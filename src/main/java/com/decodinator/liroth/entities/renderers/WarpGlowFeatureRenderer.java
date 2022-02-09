@@ -2,7 +2,6 @@ package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
 import com.decodinator.liroth.entities.FungalFiendEntity;
-import com.decodinator.liroth.entities.SkeletalFreakEntity;
 import com.decodinator.liroth.entities.WarpEntity;
 
 import net.fabricmc.api.EnvType;
