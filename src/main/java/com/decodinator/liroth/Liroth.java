@@ -90,6 +90,7 @@ import com.decodinator.liroth.core.world.dims.DimensionLiroth;
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.PierPeepEntity;
+import com.decodinator.liroth.entities.ShadeEntity;
 import com.decodinator.liroth.entities.SkeletalFreakEntity;
 import com.decodinator.liroth.entities.SoulArachnidEntity;
 import com.decodinator.liroth.entities.WarpEntity;
@@ -164,6 +165,14 @@ public class Liroth implements ModInitializer {
     
     public static final Item PIER_PEEP_SPAWN_EGG = new SpawnEggItem(PIER_PEEP, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
+    public static final EntityType<ShadeEntity> SHADE = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("liroth", "shade"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ShadeEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
+    );
+    
+    public static final Item SHADE_SPAWN_EGG = new SpawnEggItem(SHADE, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    
     public static final Identifier LIROTH_BLASTER_FIRING_SOUND_ID = new Identifier("liroth:liroth_blaster_firing");
     public static SoundEvent LIROTH_BLASTER_FIRING_SOUND_EVENT = new SoundEvent(LIROTH_BLASTER_FIRING_SOUND_ID);
     public static final Identifier FUNGAL_FIEND_DEATH_SOUND_ID = new Identifier("liroth:fungal_fiend_death");
@@ -174,6 +183,7 @@ public class Liroth implements ModInitializer {
     public static SoundEvent FUNGAL_FIEND_FUSE_SOUND_EVENT = new SoundEvent(FUNGAL_FIEND_FUSE_SOUND_ID);
 	
 	  public static final Tag<Block> DIRT_ORE_REPLACEABLES = TagFactory.BLOCK.create(new Identifier("liroth", "dirt_ore_replaceables"));
+	  public static final Tag<Item> TORCHES = TagFactory.ITEM.create(new Identifier("liroth", "torches"));
 	
 	public static final Block DIMENSIONAL_COMMUNICATOR = new DimensionalCommunicator(AbstractBlock.Settings.copy(Blocks.OBSIDIAN));
 	public static final Item DIMENSIONAL_COMMUNICATOR_ITEM = new BlockItem(DIMENSIONAL_COMMUNICATOR, new Item.Settings());
@@ -246,6 +256,7 @@ public class Liroth implements ModInitializer {
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(WARP, WarpEntity.createWarpAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(SOUL_ARACHNID, SoulArachnidEntity.createSoulArachnidAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(PIER_PEEP, PierPeepEntity.createPierPeepAttributes());
+		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(SHADE, ShadeEntity.createShadeAttributes());
 		
         LirothEntities.RegisterEntities();
 		
@@ -468,6 +479,7 @@ public class Liroth implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "warp_spawn_egg"), WARP_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "soul_arachnid_spawn_egg"), SOUL_ARACHNID_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "pier_peep_spawn_egg"), PIER_PEEP_SPAWN_EGG);
+		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "shade_spawn_egg"), SHADE_SPAWN_EGG);
 		
 		
 		EntityRendererRegistry.INSTANCE.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
