@@ -1,0 +1,50 @@
+{
+  "temperature": 0.7,
+  "downfall": 0.8,
+  "precipitation": "none",
+  "category": "forest",
+  "effects": {
+    "sky_color": 11959039,
+    "fog_color": 10027263,
+    "water_color": 5980132,
+    "water_fog_color": 1967411,
+    "grass_color": 10624171,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2
+    }
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [
+      "liroth:trees_liroth",
+      "minecraft:patch_tall_grass",
+      "minecraft:patch_grass_jungle"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

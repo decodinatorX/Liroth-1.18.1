@@ -1,0 +1,20 @@
+{
+    "name": "Welcome!",
+    "icon": "liroth:liroth_gem",
+    "category": "liroth:liroth_intro",
+    "pages": [
+        {
+            "type": "text",
+            "text": "So! Liroth finally has a tutorial book! Woopee!! So, let's start, first, it seems you've already found a Liroth Gem and combined it with the book to create this here Tutorial Book, good!"
+        },
+        {
+      		"type": "crafting",
+      		"text": "The Tutorial Book Recipe above, don't know why I put it here considering you already knew the recipe from your intellegence to actually combine the two in the first place, why am I still rambling, why aren't I just letting you get to the tutorial... help!",
+      		"recipe": "liroth:liroth_planks_recipe"
+    	},
+    	{
+    		"type": "text",
+    		"text": "So yeah! Welcome to the Liroth Mod! The mod has been overdue for a tutorial book for quite some time now... and through a little looking up, it seems that Patchouli is extremely easy to use because it uses only JSONs! Which is nice. $(br2)Also, you can call me $(l)$(#f00)L$(), your sarcastic yet sometimes idiotic assistant! See any misspellings?? May be on purpose, may just be me being an idiot!"
+    	}
+    ]
+}

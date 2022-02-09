@@ -1,0 +1,13 @@
+{
+  "group": "liroth",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "liroth:japz_log"
+    }
+  ],
+  "result": {
+    "item": "liroth:japz_planks",
+    "count": 4
+  }
+}

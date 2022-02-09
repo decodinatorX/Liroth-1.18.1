@@ -1,0 +1,16 @@
+{
+  "group": "liroth",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "liroth:soul_glass_bottle"
+    },
+    {
+      "item": "liroth:liroth_star"
+    }
+  ],
+  "result": {
+    "item": "liroth:corrupted_liroth_star",
+    "count": 1
+  }
+}

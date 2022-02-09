@@ -1,0 +1,11 @@
+{
+  "type": "liroth:liroth_end",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "liroth:liroth_end",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "liroth:liroth_end_biome"
+    }
+  }
+}

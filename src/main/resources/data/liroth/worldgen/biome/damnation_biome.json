@@ -1,0 +1,76 @@
+{
+  "temperature": 0.8,
+  "downfall": 0.9,
+  "precipitation": "rain",
+  "category": "swamp",
+  "effects": {
+    "sky_color": 328965,
+    "fog_color": 78337,
+    "water_color": 328965,
+    "water_fog_color": 328965,
+    "grass_color": 328965,
+    "foliage_color": 328965,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2
+    }
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [],
+    [
+      "minecraft:lake_lava_underground",
+      "minecraft:lake_lava_surface"
+    ],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [
+      "minecraft:fossil_upper",
+      "minecraft:fossil_lower",
+      "minecraft:monster_room",
+      "minecraft:monster_room_deep"
+    ],
+    [],
+    [],
+    [
+      "minecraft:ore_gravel",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis_buried",
+      "minecraft:underwater_magma"
+    ],
+    [],
+    [
+      "minecraft:spring_water",
+      "minecraft:spring_lava"
+    ],
+    [
+      "minecraft:patch_tall_grass_2",
+      "minecraft:patch_grass_plain",
+      "liroth:trees_damnation",
+      "liroth:patch_fungus_mushroom"
+    ],
+    []
+  ]
+}

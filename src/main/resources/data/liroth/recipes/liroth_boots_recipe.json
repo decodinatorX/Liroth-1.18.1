@@ -1,0 +1,26 @@
+{
+  "group": "liroth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0 2",
+    "3 5"
+  ],
+  "key": {
+    "0": {
+      "item": "liroth:liroth_gem"
+    },
+    "2": {
+      "item": "liroth:liroth_gem"
+    },
+    "3": {
+      "item": "liroth:liroth_gem"
+    },
+    "5": {
+      "item": "liroth:liroth_gem"
+    }
+  },
+  "result": {
+    "item": "liroth:liroth_boots",
+    "count": 1
+  }
+}

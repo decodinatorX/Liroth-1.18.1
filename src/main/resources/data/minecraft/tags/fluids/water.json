@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+  	"liroth:liroth_fluid_still",
+  	"liroth:liroth_fluid_flowing"
+  ]
+}

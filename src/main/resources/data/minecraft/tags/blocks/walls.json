@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "liroth:blue_sandstone_wall",
+    "liroth:liroth_cobblestone_wall",
+    "liroth:petrified_damnation_brick_wall",
+    "liroth:smooth_blue_sandstone_wall",
+    "liroth:spinerios_cobblestone_wall",
+    "liroth:liroth_stone_wall",
+    "liroth:spinerios_stone_wall"
+  ]
+}

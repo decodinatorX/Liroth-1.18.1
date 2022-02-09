@@ -1,0 +1,11 @@
+{
+  "type": "liroth:damnation",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "liroth:damnation",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "liroth:damnation_biome"
+    }
+  }
+}

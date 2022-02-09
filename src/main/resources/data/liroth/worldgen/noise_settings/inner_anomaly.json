@@ -1,0 +1,52 @@
+{
+  "sea_level": 0,
+  "disable_mob_generation": true,
+  "noise_caves_enabled": false,
+  "noodle_caves_enabled": false,
+  "aquifers_enabled": false,
+  "ore_veins_enabled": false,
+  "legacy_random_source": false,
+  "default_block": {
+    "Name": "liroth:anomaly_block"
+  },
+  "default_fluid": {
+    "Name": "minecraft:air"
+  },
+  "noise": {
+    "min_y": 0,
+    "height": 128,
+    "size_horizontal": 2,
+    "size_vertical": 1,
+    "island_noise_override": false,
+    "sampling": {
+      "xz_scale": 2,
+      "y_scale": 1,
+      "xz_factor": 80,
+      "y_factor": 160
+    },
+    "bottom_slide": {
+      "target": -0.234375,
+      "size": 7,
+      "offset": 1
+    },
+    "top_slide": {
+      "target": -23.4375,
+      "size": 64,
+      "offset": -46
+    },
+    "terrain_shaper": {
+      "offset": 0,
+      "factor": 1,
+      "jaggedness": 0
+    }
+  },
+  "surface_rule": {
+    "type": "minecraft:block",
+    "result_state": {
+      "Name": "liroth:anomaly_block"
+    }
+  },
+  "structures": {
+    "structures": {}
+  }
+}

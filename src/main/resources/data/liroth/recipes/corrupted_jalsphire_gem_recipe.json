@@ -1,0 +1,16 @@
+{
+  "group": "liroth",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "liroth:soul_glass_bottle"
+    },
+    {
+      "item": "liroth:jalsphire_gem"
+    }
+  ],
+  "result": {
+    "item": "liroth:corrupted_jalsphire_gem",
+    "count": 1
+  }
+}

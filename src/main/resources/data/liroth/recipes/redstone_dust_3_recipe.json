@@ -1,0 +1,13 @@
+{
+  "group": "liroth",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "liroth:redstone_broken_stage_3"
+    }
+  ],
+  "result": {
+    "item": "minecraft:redstone",
+    "count": 3
+  }
+}

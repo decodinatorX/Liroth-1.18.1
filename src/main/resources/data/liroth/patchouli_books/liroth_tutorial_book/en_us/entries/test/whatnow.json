@@ -1,0 +1,74 @@
+{
+    "name": "What now??",
+    "icon": "liroth:liroth_sword",
+    "category": "liroth:liroth_intro",
+    "pages": [
+        {
+            "type": "text",
+            "text": "From here, you're probably asking what you should do now?? Well, the Liroth Gem itself has many uses in its current state. $(br) $(br)The different uses of the Liroth Gem include the following:"
+        },
+        {
+      		"type": "crafting",
+      		"recipe": "liroth:liroth_sword_recipe",
+      		"recipe2": "liroth:liroth_shovel_recipe"
+    	},
+    	{
+      		"type": "crafting",
+      		"recipe": "liroth:liroth_pickaxe_recipe",
+      		"recipe2": "liroth:liroth_axe_recipe"
+    	},
+        {
+      		"type": "crafting",
+      		"recipe": "liroth:liroth_hoe_recipe"
+    	},
+        {
+      		"type": "crafting",
+      		"recipe": "liroth:liroth_helmet_recipe",
+      		"recipe2": "liroth:liroth_chestplate_recipe"
+    	},
+        {
+      		"type": "crafting",
+      		"recipe": "liroth:liroth_leggings_recipe",
+      		"recipe2": "liroth:liroth_boots_recipe"
+    	},
+    	{
+    		"type": "crafting",
+    		"recipe": "liroth:dimensional_communicator_recipe",
+    		"text": "Get all that? Cool, alright, so, that's all you can really do for the time being... HOWEVER, you're gonna wanna go to the first dimension which happens to be the Liroth Dimension. You need to create a portal frame of Liroth Gem Blocks!"
+    	},
+	{
+		"type": "multiblock",
+		"text": "Woohoo, this is the Liroth Portal... build it like this...",
+		"name": "The Liroth Portal",
+		"multiblock": {
+			"pattern": [
+				[ 
+				"_AA_",
+				"A__A",
+				"A_0A",
+				"_AA_"
+				]
+			],
+			"mapping": {
+				"A": "liroth:dimensional_communicator",
+				"B": "minecraft:diamond_block",
+				"C": "minecraft:gold_block",
+				"D": "minecraft:emerald_block",
+				"E": "minecraft:redstone_block",
+				"F": "minecraft:lapis_block"
+			}
+		}
+	},
+			{
+		"type": "crafting",
+		"title": "Liroth Teleporter",
+		"text": "The Liroth Teleporter is a device that requires less resources in general but there's the risk of suffocation... $(l)CRAFT THIS TO ADD MORE ENTRIES! THIS IS MANDATORY!",
+		"recipe": "liroth:liroth_planks_recipe"
+		},
+		{
+		"type": "smelting",
+		"text": "This is how you make the charge that would activate the framed portal however if need be.",
+		"recipe": "liroth:liroth_gem_smelting"
+		}
+    ]
+}

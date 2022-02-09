@@ -1,0 +1,27 @@
+{
+  "group": "liroth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01",
+    " 3",
+    " 5"
+  ],
+  "key": {
+    "0": {
+      "item": "liroth:liroth_gem"
+    },
+    "1": {
+      "item": "liroth:liroth_gem"
+    },
+    "3": {
+      "item": "minecraft:stick"
+    },
+    "5": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "liroth:liroth_hoe",
+    "count": 1
+  }
+}

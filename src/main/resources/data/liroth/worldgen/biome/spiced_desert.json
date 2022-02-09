@@ -1,0 +1,51 @@
+{
+  "temperature": 2,
+  "downfall": 0,
+  "precipitation": "none",
+  "category": "savanna",
+  "effects": {
+    "sky_color": 16755829,
+    "fog_color": 16772290,
+    "water_color": 14985023,
+    "water_fog_color": 3350533,
+    "grass_color": 283216,
+    "grass_color_modifier": "none",
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2
+    }
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:patch_tall_grass",
+      "liroth:trees_spiced",
+      "minecraft:patch_grass_savanna"
+    ],
+    []
+  ]
+}

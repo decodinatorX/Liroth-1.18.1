@@ -1,0 +1,48 @@
+{
+  "type": "liroth:liroth_dimension",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "liroth:liroth_dimension",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "liroth:liroth_biome",
+          "parameters": {
+            "temperature": 0,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "liroth:spiced_desert",
+          "parameters": {
+            "temperature": 1,
+            "humidity": -0.35,
+            "continentalness": 0.03,
+            "erosion": -0.2225,
+            "weirdness": -0.9333,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "liroth:tallpier",
+          "parameters": {
+            "temperature": 0.55,
+            "humidity": 0.3,
+            "continentalness": -0.11,
+            "erosion": -0.375,
+            "weirdness": -0.7666,
+            "depth": 0,
+            "offset": 0
+          }
+        }
+      ]
+    }
+  }
+}

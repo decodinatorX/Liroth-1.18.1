@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "liroth:liroth_log",
+    "liroth:spiced_log",
+    "liroth:tallpier_log",
+    "liroth:damnation_log",
+    "liroth:petrified_damnation_log",
+    "liroth:japz_log",
+    "liroth:koolaw_log"
+  ]
+}
