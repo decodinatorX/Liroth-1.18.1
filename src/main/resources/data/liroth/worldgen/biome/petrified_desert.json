@@ -18,7 +18,14 @@
     }
   },
   "spawners": {
-    "monster": [],
+    "monster": [
+        {
+        "type": "liroth:shade",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 4
+        }
+    ],
     "creature": [],
     "ambient": [],
     "water_creature": [],
@@ -51,6 +58,8 @@
       "liroth:spinerios_iron_ore",
       "liroth:spinerios_lapis_ore",
       "liroth:spinerios_liroth_ore",
+      "liroth:spinerios_tourmaline_ore",
+      "liroth:spinerios_jalsphire_ore",
       "liroth:spinerios_quartz_ore",
       "liroth:spinerios_redstone_ore"
     ],

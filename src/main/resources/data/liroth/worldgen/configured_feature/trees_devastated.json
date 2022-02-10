@@ -3,11 +3,7 @@
   "config": {
     "features": [
       {
-        "chance": 0.2,
-        "feature": "liroth:devastated_checked"
-      },
-      {
-        "chance": 0.1,
+        "chance": 0.8,
         "feature": "liroth:devastated_checked"
       }
     ],

@@ -18,7 +18,14 @@
     }
   },
   "spawners": {
-    "monster": [],
+    "monster": [
+      	{
+        "type": "liroth:freakshow",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 4
+        }
+    ],
     "creature": [],
     "ambient": [],
     "axolotls": [],
@@ -57,7 +64,8 @@
     [
       "minecraft:patch_tall_grass_2",
       "minecraft:patch_grass_plain",
-      "liroth:trees_devastated"
+      "liroth:trees_devastated",
+      "liroth:quantum_diamond_ore"
     ],
     []
   ]

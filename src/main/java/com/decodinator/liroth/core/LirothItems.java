@@ -57,6 +57,8 @@ public class LirothItems {
     
 //    public static final Item CORRUPTED_ROD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeTab)), "corrupted_rod"); IS NOW THE COOL BEAM
     
+    public static final CustomBoatItem DAMNATION_BOAT = new CustomBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
+    
     public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
     
     public static final Item JALSPHIRE_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jalsphire_dust");

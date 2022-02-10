@@ -18,7 +18,14 @@
     }
   },
   "spawners": {
-    "monster": [],
+    "monster": [
+        {
+        "type": "liroth:soul_arachnid",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      	}
+    ],
     "creature": [],
     "ambient": [],
     "water_creature": [],
@@ -44,7 +51,9 @@
     [
       "minecraft:patch_tall_grass",
       "liroth:trees_spiced",
-      "minecraft:patch_grass_savanna"
+      "minecraft:patch_grass_savanna",
+      "liroth:lirothian_liroth_gem_ore",
+      "liroth:charred_lirothian_liroth_gem_ore"
     ],
     []
   ]

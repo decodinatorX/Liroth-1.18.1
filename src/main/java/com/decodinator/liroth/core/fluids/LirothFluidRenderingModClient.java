@@ -18,6 +18,8 @@ import com.decodinator.liroth.entities.boat.CustomBoatEntityRenderer;
 import com.decodinator.liroth.entities.renderers.BeamLaserProjectileEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ForsakenCorpseEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ForsakenCorpseModel;
+import com.decodinator.liroth.entities.renderers.FreakshowEntityRenderer;
+import com.decodinator.liroth.entities.renderers.FreakshowModel;
 import com.decodinator.liroth.entities.renderers.FungalFiendEntityRenderer;
 import com.decodinator.liroth.entities.renderers.FungalFiendModel;
 import com.decodinator.liroth.entities.renderers.PierPeepEntityRenderer;
@@ -54,6 +56,7 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_PIER_PEEP_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "pier_peep"), "main");
     public static final EntityModelLayer MODEL_SHADE_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "shade"), "main");
     public static final EntityModelLayer MODEL_PROWLER_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "prowler"), "main");
+    public static final EntityModelLayer MODEL_FREAKSHOW_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "freakshow"), "main");
     
 	@Override
 	public void onInitializeClient() {
@@ -130,6 +133,12 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_PROWLER_LAYER, ProwlerModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(Liroth.FREAKSHOW, (context) -> {
+            return new FreakshowEntityRenderer(context);
+        });
+ 
+        EntityModelLayerRegistry.registerModelLayer(MODEL_FREAKSHOW_LAYER, FreakshowModel::getTexturedModelData);
 	}
 	
 	@SuppressWarnings("deprecation")

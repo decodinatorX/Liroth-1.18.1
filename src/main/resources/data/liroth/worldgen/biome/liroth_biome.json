@@ -17,7 +17,26 @@
     }
   },
   "spawners": {
-    "monster": [],
+    "monster": [
+        {
+        "type": "liroth:forsaken_corpse",
+        "weight": 95,
+        "minCount": 4,
+        "maxCount": 4
+      	},
+      	{
+        "type": "liroth:skeletal_freak",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      	},
+      	{
+        "type": "liroth:warp",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 4
+        }
+    ],
     "creature": [],
     "ambient": [],
     "water_creature": [],
@@ -36,7 +55,9 @@
       "liroth:trees_liroth",
       "minecraft:patch_tall_grass",
       "minecraft:patch_grass_jungle",
-      "liroth:vile_tentacle"
+      "liroth:vile_tentacle",
+      "liroth:lirothian_liroth_gem_ore",
+      "liroth:charred_lirothian_liroth_gem_ore"
     ],
     [],
     [],

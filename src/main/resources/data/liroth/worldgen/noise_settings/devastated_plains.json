@@ -3047,14 +3047,14 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "liroth:soulless_soil"
                                 }
                               }
                             },
                             {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "minecraft:gravel"
+                                "Name": "liroth:soulless_soil"
                               }
                             }
                           ]
@@ -3310,7 +3310,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "liroth:soulless_soil"
                                   }
                                 }
                               },
@@ -3375,7 +3375,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "liroth:soulless_soil"
                                   }
                                 }
                               },
@@ -3482,7 +3482,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "liroth:soulless_soil"
                                     }
                                   }
                                 ]
@@ -3522,14 +3522,14 @@
                                           "then_run": {
                                             "type": "minecraft:block",
                                             "result_state": {
-                                              "Name": "minecraft:stone"
+                                              "Name": "liroth:soulless_soil"
                                             }
                                           }
                                         },
                                         {
                                           "type": "minecraft:block",
                                           "result_state": {
-                                            "Name": "minecraft:gravel"
+                                            "Name": "liroth:soulless_soil"
                                           }
                                         }
                                       ]
@@ -3538,7 +3538,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "liroth:soulless_soil"
                                     }
                                   }
                                 ]
@@ -3563,7 +3563,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "liroth:soulless_soil"
                                   }
                                 }
                               }
@@ -3653,7 +3653,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "liroth:soulless_soil"
                                 }
                               }
                             }
@@ -3681,7 +3681,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "liroth:soulless_soil"
                                   }
                                 }
                               },
@@ -3737,14 +3737,14 @@
                                       "then_run": {
                                         "type": "minecraft:block",
                                         "result_state": {
-                                          "Name": "minecraft:stone"
+                                          "Name": "liroth:soulless_soil"
                                         }
                                       }
                                     },
                                     {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:gravel"
+                                        "Name": "liroth:soulless_soil"
                                       }
                                     }
                                   ]
@@ -3761,7 +3761,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "liroth:soulless_soil"
                                   }
                                 }
                               },
@@ -3818,14 +3818,14 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:stone"
+                                        "Name": "liroth:soulless_soil"
                                       }
                                     }
                                   },
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:gravel"
+                                      "Name": "liroth:soulless_soil"
                                     }
                                   }
                                 ]
@@ -4106,7 +4106,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "liroth:soulless_soil"
                                   }
                                 }
                               },
@@ -4163,7 +4163,7 @@
                           "then_run": {
                             "type": "minecraft:block",
                             "result_state": {
-                              "Name": "minecraft:stone"
+                              "Name": "liroth:soulless_soil"
                             }
                           }
                         },
@@ -4243,7 +4243,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "liroth:soulless_soil"
                                     }
                                   }
                                 ]
@@ -4283,14 +4283,14 @@
                                           "then_run": {
                                             "type": "minecraft:block",
                                             "result_state": {
-                                              "Name": "minecraft:stone"
+                                              "Name": "liroth:soulless_soil"
                                             }
                                           }
                                         },
                                         {
                                           "type": "minecraft:block",
                                           "result_state": {
-                                            "Name": "minecraft:gravel"
+                                            "Name": "liroth:soulless_soil"
                                           }
                                         }
                                       ]
@@ -4299,7 +4299,7 @@
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:stone"
+                                      "Name": "liroth:soulless_soil"
                                     }
                                   }
                                 ]
@@ -4324,7 +4324,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "liroth:soulless_soil"
                                   }
                                 }
                               }
@@ -4414,7 +4414,7 @@
                               "then_run": {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "minecraft:stone"
+                                  "Name": "liroth:soulless_soil"
                                 }
                               }
                             }
@@ -4439,7 +4439,7 @@
                             "then_run": {
                               "type": "minecraft:block",
                               "result_state": {
-                                "Name": "minecraft:stone"
+                                "Name": "liroth:soulless_soil"
                               }
                             }
                           }
@@ -4478,14 +4478,14 @@
                                       "then_run": {
                                         "type": "minecraft:block",
                                         "result_state": {
-                                          "Name": "minecraft:stone"
+                                          "Name": "liroth:soulless_soil"
                                         }
                                       }
                                     },
                                     {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:gravel"
+                                        "Name": "liroth:soulless_soil"
                                       }
                                     }
                                   ]
@@ -4502,7 +4502,7 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "minecraft:stone"
+                                    "Name": "liroth:soulless_soil"
                                   }
                                 }
                               },
@@ -4536,14 +4536,14 @@
                                     "then_run": {
                                       "type": "minecraft:block",
                                       "result_state": {
-                                        "Name": "minecraft:stone"
+                                        "Name": "liroth:soulless_soil"
                                       }
                                     }
                                   },
                                   {
                                     "type": "minecraft:block",
                                     "result_state": {
-                                      "Name": "minecraft:gravel"
+                                      "Name": "liroth:soulless_soil"
                                     }
                                   }
                                 ]
@@ -4639,7 +4639,7 @@
                     "then_run": {
                       "type": "minecraft:block",
                       "result_state": {
-                        "Name": "minecraft:stone"
+                        "Name": "liroth:soulless_soil"
                       }
                     }
                   },
@@ -4696,14 +4696,14 @@
                         "then_run": {
                           "type": "minecraft:block",
                           "result_state": {
-                            "Name": "minecraft:stone"
+                            "Name": "liroth:soulless_soil"
                           }
                         }
                       },
                       {
                         "type": "minecraft:block",
                         "result_state": {
-                          "Name": "minecraft:gravel"
+                          "Name": "liroth:soulless_soil"
                         }
                       }
                     ]
@@ -4729,7 +4729,7 @@
         "then_run": {
           "type": "minecraft:block",
           "result_state": {
-            "Name": "minecraft:deepslate",
+            "Name": "liroth:soulless_soil",
             "Properties": {
               "axis": "y"
             }

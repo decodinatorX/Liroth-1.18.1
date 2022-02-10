@@ -18,7 +18,14 @@
     }
   },
   "spawners": {
-    "monster": [],
+    "monster": [      
+    	{
+        "type": "liroth:fungal_fiend",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      	}
+      ],
     "creature": [],
     "ambient": [],
     "axolotls": [],
@@ -58,6 +65,8 @@
       "minecraft:ore_redstone_lower",
       "minecraft:ore_diamond_buried",
       "minecraft:ore_lapis_buried",
+      "liroth:spinerios_ancient_debris",
+      "liroth:spinerios_stone_tourmaline_ore",
       "minecraft:underwater_magma"
     ],
     [],
@@ -69,7 +78,8 @@
       "minecraft:patch_tall_grass_2",
       "minecraft:patch_grass_plain",
       "liroth:trees_damnation",
-      "liroth:patch_fungus_mushroom"
+      "liroth:patch_fungus_mushroom",
+      "liroth:damnation_fungus"
     ],
     []
   ]

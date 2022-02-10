@@ -18,7 +18,14 @@
     }
   },
   "spawners": {
-    "monster": [],
+    "monster": [
+        {
+        "type": "liroth:prowler",
+        "weight": 10,
+        "minCount": 1,
+        "maxCount": 4
+        }
+    ],
     "creature": [],
     "ambient": [],
     "axolotls": [],
@@ -61,7 +68,9 @@
       "minecraft:flower_default",
       "minecraft:patch_grass_forest",
       "minecraft:spring_water",
-      "liroth:obsidian_spike"
+      "liroth:obsidian_spike",
+      "liroth:end_spike",
+      "liroth:jalsphire_ore"
     ],
     []
   ]

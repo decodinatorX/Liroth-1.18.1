@@ -31,6 +31,7 @@ import com.decodinator.liroth.core.blocks.CustomRod;
 import com.decodinator.liroth.core.blocks.CustomSapling;
 import com.decodinator.liroth.core.blocks.CustomTorch;
 import com.decodinator.liroth.core.blocks.CustomWallTorch;
+import com.decodinator.liroth.core.blocks.CustomWartBlock;
 import com.decodinator.liroth.core.blocks.LirothPortalBlock;
 import com.decodinator.liroth.core.world.trees.DamnationTree;
 import com.decodinator.liroth.core.world.trees.JapzTree;
@@ -65,6 +66,7 @@ public class LirothBlocks {
     public static final Block CHARRED_LIROTH_COBBLESTONE_WALL = createStoneWall("charred_liroth_cobblestone_wall");
     public static final Block CHARRED_LIROTH_COBBLESTONE_STAIRS = createStoneStairs("charred_liroth_cobblestone_stairs");
     public static final Block CHARRED_LIROTH_COBBLESTONE_SLAB = createStoneSlab("charred_liroth_cobblestone_slab");
+    public static final Block CHARRED_LIROTH_GEM_ORE = createOre("charred_lirothian_liroth_gem_ore");
     public static final Block CHARRED_LIROTH_STONE_BLOCK = createStone("charred_liroth_stone");
     public static final Block CHARRED_LIROTH_STONE_WALL = createStoneWall("charred_liroth_stone_wall");
     public static final Block CHARRED_LIROTH_STONE_STAIRS = createStoneStairs("charred_liroth_stone_stairs");
@@ -89,6 +91,7 @@ public class LirothBlocks {
     public static final Block DAMNATION_SLAB = createWoodSlab("damnation_slab");
     public static final Block DAMNATION_STAIRS = createWoodStairs("damnation_stairs");
     public static final Block DAMNATION_TRAPDOOR = createTrapDoor("damnation_trapdoor");
+    public static final Block DAMNATION_WART_BLOCK = createWartBlock("damnation_wart_block");
     public static final Block DAMNED_PASSAGEWAY = createStone("damned_passageway");
     public static final Block DEEPSLATE_LIROTH_ORE = createDeepslateOre("deepslate_liroth_gem_ore");
     public static final Block DEEPSLATE_TOURMALINE_ORE = createMetalBlock("deepslate_tourmaline_ore");
@@ -105,6 +108,7 @@ public class LirothBlocks {
 //    public static final Block FUNGAL_CAMPFIRE = createCampfire("fungal_campfire");
     public static final Block FUNGAL_LANTERN = createLantern("fungal_lantern");
     public static final Block FUNGAL_TORCH = createTorch("fungal_torch");
+    public static final Block FUNGAL_LIGHT = createShroomlightBlock("fungallight");
     public static final Block GATEWAY_BLOCK = createObsidianBlock("gateway_block");
     public static final Block HAUNTED_THROUGHFARE_BLOCK = createMetalBlock("haunted_throughfare_block");
     public static final Block JALSPHIRE_ORE = createDirtOre("jalsphire_ore");
@@ -223,6 +227,7 @@ public class LirothBlocks {
     public static final Block SPINERIOS_STONE_WALL = createStoneWall("spinerios_stone_wall");
     public static final Block SPINERIOS_STONE_SLAB = createStoneSlab("spinerios_stone_slab");
     public static final Block SPINERIOS_STONE_STAIRS = createStoneStairs("spinerios_stone_stairs");
+    public static final Block SPINERIOS_STONE_TOURMALINE_ORE = createOre("spinerios_stone_tourmaline_ore");
     public static final Block SPINERIOS_TOURMALINE_ORE = createDirtOre("spinerios_tourmaline_ore");
     public static final Block TALLPIER_LEAVES = createLeaves("tallpier_leaves");
     public static final Block TALLPIER_LOG = createLog("tallpier_log");
@@ -294,6 +299,20 @@ public class LirothBlocks {
     
     static Block createFungusPlant(String id) {
         Block createBlock = new CustomFungalPlant(FabricBlockSettings.copy(Blocks.CRIMSON_FUNGUS).noCollision().emissiveLighting(LirothBlocks::always), null);
+        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        BLOCKS.add(createBlock);
+        return createBlock;
+    }
+    
+    static Block createWartBlock(String id) {
+        Block createBlock = new Block(FabricBlockSettings.copy(Blocks.NETHER_WART_BLOCK).emissiveLighting(LirothBlocks::always));
+        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        BLOCKS.add(createBlock);
+        return createBlock;
+    }
+    
+    static Block createShroomlightBlock(String id) {
+        Block createBlock = new Block(FabricBlockSettings.copy(Blocks.NETHER_WART_BLOCK).emissiveLighting(LirothBlocks::always).strength(1.0f).sounds(BlockSoundGroup.SHROOMLIGHT).luminance(state -> 15));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
