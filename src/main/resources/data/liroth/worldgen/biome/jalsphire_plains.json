@@ -60,7 +60,8 @@
       "liroth:trees_koolaw",
       "minecraft:flower_default",
       "minecraft:patch_grass_forest",
-      "minecraft:spring_water"
+      "minecraft:spring_water",
+      "liroth:obsidian_spike"
     ],
     []
   ]

@@ -22,6 +22,8 @@ import com.decodinator.liroth.entities.renderers.FungalFiendEntityRenderer;
 import com.decodinator.liroth.entities.renderers.FungalFiendModel;
 import com.decodinator.liroth.entities.renderers.PierPeepEntityRenderer;
 import com.decodinator.liroth.entities.renderers.PierPeepModel;
+import com.decodinator.liroth.entities.renderers.ProwlerEntityRenderer;
+import com.decodinator.liroth.entities.renderers.ProwlerModel;
 import com.decodinator.liroth.entities.renderers.ShadeEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ShadeModel;
 import com.decodinator.liroth.entities.renderers.SkeletalFreakEntityRenderer;
@@ -51,6 +53,7 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_SOUL_ARACHNID_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "soul_arachnid"), "main");
     public static final EntityModelLayer MODEL_PIER_PEEP_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "pier_peep"), "main");
     public static final EntityModelLayer MODEL_SHADE_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "shade"), "main");
+    public static final EntityModelLayer MODEL_PROWLER_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "prowler"), "main");
     
 	@Override
 	public void onInitializeClient() {
@@ -121,6 +124,12 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_SHADE_LAYER, ShadeModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(Liroth.PROWLER, (context) -> {
+            return new ProwlerEntityRenderer(context);
+        });
+ 
+        EntityModelLayerRegistry.registerModelLayer(MODEL_PROWLER_LAYER, ProwlerModel::getTexturedModelData);
 	}
 	
 	@SuppressWarnings("deprecation")

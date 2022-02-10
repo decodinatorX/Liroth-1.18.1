@@ -35,7 +35,8 @@
     [
       "liroth:trees_liroth",
       "minecraft:patch_tall_grass",
-      "minecraft:patch_grass_jungle"
+      "minecraft:patch_grass_jungle",
+      "liroth:vile_tentacle"
     ],
     [],
     [],

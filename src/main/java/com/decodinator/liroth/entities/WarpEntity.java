@@ -1,6 +1,7 @@
 package com.decodinator.liroth.entities;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.EndermanEntity;
@@ -11,6 +12,8 @@ public class WarpEntity extends EndermanEntity {
 
 	public WarpEntity(EntityType<? extends EndermanEntity> entityType, World world) {
 		super(entityType, world);
+        this.stepHeight = 1.0f;
+        this.setPathfindingPenalty(PathNodeType.WATER, -1.0f);
 	}
 
     public static DefaultAttributeContainer.Builder createWarpAttributes() {

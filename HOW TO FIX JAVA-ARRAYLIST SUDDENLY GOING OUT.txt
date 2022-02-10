@@ -1,0 +1,6 @@
+regen all sources and refresh code
+
+if using eclipse simply run these two commands through CMD
+
+"gradlew eclipse"
+"gradlew genSources"

@@ -52,6 +52,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -62,10 +63,13 @@ import net.minecraft.world.gen.decorator.CountPlacementModifier;
 import net.minecraft.world.gen.decorator.HeightRangePlacementModifier;
 import net.minecraft.world.gen.decorator.SquarePlacementModifier;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreConfiguredFeatures;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,6 +82,8 @@ import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.LirothRenders;
 import com.decodinator.liroth.core.blocks.DimensionalCommunicator;
 import com.decodinator.liroth.core.blocks.DimensionalCommunicatorEntity;
+import com.decodinator.liroth.core.features.ObsidianSpikeFeature;
+import com.decodinator.liroth.core.features.VileTentacleFeature;
 import com.decodinator.liroth.core.fluids.LirothFluid;
 import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
 import com.decodinator.liroth.core.fluids.MoltenSpinerios;
@@ -90,6 +96,7 @@ import com.decodinator.liroth.core.world.dims.DimensionLiroth;
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.PierPeepEntity;
+import com.decodinator.liroth.entities.ProwlerEntity;
 import com.decodinator.liroth.entities.ShadeEntity;
 import com.decodinator.liroth.entities.SkeletalFreakEntity;
 import com.decodinator.liroth.entities.SoulArachnidEntity;
@@ -173,6 +180,14 @@ public class Liroth implements ModInitializer {
     
     public static final Item SHADE_SPAWN_EGG = new SpawnEggItem(SHADE, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
+    public static final EntityType<ProwlerEntity> PROWLER = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("liroth", "prowler"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ProwlerEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
+    );
+    
+    public static final Item PROWLER_SPAWN_EGG = new SpawnEggItem(PROWLER, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    
     public static final Identifier LIROTH_BLASTER_FIRING_SOUND_ID = new Identifier("liroth:liroth_blaster_firing");
     public static SoundEvent LIROTH_BLASTER_FIRING_SOUND_EVENT = new SoundEvent(LIROTH_BLASTER_FIRING_SOUND_ID);
     public static final Identifier FUNGAL_FIEND_DEATH_SOUND_ID = new Identifier("liroth:fungal_fiend_death");
@@ -243,12 +258,17 @@ public class Liroth implements ModInitializer {
 		      SquarePlacementModifier.of(), // spreading horizontally
 		      HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(64))); // height
 	  
+	  private static final Feature<DefaultFeatureConfig> OBSIDIAN_SPIKE = new ObsidianSpikeFeature(DefaultFeatureConfig.CODEC);
+	  private static final Feature<DefaultFeatureConfig> VILE_TENTALCE = new VileTentacleFeature(DefaultFeatureConfig.CODEC);
 	  
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		
+	    Registry.register(Registry.FEATURE, new Identifier("liroth", "obsidian_spike"), OBSIDIAN_SPIKE);
+	    Registry.register(Registry.FEATURE, new Identifier("liroth", "vile_tentacle"), VILE_TENTALCE);
 		
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FUNGAL_FIEND, FungalFiendEntity.createFungalFiendAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FORSAKEN_CORPSE, ForsakenCorpseEntity.createForsakenCorpseAttributes());
@@ -257,6 +277,7 @@ public class Liroth implements ModInitializer {
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(SOUL_ARACHNID, SoulArachnidEntity.createSoulArachnidAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(PIER_PEEP, PierPeepEntity.createPierPeepAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(SHADE, ShadeEntity.createShadeAttributes());
+		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(PROWLER, ProwlerEntity.createProwlerAttributes());
 		
         LirothEntities.RegisterEntities();
 		
@@ -480,6 +501,7 @@ public class Liroth implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "soul_arachnid_spawn_egg"), SOUL_ARACHNID_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "pier_peep_spawn_egg"), PIER_PEEP_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "shade_spawn_egg"), SHADE_SPAWN_EGG);
+		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "prowler_spawn_egg"), PROWLER_SPAWN_EGG);
 		
 		
 		EntityRendererRegistry.INSTANCE.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
