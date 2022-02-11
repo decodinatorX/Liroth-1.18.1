@@ -71,7 +71,7 @@ public class LirothItems {
 
     public static final Item LIROTH_BLASTER = createRangedItem(new LirothBlaster(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "liroth_blaster");
     
-    public static final CustomBoatItem LIROTH_BOAT = new CustomBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
+    public static final CustomBoatItem LIROTH_BOAT = new CustomBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1).fireproof());
     
     public static final Item LIROTH_BONE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_bone");
 
