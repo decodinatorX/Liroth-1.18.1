@@ -15,6 +15,7 @@ import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.entities.boat.CustomBoatEntityModel;
 import com.decodinator.liroth.entities.boat.CustomBoatEntityRenderer;
+import com.decodinator.liroth.entities.boat.DamnationBoatEntityRenderer;
 import com.decodinator.liroth.entities.renderers.BeamLaserProjectileEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ForsakenCorpseEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ForsakenCorpseModel;
@@ -48,6 +49,7 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
 	public static final Identifier PacketID = new Identifier(Liroth.MOD_ID, "spawn_packet");
 
     public static final EntityModelLayer MODEL_LIROTH_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "liroth_boat"), "main");
+    public static final EntityModelLayer MODEL_DAMNATION_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "damnation_boat"), "main");
     public static final EntityModelLayer MODEL_FUNGAL_FIEND_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "fungal_fiend"), "main");
     public static final EntityModelLayer MODEL_FORSAKEN_CORPSE_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "forsaken_corpse"), "main");
     public static final EntityModelLayer MODEL_SKELETAL_FREAK_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "skeletal_freak"), "main");
@@ -80,6 +82,9 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
 		
         EntityRendererRegistry.register(LirothEntities.LIROTH_BOAT, CustomBoatEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_LIROTH_BOAT_LAYER, CustomBoatEntityModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(LirothEntities.DAMNATION_BOAT, DamnationBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_DAMNATION_BOAT_LAYER, CustomBoatEntityModel::getTexturedModelData);
         
         // In 1.17, use EntityRendererRegistry.register (seen below) instead of EntityRendererRegistry.INSTANCE.register (seen above)
         EntityRendererRegistry.register(Liroth.FUNGAL_FIEND, (context) -> {

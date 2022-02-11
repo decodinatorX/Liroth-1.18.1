@@ -11,10 +11,12 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -94,7 +96,14 @@ public class DamnationBoatEntity extends Entity {
         this.prevY = y;
         this.prevZ = z;
     }
-
+    
+    @Override
+    public void baseTick() {
+        if (this.isInLava()) {
+            this.extinguish();
+            this.location = DamnationBoatEntity.Location.IN_WATER;
+            }
+    }
 
     protected float getEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return dimensions.height;
@@ -140,7 +149,7 @@ public class DamnationBoatEntity extends Entity {
 
     public boolean damage(DamageSource source, float amount) {
         if (this.isInvulnerableTo(source)) {
-            return false;
+            return this.isInvulnerableTo(DamageSource.LAVA);
         } else if (!this.world.isClient && !this.isRemoved()) {
         	this.isInvulnerableTo(DamageSource.LAVA);
             this.setDamageWobbleSide(-this.getDamageWobbleSide());
@@ -156,9 +165,10 @@ public class DamnationBoatEntity extends Entity {
 
                 this.discard();
             }
-
+            this.isInvulnerableTo(DamageSource.LAVA);
             return true;
         } else {
+        	this.isInvulnerableTo(DamageSource.LAVA);
             return true;
         }
     }
@@ -192,7 +202,7 @@ public class DamnationBoatEntity extends Entity {
     }
 
     public Item asItem() {
-        return LirothItems.LIROTH_BOAT;
+        return LirothItems.DAMNATION_BOAT;
     }
 
     public void animateDamage() {
@@ -221,9 +231,6 @@ public class DamnationBoatEntity extends Entity {
     public void tick() {
         this.lastLocation = this.location;
         this.location = this.checkLocation();
-        if (this.getPassengersDeep() != null) {
-        	this.getPrimaryPassenger().extinguish();
-        }
         if (this.location != DamnationBoatEntity.Location.UNDER_WATER && this.location != DamnationBoatEntity.Location.UNDER_FLOWING_WATER) {
             this.ticksUnderwater = 0.0F;
         } else {
@@ -292,6 +299,7 @@ public class DamnationBoatEntity extends Entity {
                 if (!entity.hasPassenger(this)) {
                     if (bl && this.getPassengerList().size() < 2 && !entity.hasVehicle() && entity.getWidth() < this.getWidth() && entity instanceof LivingEntity && !(entity instanceof WaterCreatureEntity) && !(entity instanceof PlayerEntity)) {
                         entity.startRiding(this);
+                        entity.extinguish();
                     } else {
                         this.pushAwayFrom(entity);
                     }
@@ -424,6 +432,8 @@ public class DamnationBoatEntity extends Entity {
                     FluidState fluidState = this.world.getFluidState(mutable);
                     if (fluidState.isIn(FluidTags.WATER)) {
                         f = Math.max(f, fluidState.getHeight(this.world, mutable));
+                    } else if (fluidState.isIn(FluidTags.LAVA)) {
+                        f = Math.max(f, fluidState.getHeight(this.world, mutable));
                     }
 
                     if (f >= 1.0F) {
@@ -493,6 +503,10 @@ public class DamnationBoatEntity extends Entity {
                     mutable.set(o, p, q);
                     FluidState fluidState = this.world.getFluidState(mutable);
                     if (fluidState.isIn(FluidTags.WATER)) {
+                        float f = (float)p + fluidState.getHeight(this.world, mutable);
+                        this.waterLevel = Math.max((double)f, this.waterLevel);
+                        bl |= box.minY < (double)f;
+                    } else if (fluidState.isIn(FluidTags.LAVA)) {
                         float f = (float)p + fluidState.getHeight(this.world, mutable);
                         this.waterLevel = Math.max((double)f, this.waterLevel);
                         bl |= box.minY < (double)f;
@@ -820,8 +834,11 @@ public class DamnationBoatEntity extends Entity {
 
     public static enum Location {
         IN_WATER,
+        IN_LAVA,
         UNDER_WATER,
+        UNDER_LAVA,
         UNDER_FLOWING_WATER,
+        UNDER_FLOWING_LAVA,
         ON_LAND,
         IN_AIR;
     }

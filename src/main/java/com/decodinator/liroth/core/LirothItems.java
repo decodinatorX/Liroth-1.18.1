@@ -31,6 +31,7 @@ import com.decodinator.liroth.core.items.CustomAxeItem;
 import com.decodinator.liroth.core.items.CustomBoatItem;
 import com.decodinator.liroth.core.items.CustomHoeItem;
 import com.decodinator.liroth.core.items.CustomPickaxeItem;
+import com.decodinator.liroth.core.items.DamnationBoatItem;
 import com.decodinator.liroth.core.items.LirothBlaster;
 import com.decodinator.liroth.core.items.LirothShield;
 import com.decodinator.liroth.core.items.PurpetuatedSpyglassItem;
@@ -57,7 +58,7 @@ public class LirothItems {
     
 //    public static final Item CORRUPTED_ROD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeTab)), "corrupted_rod"); IS NOW THE COOL BEAM
     
-    public static final CustomBoatItem DAMNATION_BOAT = new CustomBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
+    public static final DamnationBoatItem DAMNATION_BOAT = new DamnationBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
     
     public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
     

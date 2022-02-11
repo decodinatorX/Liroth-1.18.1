@@ -19,20 +19,20 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3f;
 
-public class DamnationBoatEntityRenderer extends EntityRenderer<CustomBoatEntity> {
+public class DamnationBoatEntityRenderer extends EntityRenderer<DamnationBoatEntity> {
 
-    private final CustomBoatEntityModel model;
+    private final DamnationBoatEntityModel model;
     private final Identifier texture;
 
 
     public DamnationBoatEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
         this.shadowRadius = 0.8F;
-        this.model = new CustomBoatEntityModel(ctx.getPart(LirothFluidRenderingModClient.MODEL_LIROTH_BOAT_LAYER));
+        this.model = new DamnationBoatEntityModel(ctx.getPart(LirothFluidRenderingModClient.MODEL_DAMNATION_BOAT_LAYER));
         this.texture = new Identifier(Liroth.MOD_ID, "textures/entity/boat/damnation.png");
     }
 
-    public void render(CustomBoatEntity boatEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(DamnationBoatEntity boatEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         matrixStack.push();
         matrixStack.translate(0.0D, 0.375D, 0.0D);
         matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F - f));
@@ -52,9 +52,9 @@ public class DamnationBoatEntityRenderer extends EntityRenderer<CustomBoatEntity
         }
 
         Identifier texture = this.texture;
-        CustomBoatEntityModel model = this.model;
+        DamnationBoatEntityModel model = this.model;
         Identifier identifier = texture;
-        CustomBoatEntityModel boatEntityModel = model;
+        DamnationBoatEntityModel boatEntityModel = model;
         matrixStack.scale(-1.0F, -1.0F, 1.0F);
         matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
         boatEntityModel.setAngles(boatEntity, g, 0.0F, -0.1F, 0.0F, 0.0F);
@@ -70,7 +70,7 @@ public class DamnationBoatEntityRenderer extends EntityRenderer<CustomBoatEntity
     }
 
     @Override
-    public Identifier getTexture(CustomBoatEntity entity) {
+    public Identifier getTexture(DamnationBoatEntity entity) {
         return this.texture;
     }
 

@@ -1,6 +1,7 @@
 package com.decodinator.liroth.mixin.bruh;
 
 import com.decodinator.liroth.entities.boat.CustomBoatEntity;
+import com.decodinator.liroth.entities.boat.DamnationBoatEntity;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -35,6 +36,10 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         this.riding = false;
         if (this.getVehicle() instanceof CustomBoatEntity) {
         	CustomBoatEntity boatEntity = (CustomBoatEntity)this.getVehicle();
+            boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
+            this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
+        } else if (this.getVehicle() instanceof DamnationBoatEntity) {
+        	DamnationBoatEntity boatEntity = (DamnationBoatEntity)this.getVehicle();
             boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
             this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
         }

@@ -508,6 +508,7 @@ public class Liroth implements ModInitializer {
 	    
 	    
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_boat"), LirothItems.LIROTH_BOAT);
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "fungal_fiend_spawn_egg"), FUNGAL_FIEND_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "forsaken_corpse_spawn_egg"), FORSAKEN_CORPSE_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "skeletal_freak_spawn_egg"), SKELETAL_FREAK_SPAWN_EGG);
