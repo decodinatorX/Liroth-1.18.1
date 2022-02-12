@@ -40,12 +40,12 @@
     "creature": [],
     "ambient": [],
     "water_creature": [
-//        {
-//        "type": "liroth:vile_shark",
-//        "weight": 1,
-//        "minCount": 1,
-//        "maxCount": 1
-//      	}  
+        {
+        "type": "liroth:vile_shark",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      	}  
     ],
     "water_ambient": [],
     "misc": []

@@ -205,7 +205,7 @@ public class Liroth implements ModInitializer {
     public static final EntityType<VileSharkEntity> VILE_SHARK = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("liroth", "vile_shark"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VileSharkEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, VileSharkEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
     public static final Item VILE_SHARK_SPAWN_EGG = new SpawnEggItem(VILE_SHARK, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
