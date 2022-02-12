@@ -1,5 +1,5 @@
 {
-  "temperature": 2,
+  "temperature": 0.5,
   "downfall": 0,
   "precipitation": "none",
   "category": "savanna",
@@ -28,7 +28,8 @@
     ],
     "creature": [],
     "ambient": [],
-    "water_creature": [],
+    "water_creature": [
+    ],
     "water_ambient": [],
     "misc": []
   },
@@ -53,7 +54,11 @@
       "liroth:trees_spiced",
       "minecraft:patch_grass_savanna",
       "liroth:lirothian_liroth_gem_ore",
-      "liroth:charred_lirothian_liroth_gem_ore"
+      "liroth:charred_lirothian_liroth_gem_ore",
+	  "liroth:liroth_bone_claw",
+      "liroth:liroth_bone_mushroom",
+      "liroth:liroth_bone_tree",
+      "liroth:vile_tentacle"
     ],
     []
   ]

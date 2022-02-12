@@ -1,0 +1,68 @@
+{
+  "temperature": 0.5,
+  "downfall": 0.5,
+  "precipitation": "rain",
+  "temperature_modifier": "none",
+  "category": "ocean",
+  "effects": {
+    "sky_color": 8223487,
+    "fog_color": 9175295,
+    "water_color": 5980132,
+    "water_fog_color": 1967411,
+    "grass_color": 10624171,
+    "foliage_color": 10624171,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2
+    }
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [],
+    [],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [
+      "minecraft:monster_room",
+      "minecraft:monster_room_deep"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:spring_water"
+    ],
+    [      
+      "liroth:vile_tentacle",
+      "liroth:liroth_bone_claw",
+      "liroth:liroth_bone_mushroom",
+      "liroth:liroth_bone_tree",
+      "liroth:lirothian_liroth_gem_ore",
+      "liroth:charred_lirothian_liroth_gem_ore"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+  ]
+}

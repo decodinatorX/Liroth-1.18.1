@@ -34,7 +34,7 @@ public class DamnationDimensionBiomeSource extends BiomeSource {
         this.BIOME_REGISTRY = biomeRegistry;
         DamnationDimensionBiomeSource.LAYERS_BIOME_REGISTRY = biomeRegistry;
         this.biomeSize = biomeSize;
-        this.seed = seed;
+        this.seed = seed * 69;
     }
 
     @Override

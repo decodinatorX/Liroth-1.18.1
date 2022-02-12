@@ -35,7 +35,7 @@ public class JantiroDimensionBiomeSource extends BiomeSource {
         this.BIOME_REGISTRY = biomeRegistry;
         JantiroDimensionBiomeSource.LAYERS_BIOME_REGISTRY = biomeRegistry;
         this.biomeSize = biomeSize;
-        this.seed = seed;
+        this.seed = seed * 1134;
     }
 
     @Override

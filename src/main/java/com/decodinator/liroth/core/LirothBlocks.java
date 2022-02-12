@@ -21,6 +21,7 @@ import java.util.List;
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.blocks.CustomCampfireBlock;
 import com.decodinator.liroth.core.blocks.CustomCraftingTable;
+import com.decodinator.liroth.core.blocks.CustomDeadWaterPlant;
 import com.decodinator.liroth.core.blocks.CustomFungalPlant;
 import com.decodinator.liroth.core.blocks.CustomFurnace;
 import com.decodinator.liroth.core.blocks.CustomKelpBlock;
@@ -32,6 +33,7 @@ import com.decodinator.liroth.core.blocks.CustomSapling;
 import com.decodinator.liroth.core.blocks.CustomTorch;
 import com.decodinator.liroth.core.blocks.CustomWallTorch;
 import com.decodinator.liroth.core.blocks.CustomWartBlock;
+import com.decodinator.liroth.core.blocks.CustomWaterPlant;
 import com.decodinator.liroth.core.blocks.LirothPortalBlock;
 import com.decodinator.liroth.core.world.trees.DamnationTree;
 import com.decodinator.liroth.core.world.trees.JapzTree;
@@ -76,7 +78,7 @@ public class LirothBlocks {
     public static final Block CORRUPTED_JALSPHIRE_GEM_BLOCK = createMetalBlock("corrupted_jalsphire_gem_block");
 //    public static final Block CORRUPTED_JALSPHIRE_ORE = createOre("corrupted_jalsphire_ore");
     public static final Block CORRUPTED_LIROTH_GEM_BLOCK = createPillarMetalBlock("corrupted_liroth_gem_block");
-    public static final Block CORRUPTED_LIROTH_GEM_ORE = createOre("corrupted_liroth_gem_ore");
+//    public static final Block CORRUPTED_LIROTH_GEM_ORE = createOre("corrupted_liroth_gem_ore");
     public static final Block DAMNATION_CRAFTING_TABLE = createCraftingTable("damnation_crafting_table");
     public static final Block DAMNATION_CHEST = createChest("damnation_chest");
     public static final Block DAMNATION_FENCE = createFence("damnation_fence");
@@ -93,6 +95,7 @@ public class LirothBlocks {
     public static final Block DAMNATION_TRAPDOOR = createTrapDoor("damnation_trapdoor");
     public static final Block DAMNATION_WART_BLOCK = createWartBlock("damnation_wart_block");
     public static final Block DAMNED_PASSAGEWAY = createStone("damned_passageway");
+    public static final Block DEAD_SEA_EYE = createDeadWaterPlant("dead_sea_eye");
     public static final Block DEEPSLATE_LIROTH_ORE = createDeepslateOre("deepslate_liroth_gem_ore");
     public static final Block DEEPSLATE_TOURMALINE_ORE = createMetalBlock("deepslate_tourmaline_ore");
     public static final Block DEVASTATED_BRICKS = createStone("devastated_bricks");
@@ -146,7 +149,7 @@ public class LirothBlocks {
     public static final Block LIROTH_COBBLESTONE_SLAB = createStoneSlab("liroth_cobblestone_slab");
     public static final Block LIROTH_CRAFTING_TABLE = createCraftingTable("liroth_crafting_table");
     public static final Block LIROTH_DIRT = createDirt("liroth_dirt");
-    public static final Block LIROTH_END_STONE = createStone("liroth_end_stone");
+//    public static final Block LIROTH_END_STONE = createStone("liroth_end_stone");
     public static final Block LIROTH_FURNACE = createFurnace("liroth_furnace");
     public static final Block LIROTH_GEM_BLOCK = createPillarMetalBlock("liroth_gem_block");
     public static final Block LIROTH_GLASS_BLOCK = createGlassBlock("liroth_glass_block");
@@ -189,6 +192,7 @@ public class LirothBlocks {
     public static final Block REDSTONE_BROKEN_STAGE_3 = createMetalBlock("redstone_broken_stage_3");
     public static final Block QUANTUM_DIAMOND_ORE = createOre("quantum_diamond_ore");
     public static final Block QUANTUM_PLATE_BLOCK = createMetalBlock("quantum_plate_block");
+    public static final Block SEA_EYE = createWaterPlant("sea_eye");
     public static final Block SMOOTH_BLUE_SANDSTONE = createStone("smooth_blue_sandstone");
     public static final Block SMOOTH_BLUE_SANDSTONE_SLAB = createStoneSlab("smooth_blue_sandstone_slab");
     public static final Block SMOOTH_BLUE_SANDSTONE_STAIRS = createStoneStairs("smooth_blue_sandstone_stairs");
@@ -292,6 +296,20 @@ public class LirothBlocks {
    
     static Block createStone(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.STONE));
+        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        BLOCKS.add(createBlock);
+        return createBlock;
+    }
+    
+    static Block createWaterPlant(String id) {
+        Block createBlock = new CustomWaterPlant(DEAD_SEA_EYE, FabricBlockSettings.copy(Blocks.FIRE_CORAL_FAN));
+        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        BLOCKS.add(createBlock);
+        return createBlock;
+    }
+    
+    static Block createDeadWaterPlant(String id) {
+        Block createBlock = new CustomDeadWaterPlant(FabricBlockSettings.copy(Blocks.DEAD_FIRE_CORAL_FAN));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;

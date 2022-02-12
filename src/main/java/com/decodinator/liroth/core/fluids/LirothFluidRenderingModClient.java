@@ -1,6 +1,7 @@
 package com.decodinator.liroth.core.fluids;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -33,11 +34,14 @@ import com.decodinator.liroth.entities.renderers.SkeletalFreakEntityRenderer;
 import com.decodinator.liroth.entities.renderers.SkeletalFreakModel;
 import com.decodinator.liroth.entities.renderers.SoulArachnidEntityRenderer;
 import com.decodinator.liroth.entities.renderers.SoulArachnidModel;
+import com.decodinator.liroth.entities.renderers.VileSharkEntityRenderer;
+import com.decodinator.liroth.entities.renderers.VileSharkModel;
 import com.decodinator.liroth.entities.renderers.WarpEntityRenderer;
 import com.decodinator.liroth.entities.renderers.WarpModel;
 import com.decodinator.liroth.util.EntitySpawnPacket;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
@@ -59,7 +63,8 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_SHADE_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "shade"), "main");
     public static final EntityModelLayer MODEL_PROWLER_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "prowler"), "main");
     public static final EntityModelLayer MODEL_FREAKSHOW_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "freakshow"), "main");
-    
+    public static final EntityModelLayer MODEL_VILE_SHARK_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "vile_shark"), "main");
+
 	@Override
 	public void onInitializeClient() {
 
@@ -67,6 +72,8 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
 				new Identifier("liroth:blocks/liroth_fluid_still"),
 				new Identifier("liroth:blocks/liroth_fluid_flowing")
 		));
+		
+		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING);
 		
 		FluidRenderHandlerRegistry.INSTANCE.register(Liroth.MOLTEN_SPINERIOS_STILL, Liroth.MOLTEN_SPINERIOS_FLOWING, new SimpleFluidRenderHandler(
 				new Identifier("liroth:blocks/molten_spinerios_still"),
@@ -144,6 +151,12 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_FREAKSHOW_LAYER, FreakshowModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(Liroth.VILE_SHARK, (context) -> {
+            return new VileSharkEntityRenderer(context);
+        });
+ 
+        EntityModelLayerRegistry.registerModelLayer(MODEL_VILE_SHARK_LAYER, VileSharkModel::getTexturedModelData);
 	}
 	
 	@SuppressWarnings("deprecation")

@@ -34,7 +34,7 @@ public class DevastatedDimensionBiomeSource extends BiomeSource {
         this.BIOME_REGISTRY = biomeRegistry;
         DevastatedDimensionBiomeSource.LAYERS_BIOME_REGISTRY = biomeRegistry;
         this.biomeSize = biomeSize;
-        this.seed = seed;
+        this.seed = seed * 420;
     }
 
     @Override

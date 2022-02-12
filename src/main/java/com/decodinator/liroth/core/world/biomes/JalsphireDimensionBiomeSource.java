@@ -34,7 +34,7 @@ public class JalsphireDimensionBiomeSource extends BiomeSource {
         this.BIOME_REGISTRY = biomeRegistry;
         JalsphireDimensionBiomeSource.LAYERS_BIOME_REGISTRY = biomeRegistry;
         this.biomeSize = biomeSize;
-        this.seed = seed;
+        this.seed = seed * 28008;
     }
 
     @Override

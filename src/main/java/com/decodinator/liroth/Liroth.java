@@ -82,6 +82,10 @@ import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.LirothRenders;
 import com.decodinator.liroth.core.blocks.DimensionalCommunicator;
 import com.decodinator.liroth.core.blocks.DimensionalCommunicatorEntity;
+import com.decodinator.liroth.core.features.LirothBoneClawFeature;
+import com.decodinator.liroth.core.features.LirothBoneMushroomFeature;
+import com.decodinator.liroth.core.features.LirothBoneTreeFeature;
+import com.decodinator.liroth.core.features.LirothSkeletonFeature;
 import com.decodinator.liroth.core.features.ObsidianSpikeFeature;
 import com.decodinator.liroth.core.features.VileTentacleFeature;
 import com.decodinator.liroth.core.fluids.LirothFluid;
@@ -101,6 +105,7 @@ import com.decodinator.liroth.entities.ProwlerEntity;
 import com.decodinator.liroth.entities.ShadeEntity;
 import com.decodinator.liroth.entities.SkeletalFreakEntity;
 import com.decodinator.liroth.entities.SoulArachnidEntity;
+import com.decodinator.liroth.entities.VileSharkEntity;
 import com.decodinator.liroth.entities.WarpEntity;
 import com.decodinator.liroth.entities.projectiles.BeamLaserProjectileEntity;
 import com.decodinator.liroth.mixin.access.ItemBlockRenderTypeAccess;
@@ -197,6 +202,14 @@ public class Liroth implements ModInitializer {
     
     public static final Item FREAKSHOW_SPAWN_EGG = new SpawnEggItem(FREAKSHOW, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
+    public static final EntityType<VileSharkEntity> VILE_SHARK = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("liroth", "vile_shark"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VileSharkEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
+    );
+    
+    public static final Item VILE_SHARK_SPAWN_EGG = new SpawnEggItem(VILE_SHARK, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    
     public static final Identifier LIROTH_BLASTER_FIRING_SOUND_ID = new Identifier("liroth:liroth_blaster_firing");
     public static SoundEvent LIROTH_BLASTER_FIRING_SOUND_EVENT = new SoundEvent(LIROTH_BLASTER_FIRING_SOUND_ID);
     public static final Identifier FUNGAL_FIEND_DEATH_SOUND_ID = new Identifier("liroth:fungal_fiend_death");
@@ -269,6 +282,9 @@ public class Liroth implements ModInitializer {
 	  
 	  private static final Feature<DefaultFeatureConfig> OBSIDIAN_SPIKE = new ObsidianSpikeFeature(DefaultFeatureConfig.CODEC);
 	  private static final Feature<DefaultFeatureConfig> VILE_TENTALCE = new VileTentacleFeature(DefaultFeatureConfig.CODEC);
+	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_CLAW = new LirothBoneClawFeature(DefaultFeatureConfig.CODEC);
+	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_MUSHROOM = new LirothBoneMushroomFeature(DefaultFeatureConfig.CODEC);
+	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_TREE = new LirothBoneTreeFeature(DefaultFeatureConfig.CODEC);
 	  
 	@Override
 	public void onInitialize() {
@@ -278,6 +294,9 @@ public class Liroth implements ModInitializer {
 		
 	    Registry.register(Registry.FEATURE, new Identifier("liroth", "obsidian_spike"), OBSIDIAN_SPIKE);
 	    Registry.register(Registry.FEATURE, new Identifier("liroth", "vile_tentacle"), VILE_TENTALCE);
+	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_claw"), LIROTH_BONE_CLAW);
+	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_mushroom"), LIROTH_BONE_MUSHROOM);
+	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_tree"), LIROTH_BONE_TREE);
 		
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FUNGAL_FIEND, FungalFiendEntity.createFungalFiendAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FORSAKEN_CORPSE, ForsakenCorpseEntity.createForsakenCorpseAttributes());
@@ -288,6 +307,7 @@ public class Liroth implements ModInitializer {
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(SHADE, ShadeEntity.createShadeAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(PROWLER, ProwlerEntity.createProwlerAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FREAKSHOW, FreakshowEntity.createFreakshowAttributes());
+		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(VILE_SHARK, VileSharkEntity.createVileSharkAttributes());
 		
         LirothEntities.RegisterEntities();
 		
@@ -338,7 +358,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_jalsphire_gem_block"), new BlockItem(LirothBlocks.CORRUPTED_JALSPHIRE_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_jalsphire_ore"), new BlockItem(LirothBlocks.CORRUPTED_JALSPHIRE_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_liroth_gem_block"), new BlockItem(LirothBlocks.CORRUPTED_LIROTH_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_liroth_gem_ore"), new BlockItem(LirothBlocks.CORRUPTED_LIROTH_GEM_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+//	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_liroth_gem_ore"), new BlockItem(LirothBlocks.CORRUPTED_LIROTH_GEM_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_crafting_table"), new BlockItem(LirothBlocks.DAMNATION_CRAFTING_TABLE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_chest"), new BlockItem(LirothBlocks.DAMNATION_CHEST, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_door"), new BlockItem(LirothBlocks.DAMNATION_DOOR, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -406,7 +426,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_crafting_table"), new BlockItem(LirothBlocks.LIROTH_CRAFTING_TABLE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_dirt"), new BlockItem(LirothBlocks.LIROTH_DIRT, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_door"), new BlockItem(LirothBlocks.LIROTH_DOOR, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_end_stone"), new BlockItem(LirothBlocks.LIROTH_END_STONE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+//	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_end_stone"), new BlockItem(LirothBlocks.LIROTH_END_STONE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_fence"), new BlockItem(LirothBlocks.LIROTH_FENCE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_furnace"), new BlockItem(LirothBlocks.LIROTH_FURNACE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_gem_block"), new BlockItem(LirothBlocks.LIROTH_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -518,7 +538,7 @@ public class Liroth implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "shade_spawn_egg"), SHADE_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "prowler_spawn_egg"), PROWLER_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "freakshow_spawn_egg"), FREAKSHOW_SPAWN_EGG);
-		
+		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "vile_shark_spawn_egg"), VILE_SHARK_SPAWN_EGG);
 		
 		EntityRendererRegistry.INSTANCE.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
 			new FlyingItemEntityRenderer(context));

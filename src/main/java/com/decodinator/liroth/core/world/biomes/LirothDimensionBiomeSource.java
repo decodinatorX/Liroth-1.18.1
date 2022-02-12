@@ -23,6 +23,7 @@ public class LirothDimensionBiomeSource extends BiomeSource {
     public static final Identifier LIROTH_BIOME = new Identifier(Liroth.MOD_ID, "liroth_biome");
     public static final Identifier SPICED_DESERT = new Identifier(Liroth.MOD_ID, "spiced_desert");
     public static final Identifier TALLPIER = new Identifier(Liroth.MOD_ID, "tallpier");
+    public static final Identifier VILE_SEA = new Identifier(Liroth.MOD_ID, "vile_sea");
     private final Registry<Biome> BIOME_REGISTRY;
     public static Registry<Biome> LAYERS_BIOME_REGISTRY;
     private final long seed;
@@ -36,7 +37,7 @@ public class LirothDimensionBiomeSource extends BiomeSource {
         this.BIOME_REGISTRY = biomeRegistry;
         LirothDimensionBiomeSource.LAYERS_BIOME_REGISTRY = biomeRegistry;
         this.biomeSize = biomeSize;
-        this.seed = seed;
+        this.seed = seed * 125;
     }
 
     @Override
@@ -51,10 +52,14 @@ public class LirothDimensionBiomeSource extends BiomeSource {
 
     @Override
     public Biome getBiome(int x, int y, int z, MultiNoiseUtil.MultiNoiseSampler noise) {
-        if ((int) noise.sample(x, y, z).temperatureNoise() > 0.30) {
+        if ((int) noise.sample(x, y, z).temperatureNoise() > 0.50 && noise.sample(x, y, z).temperatureNoise() < 0.50) {
             return BIOME_REGISTRY.get(LirothDimensionBiomeSource.TALLPIER);
-        } else if ((int) noise.sample(x, y, z).temperatureNoise() > 0.70 && noise.sample(x, y, z).temperatureNoise() < 1.00) {
+        } else if ((int) noise.sample(x, y, z).temperatureNoise() > 0.50 && noise.sample(x, y, z).temperatureNoise() < 0.50) {
             return BIOME_REGISTRY.get(LirothDimensionBiomeSource.SPICED_DESERT);
+        } else if ((int) noise.sample(x, y, z).temperatureNoise() > 0.50 && noise.sample(x, y, z).temperatureNoise() < 0.50) {
+        	return BIOME_REGISTRY.get(LirothDimensionBiomeSource.LIROTH_BIOME);
+        } else if ((int) noise.sample(x, y, z).temperatureNoise() > 0.50 && noise.sample(x, y, z).temperatureNoise() < 0.50) {
+        	return BIOME_REGISTRY.get(LirothDimensionBiomeSource.VILE_SEA);
         } else {
             return BIOME_REGISTRY.get(LirothDimensionBiomeSource.LIROTH_BIOME);
         }

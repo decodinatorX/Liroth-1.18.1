@@ -28,6 +28,7 @@ public class LirothRenders {
         map.put(LirothBlocks.VILE_TENTACLE_TIP, RenderLayer.getCutout());
         map.put(LirothBlocks.DAMNATION_FUNGAL_CLUSTER, RenderLayer.getCutout());
         map.put(LirothBlocks.DAMNATION_FUNGUS, RenderLayer.getCutout());
+        map.put(LirothBlocks.SEA_EYE, RenderLayer.getCutout());
         
 //        map.put(LirothBlocks.CORRUPTED_BREWING_STAND, RenderLayer.getCutout());
         
@@ -57,6 +58,8 @@ public class LirothRenders {
         map.put(LirothBlocks.JALSPHIRE_DIMENSION_PORTAL, RenderLayer.getTranslucent());
         map.put(LirothBlocks.DEVASTATED_DIMENSION_PORTAL, RenderLayer.getTranslucent());
 
+        map.put(Liroth.LIROTH_FLUID, RenderLayer.getTranslucent());
+        
         map.put(LirothBlocks.LIROTH_GLASS_BLOCK, RenderLayer.getTranslucent());
         map.put(LirothBlocks.FORCEFIELD, RenderLayer.getTranslucent());
         

@@ -1,6 +1,6 @@
 {
-  "temperature": 0.7,
-  "downfall": 0.8,
+  "temperature": 0.5,
+  "downfall": 0.5,
   "precipitation": "none",
   "category": "forest",
   "effects": {
@@ -39,7 +39,14 @@
     ],
     "creature": [],
     "ambient": [],
-    "water_creature": [],
+    "water_creature": [
+//        {
+//        "type": "liroth:vile_shark",
+//        "weight": 1,
+//        "minCount": 1,
+//        "maxCount": 1
+//      	}  
+    ],
     "water_ambient": [],
     "misc": []
   },
@@ -56,6 +63,9 @@
       "minecraft:patch_tall_grass",
       "minecraft:patch_grass_jungle",
       "liroth:vile_tentacle",
+      "liroth:liroth_bone_claw",
+      "liroth:liroth_bone_mushroom",
+      "liroth:liroth_bone_tree",
       "liroth:lirothian_liroth_gem_ore",
       "liroth:charred_lirothian_liroth_gem_ore"
     ],

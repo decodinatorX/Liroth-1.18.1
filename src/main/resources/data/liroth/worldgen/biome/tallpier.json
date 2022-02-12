@@ -1,6 +1,6 @@
 {
-  "temperature": 0,
-  "downfall": 1,
+  "temperature": 0.5,
+  "downfall": 0.5,
   "precipitation": "snow",
   "temperature_modifier": "frozen",
   "category": "jungle",
@@ -30,7 +30,8 @@
     ],
     "creature": [],
     "ambient": [],
-    "water_creature": [],
+    "water_creature": [  
+    ],
     "water_ambient": [],
     "misc": []
   },
@@ -54,7 +55,11 @@
       "liroth:trees_tallpier",
       "minecraft:patch_grass_jungle",
       "liroth:lirothian_liroth_gem_ore",
-      "liroth:charred_lirothian_liroth_gem_ore"
+      "liroth:charred_lirothian_liroth_gem_ore",
+	  "liroth:liroth_bone_claw",
+      "liroth:liroth_bone_mushroom",
+      "liroth:liroth_bone_tree",
+      "liroth:vile_tentacle"
     ],
     []
   ]

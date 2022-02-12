@@ -14,6 +14,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 
 public class ShadeEntity extends ZombieEntity {
 
@@ -46,5 +47,13 @@ public class ShadeEntity extends ZombieEntity {
     
     public void poof() {
         this.kill();
+    }
+    
+    @Override
+    protected void convertInWater() {
+        this.convertTo(Liroth.SHADE);
+        if (!this.isSilent() || this.isSilent()) {
+            this.world.syncWorldEvent(null, WorldEvents.ZOMBIE_CONVERTS_TO_DROWNED, this.getBlockPos(), 0);
+        }
     }
 }
