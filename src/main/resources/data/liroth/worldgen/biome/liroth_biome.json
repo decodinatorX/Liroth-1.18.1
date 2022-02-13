@@ -42,10 +42,10 @@
     "water_creature": [
         {
         "type": "liroth:vile_shark",
-        "weight": 1,
+        "weight": 5,
         "minCount": 1,
-        "maxCount": 1
-      	}  
+        "maxCount": 4
+      	} 
     ],
     "water_ambient": [],
     "misc": []
@@ -60,6 +60,7 @@
   "features": [
     [
       "liroth:trees_liroth",
+      "liroth:liroth_rose",
       "minecraft:patch_tall_grass",
       "minecraft:patch_grass_jungle",
       "liroth:vile_tentacle",

@@ -73,6 +73,10 @@ public class LirothBlocks {
     public static final Block CHARRED_LIROTH_STONE_WALL = createStoneWall("charred_liroth_stone_wall");
     public static final Block CHARRED_LIROTH_STONE_STAIRS = createStoneStairs("charred_liroth_stone_stairs");
     public static final Block CHARRED_LIROTH_STONE_SLAB = createStoneSlab("charred_liroth_stone_slab");
+    public static final Block CHARRED_LIROTH_STONE_BRICKS = createStone("charred_liroth_stone_bricks");
+    public static final Block CHARRED_LIROTH_STONE_BRICK_WALL = createStoneWall("charred_liroth_stone_brick_wall");
+    public static final Block CHARRED_LIROTH_STONE_BRICK_STAIRS = createStoneStairs("charred_liroth_stone_brick_stairs");
+    public static final Block CHARRED_LIROTH_STONE_BRICK_SLAB = createStoneSlab("charred_liroth_stone_brick_slab");
     public static final Block CHISELED_DEVASTATED_BRICKS = createStone("chiseled_devastated_bricks");
 //    public static final Block CORRUPTED_BREWING_STAND = createBrewingStand("corrupted_brewing_stand");
     public static final Block CORRUPTED_JALSPHIRE_GEM_BLOCK = createMetalBlock("corrupted_jalsphire_gem_block");
@@ -167,6 +171,10 @@ public class LirothBlocks {
     public static final Block LIROTH_STONE_WALL = createStoneWall("liroth_stone_wall");
     public static final Block LIROTH_STONE_STAIRS = createStoneStairs("liroth_stone_stairs");
     public static final Block LIROTH_STONE_SLAB = createStoneSlab("liroth_stone_slab");
+    public static final Block LIROTH_STONE_BRICKS = createStone("liroth_stone_bricks");
+    public static final Block LIROTH_STONE_BRICK_WALL = createStoneWall("liroth_stone_brick_wall");
+    public static final Block LIROTH_STONE_BRICK_STAIRS = createStoneStairs("liroth_stone_brick_stairs");
+    public static final Block LIROTH_STONE_BRICK_SLAB = createStoneSlab("liroth_stone_brick_slab");
     public static final Block LIROTH_DOOR = createDoor("liroth_door");
     public static final Block LIROTH_FENCE = createFence("liroth_fence");
     public static final Block LIROTH_SLAB = createWoodSlab("liroth_slab");
@@ -231,6 +239,10 @@ public class LirothBlocks {
     public static final Block SPINERIOS_STONE_WALL = createStoneWall("spinerios_stone_wall");
     public static final Block SPINERIOS_STONE_SLAB = createStoneSlab("spinerios_stone_slab");
     public static final Block SPINERIOS_STONE_STAIRS = createStoneStairs("spinerios_stone_stairs");
+    public static final Block SPINERIOS_STONE_BRICKS = createStone("spinerios_stone_bricks");
+    public static final Block SPINERIOS_STONE_BRICK_WALL = createStoneWall("spinerios_stone_brick_wall");
+    public static final Block SPINERIOS_STONE_BRICK_SLAB = createStoneSlab("spinerios_stone_brick_slab");
+    public static final Block SPINERIOS_STONE_BRICK_STAIRS = createStoneStairs("spinerios_stone_brick_stairs");
     public static final Block SPINERIOS_STONE_TOURMALINE_ORE = createOre("spinerios_stone_tourmaline_ore");
     public static final Block SPINERIOS_TOURMALINE_ORE = createDirtOre("spinerios_tourmaline_ore");
     public static final Block TALLPIER_LEAVES = createLeaves("tallpier_leaves");
