@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.event.Event;
@@ -95,6 +96,9 @@ import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.LirothRenders;
 import com.decodinator.liroth.core.blocks.DimensionalCommunicator;
 import com.decodinator.liroth.core.blocks.DimensionalCommunicatorEntity;
+import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
+import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreen;
+import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreenHandler;
 import com.decodinator.liroth.core.features.LirothBoneClawFeature;
 import com.decodinator.liroth.core.features.LirothBoneMushroomFeature;
 import com.decodinator.liroth.core.features.LirothBoneTreeFeature;
@@ -135,6 +139,13 @@ public class Liroth implements ModInitializer {
 		return new Identifier(MOD_ID, path);
 	}
 	
+    public static BlockEntityType<LirothSplitterBlockEntity> LIROTH_SPLITTER_BLOCK_ENTITY =
+            Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "liroth_splitter"),
+                    FabricBlockEntityTypeBuilder.create(LirothSplitterBlockEntity::new,
+                            LirothBlocks.LIROTH_SPLITTER).build(null));
+    public static ScreenHandlerType<LirothSplitterScreenHandler> LIROTH_SPLITTER_SCREEN_HANDLER =
+            ScreenHandlerRegistry.registerSimple(new Identifier(MOD_ID, "liroth_splitter"),
+            		LirothSplitterScreenHandler::new);
 	
     public static final EntityType<FungalFiendEntity> FUNGAL_FIEND = Registry.register(
             Registry.ENTITY_TYPE,
@@ -556,6 +567,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_tourmaline_ore"), new BlockItem(LirothBlocks.SPINERIOS_TOURMALINE_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_stone_tourmaline_ore"), new BlockItem(LirothBlocks.SPINERIOS_STONE_TOURMALINE_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_splitter"), new BlockItem(LirothBlocks.LIROTH_SPLITTER, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_boat"), LirothItems.LIROTH_BOAT);
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);
@@ -578,6 +590,8 @@ public class Liroth implements ModInitializer {
         Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_DEATH_SOUND_ID, FUNGAL_FIEND_DEATH_SOUND_EVENT);
         Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_HURT_SOUND_ID, FUNGAL_FIEND_HURT_SOUND_EVENT);
         Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_FUSE_SOUND_ID, FUNGAL_FIEND_FUSE_SOUND_EVENT);
+        
+
 	    
 /*        Registry.register(Registry.BLOCK, new Identifier("liroth", "liroth_dimension_portal"), LIROTH_DIMENSION_PORTAL);
 		Registry.register(Registry.BLOCK, id("dimensional_communicator"), DIMENSIONAL_COMMUNICATOR);
@@ -620,6 +634,8 @@ public class Liroth implements ModInitializer {
 			registry.register(new Identifier("liroth:blocks/molten_spinerios_still"));
 			registry.register(new Identifier("liroth:blocks/molten_spinerios_flowing"));
 		});
+		
+        ScreenRegistry.register(LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
 				
 		CustomPortalBuilder.beginPortal()  
 	    .frameBlock(LirothBlocks.DIMENSIONAL_COMMUNICATOR)

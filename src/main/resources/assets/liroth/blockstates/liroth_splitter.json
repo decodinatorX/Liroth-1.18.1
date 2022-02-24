@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "normal": {
+      "model": "liroth:liroth_splitter"
+    },
+    "facing=north": {
+      "model": "liroth:liroth_splitter"
+    },
+    "facing=east": {
+      "model": "liroth:liroth_splitter",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "liroth:liroth_splitter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "liroth:liroth_splitter",
+      "y": 270
+    }
+  }
+}
