@@ -38,6 +38,7 @@ import com.decodinator.liroth.core.blocks.CustomWartBlock;
 import com.decodinator.liroth.core.blocks.CustomWaterPlant;
 import com.decodinator.liroth.core.blocks.LirothPortalBlock;
 import com.decodinator.liroth.core.blocks.LirothSplitterBlock;
+import com.decodinator.liroth.core.blocks.QuantumExtractorBlock;
 import com.decodinator.liroth.core.world.trees.DamnationTree;
 import com.decodinator.liroth.core.world.trees.JapzTree;
 import com.decodinator.liroth.core.world.trees.KoolawTree;
@@ -268,7 +269,7 @@ public class LirothBlocks {
 //    public static final Block LIROTH_DUST_COMPACTOR = createLirothDustCompactor("liroth_dust_compactor");
     public static final Block LIROTH_SPLITTER = createLirothSplitter("liroth_splitter");
 //    public static final Block LIROTHIAN_TRANSMUTATION_TABLE = createLirothianTransmutationTable("lirothian_transmutation_table");
-//    public static final Block QUANTUM_EXTRACTOR = createQuantumExtractor("quantum_extractor");
+    public static final Block QUANTUM_EXTRACTOR = createQuantumExtractor("quantum_extractor");
     
     // Saplings
     public static final Block LIROTH_SAPLING = createLirothSapling("liroth_sapling");
@@ -318,6 +319,13 @@ public class LirothBlocks {
     
     private static Block createLirothSplitter(String id) {
         Block createBlock = new LirothSplitterBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5f).luminance(LirothBlocks.createLightLevelFromLitBlockState(13)));
+        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        BLOCKS.add(createBlock);
+        return createBlock;
+	}
+
+    private static Block createQuantumExtractor(String id) {
+        Block createBlock = new QuantumExtractorBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5f).nonOpaque().luminance(LirothBlocks.createLightLevelFromLitBlockState(13)));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;

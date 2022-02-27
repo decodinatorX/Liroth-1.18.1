@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -43,13 +44,15 @@ import java.util.Map;
 import org.jetbrains.annotations.Nullable;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.blocks.LirothSplitterBlock;
+import com.decodinator.liroth.core.blocks.QuantumExtractorBlock;
 import com.google.common.collect.Maps;
 
-public class LirothSplitterBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory =
-            DefaultedList.ofSize(5, ItemStack.EMPTY);
+            DefaultedList.ofSize(4, ItemStack.EMPTY);
 	private static final Map<Item, Integer> AVAILABLE_FUELS = Maps.newHashMap();
     private int timer;
     int burnTime;
@@ -61,16 +64,16 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         public int get(int index) {
             switch (index) {
                 case 0: {
-                    return LirothSplitterBlockEntity.this.burnTime;
+                    return QuantumExtractorBlockEntity.this.burnTime;
                 }
                 case 1: {
-                    return LirothSplitterBlockEntity.this.fuelTime;
+                    return QuantumExtractorBlockEntity.this.fuelTime;
                 }
                 case 2: {
-                    return LirothSplitterBlockEntity.this.cookTime;
+                    return QuantumExtractorBlockEntity.this.cookTime;
                 }
                 case 3: {
-                    return LirothSplitterBlockEntity.this.cookTimeTotal;
+                    return QuantumExtractorBlockEntity.this.cookTimeTotal;
                 }
             }
             return 0;
@@ -80,19 +83,19 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         public void set(int index, int value) {
             switch (index) {
                 case 0: {
-                	LirothSplitterBlockEntity.this.burnTime = value;
+                	QuantumExtractorBlockEntity.this.burnTime = value;
                     break;
                 }
                 case 1: {
-                	LirothSplitterBlockEntity.this.fuelTime = value;
+                	QuantumExtractorBlockEntity.this.fuelTime = value;
                     break;
                 }
                 case 2: {
-                	LirothSplitterBlockEntity.this.cookTime = value;
+                	QuantumExtractorBlockEntity.this.cookTime = value;
                     break;
                 }
                 case 3: {
-                	LirothSplitterBlockEntity.this.cookTimeTotal = value;
+                	QuantumExtractorBlockEntity.this.cookTimeTotal = value;
                     break;
                 }
             }
@@ -137,19 +140,19 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
 		return 2;
 	}
 
-    public LirothSplitterBlockEntity(BlockPos pos, BlockState state) {
-        super(Liroth.LIROTH_SPLITTER_BLOCK_ENTITY, pos, state);
+    public QuantumExtractorBlockEntity(BlockPos pos, BlockState state) {
+        super(Liroth.QUANTUM_EXTRACTOR_BLOCK_ENTITY, pos, state);
     }
 
     @Override
     public Text getDisplayName() {
-        return new TranslatableText("container.liroth_splitter");
+        return new TranslatableText("container.quantum_extractor");
     }
 
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new LirothSplitterScreenHandler(syncId, inv, this, propertyDelegate);
+        return new QuantumExtractorScreenHandler(syncId, inv, this, propertyDelegate);
     }
 
     @Override
@@ -180,8 +183,8 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
     
     public void forceUpdateAllStates() {
         BlockState state = world.getBlockState(pos);
-        if (state.get(LirothSplitterBlock.LIT) != burnTime > 0) {
-            world.setBlockState(pos, state.with(LirothSplitterBlock.LIT, burnTime > 0), 3);
+        if (state.get(QuantumExtractorBlock.LIT) != burnTime > 0) {
+            world.setBlockState(pos, state.with(QuantumExtractorBlock.LIT, burnTime > 0), 3);
         }
     }
     
@@ -189,7 +192,7 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         world.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0f, 1.0f);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, LirothSplitterBlockEntity entity) {
+    public static void tick(World world, BlockPos pos, BlockState state, QuantumExtractorBlockEntity entity) {
         boolean bl = entity.isBurning();
         boolean bl2 = false;
         if (entity.isBurning()) {
@@ -200,7 +203,7 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
             int i = entity.getMaxCountPerStack();
             if (!entity.isBurning()) {
                 entity.fuelTime = entity.burnTime = entity.getFuelTime(itemStack);
-                if (entity.isBurning() && LirothSplitterBlockEntity.hasRecipe(entity)) {
+                if (entity.isBurning() && QuantumExtractorBlockEntity.hasRecipe(entity)) {
                     bl2 = true;
                     if (!itemStack.isEmpty()) {
                         Item item = itemStack.getItem();
@@ -212,12 +215,12 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
                     }
                 }
             }
-            if (entity.isBurning() && LirothSplitterBlockEntity.hasRecipe(entity)) {
+            if (entity.isBurning() && QuantumExtractorBlockEntity.hasRecipe(entity)) {
                 ++entity.cookTime;
                 if (entity.cookTime == entity.cookTimeTotal) {
                     entity.cookTime = 0;
-                    entity.cookTimeTotal = LirothSplitterBlockEntity.getCookTime();
-                    LirothSplitterBlockEntity.craftItem(entity);
+                    entity.cookTimeTotal = QuantumExtractorBlockEntity.getCookTime();
+                    QuantumExtractorBlockEntity.craftItem(entity);
                     bl2 = true;
                 }
             } else {
@@ -228,33 +231,47 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         }
         if (bl != entity.isBurning()) {
             bl2 = true;
-            state = (BlockState)state.with(LirothSplitterBlock.LIT, entity.isBurning());
+            state = (BlockState)state.with(QuantumExtractorBlock.LIT, entity.isBurning());
             world.setBlockState(pos, state, Block.NOTIFY_ALL);
         }
         if (bl2) {
-        	LirothSplitterBlockEntity.markDirty(world, pos, state);
+        	QuantumExtractorBlockEntity.markDirty(world, pos, state);
         }
     }
 
-    private static void craftItem(LirothSplitterBlockEntity entity) {
+    private static void craftItem(QuantumExtractorBlockEntity entity) {
     	
         entity.removeStack(0, 1);
-
-        entity.setStack(2, new ItemStack(LirothItems.LIROTH_DUST_ANSALUM, entity.getStack(2).getCount() + 1));
-        entity.setStack(3, new ItemStack(LirothItems.LIROTH_DUST_LUX, entity.getStack(3).getCount() + 1));
-        entity.setStack(4, new ItemStack(LirothItems.LIROTH_DUST_SALEM, entity.getStack(4).getCount() + 1));
+        
+/*        if (entity.getStack(1).getItem() == Blocks.REDSTONE_BLOCK.asItem()) {
+        	entity.removeStack(1, 1);
+        	entity.setStack(2, new ItemStack(LirothBlocks.REDSTONE_BROKEN_STAGE_1.asItem(), entity.getStack(2).getCount() + 1));
+        }
+        if (entity.getStack(1).getItem() == LirothBlocks.REDSTONE_BROKEN_STAGE_1.asItem()) {
+        	entity.removeStack(1, 1);
+        	entity.setStack(2, new ItemStack(LirothBlocks.REDSTONE_BROKEN_STAGE_2.asItem(), entity.getStack(2).getCount() + 1));
+        }
+        if (entity.getStack(1).getItem() == LirothBlocks.REDSTONE_BROKEN_STAGE_2.asItem()) {
+        	entity.removeStack(1, 1);
+        	entity.setStack(2, new ItemStack(LirothBlocks.REDSTONE_BROKEN_STAGE_3.asItem(), entity.getStack(2).getCount() + 1));
+        }
+        if (entity.getStack(1).getItem() == LirothBlocks.REDSTONE_BROKEN_STAGE_3.asItem()) {
+        	entity.removeStack(1, 1);
+        }*/
+        entity.setStack(3, new ItemStack(Items.DIAMOND, entity.getStack(3).getCount() + 1));
+        entity.setStack(4, new ItemStack(LirothItems.QUANTUM_PLATE, entity.getStack(4).getCount() + 1));
         
         entity.ticks = 0;
     }
 
-    private static boolean hasRecipe(LirothSplitterBlockEntity entity) {
-        boolean hasItemInFirstSlot = entity.getStack(0).getItem() == LirothItems.LIROTH_GEM;
+    private static boolean hasRecipe(QuantumExtractorBlockEntity entity) {
+        boolean hasItemInFirstSlot = entity.getStack(0).getItem() == LirothItems.QUANTUM_DIAMOND;
 
         return hasItemInFirstSlot;
     }
 
-    private static boolean hasNotReachedStackLimit(LirothSplitterBlockEntity entity) {
-        return entity.getStack(2).getCount() < entity.getStack(2).getMaxCount() ||
+    private static boolean hasNotReachedStackLimit(QuantumExtractorBlockEntity entity) {
+        return /*entity.getStack(2).getCount() < entity.getStack(2).getMaxCount() ||*/
         	   entity.getStack(3).getCount() < entity.getStack(3).getMaxCount() ||
         	   entity.getStack(4).getCount() < entity.getStack(4).getMaxCount();
     }
@@ -270,14 +287,21 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
 	protected int getFuelTime(ItemStack fuel) {
 		if (fuel.isEmpty()) {
 			return 0;
+		} else if (fuel.isOf(Blocks.REDSTONE_BLOCK.asItem())) {
+			return 16000;
+/*		} else if (fuel.isOf(LirothBlocks.REDSTONE_BROKEN_STAGE_1.asItem())) {
+			return 16000;
+		} else if (fuel.isOf(LirothBlocks.REDSTONE_BROKEN_STAGE_2.asItem())) {
+			return 16000;
+		} else if (fuel.isOf(LirothBlocks.REDSTONE_BROKEN_STAGE_3.asItem())) {
+			return 16000;*/
 		}
-		Item item = fuel.getItem();
-		return AVAILABLE_FUELS.getOrDefault(item, getFabricFuel(fuel));
+		return 0;
 	}
     
     @Override
     public boolean isValid(int slot, ItemStack stack) {
-        if (slot == 2 || slot == 3 || slot == 4) {
+        if (slot == 3 || slot == 4) {
             return false;
         }
         if (slot == 1) {
@@ -286,25 +310,13 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         }
         return true;
     }
-    
-	public static boolean canUseAsFuel(ItemStack stack) {
-		return AVAILABLE_FUELS.containsKey(stack.getItem()) || getFabricFuel(stack) > 2000;
-	}
-	
-	public static void registerFuel(ItemConvertible fuel, int time) {
-		AVAILABLE_FUELS.put(fuel.asItem(), time);
-	}
-	
-	public static Map<Item, Integer> availableFuels() {
-		return AVAILABLE_FUELS;
-	}
 	
 	private static int getFabricFuel(ItemStack stack) {
 		Integer ticks = FuelRegistry.INSTANCE.get(stack.getItem());
 		return ticks == null ? 0 : ticks;
 	}
     
-    private static boolean tickReached100(LirothSplitterBlockEntity entity) {
+    private static boolean tickReached100(QuantumExtractorBlockEntity entity) {
     	return entity.ticks <= getCookTime();
     }
 }

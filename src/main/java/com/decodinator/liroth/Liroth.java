@@ -112,6 +112,9 @@ import com.decodinator.liroth.core.blocks.DimensionalCommunicatorEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreen;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreenHandler;
+import com.decodinator.liroth.core.blocks.entity.QuantumExtractorBlockEntity;
+import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreen;
+import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreenHandler;
 import com.decodinator.liroth.core.effects.SchluckedStatusEffect;
 import com.decodinator.liroth.core.features.LirothBoneClawFeature;
 import com.decodinator.liroth.core.features.LirothBoneMushroomFeature;
@@ -174,6 +177,14 @@ public class Liroth implements ModInitializer {
     public static ScreenHandlerType<LirothSplitterScreenHandler> LIROTH_SPLITTER_SCREEN_HANDLER =
             ScreenHandlerRegistry.registerSimple(new Identifier(MOD_ID, "liroth_splitter"),
             		LirothSplitterScreenHandler::new);
+    
+    public static BlockEntityType<QuantumExtractorBlockEntity> QUANTUM_EXTRACTOR_BLOCK_ENTITY =
+            Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "quantum_extractor"),
+                    FabricBlockEntityTypeBuilder.create(QuantumExtractorBlockEntity::new,
+                            LirothBlocks.QUANTUM_EXTRACTOR).build(null));
+    public static ScreenHandlerType<QuantumExtractorScreenHandler> QUANTUM_EXTRACTOR_SCREEN_HANDLER =
+            ScreenHandlerRegistry.registerSimple(new Identifier(MOD_ID, "quantum_extractor"),
+            		QuantumExtractorScreenHandler::new);
 	
     public static final EntityType<FungalFiendEntity> FUNGAL_FIEND = Registry.register(
             Registry.ENTITY_TYPE,
@@ -609,6 +620,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_stone_tourmaline_ore"), new BlockItem(LirothBlocks.SPINERIOS_STONE_TOURMALINE_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_splitter"), new BlockItem(LirothBlocks.LIROTH_SPLITTER, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "quantum_extractor"), new BlockItem(LirothBlocks.QUANTUM_EXTRACTOR, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_boat"), LirothItems.LIROTH_BOAT);
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);
@@ -678,6 +690,7 @@ public class Liroth implements ModInitializer {
 		});
 		
         ScreenRegistry.register(LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
+        ScreenRegistry.register(QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
 				
 		CustomPortalBuilder.beginPortal()  
 	    .frameBlock(LirothBlocks.DIMENSIONAL_COMMUNICATOR)
