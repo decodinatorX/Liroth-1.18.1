@@ -26,6 +26,8 @@ import org.jetbrains.annotations.Nullable;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.common.properties.LirothCreativeTab;
+import com.decodinator.liroth.core.items.AnsalumArmorItem;
+import com.decodinator.liroth.core.items.AnsalumLirothShield;
 import com.decodinator.liroth.core.items.BeamItem;
 import com.decodinator.liroth.core.items.CustomAxeItem;
 import com.decodinator.liroth.core.items.CustomBoatItem;
@@ -34,7 +36,13 @@ import com.decodinator.liroth.core.items.CustomPickaxeItem;
 import com.decodinator.liroth.core.items.DamnationBoatItem;
 import com.decodinator.liroth.core.items.LirothBlaster;
 import com.decodinator.liroth.core.items.LirothShield;
+import com.decodinator.liroth.core.items.LuxArmorItem;
+import com.decodinator.liroth.core.items.LuxLirothShield;
 import com.decodinator.liroth.core.items.PurpetuatedSpyglassItem;
+import com.decodinator.liroth.core.items.QuantumArmorItem;
+import com.decodinator.liroth.core.items.QuantumLirothShield;
+import com.decodinator.liroth.core.items.SalemArmorItem;
+import com.decodinator.liroth.core.items.SalemLirothShield;
 import com.decodinator.liroth.entities.boat.CustomBoatEntity;
 
 @SuppressWarnings("deprecation")
@@ -63,6 +71,7 @@ public class LirothItems {
     public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
     
     public static final Item JALSPHIRE_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jalsphire_dust");
+    public static final Item JALSPHIRE_DUST_HEAP = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jalsphire_dust_heap");
     public static final Item JALSPHIRE_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jalsphire_gem");
     
     public static final Item LIROTH_GEM_ANSALUM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_ansalum");
@@ -86,6 +95,10 @@ public class LirothItems {
     public static final Item LIROTH_GEM_SALEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_salem");
 
     public static final Item LIROTH_SHIELD = createShieldItem(new LirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "liroth_shield");
+    public static final Item ANSALUM_LIROTH_SHIELD = createAnsalumShieldItem(new AnsalumLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "ansalum_liroth_shield");
+    public static final Item LUX_LIROTH_SHIELD = createLuxShieldItem(new LuxLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "lux_liroth_shield");
+    public static final Item SALEM_LIROTH_SHIELD = createSalemShieldItem(new SalemLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "salem_liroth_shield");
+    public static final Item QUANTUM_LIROTH_SHIELD = createQuantumShieldItem(new QuantumLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "quantum_liroth_shield");
     
     public static final Item LIROTH_SOUL_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_soul_dust");
     
@@ -109,6 +122,32 @@ public class LirothItems {
     public static final Item LIROTH_CHESTPLATE = createArmorItem(new ArmorItem(Liroth.LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_chestplate");
     public static final Item LIROTH_LEGGINGS = createArmorItem(new ArmorItem(Liroth.LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_leggings");
     public static final Item LIROTH_BOOTS = createArmorItem(new ArmorItem(Liroth.LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_boots");
+    
+    public static final Item ANSALUM_LIROTH_HELMET = createArmorItem(new AnsalumArmorItem(Liroth.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ansalum_liroth_helmet");
+    public static final Item ANSALUM_LIROTH_CHESTPLATE = createArmorItem(new AnsalumArmorItem(Liroth.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ansalum_liroth_chestplate");
+    public static final Item ANSALUM_LIROTH_LEGGINGS = createArmorItem(new AnsalumArmorItem(Liroth.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ansalum_liroth_leggings");
+    public static final Item ANSALUM_LIROTH_BOOTS = createArmorItem(new AnsalumArmorItem(Liroth.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ansalum_liroth_boots");
+    
+    public static final Item ANSALUM_LIROTH_AXE = createToolItem(new CustomAxeItem(Liroth.ANSALUM_LIROTH_TOOL_MATERIAL, 7.0f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "ansalum_liroth_axe");
+    public static final Item LUX_LIROTH_KATANA = createToolItem(new SwordItem(Liroth.LUX_LIROTH_TOOL_MATERIAL, 2, -1.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "lux_liroth_katana");
+    public static final Item SALEM_LIROTH_FALCHION = createToolItem(new SwordItem(Liroth.SALEM_LIROTH_TOOL_MATERIAL, 4, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "salem_liroth_falchion");
+    
+    public static final Item QUANTUM_LIROTH_SWORD = createToolItem(new SwordItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, 4, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "quantum_liroth_sword");
+    
+    public static final Item LUX_LIROTH_HELMET = createArmorItem(new LuxArmorItem(Liroth.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lux_liroth_helmet");
+    public static final Item LUX_LIROTH_CHESTPLATE = createArmorItem(new LuxArmorItem(Liroth.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lux_liroth_chestplate");
+    public static final Item LUX_LIROTH_LEGGINGS = createArmorItem(new LuxArmorItem(Liroth.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lux_liroth_leggings");
+    public static final Item LUX_LIROTH_BOOTS = createArmorItem(new LuxArmorItem(Liroth.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lux_liroth_boots");
+    
+    public static final Item SALEM_LIROTH_HELMET = createArmorItem(new SalemArmorItem(Liroth.SALEM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "salem_liroth_helmet");
+    public static final Item SALEM_LIROTH_CHESTPLATE = createArmorItem(new SalemArmorItem(Liroth.SALEM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "salem_liroth_chestplate");
+    public static final Item SALEM_LIROTH_LEGGINGS = createArmorItem(new SalemArmorItem(Liroth.SALEM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "salem_liroth_leggings");
+    public static final Item SALEM_LIROTH_BOOTS = createArmorItem(new SalemArmorItem(Liroth.SALEM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "salem_liroth_boots");
+    
+    public static final Item QUANTUM_LIROTH_HELMET = createArmorItem(new QuantumArmorItem(Liroth.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "quantum_liroth_helmet");
+    public static final Item QUANTUM_LIROTH_CHESTPLATE = createArmorItem(new QuantumArmorItem(Liroth.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "quantum_liroth_chestplate");
+    public static final Item QUANTUM_LIROTH_LEGGINGS = createArmorItem(new QuantumArmorItem(Liroth.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "quantum_liroth_leggings");
+    public static final Item QUANTUM_LIROTH_BOOTS = createArmorItem(new QuantumArmorItem(Liroth.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "quantum_liroth_boots");
     
     public static final Item LIROTH_SWORD = createToolItem(new SwordItem(Liroth.LIROTH_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_sword");
     public static final Item LIROTH_SHOVEL = createToolItem(new ShovelItem(Liroth.LIROTH_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_shovel");
@@ -146,6 +185,34 @@ public class LirothItems {
 	}
     
     private static Item createShieldItem(LirothShield shieldItem, String id) {
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), shieldItem);
+//      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
+      itemsList.add(shieldItem);
+      return shieldItem;
+	}
+    
+    private static Item createAnsalumShieldItem(AnsalumLirothShield shieldItem, String id) {
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), shieldItem);
+//      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
+      itemsList.add(shieldItem);
+      return shieldItem;
+	}
+    
+    private static Item createLuxShieldItem(LuxLirothShield shieldItem, String id) {
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), shieldItem);
+//      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
+      itemsList.add(shieldItem);
+      return shieldItem;
+	}
+    
+    private static Item createSalemShieldItem(SalemLirothShield shieldItem, String id) {
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), shieldItem);
+//      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
+      itemsList.add(shieldItem);
+      return shieldItem;
+	}
+    
+    private static Item createQuantumShieldItem(QuantumLirothShield shieldItem, String id) {
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), shieldItem);
 //      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
       itemsList.add(shieldItem);

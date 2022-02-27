@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 
-public abstract class MoltenSpinerios extends LavaTypeFluid {
+public abstract class MoltenSpinerios extends WaterTypeFluid {
 	@Override
 	public Fluid getStill() {
 		return Liroth.MOLTEN_SPINERIOS_STILL;

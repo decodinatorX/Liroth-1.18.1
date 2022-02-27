@@ -17,6 +17,7 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.fabricmc.fabric.api.tag.TagFactory;
@@ -24,21 +25,30 @@ import net.fabricmc.fabric.impl.structure.FabricStructureImpl;
 import net.fabricmc.fabric.mixin.structure.StructuresConfigAccessor;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.InGameOverlayRenderer;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.ProjectileEntityRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.data.client.model.BlockStateModelGenerator;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BlockItem;
@@ -49,6 +59,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.WallStandingBlockItem;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
@@ -56,8 +67,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -99,6 +112,7 @@ import com.decodinator.liroth.core.blocks.DimensionalCommunicatorEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreen;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreenHandler;
+import com.decodinator.liroth.core.effects.SchluckedStatusEffect;
 import com.decodinator.liroth.core.features.LirothBoneClawFeature;
 import com.decodinator.liroth.core.features.LirothBoneMushroomFeature;
 import com.decodinator.liroth.core.features.LirothBoneTreeFeature;
@@ -108,8 +122,17 @@ import com.decodinator.liroth.core.features.VileTentacleFeature;
 import com.decodinator.liroth.core.fluids.LirothFluid;
 import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
 import com.decodinator.liroth.core.fluids.MoltenSpinerios;
+import com.decodinator.liroth.core.fluids.SchluckedFluidBlock;
+import com.decodinator.liroth.core.helpers.AnsalumLirothArmorMaterial;
+import com.decodinator.liroth.core.helpers.AnsalumLirothToolMaterial;
 import com.decodinator.liroth.core.helpers.LirothArmorMaterial;
 import com.decodinator.liroth.core.helpers.LirothToolMaterial;
+import com.decodinator.liroth.core.helpers.LuxLirothArmorMaterial;
+import com.decodinator.liroth.core.helpers.LuxLirothToolMaterial;
+import com.decodinator.liroth.core.helpers.QuantumLirothArmorMaterial;
+import com.decodinator.liroth.core.helpers.QuantumLirothToolMaterial;
+import com.decodinator.liroth.core.helpers.SalemLirothArmorMaterial;
+import com.decodinator.liroth.core.helpers.SalemLirothToolMaterial;
 import com.decodinator.liroth.core.helpers.TourmalineArmorMaterial;
 import com.decodinator.liroth.core.helpers.TourmalineToolMaterial;
 import com.decodinator.liroth.core.items.BeamItem;
@@ -126,7 +149,9 @@ import com.decodinator.liroth.entities.VileSharkEntity;
 import com.decodinator.liroth.entities.WarpEntity;
 import com.decodinator.liroth.entities.projectiles.BeamLaserProjectileEntity;
 import com.decodinator.liroth.mixin.access.ItemBlockRenderTypeAccess;
+import com.decodinator.liroth.util.TheBitchHasTheSchluck;
 import com.decodinator.liroth.util.gui.DimensionalCommunicatorScreenHandler;
+import com.decodinator.liroth.util.gui.SluckedOverlay;
 import com.decodinator.liroth.world.generator.LirothConfiguredStructures;
 import com.decodinator.liroth.world.generator.LirothStructures;
 import com.mojang.brigadier.context.CommandContext;
@@ -138,6 +163,9 @@ public class Liroth implements ModInitializer {
 	public static Identifier id(String path) {
 		return new Identifier(MOD_ID, path);
 	}
+	
+	  public static final StatusEffect SCHLUCKED = new SchluckedStatusEffect();
+	  
 	
     public static BlockEntityType<LirothSplitterBlockEntity> LIROTH_SPLITTER_BLOCK_ENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "liroth_splitter"),
@@ -246,6 +274,7 @@ public class Liroth implements ModInitializer {
     public static SoundEvent FUNGAL_FIEND_FUSE_SOUND_EVENT = new SoundEvent(FUNGAL_FIEND_FUSE_SOUND_ID);
 	
 	  public static final Tag<Block> DIRT_ORE_REPLACEABLES = TagFactory.BLOCK.create(new Identifier("liroth", "dirt_ore_replaceables"));
+	  public static final Tag<Fluid> STICKY_FLUIDS = TagFactory.FLUID.create(new Identifier("liroth", "sticky_fluids"));
 	  public static final Tag<Item> TORCHES = TagFactory.ITEM.create(new Identifier("liroth", "torches"));
 	
 	public static final Block DIMENSIONAL_COMMUNICATOR = new DimensionalCommunicator(AbstractBlock.Settings.copy(Blocks.OBSIDIAN));
@@ -267,6 +296,14 @@ public class Liroth implements ModInitializer {
     public static final ToolMaterial LIROTH_TOOL_MATERIAL = new LirothToolMaterial();
     public static final ArmorMaterial TOURMALINE_ARMOR_MATERIAL = new TourmalineArmorMaterial();
     public static final ToolMaterial TOURMALINE_TOOL_MATERIAL = new TourmalineToolMaterial();
+    public static final ArmorMaterial ANSALUM_LIROTH_ARMOR_MATERIAL = new AnsalumLirothArmorMaterial();
+    public static final ToolMaterial ANSALUM_LIROTH_TOOL_MATERIAL = new AnsalumLirothToolMaterial();
+    public static final ArmorMaterial LUX_LIROTH_ARMOR_MATERIAL = new LuxLirothArmorMaterial();
+    public static final ToolMaterial LUX_LIROTH_TOOL_MATERIAL = new LuxLirothToolMaterial();
+    public static final ArmorMaterial SALEM_LIROTH_ARMOR_MATERIAL = new SalemLirothArmorMaterial();
+    public static final ToolMaterial SALEM_LIROTH_TOOL_MATERIAL = new SalemLirothToolMaterial();
+    public static final ArmorMaterial QUANTUM_LIROTH_ARMOR_MATERIAL = new QuantumLirothArmorMaterial();
+    public static final ToolMaterial QUANTUM_LIROTH_TOOL_MATERIAL = new QuantumLirothToolMaterial();
 
 	public static FlowableFluid MOLTEN_SPINERIOS_STILL;
 	public static FlowableFluid MOLTEN_SPINERIOS_FLOWING;
@@ -348,6 +385,8 @@ public class Liroth implements ModInitializer {
 			return;
 		}
 		
+        Registry.register(Registry.PARTICLE_TYPE, new Identifier("liroth", "purple_flame"), PURPLE_FLAME);		
+		
 	    Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,
 	           new Identifier("liroth", "overworld_tourmaline_ore"), OVERWORLD_TOURMALINE_GEM_ORE_CONFIGURED_FEATURE);
 	       Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier("liroth", "overworld_tourmaline_ore"),
@@ -363,6 +402,8 @@ public class Liroth implements ModInitializer {
 		   BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
 		       RegistryKey.of(Registry.PLACED_FEATURE_KEY,
 		           new Identifier("liroth", "overworld_deepslate_liroth_gem_ore")));
+		   
+		Registry.register(Registry.STATUS_EFFECT, new Identifier("liroth", "schlucked"), SCHLUCKED);
 		   
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "anomaly"), new BlockItem(LirothBlocks.ANOMALY, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "anomaly_block"), new BlockItem(LirothBlocks.ANOMALY_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -591,7 +632,7 @@ public class Liroth implements ModInitializer {
         Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_HURT_SOUND_ID, FUNGAL_FIEND_HURT_SOUND_EVENT);
         Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_FUSE_SOUND_ID, FUNGAL_FIEND_FUSE_SOUND_EVENT);
         
-
+        
 	    
 /*        Registry.register(Registry.BLOCK, new Identifier("liroth", "liroth_dimension_portal"), LIROTH_DIMENSION_PORTAL);
 		Registry.register(Registry.BLOCK, id("dimensional_communicator"), DIMENSIONAL_COMMUNICATOR);
@@ -601,6 +642,7 @@ public class Liroth implements ModInitializer {
         LirothRenders.renderCutOuts(blockRenderTypeMap -> ItemBlockRenderTypeAccess.getTypeByBlock().putAll(blockRenderTypeMap));
 	    LirothRegistries.registerItems();
 	    LirothRegistries.registerFuels();
+
 		LOGGER.info("Hello Fabric world!");
 		
 		LIROTH_FLUID_STILL = Registry.register(Registry.FLUID, new Identifier(MOD_ID, "liroth_fluid_still"), new LirothFluid.Still());
@@ -613,7 +655,7 @@ public class Liroth implements ModInitializer {
 		MOLTEN_SPINERIOS_FLOWING = Registry.register(Registry.FLUID, new Identifier(MOD_ID, "molten_spinerios_flowing"), new MoltenSpinerios.Flowing());
 		MOLTEN_SPINERIOS_BUCKET = Registry.register(Registry.ITEM, new Identifier(MOD_ID, "molten_spinerios_bucket"), 
 	        new BucketItem(MOLTEN_SPINERIOS_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(LirothCreativeTab.creativeItemsTab)));
-		MOLTEN_SPINERIOS = Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "molten_spinerios"), new FluidBlock(MOLTEN_SPINERIOS_STILL, AbstractBlock.Settings.copy(Blocks.LAVA)){});
+		MOLTEN_SPINERIOS = Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "molten_spinerios"), new SchluckedFluidBlock(MOLTEN_SPINERIOS_STILL, AbstractBlock.Settings.copy(Blocks.LAVA)){});
 	
 		FluidRenderHandlerRegistry.INSTANCE.register(Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING, new SimpleFluidRenderHandler(
 				new Identifier("liroth:blocks/liroth_fluid_still"),
@@ -721,5 +763,17 @@ public class Liroth implements ModInitializer {
         PersistentProjectileEntity persistentProjectileEntity = beamItem.createBeam(entity.world, stack, entity);
         persistentProjectileEntity.applyEnchantmentEffects(entity, damageModifier);
         return persistentProjectileEntity;
+    }
+    
+    public static final DefaultParticleType PURPLE_FLAME = FabricParticleTypes.simple();
+    
+    public static void renderOverlays(MinecraftClient client, MatrixStack matrices) {
+        BlockState blockState;
+        ClientPlayerEntity playerEntity = client.player;
+        if (!client.player.isSpectator()) {
+            if (client.player.isSubmergedIn(Liroth.STICKY_FLUIDS)) {
+                SluckedOverlay.renderSchluckedOverlay(client, matrices);
+            }
+        }
     }
 }

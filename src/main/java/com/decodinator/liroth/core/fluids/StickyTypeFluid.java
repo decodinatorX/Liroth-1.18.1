@@ -12,7 +12,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-public abstract class LavaTypeFluid extends FlowableFluid {
+public abstract class StickyTypeFluid extends FlowableFluid {
 	/**
 	 * @return whether the given fluid an instance of this fluid
 	 */
@@ -72,7 +72,7 @@ public abstract class LavaTypeFluid extends FlowableFluid {
 	 */
 	@Override
 	public int getTickRate(WorldView worldView) {
-		return 30;
+		return 50;
 	}
  
 	/**
@@ -80,6 +80,6 @@ public abstract class LavaTypeFluid extends FlowableFluid {
 	 */
 	@Override
 	protected float getBlastResistance() {
-		return 100.0F;
+		return 300.0F;
 	}
 }

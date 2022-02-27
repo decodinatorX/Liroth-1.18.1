@@ -6,6 +6,7 @@ import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
@@ -17,6 +18,7 @@ import ru.bclib.registry.BaseBlockEntities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.blocks.CustomCampfireBlock;
@@ -315,11 +317,15 @@ public class LirothBlocks {
     }
     
     private static Block createLirothSplitter(String id) {
-        Block createBlock = new LirothSplitterBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK));
+        Block createBlock = new LirothSplitterBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5f).luminance(LirothBlocks.createLightLevelFromLitBlockState(13)));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
 	}
+    
+    private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
+        return state -> state.get(Properties.LIT) != false ? litLevel : 0;
+    }
 
 	static Block createWaterPlant(String id) {
         Block createBlock = new CustomWaterPlant(DEAD_SEA_EYE, FabricBlockSettings.copy(Blocks.FIRE_CORAL_FAN));

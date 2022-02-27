@@ -2,33 +2,44 @@ package com.decodinator.liroth.core.blocks.entity;
 
 import com.decodinator.liroth.Liroth;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class LirothSplitterScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final World world;
+    private final PropertyDelegate propertyDelegate;
+	private PlayerEntity entity;
 
     public LirothSplitterScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(3));
+        this(syncId, playerInventory, new SimpleInventory(5), new ArrayPropertyDelegate(4));
     }
 
-    public LirothSplitterScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+    public LirothSplitterScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
         super(Liroth.LIROTH_SPLITTER_SCREEN_HANDLER, syncId);
         checkSize(inventory, 5);
         this.inventory = inventory;
         this.world = playerInventory.player.world;
+		this.entity = entity;
         inventory.onOpen(playerInventory.player);
-
+        this.propertyDelegate = propertyDelegate;
+        
         // Our Slots
-        this.addSlot(new Slot(inventory, 0, 52, 25));
-        this.addSlot(new Slot(inventory, 1, 52, 46));
+        this.addProperties(propertyDelegate);
+        this.addSlot(new Slot(inventory, 0, 52, 16));
+        this.addSlot(new Slot(inventory, 1, 52, 52));
         this.addSlot(new Slot(inventory, 2, 112, 8));
         this.addSlot(new Slot(inventory, 3, 112, 34));
         this.addSlot(new Slot(inventory, 4, 112, 60));
@@ -79,5 +90,26 @@ public class LirothSplitterScreenHandler extends ScreenHandler {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 0 + 8 + i * 18, 0 + 142));
         }
+    }
+    
+	@Environment(EnvType.CLIENT)
+	public int getCookProgress(int pixels) {
+		int time = propertyDelegate.get(2);
+		int timeTotal = propertyDelegate.get(3);
+		return timeTotal != 0 && time != 0 ? time * pixels / timeTotal : 0;
+	}
+	
+	@Environment(EnvType.CLIENT)
+    public int getFuelProgress() {
+        int i = this.propertyDelegate.get(1);
+        if (i == 0) {
+            i = 200;
+        }
+        return this.propertyDelegate.get(0) * 13 / i;
+    }
+	
+	@Environment(EnvType.CLIENT)
+    public boolean isBurning() {
+        return this.propertyDelegate.get(0) > 0;
     }
 }

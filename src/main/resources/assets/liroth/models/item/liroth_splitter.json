@@ -1,5 +1,5 @@
 {
-  "parent": "liroth:block/liroth_splitter",
+  "parent": "liroth:block/liroth_splitter_off",
   "display": {
     "thirdperson": {
       "rotation": [
