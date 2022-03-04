@@ -258,8 +258,8 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
         if (entity.getStack(1).getItem() == LirothBlocks.REDSTONE_BROKEN_STAGE_3.asItem()) {
         	entity.removeStack(1, 1);
         }*/
-        entity.setStack(3, new ItemStack(Items.DIAMOND, entity.getStack(3).getCount() + 1));
-        entity.setStack(4, new ItemStack(LirothItems.QUANTUM_PLATE, entity.getStack(4).getCount() + 1));
+        entity.setStack(2, new ItemStack(Items.DIAMOND, entity.getStack(2).getCount() + 1));
+        entity.setStack(3, new ItemStack(LirothItems.QUANTUM_PLATE, entity.getStack(3).getCount() + 1));
         
         entity.ticks = 0;
     }
@@ -272,8 +272,8 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
 
     private static boolean hasNotReachedStackLimit(QuantumExtractorBlockEntity entity) {
         return /*entity.getStack(2).getCount() < entity.getStack(2).getMaxCount() ||*/
-        	   entity.getStack(3).getCount() < entity.getStack(3).getMaxCount() ||
-        	   entity.getStack(4).getCount() < entity.getStack(4).getMaxCount();
+        	   entity.getStack(2).getCount() < entity.getStack(2).getMaxCount() ||
+        	   entity.getStack(3).getCount() < entity.getStack(3).getMaxCount();
     }
     
     private static int getCookTime() {
@@ -288,7 +288,7 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
 		if (fuel.isEmpty()) {
 			return 0;
 		} else if (fuel.isOf(Blocks.REDSTONE_BLOCK.asItem())) {
-			return 16000;
+			return 600;
 /*		} else if (fuel.isOf(LirothBlocks.REDSTONE_BROKEN_STAGE_1.asItem())) {
 			return 16000;
 		} else if (fuel.isOf(LirothBlocks.REDSTONE_BROKEN_STAGE_2.asItem())) {
@@ -301,7 +301,7 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
     
     @Override
     public boolean isValid(int slot, ItemStack stack) {
-        if (slot == 3 || slot == 4) {
+        if (slot == 2 || slot == 3) {
             return false;
         }
         if (slot == 1) {

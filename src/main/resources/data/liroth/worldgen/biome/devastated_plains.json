@@ -10,11 +10,28 @@
     "water_fog_color": 0,
     "grass_color": 0,
     "foliage_color": 0,
+    "ambient_sound": "minecraft:ambient.basalt_deltas.loop",
     "mood_sound": {
-      "sound": "minecraft:ambient.cave",
+      "sound": "minecraft:ambient.basalt_deltas.mood",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.basalt_deltas.additions",
+      "tick_chance": 0.0111
+    },
+    "music": {
+      "sound": "liroth:music.liroth.desolate",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:white_ash"
+      },
+      "probability": 0.118093334
     }
   },
   "spawners": {
@@ -65,7 +82,8 @@
       "minecraft:patch_tall_grass_2",
       "minecraft:patch_grass_plain",
       "liroth:trees_devastated",
-      "liroth:quantum_diamond_ore"
+      "liroth:quantum_diamond_ore",
+      "liroth:ruby_ore"
     ],
     []
   ]

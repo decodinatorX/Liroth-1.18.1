@@ -10,11 +10,28 @@
     "water_fog_color": 328965,
     "grass_color": 328965,
     "foliage_color": 328965,
+    "ambient_sound": "minecraft:ambient.soul_sand_valley.loop",
     "mood_sound": {
-      "sound": "minecraft:ambient.cave",
+      "sound": "minecraft:ambient.soul_sand_valley.mood",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.soul_sand_valley.additions",
+      "tick_chance": 0.0111
+    },
+    "music": {
+      "sound": "liroth:music.liroth.damnation",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
+    },
+    "particle": {
+      "options": {
+        "type": "liroth:green_spore"
+      },
+      "probability": 0.118093334
     }
   },
   "spawners": {
@@ -44,10 +61,7 @@
   },
   "features": [
     [],
-    [
-      "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
-    ],
+    [],
     [
       "minecraft:amethyst_geode"
     ],

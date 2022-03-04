@@ -32,5 +32,68 @@
   			"name": "liroth:fungal_fiend/fuse"
   		}
   	]
+  },
+    "music.liroth.liroth_biome": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "liroth:music/liroth_biome",
+        "stream": true
+      }
+    ]
+  },
+    "music.liroth.tallpier_biome": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "liroth:music/tallpier_biome",
+        "stream": true
+      }
+    ]
+  },
+    "music.liroth.spiced_desert": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "liroth:music/spiced_desert",
+        "stream": true
+      }
+    ]
+  },
+    "music.liroth.damnation": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "liroth:music/damnation",
+        "stream": true
+      }
+    ]
+  },
+    "music.liroth.escape": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "liroth:music/escape",
+        "stream": true
+      }
+    ]
+  },
+    "music.liroth.jalsphire": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "liroth:music/jalsphire",
+        "stream": true
+      }
+    ]
+  },
+    "music.liroth.desolate": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "liroth:music/desolate",
+        "stream": true
+      }
+    ]
   }
 }

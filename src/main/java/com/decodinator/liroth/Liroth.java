@@ -87,10 +87,13 @@ import net.minecraft.world.gen.decorator.HeightRangePlacementModifier;
 import net.minecraft.world.gen.decorator.SquarePlacementModifier;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.DripstoneClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreConfiguredFeatures;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.RandomPatchFeature;
+import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 
@@ -116,6 +119,8 @@ import com.decodinator.liroth.core.blocks.entity.QuantumExtractorBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreen;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreenHandler;
 import com.decodinator.liroth.core.effects.SchluckedStatusEffect;
+import com.decodinator.liroth.core.features.DamnationVinesFeature;
+import com.decodinator.liroth.core.features.JalsphireCrystalClusterFeature;
 import com.decodinator.liroth.core.features.LirothBoneClawFeature;
 import com.decodinator.liroth.core.features.LirothBoneMushroomFeature;
 import com.decodinator.liroth.core.features.LirothBoneTreeFeature;
@@ -283,7 +288,35 @@ public class Liroth implements ModInitializer {
     public static SoundEvent FUNGAL_FIEND_HURT_SOUND_EVENT = new SoundEvent(FUNGAL_FIEND_HURT_SOUND_ID);
     public static final Identifier FUNGAL_FIEND_FUSE_SOUND_ID = new Identifier("liroth:fungal_fiend_fuse");
     public static SoundEvent FUNGAL_FIEND_FUSE_SOUND_EVENT = new SoundEvent(FUNGAL_FIEND_FUSE_SOUND_ID);
-	
+    
+    // AMS - C418
+    public static final Identifier LIROTH_BIOME_MUSIC_SOUND_ID = new Identifier("liroth:music.liroth.liroth_biome");
+    public static SoundEvent LIROTH_BIOME_MUSIC_SOUND_EVENT = new SoundEvent(LIROTH_BIOME_MUSIC_SOUND_ID);
+    
+    // ATX - C418
+    public static final Identifier TALLPIER_BIOME_MUSIC_SOUND_ID = new Identifier("liroth:music.liroth.tallpier_biome");
+    public static SoundEvent TALLPIER_BIOME_MUSIC_SOUND_EVENT = new SoundEvent(TALLPIER_BIOME_MUSIC_SOUND_ID);
+    
+    // Fake Triplets - C418
+    public static final Identifier SPICED_DESERT_MUSIC_SOUND_ID = new Identifier("liroth:music.liroth.spiced_desert");
+    public static SoundEvent SPICED_DESERT_MUSIC_SOUND_EVENT = new SoundEvent(SPICED_DESERT_MUSIC_SOUND_ID);
+    
+    // Home - C418
+    public static final Identifier DAMNATION_MUSIC_SOUND_ID = new Identifier("liroth:music.liroth.damnation");
+    public static SoundEvent DAMNATION_MUSIC_SOUND_EVENT = new SoundEvent(DAMNATION_MUSIC_SOUND_ID);
+    
+    // Hope - C418
+    public static final Identifier ESCAPE_MUSIC_SOUND_ID = new Identifier("liroth:music.liroth.escape");
+    public static SoundEvent ESCAPE_MUSIC_SOUND_EVENT = new SoundEvent(ESCAPE_MUSIC_SOUND_ID);
+    
+    // Keighley - C418
+    public static final Identifier JALSPHIRE_MUSIC_SOUND_ID = new Identifier("liroth:music.liroth.jalsphire");
+    public static SoundEvent JALSPHIRE_MUSIC_SOUND_EVENT = new SoundEvent(JALSPHIRE_MUSIC_SOUND_ID);
+    
+    // Impostor Syndrome - C418
+    public static final Identifier DESOLATE_MUSIC_SOUND_ID = new Identifier("liroth:music.liroth.desolate");
+    public static SoundEvent DESOLATE_MUSIC_SOUND_EVENT = new SoundEvent(DESOLATE_MUSIC_SOUND_ID);
+		
 	  public static final Tag<Block> DIRT_ORE_REPLACEABLES = TagFactory.BLOCK.create(new Identifier("liroth", "dirt_ore_replaceables"));
 	  public static final Tag<Fluid> STICKY_FLUIDS = TagFactory.FLUID.create(new Identifier("liroth", "sticky_fluids"));
 	  public static final Tag<Item> TORCHES = TagFactory.ITEM.create(new Identifier("liroth", "torches"));
@@ -338,7 +371,7 @@ public class Liroth implements ModInitializer {
 			      OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES,
 			      LirothBlocks.DEEPSLATE_TOURMALINE_ORE.getDefaultState(),
 			      4)); // vein size
-
+	  
 	  public static PlacedFeature OVERWORLD_TOURMALINE_GEM_ORE_PLACED_FEATURE = OVERWORLD_TOURMALINE_GEM_ORE_CONFIGURED_FEATURE.withPlacement(
 		      CountPlacementModifier.of(5), // number of veins per chunk
 		      SquarePlacementModifier.of(), // spreading horizontally
@@ -359,6 +392,9 @@ public class Liroth implements ModInitializer {
 	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_CLAW = new LirothBoneClawFeature(DefaultFeatureConfig.CODEC);
 	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_MUSHROOM = new LirothBoneMushroomFeature(DefaultFeatureConfig.CODEC);
 	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_TREE = new LirothBoneTreeFeature(DefaultFeatureConfig.CODEC);
+	  private static final Feature<DripstoneClusterFeatureConfig> JALSPHIRE_CRYSTAL_CLUSTER = new JalsphireCrystalClusterFeature(DripstoneClusterFeatureConfig.CODEC);
+	  private static final Feature<DefaultFeatureConfig> DAMNATION_VINES = new DamnationVinesFeature(DefaultFeatureConfig.CODEC);
+	  private static final Feature<RandomPatchFeatureConfig> WILTING_LIROTH_ROSES = new RandomPatchFeature(RandomPatchFeatureConfig.CODEC);
 	  
 	@Override
 	public void onInitialize() {
@@ -374,7 +410,10 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_claw"), LIROTH_BONE_CLAW);
 	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_mushroom"), LIROTH_BONE_MUSHROOM);
 	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_tree"), LIROTH_BONE_TREE);
-		
+	    Registry.register(Registry.FEATURE, new Identifier("liroth", "jalsphire_crystal_cluster"), JALSPHIRE_CRYSTAL_CLUSTER);
+	    Registry.register(Registry.FEATURE, new Identifier("liroth", "damnation_vines"), DAMNATION_VINES);
+	    Registry.register(Registry.FEATURE, new Identifier("liroth", "wilting_liroth_roses"), WILTING_LIROTH_ROSES);
+	    
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FUNGAL_FIEND, FungalFiendEntity.createFungalFiendAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FORSAKEN_CORPSE, ForsakenCorpseEntity.createForsakenCorpseAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(SKELETAL_FREAK, SkeletalFreakEntity.createSkeletalFreakAttributes());
@@ -397,7 +436,10 @@ public class Liroth implements ModInitializer {
 		}
 		
         Registry.register(Registry.PARTICLE_TYPE, new Identifier("liroth", "purple_flame"), PURPLE_FLAME);		
-		
+        Registry.register(Registry.PARTICLE_TYPE, new Identifier("liroth", "green_flame"), GREEN_FLAME);		
+        Registry.register(Registry.PARTICLE_TYPE, new Identifier("liroth", "cloak"), CLOAK);		
+        Registry.register(Registry.PARTICLE_TYPE, new Identifier("liroth", "green_spore"), GREEN_SPORE);		
+        
 	    Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,
 	           new Identifier("liroth", "overworld_tourmaline_ore"), OVERWORLD_TOURMALINE_GEM_ORE_CONFIGURED_FEATURE);
 	       Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier("liroth", "overworld_tourmaline_ore"),
@@ -413,6 +455,14 @@ public class Liroth implements ModInitializer {
 		   BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
 		       RegistryKey.of(Registry.PLACED_FEATURE_KEY,
 		           new Identifier("liroth", "overworld_deepslate_liroth_gem_ore")));
+
+		    Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,
+			           new Identifier("liroth", "overworld_deepslate_tourmaline_ore"), OVERWORLD_DEEPSLATE_TOURMALINE_GEM_ORE_CONFIGURED_FEATURE);
+			       Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier("liroth", "overworld_deepslate_tourmaline_ore"),
+			           OVERWORLD_DEEPSLATE_TOURMALINE_GEM_ORE_PLACED_FEATURE);
+			       BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
+			           RegistryKey.of(Registry.PLACED_FEATURE_KEY,
+			               new Identifier("liroth", "overworld_deepslate_tourmaline_ore")));
 		   
 		Registry.register(Registry.STATUS_EFFECT, new Identifier("liroth", "schlucked"), SCHLUCKED);
 		   
@@ -440,9 +490,9 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "charred_liroth_stone_brick_wall"), new BlockItem(LirothBlocks.CHARRED_LIROTH_STONE_BRICK_WALL, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "chiseled_devastated_bricks"), new BlockItem(LirothBlocks.CHISELED_DEVASTATED_BRICKS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_brewing_stand"), new BlockItem(LirothBlocks.CORRUPTED_BREWING_STAND, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_jalsphire_gem_block"), new BlockItem(LirothBlocks.CORRUPTED_JALSPHIRE_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+//	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_jalsphire_gem_block"), new BlockItem(LirothBlocks.CORRUPTED_JALSPHIRE_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_jalsphire_ore"), new BlockItem(LirothBlocks.CORRUPTED_JALSPHIRE_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_liroth_gem_block"), new BlockItem(LirothBlocks.CORRUPTED_LIROTH_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+//	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_liroth_gem_block"), new BlockItem(LirothBlocks.CORRUPTED_LIROTH_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "corrupted_liroth_gem_ore"), new BlockItem(LirothBlocks.CORRUPTED_LIROTH_GEM_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_crafting_table"), new BlockItem(LirothBlocks.DAMNATION_CRAFTING_TABLE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_chest"), new BlockItem(LirothBlocks.DAMNATION_CHEST, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -450,6 +500,10 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_fence"), new BlockItem(LirothBlocks.DAMNATION_FENCE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_fungal_cluster"), new BlockItem(LirothBlocks.DAMNATION_FUNGAL_CLUSTER, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_fungus"), new BlockItem(LirothBlocks.DAMNATION_FUNGUS, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_fungal_carpet"), new BlockItem(LirothBlocks.DAMNATION_FUNGAL_CARPET, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_fungal_heap"), new BlockItem(LirothBlocks.DAMNATION_FUNGAL_HEAP, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_fungal_fuss"), new BlockItem(LirothBlocks.DAMNATION_FUNGAL_FUSS, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_fungal_patch"), new BlockItem(LirothBlocks.DAMNATION_FUNGAL_PATCH, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_leaves"), new BlockItem(LirothBlocks.DAMNATION_LEAVES, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_log"), new BlockItem(LirothBlocks.DAMNATION_LOG, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_planks"), new BlockItem(LirothBlocks.DAMNATION_PLANKS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -459,6 +513,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_stairs"), new BlockItem(LirothBlocks.DAMNATION_STAIRS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_trapdoor"), new BlockItem(LirothBlocks.DAMNATION_TRAPDOOR, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_wart_block"), new BlockItem(LirothBlocks.DAMNATION_WART_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "damnation_vines"), new BlockItem(LirothBlocks.DAMNATION_VINES, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "damned_passageway"), new BlockItem(LirothBlocks.DAMNED_PASSAGEWAY, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "deepslate_liroth_gem_ore"), new BlockItem(LirothBlocks.DEEPSLATE_LIROTH_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "devastated_brick_slab"), new BlockItem(LirothBlocks.DEVASTATED_BRICK_SLAB, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -556,9 +611,10 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "pier_grass_block"), new BlockItem(LirothBlocks.PIER_GRASS_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "quantum_diamond_ore"), new BlockItem(LirothBlocks.QUANTUM_DIAMOND_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "quantum_plate_block"), new BlockItem(LirothBlocks.QUANTUM_PLATE_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_1"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_1, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_2"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_2, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_3"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_3, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+//	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_1"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_1, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+//	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_2"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_2, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+//	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_3"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_3, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "ruby_ore"), new BlockItem(LirothBlocks.RUBY_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "smooth_blue_sandstone"), new BlockItem(LirothBlocks.SMOOTH_BLUE_SANDSTONE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "smooth_blue_sandstone_slab"), new BlockItem(LirothBlocks.SMOOTH_BLUE_SANDSTONE_SLAB, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "smooth_blue_sandstone_stairs"), new BlockItem(LirothBlocks.SMOOTH_BLUE_SANDSTONE_STAIRS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -566,6 +622,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "soul_rod"), new BlockItem(LirothBlocks.SOUL_ROD, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "soulless_flame"), new BlockItem(LirothBlocks.SOULLESS_FLAME, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "soulless_soil"), new BlockItem(LirothBlocks.SOULLESS_SOIL, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "spiced_crafting_table"), new BlockItem(LirothBlocks.SPICED_CRAFTING_TABLE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spiced_door"), new BlockItem(LirothBlocks.SPICED_DOOR, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spiced_fence"), new BlockItem(LirothBlocks.SPICED_FENCE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spiced_leaves"), new BlockItem(LirothBlocks.SPICED_LEAVES, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -602,6 +659,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_stone_brick_slab"), new BlockItem(LirothBlocks.SPINERIOS_STONE_BRICK_SLAB, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_stone_brick_stairs"), new BlockItem(LirothBlocks.SPINERIOS_STONE_BRICK_STAIRS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_stone_brick_wall"), new BlockItem(LirothBlocks.SPINERIOS_STONE_BRICK_WALL, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "tallpier_crafting_table"), new BlockItem(LirothBlocks.TALLPIER_CRAFTING_TABLE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "tallpier_door"), new BlockItem(LirothBlocks.TALLPIER_DOOR, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "tallpier_fence"), new BlockItem(LirothBlocks.TALLPIER_FENCE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "tallpier_leaves"), new BlockItem(LirothBlocks.TALLPIER_LEAVES, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -612,6 +670,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "tallpier_stairs"), new BlockItem(LirothBlocks.TALLPIER_STAIRS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "tallpier_trapdoor"), new BlockItem(LirothBlocks.TALLPIER_TRAPDOOR, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "vile_tentacle"), new BlockItem(LirothBlocks.VILE_TENTACLE, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "wilting_liroth_rose"), new BlockItem(LirothBlocks.WILITING_LIROTH_ROSE, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
 
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "deepslate_tourmaline_ore"), new BlockItem(LirothBlocks.DEEPSLATE_TOURMALINE_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "tourmaline_gem_block"), new BlockItem(LirothBlocks.TOURMALINE_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -621,6 +680,8 @@ public class Liroth implements ModInitializer {
 	    
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "liroth_splitter"), new BlockItem(LirothBlocks.LIROTH_SPLITTER, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "quantum_extractor"), new BlockItem(LirothBlocks.QUANTUM_EXTRACTOR, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "jalsphire_crystal_block"), new BlockItem(LirothBlocks.JALSPHIRE_CRYSTAL_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "pointed_jalsphire_crystal"), new BlockItem(LirothBlocks.POINTED_JALSPHIRE_CRYSTAL, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_boat"), LirothItems.LIROTH_BOAT);
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);
@@ -643,7 +704,13 @@ public class Liroth implements ModInitializer {
         Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_DEATH_SOUND_ID, FUNGAL_FIEND_DEATH_SOUND_EVENT);
         Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_HURT_SOUND_ID, FUNGAL_FIEND_HURT_SOUND_EVENT);
         Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_FUSE_SOUND_ID, FUNGAL_FIEND_FUSE_SOUND_EVENT);
-        
+        Registry.register(Registry.SOUND_EVENT, this.LIROTH_BIOME_MUSIC_SOUND_ID, LIROTH_BIOME_MUSIC_SOUND_EVENT);
+        Registry.register(Registry.SOUND_EVENT, this.TALLPIER_BIOME_MUSIC_SOUND_ID, TALLPIER_BIOME_MUSIC_SOUND_EVENT);
+        Registry.register(Registry.SOUND_EVENT, this.SPICED_DESERT_MUSIC_SOUND_ID, SPICED_DESERT_MUSIC_SOUND_EVENT);
+        Registry.register(Registry.SOUND_EVENT, this.DAMNATION_MUSIC_SOUND_ID, DAMNATION_MUSIC_SOUND_EVENT);
+        Registry.register(Registry.SOUND_EVENT, this.ESCAPE_MUSIC_SOUND_ID, ESCAPE_MUSIC_SOUND_EVENT);
+        Registry.register(Registry.SOUND_EVENT, this.JALSPHIRE_MUSIC_SOUND_ID, JALSPHIRE_MUSIC_SOUND_EVENT);
+        Registry.register(Registry.SOUND_EVENT, this.DESOLATE_MUSIC_SOUND_ID, DESOLATE_MUSIC_SOUND_EVENT);
         
 	    
 /*        Registry.register(Registry.BLOCK, new Identifier("liroth", "liroth_dimension_portal"), LIROTH_DIMENSION_PORTAL);
@@ -779,6 +846,9 @@ public class Liroth implements ModInitializer {
     }
     
     public static final DefaultParticleType PURPLE_FLAME = FabricParticleTypes.simple();
+    public static final DefaultParticleType GREEN_FLAME = FabricParticleTypes.simple();
+    public static final DefaultParticleType CLOAK = FabricParticleTypes.simple();
+    public static final DefaultParticleType GREEN_SPORE = FabricParticleTypes.simple();
     
     public static void renderOverlays(MinecraftClient client, MatrixStack matrices) {
         BlockState blockState;

@@ -18,6 +18,7 @@
     "access.SaplingBlockAccess",
     "access.ShovelItemAccess",
     "access.StairBlockAccess",
+    "access.StructureFeatureAccessor",
     "access.TrapDoorBlockAccess",
     "access.WoodButtonBlockAccess",
     "bruh.MultiNoiseBiomeSourceMixin",

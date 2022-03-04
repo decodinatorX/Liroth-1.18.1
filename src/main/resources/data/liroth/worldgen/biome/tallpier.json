@@ -12,11 +12,28 @@
     "grass_color": 5621189,
     "foliage_color": 3932160,
     "grass_color_modifier": "none",
+    "ambient_sound": "minecraft:ambient.crimson_forest.loop",
     "mood_sound": {
-      "sound": "minecraft:ambient.cave",
+      "sound": "minecraft:ambient.crimson_forest.mood",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.crimson_forest.additions",
+      "tick_chance": 0.0111
+    },
+    "music": {
+      "sound": "liroth:music.liroth.tallpier_biome",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.025
     }
   },
   "spawners": {

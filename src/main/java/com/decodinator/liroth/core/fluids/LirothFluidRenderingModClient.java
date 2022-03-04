@@ -1,7 +1,9 @@
 package com.decodinator.liroth.core.fluids;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.particle.FlameParticle;
+import net.minecraft.client.particle.WhiteAshParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.Entity;
@@ -165,7 +167,24 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
         }));
         
         ParticleFactoryRegistry.getInstance().register(Liroth.PURPLE_FLAME, FlameParticle.Factory::new);
+        
+        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
+            registry.register(new Identifier("liroth", "particle/green_flame"));
+        }));
+        
+        ParticleFactoryRegistry.getInstance().register(Liroth.GREEN_FLAME, FlameParticle.Factory::new);
 
+        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
+            registry.register(new Identifier("liroth", "particle/cloak"));
+        }));
+        
+        ParticleFactoryRegistry.getInstance().register(Liroth.CLOAK, EndRodParticle.Factory::new);
+        
+        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
+            registry.register(new Identifier("liroth", "particle/green_spore"));
+        }));
+        
+        ParticleFactoryRegistry.getInstance().register(Liroth.GREEN_SPORE, WhiteAshParticle.Factory::new);
 	}
 	
 	

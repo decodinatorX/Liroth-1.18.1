@@ -22,8 +22,18 @@ public class LirothRenders {
         map.put(LirothBlocks.SPICED_SAPLING, RenderLayer.getCutout());
         map.put(LirothBlocks.TALLPIER_SAPLING, RenderLayer.getCutout());
         map.put(LirothBlocks.LIROTH_GRASS, RenderLayer.getCutout());
+
+        map.put(LirothBlocks.POINTED_JALSPHIRE_CRYSTAL, RenderLayer.getCutout());
+        
+        map.put(LirothBlocks.DAMNATION_VINES_PLANT, RenderLayer.getCutout());
+        map.put(LirothBlocks.DAMNATION_VINES, RenderLayer.getCutout());
+        map.put(LirothBlocks.DAMNATION_FUNGAL_FUSS, RenderLayer.getCutout());
+        map.put(LirothBlocks.DAMNATION_FUNGAL_HEAP, RenderLayer.getCutout());
+        map.put(LirothBlocks.DAMNATION_FUNGAL_PATCH, RenderLayer.getCutout());
+        map.put(LirothBlocks.FUNGAL_LANTERN, RenderLayer.getCutout());
         
         map.put(LirothBlocks.LIROTH_ROSE, RenderLayer.getCutout());
+        map.put(LirothBlocks.WILITING_LIROTH_ROSE, RenderLayer.getCutout());
         map.put(LirothBlocks.VILE_TENTACLE, RenderLayer.getCutout());
         map.put(LirothBlocks.VILE_TENTACLE_TIP, RenderLayer.getCutout());
         map.put(LirothBlocks.DAMNATION_FUNGAL_CLUSTER, RenderLayer.getCutout());

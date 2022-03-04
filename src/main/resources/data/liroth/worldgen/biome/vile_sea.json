@@ -11,11 +11,22 @@
     "water_fog_color": 1967411,
     "grass_color": 10624171,
     "foliage_color": 10624171,
+    "ambient_sound": "minecraft:ambient.nether_wastes.loop",
     "mood_sound": {
-      "sound": "minecraft:ambient.cave",
+      "sound": "minecraft:ambient.nether_wastes.mood",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.nether_wastes.additions",
+      "tick_chance": 0.0111
+    },
+    "music": {
+      "sound": "liroth:music.liroth.liroth_biome",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
     }
   },
   "spawners": {

@@ -15,6 +15,12 @@
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2
+    },
+    "music": {
+      "sound": "liroth:music.liroth.escape",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
     }
   },
   "spawners": {
@@ -88,7 +94,8 @@
       "liroth:spinerios_tourmaline_ore",
       "liroth:spinerios_jalsphire_ore",
       "liroth:spinerios_quartz_ore",
-      "liroth:spinerios_redstone_ore"
+      "liroth:spinerios_redstone_ore",
+      "liroth:spinerios_stone_ore"
     ],
     [
       "minecraft:freeze_top_layer"

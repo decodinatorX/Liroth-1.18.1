@@ -15,6 +15,12 @@
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2
+    },
+    "music": {
+      "sound": "liroth:music.liroth.jalsphire",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
     }
   },
   "spawners": {
@@ -56,7 +62,10 @@
       "minecraft:monster_room_deep"
     ],
     [],
-    [],
+    [
+      "liroth:jalsphire_crystal_cluster",
+      "liroth:pointed_jalsphire_crystal"
+    ],
     [],
     [],
     [
@@ -69,6 +78,8 @@
       "minecraft:patch_grass_forest",
       "minecraft:spring_water",
       "liroth:obsidian_spike",
+      "liroth:jalsphire_crystal_cluster",
+      "liroth:disk_spinerios_stone",
       "liroth:end_spike",
       "liroth:jalsphire_ore"
     ],

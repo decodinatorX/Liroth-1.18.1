@@ -24,7 +24,7 @@ public class QuantumExtractorScreenHandler extends ScreenHandler {
 	private PlayerEntity entity;
 
     public QuantumExtractorScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(5), new ArrayPropertyDelegate(4));
+        this(syncId, playerInventory, new SimpleInventory(4), new ArrayPropertyDelegate(4));
     }
 
     public QuantumExtractorScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
@@ -41,8 +41,8 @@ public class QuantumExtractorScreenHandler extends ScreenHandler {
         this.addSlot(new Slot(inventory, 0, 56, 13));
         this.addSlot(new Slot(inventory, 1, 56, 49));
 //        this.addSlot(new Slot(inventory, 2, 80, 49));
-        this.addSlot(new Slot(inventory, 3, 113, 18));
-        this.addSlot(new Slot(inventory, 4, 113, 45));
+        this.addSlot(new Slot(inventory, 2, 113, 18));
+        this.addSlot(new Slot(inventory, 3, 113, 45));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
