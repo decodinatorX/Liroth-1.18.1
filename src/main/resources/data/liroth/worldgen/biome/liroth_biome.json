@@ -8,7 +8,7 @@
     "fog_color": 10027263,
     "water_color": 5980132,
     "water_fog_color": 1967411,
-    "grass_color": 10624171,
+    "grass_color": 4259912,
     "mood_sound": {
       "sound": "minecraft:ambient.cave",
       "tick_delay": 6000,
@@ -74,6 +74,9 @@
       "liroth:liroth_bone_mushroom",
       "liroth:liroth_bone_tree",
       "liroth:lirothian_liroth_gem_ore",
+      "liroth:lirothian_cobalt_ore",
+      "liroth:disk_gravel_liroth",
+      "liroth:lirothian_petroleum_ore",
       "liroth:charred_lirothian_liroth_gem_ore"
     ],
     [],

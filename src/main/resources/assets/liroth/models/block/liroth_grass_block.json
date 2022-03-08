@@ -3,10 +3,10 @@
   "textures": {
     "down": "liroth:blocks/liroth_dirt",
     "up": "liroth:blocks/liroth_grass_block_top",
-    "north": "liroth:blocks/liroth_grass_block_side_n",
+    "north": "liroth:blocks/liroth_grass_block_side_e",
     "east": "liroth:blocks/liroth_grass_block_side_e",
-    "south": "liroth:blocks/liroth_grass_block_side_s",
-    "west": "liroth:blocks/liroth_grass_block_side_w",
+    "south": "liroth:blocks/liroth_grass_block_side_e",
+    "west": "liroth:blocks/liroth_grass_block_side_e",
     "particle": "liroth:blocks/liroth_grass_block_top"
   }
 }

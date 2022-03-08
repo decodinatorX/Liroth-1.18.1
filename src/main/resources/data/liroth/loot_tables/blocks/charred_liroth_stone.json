@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "liroth:charred_liroth_stone"
+          "name": "liroth:charred_liroth_cobblestone"
         }
       ],
       "conditions": [

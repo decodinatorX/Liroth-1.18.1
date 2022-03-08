@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "liroth:spinerios_stone"
+          "name": "liroth:spinerios_cobblestone"
         }
       ],
       "conditions": [

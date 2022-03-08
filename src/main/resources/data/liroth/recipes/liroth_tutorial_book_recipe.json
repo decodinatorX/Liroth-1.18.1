@@ -1,18 +1,13 @@
 {
   "group": "liroth",
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "01"
-  ],
-  "key": {
-    "0": {
+  "type": "patchouli:shapeless_book_recipe",
+  "ingredients": [
+    {
       "item": "liroth:wilting_liroth_rose"
     },
-    "1": {
+    {
       "item": "minecraft:book"
     }
-  },
-  "result": {
-          "item": "liroth:liroth_tutorial_book"
-        }
+  ],
+  "book": "liroth:liroth_tutorial_book"
 }

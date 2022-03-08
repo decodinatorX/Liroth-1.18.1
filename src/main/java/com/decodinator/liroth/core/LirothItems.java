@@ -89,11 +89,23 @@ public class LirothItems {
     public static final Item LIROTH_DUST_SALEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_dust_salem");
     
     public static final Item LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem");
+    public static final Item LIROTH_GEM_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_dust");
+    public static final Item LIROTH_GEM_DUST_HEAP = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_dust_heap");
+    
+    //It's got that extreme pulp of taking a big ass bite out of a lemon and the tanginess of blackberries while the taste itself is a strawberry metallic flavor
+    public static final Item LIROTH_COATED_BREAD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).food(FoodComponents.BREAD)), "liroth_coated_bread");
     
     public static final Item LIROTH_GEM_LUX = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_lux");
 
     public static final Item LIROTH_GEM_SALEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_salem");
+    
+    public static final Item LIROTHIAN_COBALT_INGOT = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "lirothian_cobalt_ingot");
+    public static final Item LIROTHIAN_COBALT_NUGGET = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "lirothian_cobalt_nugget");
+    public static final Item LIROTHIAN_COBALT_HORSE_ARMOR = createItem(new HorseArmorItem(5, "lirothian_cobalt", new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lirothian_cobalt_horse_armor");
+    public static final Item RAW_LIROTHIAN_COBALT = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "raw_lirothian_cobalt");
 
+    public static final Item LIROTHIAN_PETROLEUM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "lirothian_petroleum");
+    
     public static final Item LIROTH_SHIELD = createShieldItem(new LirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "liroth_shield");
     public static final Item ANSALUM_LIROTH_SHIELD = createAnsalumShieldItem(new AnsalumLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "ansalum_liroth_shield");
     public static final Item LUX_LIROTH_SHIELD = createLuxShieldItem(new LuxLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "lux_liroth_shield");
@@ -122,6 +134,11 @@ public class LirothItems {
     public static final Item LIROTH_CHESTPLATE = createArmorItem(new ArmorItem(Liroth.LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_chestplate");
     public static final Item LIROTH_LEGGINGS = createArmorItem(new ArmorItem(Liroth.LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_leggings");
     public static final Item LIROTH_BOOTS = createArmorItem(new ArmorItem(Liroth.LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_boots");
+    
+    public static final Item LIROTHIAN_COBALT_HELMET = createArmorItem(new ArmorItem(Liroth.LIROTHIAN_COBALT_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lirothian_cobalt_helmet");
+    public static final Item LIROTHIAN_COBALT_CHESTPLATE = createArmorItem(new ArmorItem(Liroth.LIROTHIAN_COBALT_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lirothian_cobalt_chestplate");
+    public static final Item LIROTHIAN_COBALT_LEGGINGS = createArmorItem(new ArmorItem(Liroth.LIROTHIAN_COBALT_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lirothian_cobalt_leggings");
+    public static final Item LIROTHIAN_COBALT_BOOTS = createArmorItem(new ArmorItem(Liroth.LIROTHIAN_COBALT_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lirothian_cobalt_boots");
     
     public static final Item ANSALUM_LIROTH_HELMET = createArmorItem(new AnsalumArmorItem(Liroth.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ansalum_liroth_helmet");
     public static final Item ANSALUM_LIROTH_CHESTPLATE = createArmorItem(new AnsalumArmorItem(Liroth.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ansalum_liroth_chestplate");
@@ -154,6 +171,12 @@ public class LirothItems {
     public static final Item LIROTH_PICKAXE = createToolItem(new CustomPickaxeItem(Liroth.LIROTH_TOOL_MATERIAL, 1, -2.8f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_pickaxe");
     public static final Item LIROTH_AXE = createToolItem(new CustomAxeItem(Liroth.LIROTH_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_axe");
     public static final Item LIROTH_HOE = createToolItem(new CustomHoeItem(Liroth.LIROTH_TOOL_MATERIAL, -4, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_hoe");
+    
+    public static final Item LIROTHIAN_COBALT_SWORD = createToolItem(new SwordItem(Liroth.LIROTHIAN_COBALT_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "lirothian_cobalt_sword");
+    public static final Item LIROTHIAN_COBALT_SHOVEL = createToolItem(new ShovelItem(Liroth.LIROTHIAN_COBALT_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "lirothian_cobalt_shovel");
+    public static final Item LIROTHIAN_COBALT_PICKAXE = createToolItem(new CustomPickaxeItem(Liroth.LIROTHIAN_COBALT_TOOL_MATERIAL, 1, -2.8f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "lirothian_cobalt_pickaxe");
+    public static final Item LIROTHIAN_COBALT_AXE = createToolItem(new CustomAxeItem(Liroth.LIROTHIAN_COBALT_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "lirothian_cobalt_axe");
+    public static final Item LIROTHIAN_COBALT_HOE = createToolItem(new CustomHoeItem(Liroth.LIROTHIAN_COBALT_TOOL_MATERIAL, -4, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "lirothian_cobalt_hoe");
     
     public static final Item TOURMALINE_HELMET = createArmorItem(new ArmorItem(Liroth.TOURMALINE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "tourmaline_helmet");
     public static final Item TOURMALINE_CHESTPLATE = createArmorItem(new ArmorItem(Liroth.TOURMALINE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "tourmaline_chestplate");

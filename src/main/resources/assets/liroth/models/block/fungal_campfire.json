@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/template_campfire",
+  "parent": "liroth:block/fungal_campfire_template",
   "textures": {
     "fire": "liroth:blocks/fungal_campfire_fire",
     "lit_log": "liroth:blocks/fungal_campfire_log_lit"

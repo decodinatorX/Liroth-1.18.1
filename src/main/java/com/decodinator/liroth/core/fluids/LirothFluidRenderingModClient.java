@@ -17,6 +17,8 @@ import java.util.UUID;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothEntities;
+import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntityRenderer;
+import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlockEntityRenderer;
 import com.decodinator.liroth.entities.boat.CustomBoatEntityModel;
 import com.decodinator.liroth.entities.boat.CustomBoatEntityRenderer;
 import com.decodinator.liroth.entities.boat.DamnationBoatEntityRenderer;
@@ -48,6 +50,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
@@ -185,6 +188,9 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
         }));
         
         ParticleFactoryRegistry.getInstance().register(Liroth.GREEN_SPORE, WhiteAshParticle.Factory::new);
+        
+        BlockEntityRendererRegistry.register(Liroth.FUNGAL_CAMPFIRE_BLOCK_ENTITY, FungalCampfireBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(Liroth.LIROTHIAN_PETROLEUM_CAMPFIRE_BLOCK_ENTITY, LirothianPetroleumCampfireBlockEntityRenderer::new);
 	}
 	
 	

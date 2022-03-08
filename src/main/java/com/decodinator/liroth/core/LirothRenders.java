@@ -24,13 +24,20 @@ public class LirothRenders {
         map.put(LirothBlocks.LIROTH_GRASS, RenderLayer.getCutout());
 
         map.put(LirothBlocks.POINTED_JALSPHIRE_CRYSTAL, RenderLayer.getCutout());
+        map.put(LirothBlocks.POINTED_PETRIFIED_CRYSTAL, RenderLayer.getCutout());
         
         map.put(LirothBlocks.DAMNATION_VINES_PLANT, RenderLayer.getCutout());
         map.put(LirothBlocks.DAMNATION_VINES, RenderLayer.getCutout());
+        map.put(LirothBlocks.JAPZ_VINES, RenderLayer.getCutout());
+        map.put(LirothBlocks.JAPZ_VINES_PLANT, RenderLayer.getCutout());
+        map.put(LirothBlocks.PETRIFIED_VINES, RenderLayer.getCutout());
+        map.put(LirothBlocks.PETRIFIED_VINES_PLANT, RenderLayer.getCutout());
+        map.put(LirothBlocks.JAPZ_BLOSSOM, RenderLayer.getCutout());
         map.put(LirothBlocks.DAMNATION_FUNGAL_FUSS, RenderLayer.getCutout());
         map.put(LirothBlocks.DAMNATION_FUNGAL_HEAP, RenderLayer.getCutout());
         map.put(LirothBlocks.DAMNATION_FUNGAL_PATCH, RenderLayer.getCutout());
         map.put(LirothBlocks.FUNGAL_LANTERN, RenderLayer.getCutout());
+        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_LANTERN, RenderLayer.getCutout());
         
         map.put(LirothBlocks.LIROTH_ROSE, RenderLayer.getCutout());
         map.put(LirothBlocks.WILITING_LIROTH_ROSE, RenderLayer.getCutout());
@@ -44,7 +51,10 @@ public class LirothRenders {
         
         map.put(LirothBlocks.FUNGAL_TORCH, RenderLayer.getCutout());
         map.put(LirothBlocks.WALL_FUNGAL_TORCH, RenderLayer.getCutout());
-//        map.put(LirothBlocks.FUNGAL_CAMPFIRE, RenderLayer.getCutout());
+        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_TORCH, RenderLayer.getCutout());
+        map.put(LirothBlocks.WALL_LIROTHIAN_PETROLEUM_TORCH, RenderLayer.getCutout());
+        map.put(LirothBlocks.FUNGAL_CAMPFIRE, RenderLayer.getCutout());
+        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_CAMPFIRE, RenderLayer.getCutout());
         
         map.put(LirothBlocks.DAMNATION_TRAPDOOR, RenderLayer.getCutoutMipped());
         map.put(LirothBlocks.JAPZ_TRAPDOOR, RenderLayer.getCutoutMipped());

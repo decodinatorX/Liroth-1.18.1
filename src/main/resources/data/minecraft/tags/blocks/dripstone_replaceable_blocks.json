@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "liroth:spinerios_stone"
+    "liroth:spinerios_stone",
+    "minecraft:blackstone"
     ]
 }
