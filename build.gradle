@@ -45,7 +45,7 @@ dependencies {
     }
     modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta49-1.18'
 	include 'net.kyrptonaught:customportalapi:0.0.1-beta49-1.18'
-
+}
 processResources {
 	inputs.property "version", project.version
 
