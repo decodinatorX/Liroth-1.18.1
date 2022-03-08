@@ -45,8 +45,6 @@ dependencies {
     }
     modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta49-1.18'
 	include 'net.kyrptonaught:customportalapi:0.0.1-beta49-1.18'
-	modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:v${project.fabric_shield_lib_version}"
-}
 
 processResources {
 	inputs.property "version", project.version
