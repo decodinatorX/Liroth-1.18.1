@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -108,11 +109,17 @@ import net.minecraft.world.gen.feature.RandomPatchFeature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import ru.bclib.api.TagAPI;
+import ru.bclib.blocks.BaseChestBlock;
+import ru.bclib.complexmaterials.ComplexMaterial;
+import ru.bclib.complexmaterials.WoodenComplexMaterial;
+import ru.bclib.complexmaterials.entry.BlockEntry;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -170,6 +177,7 @@ import com.decodinator.liroth.core.world.dims.DimensionLiroth;
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
 import com.decodinator.liroth.entities.FreakshowEntity;
 import com.decodinator.liroth.entities.FungalFiendEntity;
+import com.decodinator.liroth.entities.LirothianMimicEntity;
 import com.decodinator.liroth.entities.PierPeepEntity;
 import com.decodinator.liroth.entities.ProwlerEntity;
 import com.decodinator.liroth.entities.ShadeEntity;
@@ -184,6 +192,8 @@ import com.decodinator.liroth.util.gui.DimensionalCommunicatorScreenHandler;
 import com.decodinator.liroth.util.gui.SluckedOverlay;
 import com.decodinator.liroth.world.generator.LirothConfiguredStructures;
 import com.decodinator.liroth.world.generator.LirothStructures;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.mojang.brigadier.context.CommandContext;
 
 public class Liroth implements ModInitializer {
@@ -195,7 +205,8 @@ public class Liroth implements ModInitializer {
 	}
 	
 	  public static final StatusEffect SCHLUCKED = new SchluckedStatusEffect();
-	  
+		private final List<BlockEntry> defaultBlockEntries = Lists.newArrayList();
+		private final Map<String, Block> blocks = Maps.newHashMap();
 	
     public static BlockEntityType<LirothSplitterBlockEntity> LIROTH_SPLITTER_BLOCK_ENTITY =
             Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(MOD_ID, "liroth_splitter"),
@@ -312,6 +323,14 @@ public class Liroth implements ModInitializer {
     );
     
     public static final Item VILE_SHARK_SPAWN_EGG = new SpawnEggItem(VILE_SHARK, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    
+    public static final EntityType<LirothianMimicEntity> LIROTHIAN_MIMIC = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("liroth", "lirothian_mimic"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LirothianMimicEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
+    );
+    
+    public static final Item LIROTHIAN_MIMIC_SPAWN_EGG = new SpawnEggItem(LIROTHIAN_MIMIC, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final Identifier LIROTH_BLASTER_FIRING_SOUND_ID = new Identifier("liroth:liroth_blaster_firing");
     public static SoundEvent LIROTH_BLASTER_FIRING_SOUND_EVENT = new SoundEvent(LIROTH_BLASTER_FIRING_SOUND_ID);
@@ -463,7 +482,7 @@ public class Liroth implements ModInitializer {
 	  private static final Feature<RandomPatchFeatureConfig> WILTING_LIROTH_ROSES = new RandomPatchFeature(RandomPatchFeatureConfig.CODEC);
 	  
 //	  private static final Feature<DefaultFeatureConfig> PETRIFIED_PLANT = new PetrifiedPlantFeature(DefaultFeatureConfig.CODEC);
-
+	  
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -496,6 +515,7 @@ public class Liroth implements ModInitializer {
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(PROWLER, ProwlerEntity.createProwlerAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FREAKSHOW, FreakshowEntity.createFreakshowAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(VILE_SHARK, VileSharkEntity.createVileSharkAttributes());
+		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(LIROTHIAN_MIMIC, LirothianMimicEntity.createLirothianMimicAttributes());
 		
         LirothEntities.RegisterEntities();
         Liroth.threadSafeLoadFinish();
@@ -507,6 +527,8 @@ public class Liroth implements ModInitializer {
 			// The gametest server does not support custom worlds
 			return;
 		}
+		
+
 		
         Registry.register(Registry.PARTICLE_TYPE, new Identifier("liroth", "purple_flame"), PURPLE_FLAME);		
         Registry.register(Registry.PARTICLE_TYPE, new Identifier("liroth", "green_flame"), GREEN_FLAME);		
@@ -574,6 +596,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "charred_liroth_stone_stairs"), new BlockItem(LirothBlocks.CHARRED_LIROTH_STONE_STAIRS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "charred_liroth_stone_wall"), new BlockItem(LirothBlocks.CHARRED_LIROTH_STONE_WALL, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "charred_liroth_stone_bricks"), new BlockItem(LirothBlocks.CHARRED_LIROTH_STONE_BRICKS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "charred_liroth_stone_brick_lock"), new BlockItem(LirothBlocks.CHARRED_LIROTH_STONE_BRICK_LOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "charred_liroth_stone_brick_slab"), new BlockItem(LirothBlocks.CHARRED_LIROTH_STONE_BRICK_SLAB, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "charred_liroth_stone_brick_stairs"), new BlockItem(LirothBlocks.CHARRED_LIROTH_STONE_BRICK_STAIRS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "charred_liroth_stone_brick_wall"), new BlockItem(LirothBlocks.CHARRED_LIROTH_STONE_BRICK_WALL, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -810,6 +833,7 @@ public class Liroth implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "prowler_spawn_egg"), PROWLER_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "freakshow_spawn_egg"), FREAKSHOW_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "vile_shark_spawn_egg"), VILE_SHARK_SPAWN_EGG);
+		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "lirothian_mimic_spawn_egg"), LIROTHIAN_MIMIC_SPAWN_EGG);
 		
 		EntityRendererRegistry.INSTANCE.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
 			new FlyingItemEntityRenderer(context));
@@ -1025,4 +1049,13 @@ public class Liroth implements ModInitializer {
                         BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE.getId(LirothConfiguredStructures.CONFIGURED_LIROTH_FORTRESS))
         );
     }
+    
+	protected void addBlockEntry(BlockEntry entry) {
+		defaultBlockEntries.add(entry);
+	}
+	
+	@Nullable
+	public Block getBlock(String key) {
+		return blocks.get(key);
+	}
 }

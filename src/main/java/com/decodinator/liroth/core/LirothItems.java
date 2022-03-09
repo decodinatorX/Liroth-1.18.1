@@ -34,6 +34,7 @@ import com.decodinator.liroth.core.items.CustomBoatItem;
 import com.decodinator.liroth.core.items.CustomHoeItem;
 import com.decodinator.liroth.core.items.CustomPickaxeItem;
 import com.decodinator.liroth.core.items.DamnationBoatItem;
+import com.decodinator.liroth.core.items.KeyItem;
 import com.decodinator.liroth.core.items.LirothBlaster;
 import com.decodinator.liroth.core.items.LirothShield;
 import com.decodinator.liroth.core.items.LuxArmorItem;
@@ -97,6 +98,9 @@ public class LirothItems {
     
     public static final Item LIROTH_GEM_LUX = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_lux");
 
+    // HMMMMMMMMMMM
+    public static final Item LIROTHIAN_DUNGEON_KEY = createItem(new KeyItem(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxDamage(1)), "lirothian_dungeon_key");
+    
     public static final Item LIROTH_GEM_SALEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_salem");
     
     public static final Item LIROTHIAN_COBALT_INGOT = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "lirothian_cobalt_ingot");

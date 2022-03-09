@@ -42,6 +42,7 @@ import com.decodinator.liroth.core.blocks.CustomWartBlock;
 import com.decodinator.liroth.core.blocks.CustomWaterPlant;
 import com.decodinator.liroth.core.blocks.CustomWeepingVinesBlock;
 import com.decodinator.liroth.core.blocks.CustomWeepingVinesPlantBlock;
+import com.decodinator.liroth.core.blocks.EnemyChestBlock;
 import com.decodinator.liroth.core.blocks.FungalCampfireBlock;
 import com.decodinator.liroth.core.blocks.LirothFarmlandBlock;
 import com.decodinator.liroth.core.blocks.LirothGrassBlock;
@@ -49,6 +50,7 @@ import com.decodinator.liroth.core.blocks.LirothPathBlock;
 import com.decodinator.liroth.core.blocks.LirothPortalBlock;
 import com.decodinator.liroth.core.blocks.LirothSplitterBlock;
 import com.decodinator.liroth.core.blocks.LirothianPetroleumCampfireBlock;
+import com.decodinator.liroth.core.blocks.LockBlock;
 import com.decodinator.liroth.core.blocks.PetrifiedCaveVinesBodyBlock;
 import com.decodinator.liroth.core.blocks.PetrifiedCaveVinesHeadBlock;
 import com.decodinator.liroth.core.blocks.PointedJalsphireCrystal;
@@ -93,6 +95,7 @@ public class LirothBlocks {
     public static final Block CHARRED_LIROTH_STONE_STAIRS = createStoneStairs("charred_liroth_stone_stairs");
     public static final Block CHARRED_LIROTH_STONE_SLAB = createStoneSlab("charred_liroth_stone_slab");
     public static final Block CHARRED_LIROTH_STONE_BRICKS = createStone("charred_liroth_stone_bricks");
+    public static final Block CHARRED_LIROTH_STONE_BRICK_LOCK = createLockBlock("charred_liroth_stone_brick_lock");
     public static final Block CHARRED_LIROTH_STONE_BRICK_WALL = createStoneWall("charred_liroth_stone_brick_wall");
     public static final Block CHARRED_LIROTH_STONE_BRICK_STAIRS = createStoneStairs("charred_liroth_stone_brick_stairs");
     public static final Block CHARRED_LIROTH_STONE_BRICK_SLAB = createStoneSlab("charred_liroth_stone_brick_slab");
@@ -378,6 +381,13 @@ public class LirothBlocks {
    
     static Block createStone(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.STONE));
+        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        BLOCKS.add(createBlock);
+        return createBlock;
+    }
+    
+    static Block createLockBlock(String id) {
+        Block createBlock = new LockBlock(FabricBlockSettings.copy(Blocks.STONE));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
