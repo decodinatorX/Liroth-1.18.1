@@ -174,6 +174,7 @@ import com.decodinator.liroth.core.helpers.TourmalineArmorMaterial;
 import com.decodinator.liroth.core.helpers.TourmalineToolMaterial;
 import com.decodinator.liroth.core.items.BeamItem;
 import com.decodinator.liroth.core.world.dims.DimensionLiroth;
+import com.decodinator.liroth.entities.ButterflyEntity;
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
 import com.decodinator.liroth.entities.FreakshowEntity;
 import com.decodinator.liroth.entities.FungalFiendEntity;
@@ -331,6 +332,14 @@ public class Liroth implements ModInitializer {
     );
     
     public static final Item LIROTHIAN_MIMIC_SPAWN_EGG = new SpawnEggItem(LIROTHIAN_MIMIC, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    
+    public static final EntityType<ButterflyEntity> BUTTERFLY = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("liroth", "butterfly"),
+            FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, ButterflyEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
+    );
+    
+    public static final Item BUTTERFLY_SPAWN_EGG = new SpawnEggItem(BUTTERFLY, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final Identifier LIROTH_BLASTER_FIRING_SOUND_ID = new Identifier("liroth:liroth_blaster_firing");
     public static SoundEvent LIROTH_BLASTER_FIRING_SOUND_EVENT = new SoundEvent(LIROTH_BLASTER_FIRING_SOUND_ID);
@@ -516,6 +525,7 @@ public class Liroth implements ModInitializer {
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(FREAKSHOW, FreakshowEntity.createFreakshowAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(VILE_SHARK, VileSharkEntity.createVileSharkAttributes());
 		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(LIROTHIAN_MIMIC, LirothianMimicEntity.createLirothianMimicAttributes());
+		net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register(BUTTERFLY, ButterflyEntity.createButterflyAttributes());
 		
         LirothEntities.RegisterEntities();
         Liroth.threadSafeLoadFinish();
@@ -643,6 +653,7 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "fungal_lantern"), new BlockItem(LirothBlocks.FUNGAL_LANTERN, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "fungallight"), new BlockItem(LirothBlocks.FUNGAL_LIGHT, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "gateway_block"), new BlockItem(LirothBlocks.GATEWAY_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "gleemstone"), new BlockItem(LirothBlocks.GLEEMSTONE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "haunted_throughfare_block"), new BlockItem(LirothBlocks.HAUNTED_THROUGHFARE_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "hilight"), new BlockItem(LirothBlocks.HILIGHT, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "jalsphire_gem_block"), new BlockItem(LirothBlocks.JALSPHIRE_GEM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -834,6 +845,7 @@ public class Liroth implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "freakshow_spawn_egg"), FREAKSHOW_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "vile_shark_spawn_egg"), VILE_SHARK_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "lirothian_mimic_spawn_egg"), LIROTHIAN_MIMIC_SPAWN_EGG);
+//		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "butterfly_spawn_egg"), BUTTERFLY_SPAWN_EGG);
 		
 		EntityRendererRegistry.INSTANCE.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
 			new FlyingItemEntityRenderer(context));
@@ -1047,6 +1059,19 @@ public class Liroth implements ModInitializer {
                 RegistryKey.of(
                         Registry.CONFIGURED_STRUCTURE_FEATURE_KEY,
                         BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE.getId(LirothConfiguredStructures.CONFIGURED_LIROTH_FORTRESS))
+        );
+        BiomeModifications.addStructure(
+                // Add our structure to all biomes that have any of these biome categories. This includes modded biomes.
+                // You can filter to certain biomes based on stuff like temperature, scale, precipitation, mod id, etc.
+                // See BiomeSelectors's methods for more options or write your own by doing `(context) -> context.whatever() == condition`
+                BiomeSelectors.tag(
+                		Liroth.LIROTH_BIOMES
+                		),
+                // The registry key of our ConfiguredStructure so BiomeModification API can grab it
+                // later to tell the game which biomes that your structure can spawn within.
+                RegistryKey.of(
+                        Registry.CONFIGURED_STRUCTURE_FEATURE_KEY,
+                        BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE.getId(LirothConfiguredStructures.CONFIGURED_NOVA_TOWER))
         );
     }
     

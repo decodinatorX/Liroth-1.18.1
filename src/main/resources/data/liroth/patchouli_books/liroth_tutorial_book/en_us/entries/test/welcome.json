@@ -1,20 +1,27 @@
 {
-    "name": "Welcome!",
-    "icon": "liroth:liroth_gem",
+    "name": "Beginnings",
+    "icon": "liroth:wilting_liroth_rose",
     "category": "liroth:liroth_intro",
     "pages": [
         {
             "type": "text",
-            "text": "So! Liroth finally has a tutorial book! Woopee!! So, let's start, first, it seems you've already found a Liroth Gem and combined it with the book to create this here Tutorial Book, good!"
+            "text": " Firstly I should probably make sure I mark my steps in the event I forget something or misplace an item."
         },
         {
       		"type": "crafting",
-      		"text": "The Tutorial Book Recipe above, don't know why I put it here considering you already knew the recipe from your intellegence to actually combine the two in the first place, why am I still rambling, why aren't I just letting you get to the tutorial... help!",
-      		"recipe": "liroth:liroth_planks_recipe"
+      		"text": " Above are the instructions to recreate this book, although thinking about it now, if I misplace this book its not like I can look at the book to figure it out...",
+      		"recipe": "liroth:liroth_tutorial_book_recipe"
     	},
     	{
-    		"type": "text",
-    		"text": "So yeah! Welcome to the Liroth Mod! The mod has been overdue for a tutorial book for quite some time now... and through a little looking up, it seems that Patchouli is extremely easy to use because it uses only JSONs! Which is nice. $(br2)Also, you can call me $(l)$(#f00)L$(), your sarcastic yet sometimes idiotic assistant! See any misspellings?? May be on purpose, may just be me being an idiot!"
+    		"type": "patchouli:spotlight",
+    		"text": " I think my next move is to break open these olden blocks of this odd gem I am going to label Liroth Gems to get ahold of some Liroth Gem Dust.",
+    		"item": "liroth:liroth_gem_dust"
+    	},
+    	{ 
+    		"type": "patchouli:quest",
+    		"trigger": "minecraft:story/mine_diamond",
+    		"title": "Mine Diamonds",
+    		"text": "Go and do that"
     	}
     ]
 }

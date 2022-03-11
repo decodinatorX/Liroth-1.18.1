@@ -23,6 +23,8 @@ import com.decodinator.liroth.entities.boat.CustomBoatEntityModel;
 import com.decodinator.liroth.entities.boat.CustomBoatEntityRenderer;
 import com.decodinator.liroth.entities.boat.DamnationBoatEntityRenderer;
 import com.decodinator.liroth.entities.renderers.BeamLaserProjectileEntityRenderer;
+import com.decodinator.liroth.entities.renderers.ButterflyEntityRenderer;
+import com.decodinator.liroth.entities.renderers.ButterflyModel;
 import com.decodinator.liroth.entities.renderers.ForsakenCorpseEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ForsakenCorpseModel;
 import com.decodinator.liroth.entities.renderers.FreakshowEntityRenderer;
@@ -74,6 +76,7 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_FREAKSHOW_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "freakshow"), "main");
     public static final EntityModelLayer MODEL_VILE_SHARK_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "vile_shark"), "main");
     public static final EntityModelLayer MODEL_LIROTHIAN_MIMIC_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "lirothian_mimic"), "main");
+    public static final EntityModelLayer MODEL_BUTTERFLY_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "butterfly"), "main");
 
 	@Override
 	public void onInitializeClient() {
@@ -174,6 +177,12 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_LIROTHIAN_MIMIC_LAYER, LirothianMimicModel::getTexturedModelData);
         
+        EntityRendererRegistry.register(Liroth.BUTTERFLY, (context) -> {
+            return new ButterflyEntityRenderer(context);
+        });
+ 
+        EntityModelLayerRegistry.registerModelLayer(MODEL_BUTTERFLY_LAYER, ButterflyModel::getTexturedModelData);
+                
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
             registry.register(new Identifier("liroth", "particle/purple_flame"));
         }));

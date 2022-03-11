@@ -146,6 +146,7 @@ public class LirothBlocks {
     public static final Block FUNGAL_TORCH = createTorch("fungal_torch");
     public static final Block FUNGAL_LIGHT = createShroomlightBlock("fungallight");
     public static final Block GATEWAY_BLOCK = createObsidianBlock("gateway_block");
+    public static final Block GLEEMSTONE = createGleemStone("gleemstone");
     public static final Block HAUNTED_THROUGHFARE_BLOCK = createMetalBlock("haunted_throughfare_block");
     public static final Block HILIGHT = createShroomlightBlock("hilight");
     public static final Block JALSPHIRE_CRYSTAL_BLOCK = createCrystalBlock("jalsphire_crystal_block");
@@ -381,6 +382,13 @@ public class LirothBlocks {
    
     static Block createStone(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.STONE));
+        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        BLOCKS.add(createBlock);
+        return createBlock;
+    }
+    
+    static Block createGleemStone(String id) {
+        Block createBlock = new Block(FabricBlockSettings.copy(Blocks.GLOWSTONE).sounds(BlockSoundGroup.GLASS).luminance(state -> 15));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;

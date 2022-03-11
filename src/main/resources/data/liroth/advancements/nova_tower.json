@@ -1,0 +1,33 @@
+{
+  "parent": "liroth:enter_liroth",
+  "display": {
+    "icon": {
+      "item": "liroth:gleemstone"
+    },
+    "title": {
+      "translate": "liroth:advancements.story.nova_tower.title"
+    },
+    "description": {
+      "translate": "liroth:advancements.story.nova_tower.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "nova_tower": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "feature": "liroth:nova_tower"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "nova_tower"
+    ]
+  ]
+}
