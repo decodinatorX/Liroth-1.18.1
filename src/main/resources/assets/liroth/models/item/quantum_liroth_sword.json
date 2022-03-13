@@ -1,6 +1,6 @@
 {
 	"__comment": "Designed by Cm@BlackSpigotMC with Cubik Studio - https://cubik.studio",
-	"ambientocclusion": false,
+	"ambientocclusion": true,
 	"textures": {
 		"quantum_liroth_sword": "liroth:items/quantum_liroth_sword"
 	},

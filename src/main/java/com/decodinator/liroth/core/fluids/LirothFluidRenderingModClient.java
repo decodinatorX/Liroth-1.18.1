@@ -22,6 +22,11 @@ import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlock
 import com.decodinator.liroth.entities.boat.CustomBoatEntityModel;
 import com.decodinator.liroth.entities.boat.CustomBoatEntityRenderer;
 import com.decodinator.liroth.entities.boat.DamnationBoatEntityRenderer;
+import com.decodinator.liroth.entities.boat.JapzBoatEntityRenderer;
+import com.decodinator.liroth.entities.boat.KoolawBoatEntityRenderer;
+import com.decodinator.liroth.entities.boat.PetrifiedDamnationBoatEntityRenderer;
+import com.decodinator.liroth.entities.boat.SpicedBoatEntityRenderer;
+import com.decodinator.liroth.entities.boat.TallpierBoatEntityRenderer;
 import com.decodinator.liroth.entities.renderers.BeamLaserProjectileEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ButterflyEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ButterflyModel;
@@ -65,6 +70,11 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
 
     public static final EntityModelLayer MODEL_LIROTH_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "liroth_boat"), "main");
     public static final EntityModelLayer MODEL_DAMNATION_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "damnation_boat"), "main");
+    public static final EntityModelLayer MODEL_JAPZ_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "japz_boat"), "main");
+    public static final EntityModelLayer MODEL_KOOLAW_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "koolaw_boat"), "main");
+    public static final EntityModelLayer MODEL_PETRIFIED_DAMNATION_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "petrified_damnation_boat"), "main");
+    public static final EntityModelLayer MODEL_SPICED_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "spiced_boat"), "main");
+    public static final EntityModelLayer MODEL_TALLPIER_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "tallpier"), "main");
     public static final EntityModelLayer MODEL_FUNGAL_FIEND_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "fungal_fiend"), "main");
     public static final EntityModelLayer MODEL_FORSAKEN_CORPSE_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "forsaken_corpse"), "main");
     public static final EntityModelLayer MODEL_SKELETAL_FREAK_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "skeletal_freak"), "main");
@@ -105,6 +115,21 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
         
         EntityRendererRegistry.register(LirothEntities.DAMNATION_BOAT, DamnationBoatEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_DAMNATION_BOAT_LAYER, CustomBoatEntityModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(LirothEntities.JAPZ_BOAT, JapzBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_JAPZ_BOAT_LAYER, CustomBoatEntityModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(LirothEntities.KOOLAW_BOAT, KoolawBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_KOOLAW_BOAT_LAYER, CustomBoatEntityModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(LirothEntities.PETRIFIED_DAMNATION_BOAT, PetrifiedDamnationBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_PETRIFIED_DAMNATION_BOAT_LAYER, CustomBoatEntityModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(LirothEntities.SPICED_BOAT, SpicedBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_SPICED_BOAT_LAYER, CustomBoatEntityModel::getTexturedModelData);
+        
+        EntityRendererRegistry.register(LirothEntities.TALLPIER_BOAT, TallpierBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_TALLPIER_BOAT_LAYER, CustomBoatEntityModel::getTexturedModelData);
         
         // In 1.17, use EntityRendererRegistry.register (seen below) instead of EntityRendererRegistry.INSTANCE.register (seen above)
         EntityRendererRegistry.register(Liroth.FUNGAL_FIEND, (context) -> {

@@ -59,17 +59,17 @@ public class LirothItems {
     
     public static final Item COOL_BEAM = createItem(new BeamItem(new Item.Settings()), "cool_beam");
     
-    public static final Item CORRUPTED_JALSPHIRE_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "corrupted_jalsphire_gem");
+//    public static final Item CORRUPTED_JALSPHIRE_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "corrupted_jalsphire_gem");
     
-    public static final Item CORRUPTED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "corrupted_liroth_gem");
+//    public static final Item CORRUPTED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "corrupted_liroth_gem");
     
-    public static final Item CORRUPTED_LIROTH_STAR = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "corrupted_liroth_star");
+//    public static final Item CORRUPTED_LIROTH_STAR = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "corrupted_liroth_star");
     
 //    public static final Item CORRUPTED_ROD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeTab)), "corrupted_rod"); IS NOW THE COOL BEAM
     
     public static final DamnationBoatItem DAMNATION_BOAT = new DamnationBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
     
-    public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
+//    public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
     
     public static final Item GLEEMSTONE_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "gleemstone_dust");
     
@@ -120,7 +120,7 @@ public class LirothItems {
     
     public static final Item LIROTH_SOUL_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_soul_dust");
     
-    public static final Item LIROTH_STAR = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_star");
+//    public static final Item LIROTH_STAR = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_star");
 
     public static final Item LIROTH_TEAR = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_tear");
         
@@ -131,7 +131,7 @@ public class LirothItems {
     
     public static final Item QUANTUM_PLATE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "quantum_plate");
     public static final Item RUBY = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "ruby");
-    public static final Item SOUL_GLASS_BOTTLE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "soul_glass_bottle");
+//    public static final Item SOUL_GLASS_BOTTLE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "soul_glass_bottle");
     public static final Item SPINERIOS_STONE_PEBBLE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "spinerios_stone_pebble");
     
     public static final Item TOURMALINE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "tourmaline");
