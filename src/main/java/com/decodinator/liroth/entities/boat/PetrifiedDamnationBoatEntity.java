@@ -191,7 +191,7 @@ public class PetrifiedDamnationBoatEntity extends Entity {
     }
 
     public Item asItem() {
-        return LirothItems.LIROTH_BOAT;
+        return LirothItems.PETRIFIED_DAMNATION_BOAT;
     }
 
     public void animateDamage() {

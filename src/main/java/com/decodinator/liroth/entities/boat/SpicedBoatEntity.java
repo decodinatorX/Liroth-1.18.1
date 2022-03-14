@@ -191,7 +191,7 @@ public class SpicedBoatEntity extends Entity {
     }
 
     public Item asItem() {
-        return LirothItems.LIROTH_BOAT;
+        return LirothItems.SPICED_BOAT;
     }
 
     public void animateDamage() {

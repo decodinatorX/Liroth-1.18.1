@@ -166,6 +166,7 @@ import com.decodinator.liroth.core.helpers.LirothianCobaltArmorMaterial;
 import com.decodinator.liroth.core.helpers.LirothianCobaltToolMaterial;
 import com.decodinator.liroth.core.helpers.LuxLirothArmorMaterial;
 import com.decodinator.liroth.core.helpers.LuxLirothToolMaterial;
+import com.decodinator.liroth.core.helpers.PotestiumLirothArmorMaterial;
 import com.decodinator.liroth.core.helpers.QuantumLirothArmorMaterial;
 import com.decodinator.liroth.core.helpers.QuantumLirothToolMaterial;
 import com.decodinator.liroth.core.helpers.SalemLirothArmorMaterial;
@@ -413,6 +414,7 @@ public class Liroth implements ModInitializer {
     public static final ToolMaterial SALEM_LIROTH_TOOL_MATERIAL = new SalemLirothToolMaterial();
     public static final ArmorMaterial QUANTUM_LIROTH_ARMOR_MATERIAL = new QuantumLirothArmorMaterial();
     public static final ToolMaterial QUANTUM_LIROTH_TOOL_MATERIAL = new QuantumLirothToolMaterial();
+    public static final ArmorMaterial POTESTIUM_LIROTH_ARMOR_MATERIAL = new PotestiumLirothArmorMaterial();
 
 	public static FlowableFluid MOLTEN_SPINERIOS_STILL;
 	public static FlowableFluid MOLTEN_SPINERIOS_FLOWING;
@@ -747,6 +749,8 @@ public class Liroth implements ModInitializer {
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "petrified_flower"), new BlockItem(LirothBlocks.PETRIFIED_FLOWER, new Item.Settings().group(LirothCreativeTab.creativePlantsTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "pier_dirt"), new BlockItem(LirothBlocks.PIER_DIRT, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "pier_grass_block"), new BlockItem(LirothBlocks.PIER_GRASS_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "pier_farmland"), new BlockItem(LirothBlocks.PIER_FARMLAND_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "pier_grass_path"), new BlockItem(LirothBlocks.PIER_PATH_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "quantum_diamond_ore"), new BlockItem(LirothBlocks.QUANTUM_DIAMOND_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "quantum_plate_block"), new BlockItem(LirothBlocks.QUANTUM_PLATE_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_1"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_1, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -785,6 +789,8 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_furnace"), new BlockItem(LirothBlocks.SPINERIOS_FURNACE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_gold_ore"), new BlockItem(LirothBlocks.SPINERIOS_GOLD_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_grass_block"), new BlockItem(LirothBlocks.SPINERIOS_GRASS_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_farmland"), new BlockItem(LirothBlocks.SPINERIOS_FARMLAND_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_grass_path"), new BlockItem(LirothBlocks.SPINERIOS_PATH_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_iron_ore"), new BlockItem(LirothBlocks.SPINERIOS_IRON_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_lapis_ore"), new BlockItem(LirothBlocks.SPINERIOS_LAPIS_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "spinerios_liroth_ore"), new BlockItem(LirothBlocks.SPINERIOS_LIROTH_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -833,7 +839,12 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "pointed_jalsphire_crystal"), new BlockItem(LirothBlocks.POINTED_JALSPHIRE_CRYSTAL, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_boat"), LirothItems.LIROTH_BOAT);
-        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);       
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "japz_boat"), LirothItems.JAPZ_BOAT);
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "koolaw_boat"), LirothItems.KOOLAW_BOAT);       
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "petrified_damnation_boat"), LirothItems.PETRIFIED_DAMNATION_BOAT);
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "spiced_boat"), LirothItems.SPICED_BOAT);
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "tallpier_boat"), LirothItems.TALLPIER_BOAT);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "fungal_fiend_spawn_egg"), FUNGAL_FIEND_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "forsaken_corpse_spawn_egg"), FORSAKEN_CORPSE_SPAWN_EGG);
 		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "skeletal_freak_spawn_egg"), SKELETAL_FREAK_SPAWN_EGG);

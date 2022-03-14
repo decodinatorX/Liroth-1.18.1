@@ -191,7 +191,7 @@ public class JapzBoatEntity extends Entity {
     }
 
     public Item asItem() {
-        return LirothItems.LIROTH_BOAT;
+        return LirothItems.JAPZ_BOAT;
     }
 
     public void animateDamage() {

@@ -53,9 +53,15 @@ import com.decodinator.liroth.core.blocks.LirothianPetroleumCampfireBlock;
 import com.decodinator.liroth.core.blocks.LockBlock;
 import com.decodinator.liroth.core.blocks.PetrifiedCaveVinesBodyBlock;
 import com.decodinator.liroth.core.blocks.PetrifiedCaveVinesHeadBlock;
+import com.decodinator.liroth.core.blocks.PierFarmlandBlock;
+import com.decodinator.liroth.core.blocks.PierGrassBlock;
+import com.decodinator.liroth.core.blocks.PierPathBlock;
 import com.decodinator.liroth.core.blocks.PointedJalsphireCrystal;
 import com.decodinator.liroth.core.blocks.PointedPetrifiedCrystal;
 import com.decodinator.liroth.core.blocks.QuantumExtractorBlock;
+import com.decodinator.liroth.core.blocks.SpineriosFarmlandBlock;
+import com.decodinator.liroth.core.blocks.SpineriosGrassBlock;
+import com.decodinator.liroth.core.blocks.SpineriosPathBlock;
 import com.decodinator.liroth.core.world.trees.DamnationTree;
 import com.decodinator.liroth.core.world.trees.JapzTree;
 import com.decodinator.liroth.core.world.trees.KoolawTree;
@@ -251,9 +257,13 @@ public class LirothBlocks {
 //    public static final Block PETRIFIED_PLANT = createPetrifiedPlant("petrified_plant");
 //    public static final Block PETRIFIED_FLOWER = createPetrifiedFlower("petrified_flower");
     public static final Block PIER_DIRT = createDirt("pier_dirt");
-    public static final Block PIER_GRASS_BLOCK = createGrassBlock("pier_grass_block");
+    public static final Block PIER_GRASS_BLOCK = createPierGrassBlock("pier_grass_block");
+    public static final Block PIER_FARMLAND_BLOCK = createPierFarmlandBlock("pier_farmland");
+    public static final Block PIER_PATH_BLOCK = createPierPathBlock("pier_grass_path");
     public static final Block POINTED_JALSPHIRE_CRYSTAL = createPointedCrystal("pointed_jalsphire_crystal");
     public static final Block POINTED_PETRIFIED_CRYSTAL = createPointedPetrifiedCrystal("pointed_petrified_crystal");
+    public static final Block POTESTIUM_ORE = createSoilOre("potestium_ore");
+    public static final Block POTESTIUM_BLOCK = createMetalBlock("potestium_block");
 //    public static final Block REDSTONE_BROKEN_STAGE_1 = createMetalBlock("redstone_broken_stage_1");
 //    public static final Block REDSTONE_BROKEN_STAGE_2 = createMetalBlock("redstone_broken_stage_2");
 //    public static final Block REDSTONE_BROKEN_STAGE_3 = createMetalBlock("redstone_broken_stage_3");
@@ -290,7 +300,9 @@ public class LirothBlocks {
     public static final Block SPINERIOS_EMERALD_ORE = createDirtOre("spinerios_emerald_ore");
     public static final Block SPINERIOS_FURNACE = createFurnace("spinerios_furnace");
     public static final Block SPINERIOS_GOLD_ORE = createDirtOre("spinerios_gold_ore");
-    public static final Block SPINERIOS_GRASS_BLOCK = createGrassBlock("spinerios_grass_block");
+    public static final Block SPINERIOS_GRASS_BLOCK = createSpineriosGrassBlock("spinerios_grass_block");
+    public static final Block SPINERIOS_FARMLAND_BLOCK = createSpineriosFarmlandBlock("spinerios_farmland");
+    public static final Block SPINERIOS_PATH_BLOCK = createSpineriosPathBlock("spinerios_grass_path");
     public static final Block SPINERIOS_IRON_ORE = createDirtOre("spinerios_iron_ore");
     public static final Block SPINERIOS_LAPIS_ORE = createDirtOre("spinerios_lapis_ore");
     public static final Block SPINERIOS_LIROTH_ORE = createDirtOre("spinerios_liroth_ore");
@@ -1050,6 +1062,42 @@ public class LirothBlocks {
     
     public static Block createLirothPathBlock(String id) {
         Block createBlock = new LirothPathBlock(FabricBlockSettings.copy(Blocks.DIRT_PATH));
+        createBlock(createBlock, id);
+        return createBlock;
+    }
+    
+    public static Block createPierGrassBlock(String id) {
+        Block createBlock = new PierGrassBlock(FabricBlockSettings.copy(Blocks.GRASS_BLOCK));
+        createBlock(createBlock, id);
+        return createBlock;
+    }
+    
+    public static Block createPierFarmlandBlock(String id) {
+        Block createBlock = new PierFarmlandBlock(FabricBlockSettings.copy(Blocks.FARMLAND));
+        createBlock(createBlock, id);
+        return createBlock;
+    }
+    
+    public static Block createPierPathBlock(String id) {
+        Block createBlock = new PierPathBlock(FabricBlockSettings.copy(Blocks.DIRT_PATH));
+        createBlock(createBlock, id);
+        return createBlock;
+    }
+    
+    public static Block createSpineriosGrassBlock(String id) {
+        Block createBlock = new SpineriosGrassBlock(FabricBlockSettings.copy(Blocks.GRASS_BLOCK));
+        createBlock(createBlock, id);
+        return createBlock;
+    }
+    
+    public static Block createSpineriosFarmlandBlock(String id) {
+        Block createBlock = new SpineriosFarmlandBlock(FabricBlockSettings.copy(Blocks.FARMLAND));
+        createBlock(createBlock, id);
+        return createBlock;
+    }
+    
+    public static Block createSpineriosPathBlock(String id) {
+        Block createBlock = new SpineriosPathBlock(FabricBlockSettings.copy(Blocks.DIRT_PATH));
         createBlock(createBlock, id);
         return createBlock;
     }

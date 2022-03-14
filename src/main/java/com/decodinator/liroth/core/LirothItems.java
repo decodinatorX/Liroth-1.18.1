@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.common.properties.LirothCreativeTab;
+import com.decodinator.liroth.core.armor.PotestiumHelmItem;
 import com.decodinator.liroth.core.items.AnsalumArmorItem;
 import com.decodinator.liroth.core.items.AnsalumLirothShield;
 import com.decodinator.liroth.core.items.BeamItem;
@@ -34,16 +35,22 @@ import com.decodinator.liroth.core.items.CustomBoatItem;
 import com.decodinator.liroth.core.items.CustomHoeItem;
 import com.decodinator.liroth.core.items.CustomPickaxeItem;
 import com.decodinator.liroth.core.items.DamnationBoatItem;
+import com.decodinator.liroth.core.items.JapzBoatItem;
 import com.decodinator.liroth.core.items.KeyItem;
+import com.decodinator.liroth.core.items.KoolawBoatItem;
 import com.decodinator.liroth.core.items.LirothBlaster;
 import com.decodinator.liroth.core.items.LirothShield;
 import com.decodinator.liroth.core.items.LuxArmorItem;
 import com.decodinator.liroth.core.items.LuxLirothShield;
+import com.decodinator.liroth.core.items.PetrifiedDamnationBoatItem;
+import com.decodinator.liroth.core.items.PotestiumArmorItem;
 import com.decodinator.liroth.core.items.PurpetuatedSpyglassItem;
 import com.decodinator.liroth.core.items.QuantumArmorItem;
 import com.decodinator.liroth.core.items.QuantumLirothShield;
 import com.decodinator.liroth.core.items.SalemArmorItem;
 import com.decodinator.liroth.core.items.SalemLirothShield;
+import com.decodinator.liroth.core.items.SpicedBoatItem;
+import com.decodinator.liroth.core.items.TallpierBoatItem;
 import com.decodinator.liroth.entities.boat.CustomBoatEntity;
 
 @SuppressWarnings("deprecation")
@@ -68,6 +75,11 @@ public class LirothItems {
 //    public static final Item CORRUPTED_ROD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeTab)), "corrupted_rod"); IS NOW THE COOL BEAM
     
     public static final DamnationBoatItem DAMNATION_BOAT = new DamnationBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
+    public static final JapzBoatItem JAPZ_BOAT = new JapzBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
+    public static final KoolawBoatItem KOOLAW_BOAT = new KoolawBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
+    public static final PetrifiedDamnationBoatItem PETRIFIED_DAMNATION_BOAT = new PetrifiedDamnationBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
+    public static final SpicedBoatItem SPICED_BOAT = new SpicedBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
+    public static final TallpierBoatItem TALLPIER_BOAT = new TallpierBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
     
 //    public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
     
@@ -112,11 +124,11 @@ public class LirothItems {
 
     public static final Item LIROTHIAN_PETROLEUM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "lirothian_petroleum");
     
-    public static final Item LIROTH_SHIELD = createShieldItem(new LirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "liroth_shield");
-    public static final Item ANSALUM_LIROTH_SHIELD = createAnsalumShieldItem(new AnsalumLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "ansalum_liroth_shield");
-    public static final Item LUX_LIROTH_SHIELD = createLuxShieldItem(new LuxLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "lux_liroth_shield");
-    public static final Item SALEM_LIROTH_SHIELD = createSalemShieldItem(new SalemLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "salem_liroth_shield");
-    public static final Item QUANTUM_LIROTH_SHIELD = createQuantumShieldItem(new QuantumLirothShield(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).maxCount(1)), "quantum_liroth_shield");
+    public static final Item LIROTH_SHIELD = createShieldItem(new LirothShield(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "liroth_shield");
+    public static final Item ANSALUM_LIROTH_SHIELD = createAnsalumShieldItem(new AnsalumLirothShield(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "ansalum_liroth_shield");
+    public static final Item LUX_LIROTH_SHIELD = createLuxShieldItem(new LuxLirothShield(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "lux_liroth_shield");
+    public static final Item SALEM_LIROTH_SHIELD = createSalemShieldItem(new SalemLirothShield(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "salem_liroth_shield");
+    public static final Item QUANTUM_LIROTH_SHIELD = createQuantumShieldItem(new QuantumLirothShield(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "quantum_liroth_shield");
     
     public static final Item LIROTH_SOUL_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_soul_dust");
     
@@ -131,6 +143,7 @@ public class LirothItems {
     
     public static final Item QUANTUM_PLATE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "quantum_plate");
     public static final Item RUBY = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "ruby");
+    public static final Item POTESTIUM_SHARD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "potestium_shard");
 //    public static final Item SOUL_GLASS_BOTTLE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "soul_glass_bottle");
     public static final Item SPINERIOS_STONE_PEBBLE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "spinerios_stone_pebble");
     
@@ -156,6 +169,10 @@ public class LirothItems {
     public static final Item SALEM_LIROTH_FALCHION = createToolItem(new SwordItem(Liroth.SALEM_LIROTH_TOOL_MATERIAL, 4, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "salem_liroth_falchion");
     
     public static final Item QUANTUM_LIROTH_SWORD = createToolItem(new SwordItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, 4, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "quantum_liroth_sword");
+    public static final Item QUANTUM_LIROTH_SHOVEL = createToolItem(new ShovelItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "quantum_liroth_shovel");
+    public static final Item QUANTUM_LIROTH_PICKAXE = createToolItem(new CustomPickaxeItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, 1, -2.8f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "quantum_liroth_pickaxe");
+    public static final Item QUANTUM_LIROTH_AXE = createToolItem(new CustomAxeItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "quantum_liroth_axe");
+    public static final Item QUANTUM_LIROTH_HOE = createToolItem(new CustomHoeItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, -4, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "quantum_liroth_hoe");
     
     public static final Item LUX_LIROTH_HELMET = createArmorItem(new LuxArmorItem(Liroth.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lux_liroth_helmet");
     public static final Item LUX_LIROTH_CHESTPLATE = createArmorItem(new LuxArmorItem(Liroth.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "lux_liroth_chestplate");
@@ -171,6 +188,13 @@ public class LirothItems {
     public static final Item QUANTUM_LIROTH_CHESTPLATE = createArmorItem(new QuantumArmorItem(Liroth.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "quantum_liroth_chestplate");
     public static final Item QUANTUM_LIROTH_LEGGINGS = createArmorItem(new QuantumArmorItem(Liroth.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "quantum_liroth_leggings");
     public static final Item QUANTUM_LIROTH_BOOTS = createArmorItem(new QuantumArmorItem(Liroth.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "quantum_liroth_boots");
+    
+    public static final Item POTESTIUM_LIROTH_HELMET = createArmorItem(new PotestiumHelmItem(Liroth.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_liroth_helmet");
+    public static final Item POTESTIUM_LIROTH_CHESTPLATE = createArmorItem(new PotestiumArmorItem(Liroth.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_liroth_chestplate");
+    public static final Item POTESTIUM_LIROTH_LEGGINGS = createArmorItem(new PotestiumArmorItem(Liroth.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_liroth_leggings");
+    public static final Item POTESTIUM_LIROTH_BOOTS = createArmorItem(new PotestiumArmorItem(Liroth.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_liroth_boots");
+    
+    public static final Item POTESTIUM_SCYTHE = createToolItem(new CustomHoeItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, 3, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "potestium_scythe");
     
     public static final Item LIROTH_SWORD = createToolItem(new SwordItem(Liroth.LIROTH_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_sword");
     public static final Item LIROTH_SHOVEL = createToolItem(new ShovelItem(Liroth.LIROTH_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_shovel");

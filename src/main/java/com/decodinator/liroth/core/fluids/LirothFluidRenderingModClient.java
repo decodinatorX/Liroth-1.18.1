@@ -17,6 +17,9 @@ import java.util.UUID;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothEntities;
+import com.decodinator.liroth.core.LirothItems;
+import com.decodinator.liroth.core.armor.PotestiumHelmetModel;
+import com.decodinator.liroth.core.armor.PotestiumHelmetRenderer;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntityRenderer;
 import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlockEntityRenderer;
 import com.decodinator.liroth.entities.boat.CustomBoatEntityModel;
@@ -59,6 +62,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -87,6 +91,7 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_VILE_SHARK_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "vile_shark"), "main");
     public static final EntityModelLayer MODEL_LIROTHIAN_MIMIC_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "lirothian_mimic"), "main");
     public static final EntityModelLayer MODEL_BUTTERFLY_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "butterfly"), "main");
+    public static final EntityModelLayer MODEL_POTESTIUM_HELMET_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "potestium_helmet"), "main");
 
 	@Override
 	public void onInitializeClient() {
@@ -234,6 +239,11 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
         
         BlockEntityRendererRegistry.register(Liroth.FUNGAL_CAMPFIRE_BLOCK_ENTITY, FungalCampfireBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(Liroth.LIROTHIAN_PETROLEUM_CAMPFIRE_BLOCK_ENTITY, LirothianPetroleumCampfireBlockEntityRenderer::new);
+        
+        EntityModelLayerRegistry.registerModelLayer(MODEL_POTESTIUM_HELMET_LAYER, PotestiumHelmetModel::getTexturedModelData);
+
+        ArmorRenderer.register(new PotestiumHelmetRenderer(), LirothItems.POTESTIUM_LIROTH_HELMET);
+
 	}
 	
 	

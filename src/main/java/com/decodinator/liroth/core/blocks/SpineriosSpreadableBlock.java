@@ -16,9 +16,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
 
-public abstract class LirothSpreadableBlock
+public abstract class SpineriosSpreadableBlock
 extends SnowyBlock {
-    protected LirothSpreadableBlock(AbstractBlock.Settings settings) {
+    protected SpineriosSpreadableBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
@@ -37,20 +37,20 @@ extends SnowyBlock {
 
     private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.up();
-        return LirothSpreadableBlock.canSurvive(state, world, pos);
+        return SpineriosSpreadableBlock.canSurvive(state, world, pos) && !world.getFluidState(blockPos).isIn(FluidTags.WATER);
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!LirothSpreadableBlock.canSurvive(state, world, pos)) {
-            world.setBlockState(pos, LirothBlocks.LIROTH_DIRT.getDefaultState());
+        if (!SpineriosSpreadableBlock.canSurvive(state, world, pos)) {
+            world.setBlockState(pos, LirothBlocks.SPINERIOS_DIRT.getDefaultState());
             return;
         }
         if (world.getLightLevel(pos.up()) >= 9) {
             BlockState blockState = this.getDefaultState();
             for (int i = 0; i < 4; ++i) {
                 BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                if (!world.getBlockState(blockPos).isOf(LirothBlocks.LIROTH_DIRT) || !LirothSpreadableBlock.canSpread(blockState, world, blockPos)) continue;
+                if (!world.getBlockState(blockPos).isOf(LirothBlocks.SPINERIOS_DIRT) || !SpineriosSpreadableBlock.canSpread(blockState, world, blockPos)) continue;
                 world.setBlockState(blockPos, (BlockState)blockState.with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
             }
         }
