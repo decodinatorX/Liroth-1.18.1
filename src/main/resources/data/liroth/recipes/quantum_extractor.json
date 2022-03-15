@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:redstone_block"
+      "item": "liroth:ruby_block"
     },
     "B": { 
       "item": "liroth:quantum_diamond"

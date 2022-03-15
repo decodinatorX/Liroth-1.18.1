@@ -259,7 +259,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SkeletalFreakEntity::new).size(EntityDimensions.fixed(0.6f, 1.95f)).build()
     );
     
-    public static final Item SKELETAL_FREAK_SPAWN_EGG = new SpawnEggItem(SKELETAL_FREAK, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item SKELETAL_FREAK_SPAWN_EGG = new SpawnEggItem(SKELETAL_FREAK, 1513239, 16711900, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
 	public static final EntityType<BeamLaserProjectileEntity> BEAM_LASER_PROJECTILE_ENTITY = Registry.register(
 			Registry.ENTITY_TYPE,
@@ -276,7 +276,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WarpEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
-    public static final Item WARP_SPAWN_EGG = new SpawnEggItem(WARP, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item WARP_SPAWN_EGG = new SpawnEggItem(WARP, 524305, 4260003, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final EntityType<SoulArachnidEntity> SOUL_ARACHNID = Registry.register(
             Registry.ENTITY_TYPE,
@@ -284,7 +284,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SoulArachnidEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
-    public static final Item SOUL_ARACHNID_SPAWN_EGG = new SpawnEggItem(SOUL_ARACHNID, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item SOUL_ARACHNID_SPAWN_EGG = new SpawnEggItem(SOUL_ARACHNID, 73758, 5078138, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final EntityType<PierPeepEntity> PIER_PEEP = Registry.register(
             Registry.ENTITY_TYPE,
@@ -292,7 +292,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, PierPeepEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
-    public static final Item PIER_PEEP_SPAWN_EGG = new SpawnEggItem(PIER_PEEP, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item PIER_PEEP_SPAWN_EGG = new SpawnEggItem(PIER_PEEP, 1638400, 11665663, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final EntityType<ShadeEntity> SHADE = Registry.register(
             Registry.ENTITY_TYPE,
@@ -300,7 +300,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ShadeEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
-    public static final Item SHADE_SPAWN_EGG = new SpawnEggItem(SHADE, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item SHADE_SPAWN_EGG = new SpawnEggItem(SHADE, 328965, 1579032, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final EntityType<ProwlerEntity> PROWLER = Registry.register(
             Registry.ENTITY_TYPE,
@@ -308,7 +308,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ProwlerEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
-    public static final Item PROWLER_SPAWN_EGG = new SpawnEggItem(PROWLER, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item PROWLER_SPAWN_EGG = new SpawnEggItem(PROWLER, 16312063, 4260003, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final EntityType<FreakshowEntity> FREAKSHOW = Registry.register(
             Registry.ENTITY_TYPE,
@@ -316,7 +316,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, FreakshowEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
-    public static final Item FREAKSHOW_SPAWN_EGG = new SpawnEggItem(FREAKSHOW, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item FREAKSHOW_SPAWN_EGG = new SpawnEggItem(FREAKSHOW, 524305, 1579032, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final EntityType<VileSharkEntity> VILE_SHARK = Registry.register(
             Registry.ENTITY_TYPE,
@@ -324,7 +324,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, VileSharkEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
-    public static final Item VILE_SHARK_SPAWN_EGG = new SpawnEggItem(VILE_SHARK, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item VILE_SHARK_SPAWN_EGG = new SpawnEggItem(VILE_SHARK, 5963996, 7667865, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final EntityType<LirothianMimicEntity> LIROTHIAN_MIMIC = Registry.register(
             Registry.ENTITY_TYPE,
@@ -332,7 +332,7 @@ public class Liroth implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LirothianMimicEntity::new).size(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
-    public static final Item LIROTHIAN_MIMIC_SPAWN_EGG = new SpawnEggItem(LIROTHIAN_MIMIC, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item LIROTHIAN_MIMIC_SPAWN_EGG = new SpawnEggItem(LIROTHIAN_MIMIC, 41655, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
     
     public static final EntityType<ButterflyEntity> BUTTERFLY = Registry.register(
             Registry.ENTITY_TYPE,
@@ -751,6 +751,8 @@ public class Liroth implements ModInitializer {
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "pier_grass_block"), new BlockItem(LirothBlocks.PIER_GRASS_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "pier_farmland"), new BlockItem(LirothBlocks.PIER_FARMLAND_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "pier_grass_path"), new BlockItem(LirothBlocks.PIER_PATH_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "potestium_ore"), new BlockItem(LirothBlocks.POTESTIUM_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "potestium_block"), new BlockItem(LirothBlocks.POTESTIUM_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "quantum_diamond_ore"), new BlockItem(LirothBlocks.QUANTUM_DIAMOND_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "quantum_plate_block"), new BlockItem(LirothBlocks.QUANTUM_PLATE_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_1"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_1, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -758,6 +760,7 @@ public class Liroth implements ModInitializer {
 //	    Registry.register(Registry.ITEM, new Identifier("liroth", "redstone_broken_stage_3"), new BlockItem(LirothBlocks.REDSTONE_BROKEN_STAGE_3, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "raw_lirothian_cobalt_block"), new BlockItem(LirothBlocks.RAW_LIROTHIAN_COBALT_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "ruby_ore"), new BlockItem(LirothBlocks.RUBY_ORE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
+	    Registry.register(Registry.ITEM, new Identifier("liroth", "ruby_block"), new BlockItem(LirothBlocks.RUBY_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "smooth_blue_sandstone"), new BlockItem(LirothBlocks.SMOOTH_BLUE_SANDSTONE, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "smooth_blue_sandstone_slab"), new BlockItem(LirothBlocks.SMOOTH_BLUE_SANDSTONE_SLAB, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new Identifier("liroth", "smooth_blue_sandstone_stairs"), new BlockItem(LirothBlocks.SMOOTH_BLUE_SANDSTONE_STAIRS, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));

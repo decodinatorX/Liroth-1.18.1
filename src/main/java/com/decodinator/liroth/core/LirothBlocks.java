@@ -269,6 +269,7 @@ public class LirothBlocks {
 //    public static final Block REDSTONE_BROKEN_STAGE_3 = createMetalBlock("redstone_broken_stage_3");
     public static final Block RAW_LIROTHIAN_COBALT_BLOCK = createMetalBlock("raw_lirothian_cobalt_block");
     public static final Block RUBY_ORE = createSoilOre("ruby_ore");
+    public static final Block RUBY_BLOCK = createMetalBlock("ruby_block");
     public static final Block QUANTUM_DIAMOND_ORE = createSoilOre("quantum_diamond_ore");
     public static final Block QUANTUM_PLATE_BLOCK = createMetalBlock("quantum_plate_block");
     public static final Block SEA_EYE = createWaterPlant("sea_eye");

@@ -1,12 +1,16 @@
 {
   "group": "liroth",
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "liroth:liroth_gem_dust",
-      "count": 9
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "000",
+    "000"
   ],
+  "key": {
+    "0": {
+      "item": "liroth:liroth_gem_dust"
+    }
+  },
   "result": {
     "item": "liroth:liroth_gem_dust_heap",
     "count": 1

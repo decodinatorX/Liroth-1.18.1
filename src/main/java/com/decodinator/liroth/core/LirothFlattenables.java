@@ -14,6 +14,10 @@ public class LirothFlattenables {
         Map<Block, BlockState> flattenables = new IdentityHashMap<>(ShovelItemAccess.getFlattenables());
         flattenables.put(LirothBlocks.LIROTH_GRASS_BLOCK, LirothBlocks.LIROTH_PATH_BLOCK.getDefaultState());
         flattenables.put(LirothBlocks.LIROTH_DIRT, LirothBlocks.LIROTH_PATH_BLOCK.getDefaultState());
+        flattenables.put(LirothBlocks.PIER_GRASS_BLOCK, LirothBlocks.PIER_PATH_BLOCK.getDefaultState());
+        flattenables.put(LirothBlocks.PIER_DIRT, LirothBlocks.PIER_PATH_BLOCK.getDefaultState());
+        flattenables.put(LirothBlocks.SPINERIOS_GRASS_BLOCK, LirothBlocks.SPINERIOS_PATH_BLOCK.getDefaultState());
+        flattenables.put(LirothBlocks.SPINERIOS_DIRT, LirothBlocks.SPINERIOS_PATH_BLOCK.getDefaultState());
         ShovelItemAccess.setFlattenables(flattenables);
     }
 }

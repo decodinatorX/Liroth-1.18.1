@@ -1,0 +1,13 @@
+{
+  "group": "liroth",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "liroth:ruby_block"
+    }
+  ],
+  "result": {
+    "item": "liroth:ruby",
+    "count": 9
+  }
+}
