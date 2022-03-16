@@ -5,11 +5,13 @@ import com.decodinator.liroth.Liroth;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -51,9 +53,25 @@ public class ShadeEntity extends ZombieEntity {
     
     @Override
     protected void convertInWater() {
-        this.convertTo(Liroth.SHADE);
-        if (!this.isSilent() || this.isSilent()) {
-            this.world.syncWorldEvent(null, WorldEvents.ZOMBIE_CONVERTS_TO_DROWNED, this.getBlockPos(), 0);
-        }
+    	
     }
+    
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return Liroth.SHADE_IDLE_SOUND_EVENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return Liroth.SHADE_HURT_SOUND_EVENT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return Liroth.SHADE_DEATH_SOUND_EVENT;
+    }
+
+    protected SoundEvent getStepSound() {
+    	return SoundEvents.BLOCK_SOUL_SAND_STEP;
+	}
 }

@@ -33,6 +33,54 @@
   		}
   	]
   },
+  "warp_death": { 
+  	"category": "hostile",
+  	"sounds": [ 
+  		{ 
+  			"name": "liroth:warp/death"
+  		}
+  	]
+  },
+  "warp_hurt": { 
+  	"category": "hostile",
+  	"sounds": [ 
+  		{ 
+  			"name": "liroth:warp/hurt"
+  		}
+  	]
+  },
+  "warp_idle": { 
+  	"category": "hostile",
+  	"sounds": [ 
+  		{ 
+  			"name": "liroth:warp/idle"
+  		}
+  	]
+  },
+  "shade_death": { 
+  	"category": "hostile",
+  	"sounds": [ 
+  		{ 
+  			"name": "liroth:shade/death"
+  		}
+  	]
+  },
+  "shade_hurt": { 
+  	"category": "hostile",
+  	"sounds": [ 
+  		{ 
+  			"name": "liroth:shade/hurt"
+  		}
+  	]
+  },
+  "shade_idle": { 
+  	"category": "hostile",
+  	"sounds": [ 
+  		{ 
+  			"name": "liroth:shade/idle"
+  		}
+  	]
+  },
     "music.liroth.liroth_biome": {
     "category": "music",
     "sounds": [

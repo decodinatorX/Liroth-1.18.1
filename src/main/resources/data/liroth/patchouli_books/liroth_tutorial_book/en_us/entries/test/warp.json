@@ -1,6 +1,7 @@
 {
     "name": "Warp",
     "icon": "liroth:liroth_tear",
+    "advancement": "liroth:warp",
     "category": "liroth:mob_index",
     "pages": [
     	{

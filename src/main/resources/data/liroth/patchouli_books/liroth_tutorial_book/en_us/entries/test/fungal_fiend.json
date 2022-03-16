@@ -1,6 +1,7 @@
 {
     "name": "Fungal Fiend",
     "icon": "liroth:damnation_fungus",
+    "advancement": "liroth:fungal_fiend",
     "category": "liroth:mob_index",
     "pages": [
     	{

@@ -130,6 +130,7 @@ public class LirothBlocks {
     public static final Block DAMNATION_STAIRS = createWoodStairs("damnation_stairs");
     public static final Block DAMNATION_TRAPDOOR = createTrapDoor("damnation_trapdoor");
     public static final Block DAMNATION_WART_BLOCK = createWartBlock("damnation_wart_block");
+    public static final Block DAMNATION_WOOD = createWood("damnation_wood");
     public static final Block DAMNATION_VINES = createWeepingVinesHead("damnation_vines");
     public static final Block DAMNATION_VINES_PLANT = createWeepingVinesBody("damnation_vines_plant");
     public static final Block DAMNED_PASSAGEWAY = createStone("damned_passageway");
@@ -178,6 +179,7 @@ public class LirothBlocks {
     public static final Block JAPZ_TRAPDOOR = createTrapDoor("japz_trapdoor");
     public static final Block JAPZ_VINES = createCaveVinesHead("japz_vines");
     public static final Block JAPZ_VINES_PLANT = createCaveVinesBody("japz_vines_plant");
+    public static final Block JAPZ_WOOD = createWood("japz_wood");
     public static final Block KOOLAW_CHEST = createChest("koolaw_chest");
     public static final Block KOOLAW_CRAFTING_TABLE = createCraftingTable("koolaw_crafting_table");
     public static final Block KOOLAW_FENCE = createFence("koolaw_fence");
@@ -188,6 +190,7 @@ public class LirothBlocks {
     public static final Block KOOLAW_DOOR = createDoor("koolaw_door");
     public static final Block KOOLAW_SLAB = createWoodSlab("koolaw_slab");
     public static final Block KOOLAW_TRAPDOOR = createTrapDoor("koolaw_trapdoor");
+    public static final Block KOOLAW_WOOD = createWood("koolaw_wood");
     public static final Block NETHER_LIROTH_GEM_ORE = createOre("nether_liroth_gem_ore");
     public static final Block LIROTH_BONE_BLOCK = createBoneBlock("liroth_bone_block");
     public static final Block LIROTH_CHEST = createChest("liroth_chest");
@@ -226,6 +229,7 @@ public class LirothBlocks {
     public static final Block LIROTH_SLAB = createWoodSlab("liroth_slab");
     public static final Block LIROTH_STAIRS = createWoodStairs("liroth_stairs");
     public static final Block LIROTH_TRAPDOOR = createTrapDoor("liroth_trapdoor");
+    public static final Block LIROTH_WOOD = createWood("liroth_wood");
     public static final Block LIROTHIAN_COBALT_BLOCK = createMetalBlock("lirothian_cobalt_block");
     public static final Block LIROTHIAN_COBALT_DOOR = createMetalDoor("lirothian_cobalt_door");
     public static final Block LIROTHIAN_COBALT_ORE = createOre("lirothian_cobalt_ore");
@@ -249,6 +253,7 @@ public class LirothBlocks {
     public static final Block PETRIFIED_DAMNATION_SLAB = createWoodSlab("petrified_damnation_slab");
     public static final Block PETRIFIED_DAMNATION_TRAPDOOR = createTrapDoor("petrified_damnation_trapdoor");
     public static final Block PETRIFIED_DAMNATION_FENCE = createFence("petrified_damnation_fence");
+    public static final Block PETRIFIED_DAMNATION_WOOD = createWood("petrified_damnation_wood");
     public static final Block PETRIFIED_CRYSTAL_BLOCK = createCrystalBlock("petrified_crystal_block");
     public static final Block PETRIFIED_MOSS_BLOCK = createMoss("petrified_moss_block");
     public static final Block PETRIFIED_MOSS_CARPET = createMossCarpet("petrified_moss_carpet");
@@ -290,6 +295,7 @@ public class LirothBlocks {
     public static final Block SPICED_SLAB = createWoodSlab("spiced_slab");
     public static final Block SPICED_STAIRS = createWoodStairs("spiced_stairs");
     public static final Block SPICED_TRAPDOOR = createTrapDoor("spiced_trapdoor");
+    public static final Block SPICED_WOOD = createWood("spiced_wood");
     public static final Block SPINERIOS_COAL_ORE = createDirtOre("spinerios_coal_ore");
     public static final Block SPINERIOS_COBBLESTONE = createStone("spinerios_cobblestone");
     public static final Block SPINERIOS_COBBLESTONE_WALL = createStoneWall("spinerios_cobblestone_wall");
@@ -328,6 +334,13 @@ public class LirothBlocks {
     public static final Block STRIPPED_JAPZ_LOG = createStrippedLog("stripped_japz_log");
     public static final Block STRIPPED_KOOLAW_LOG = createStrippedLog("stripped_koolaw_log");
     public static final Block STRIPPED_PETRIFIED_DAMNATION_LOG = createStrippedLog("stripped_petrified_damnation_log");
+    public static final Block STRIPPED_LIROTH_WOOD = createWood("stripped_liroth_wood");
+    public static final Block STRIPPED_SPICED_WOOD = createWood("stripped_spiced_wood");
+    public static final Block STRIPPED_TALLPIER_WOOD = createWood("stripped_tallpier_wood");
+    public static final Block STRIPPED_DAMNATION_WOOD = createWood("stripped_damnation_wood");
+    public static final Block STRIPPED_JAPZ_WOOD = createWood("stripped_japz_wood");
+    public static final Block STRIPPED_KOOLAW_WOOD = createWood("stripped_koolaw_wood");
+    public static final Block STRIPPED_PETRIFIED_DAMNATION_WOOD = createWood("stripped_petrified_damnation_wood");
     public static final Block TALLPIER_CRAFTING_TABLE = createCraftingTable("tallpier_crafting_table");
     public static final Block TALLPIER_CHEST = createChest("tallpier_chest");
     public static final Block TALLPIER_LEAVES = createLeaves("tallpier_leaves");
@@ -338,6 +351,7 @@ public class LirothBlocks {
     public static final Block TALLPIER_SLAB = createWoodSlab("tallpier_slab");
     public static final Block TALLPIER_STAIRS = createWoodStairs("tallpier_stairs");
     public static final Block TALLPIER_TRAPDOOR = createTrapDoor("tallpier_trapdoor");
+    public static final Block TALLPIER_WOOD = createWood("tallpier_wood");
     public static final Block TOURMALINE_GEM_BLOCK = createMetalBlock("tourmaline_gem_block");
     public static final Block TOURMALINE_ORE = createStone("tourmaline_ore");
     public static final Block VILE_TENTACLE_TIP = createUnderwaterReedTop("vile_tentacle_tip");
@@ -399,6 +413,8 @@ public class LirothBlocks {
         BLOCKS.add(createBlock);
         return createBlock;
     }
+    
+
     
     static Block createGleemStone(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.GLOWSTONE).sounds(BlockSoundGroup.GLASS).luminance(state -> 15));

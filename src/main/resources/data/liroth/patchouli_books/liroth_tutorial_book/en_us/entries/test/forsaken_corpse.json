@@ -1,6 +1,7 @@
 {
     "name": "Forsaken Corpse",
     "icon": "liroth:liroth_soul_dust",
+    "advancement": "liroth:forsaken_corpse",
     "category": "liroth:mob_index",
     "pages": [
     	{

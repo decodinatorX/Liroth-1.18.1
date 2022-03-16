@@ -1,6 +1,7 @@
 {
     "name": "Freakshow",
     "icon": "liroth:liroth_tear",
+    "advancement": "liroth:freakshow",
     "category": "liroth:mob_index",
     "pages": [
     	{

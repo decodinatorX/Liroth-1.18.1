@@ -1,6 +1,7 @@
 {
     "name": "Vile Shark",
     "icon": "liroth:liroth_tear",
+    "advancement": "liroth:vile_shark",
     "category": "liroth:mob_index",
     "pages": [
     	{

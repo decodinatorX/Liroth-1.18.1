@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "liroth:blocks/tallpier_log_side",
-    "particle": "liroth:blocks/tallpier_log_side"
+    "all": "liroth:blocks/log_tallpier",
+    "particle": "liroth:blocks/log_tallpier"
   }
 }

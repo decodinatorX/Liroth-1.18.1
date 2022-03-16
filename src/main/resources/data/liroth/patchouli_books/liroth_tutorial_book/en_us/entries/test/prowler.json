@@ -1,6 +1,7 @@
 {
     "name": "Prowler",
     "icon": "liroth:liroth_tear",
+    "advancement": "liroth:prowler",
     "category": "liroth:mob_index",
     "pages": [
     	{

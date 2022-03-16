@@ -4,10 +4,16 @@ import com.decodinator.liroth.Liroth;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 
@@ -26,12 +32,29 @@ public class ForsakenCorpseEntity extends ZombieEntity {
         		.add(EntityAttributes.GENERIC_ARMOR, 4.0)
         		.add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
     }
-    
+
     @Override
     protected void convertInWater() {
-        this.convertTo(Liroth.FORSAKEN_CORPSE);
-        if (!this.isSilent() || this.isSilent()) {
-            this.world.syncWorldEvent(null, WorldEvents.ZOMBIE_CONVERTS_TO_DROWNED, this.getBlockPos(), 0);
-        }
+
+    }
+    
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_DROWNED_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_DROWNED_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_DROWNED_DEATH;
+    }
+
+    protected SoundEvent getStepSound() {
+        return SoundEvents.ENTITY_DROWNED_STEP;
     }
 }

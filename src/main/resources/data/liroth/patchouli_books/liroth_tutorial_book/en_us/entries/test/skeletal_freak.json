@@ -1,6 +1,7 @@
 {
     "name": "Skeletal Freak",
-    "icon": "liroth:liroth_soul_dust",
+    "icon": "liroth:liroth_bone",
+    "advancement": "liroth:skeletal_freak",
     "category": "liroth:mob_index",
     "pages": [
     	{

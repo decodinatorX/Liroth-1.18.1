@@ -1,6 +1,7 @@
 {
     "name": "Shade",
     "icon": "liroth:spinerios_stone_pebble",
+    "advancement": "liroth:shade",
     "category": "liroth:mob_index",
     "pages": [
     	{

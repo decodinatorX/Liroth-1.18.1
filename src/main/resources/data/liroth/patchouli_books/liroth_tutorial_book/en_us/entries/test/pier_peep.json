@@ -1,6 +1,7 @@
 {
     "name": "Pier Peep",
     "icon": "liroth:liroth_tear",
+    "advancement": "liroth:pier_peep",
     "category": "liroth:mob_index",
     "pages": [
     	{

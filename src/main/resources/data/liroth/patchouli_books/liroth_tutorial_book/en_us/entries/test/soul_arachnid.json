@@ -1,6 +1,7 @@
 {
     "name": "Soul Arachnid",
     "icon": "liroth:liroth_tear",
+    "advancement": "liroth:soul_arachnid",
     "category": "liroth:mob_index",
     "pages": [
     	{

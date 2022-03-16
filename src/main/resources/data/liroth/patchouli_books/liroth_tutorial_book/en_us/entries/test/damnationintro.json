@@ -1,55 +1,23 @@
 {
-    "name": "Damnation Dimension",
-    "icon": "liroth:charred_accessway_block",
-    "category": "liroth:liroth_dimension",
+    "name": "Damnation Thicket",
+    "icon": "liroth:damnation_log",
+    "advancement": "liroth:enter_damnation",
+    "category": "liroth:damnation_dimension",
     "pages": [
-	    	{
-    		"type": "text",
-    		"text": "Now we're onto the next part of the entire spill of things! Where we now need to create a Liroth Splitter. $(br) $(br)The machine is going to require a Liroth Gem and a Liroth Charge in order to operate however."
-    	},
     	{
-    	"type": "spotlight",
-    	"item": "liroth:damnation_soil",
-    	"title": "Lirothian Separator",
-    	"text": "The Lirothian Separator is a machine that will separate the Liroth Gem itself into three different dusts in the next entry once you've created the machine and place the gem with a charge in it."
-    	},
-    	{
-    	"type": "crafting",
-    	"recipe": "liroth:liroth_planks_recipe"
-    	},
-	{
-		"type": "multiblock",
-		"text": "The next dimension is built using that sand in the biome of scavengers.",
-		"name": "The Damnation Portal",
-		"multiblock": {
-			"pattern": [
-				[ 
-				"_AA_",
-				"A__A",
-				"A_0A",
-				"_AA_"
-				]
-			],
-			"mapping": {
-				"A": "liroth:charred_accessway_block",
-				"B": "minecraft:diamond_block",
-				"C": "minecraft:gold_block",
-				"D": "minecraft:emerald_block",
-				"E": "minecraft:redstone_block",
-				"F": "minecraft:lapis_block"
-			}
-		}
+		"type": "image",
+		"images": ["liroth:textures/gui/entries/damnation_thicket.png"],
+		"title": "Damnation Thicket",
+		"border": true,
+		"text": " This fungal mess is extremely dark and yet flourishing with life."
 	},
-			{
-		"type": "crafting",
-		"title": "Damned Teleporter",
-		"text": "The Damnation Teleporter is a device that requires less resources in general but there's the risk of suffocation... $(l)CRAFT THIS TO ADD MORE ENTRIES! THIS IS MANDATORY!",
-		"recipe": "liroth:liroth_planks_recipe"
-		},
-		{
-		"type": "smelting",
-		"text": "This is how you make the charge that would activate the framed portal however if need be.",
-		"recipe": "liroth:liroth_gem_smelting"
-		}
+        {
+            "type": "text",
+            "text": " The trees and the large shrooms that take up the land here are just bundling with life and with it the vile creatures of this land. The soil is as fungal as the fungallights that hang from the large shrooms that tower me. The smell would've probably have been quite fine if it weren't for that horrid lake of whatever sticky essence it is' existence."
+        },
+        {
+            "type": "text",
+            "text": " The caves are a different story however, although bustling with the same amount and practically the same type of life as the surface, it is much more collected and heavy down here, its almost impossible to breath with the amount of spores flying around. $(br)$(br) Almost."
+        } 
     ]
 }

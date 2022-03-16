@@ -6,12 +6,14 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
@@ -40,5 +42,24 @@ public class SkeletalFreakEntity extends SkeletonEntity {
 
     protected PersistentProjectileEntity createBeamProjectile(ItemStack arrow, float damageModifier) {
         return Liroth.createBeamProjectile(this, arrow, damageModifier);
+    }
+    
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_STRAY_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_STRAY_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_STRAY_DEATH;
+    }
+
+    protected SoundEvent getStepSound() {
+        return SoundEvents.ENTITY_WITHER_SKELETON_STEP;
     }
 }

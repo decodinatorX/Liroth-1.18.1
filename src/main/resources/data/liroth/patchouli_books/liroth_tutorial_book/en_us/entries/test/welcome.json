@@ -19,9 +19,9 @@
     	},
     	{ 
     		"type": "patchouli:quest",
-    		"trigger": "minecraft:story/mine_diamond",
-    		"title": "Mine Diamonds",
-    		"text": "Go and do that"
+    		"trigger": "liroth:mine_liroth_gem",
+    		"title": "Make/Mine Liroth Gem",
+    		"text": " We can create the gem via the olden blocks we've come across with the roses, or we can go beneath the earth to search for the gems embeded within the stone. I believe the gems should be discoverable within the other realms as well."
     	}
     ]
 }
