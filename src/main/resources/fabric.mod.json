@@ -23,6 +23,10 @@
     ],
     "client": [ 
     	"com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient"
+    ],
+      "rei": [
+    "com.decodinator.liroth.rei.LirothREIServerPlugin",
+    "com.decodinator.liroth.rei.LirothREIClientPlugin"
     ]
   },
   "mixins": [

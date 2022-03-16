@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "liroth:blocks/koolaw_door_bottom"
+    "layer0": "liroth:items/koolaw_door"
   }
 }

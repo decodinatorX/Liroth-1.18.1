@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "liroth:blocks/spiced_wood_door_bottom"
+    "layer0": "liroth:items/spiced_door"
   }
 }
