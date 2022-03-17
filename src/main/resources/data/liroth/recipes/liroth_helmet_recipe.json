@@ -1,29 +1,12 @@
 {
-  "group": "liroth",
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "012",
-    "3 5"
-  ],
-  "key": {
-    "0": {
-      "item": "liroth:liroth_gem"
-    },
-    "1": {
-      "item": "liroth:liroth_gem"
-    },
-    "2": {
-      "item": "liroth:liroth_gem"
-    },
-    "3": {
-      "item": "liroth:liroth_gem"
-    },
-    "5": {
-      "item": "liroth:liroth_gem"
-    }
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:netherite_helmet"
+  },
+  "addition": {
+    "item": "liroth:liroth_gem"
   },
   "result": {
-    "item": "liroth:liroth_helmet",
-    "count": 1
+    "item": "liroth:liroth_helmet"
   }
 }

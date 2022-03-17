@@ -445,7 +445,7 @@ public class Liroth implements ModInitializer {
 		      .configure(new OreFeatureConfig(
 		          OreConfiguredFeatures.STONE_ORE_REPLACEABLES,
 		          LirothBlocks.TOURMALINE_ORE.getDefaultState(),
-		          8)); // vein size
+		          3)); // vein size
 	  
 	  private static ConfiguredFeature<?, ?> OVERWORLD_DEEPSLATE_LIROTH_GEM_ORE_CONFIGURED_FEATURE = Feature.ORE
 		      .configure(new OreFeatureConfig(
@@ -472,9 +472,7 @@ public class Liroth implements ModInitializer {
 			      4)); // vein size
 	  
 	  public static PlacedFeature OVERWORLD_TOURMALINE_GEM_ORE_PLACED_FEATURE = OVERWORLD_TOURMALINE_GEM_ORE_CONFIGURED_FEATURE.withPlacement(
-		      CountPlacementModifier.of(5), // number of veins per chunk
-		      SquarePlacementModifier.of(), // spreading horizontally
-		      HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(64))); // height*/
+			  SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.fixed(8), YOffset.fixed(24)), BiomePlacementModifier.of());
 	  
 	  public static PlacedFeature OVERWORLD_DEEPSLATE_LIROTH_GEM_ORE_PLACED_FEATURE = OVERWORLD_DEEPSLATE_LIROTH_GEM_ORE_CONFIGURED_FEATURE.withPlacement(
 		      CountPlacementModifier.of(15), // number of veins per chunk
@@ -482,15 +480,13 @@ public class Liroth implements ModInitializer {
 		      HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(64))); // height
 	  
 	  public static PlacedFeature NETHER_LIROTH_GEM_ORE_PLACED_FEATURE = NETHER_LIROTH_GEM_ORE_CONFIGURED_FEATURE.withPlacement(
-			  Liroth.modifiersWithCount(10, PlacedFeatures.TEN_ABOVE_AND_BELOW_RANGE));
+			  Liroth.modifiersWithCount(5, PlacedFeatures.TEN_ABOVE_AND_BELOW_RANGE));
 	  
 	  public static PlacedFeature END_LIROTH_GEM_ORE_PLACED_FEATURE = END_LIROTH_GEM_ORE_CONFIGURED_FEATURE.withPlacement(
 			  Liroth.modifiersWithCount(10, PlacedFeatures.TEN_ABOVE_AND_BELOW_RANGE));
 
 	  public static PlacedFeature OVERWORLD_DEEPSLATE_TOURMALINE_GEM_ORE_PLACED_FEATURE = OVERWORLD_DEEPSLATE_TOURMALINE_GEM_ORE_CONFIGURED_FEATURE.withPlacement(
-		      CountPlacementModifier.of(15), // number of veins per chunk
-		      SquarePlacementModifier.of(), // spreading horizontally
-		      HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(64))); // height
+			  SquarePlacementModifier.of(), HeightRangePlacementModifier.trapezoid(YOffset.fixed(8), YOffset.fixed(24)), BiomePlacementModifier.of());
 	  
 	    private static List<PlacementModifier> modifiersWithCount(int count, PlacementModifier heightModifier) {
 	        return Liroth.modifiers(CountPlacementModifier.of(count), heightModifier);

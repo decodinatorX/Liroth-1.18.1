@@ -1,5 +1,5 @@
 {
-  "group": "liroth",
+
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "01",
@@ -7,20 +7,20 @@
   ],
   "key": {
     "0": {
-      "item": "liroth:petriifed_damnation_log"
+      "item": "liroth:petrified_damnation_log"
     },
     "1": {
-      "item": "liroth:petriifed_damnation_log"
+      "item": "liroth:petrified_damnation_log"
     },
     "2": {
-      "item": "liroth:petriifed_damnation_log"
+      "item": "liroth:petrified_damnation_log"
     },
     "3": {
-      "item": "liroth:petriifed_damnation_log"
+      "item": "liroth:petrified_damnation_log"
     }
   },
   "result": {
-    "item": "liroth:petriifed_damnation_wood",
+    "item": "liroth:petrified_damnation_wood",
     "count": 4
   }
 }

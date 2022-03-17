@@ -9,29 +9,32 @@
             "text": " My studies of this gem have proven to me that a higher tier of weaponry and armor exists."
         },
         {
-      		"type": "crafting",
+      		"type": "smithing",
       		"recipe": "liroth:liroth_sword_recipe",
       		"recipe2": "liroth:liroth_shovel_recipe"
     	},
     	{
-      		"type": "crafting",
+      		"type": "smithing",
       		"recipe": "liroth:liroth_pickaxe_recipe",
       		"recipe2": "liroth:liroth_axe_recipe"
     	},
         {
-      		"type": "crafting",
-      		"recipe": "liroth:liroth_hoe_recipe",
-      		"recipe2": "liroth:liroth_shield_recipe"
+      		"type": "smithing",
+      		"recipe": "liroth:liroth_hoe_recipe"
     	},
         {
-      		"type": "crafting",
+      		"type": "smithing",
       		"recipe": "liroth:liroth_helmet_recipe",
       		"recipe2": "liroth:liroth_chestplate_recipe"
     	},
         {
-      		"type": "crafting",
+      		"type": "smithing",
       		"recipe": "liroth:liroth_leggings_recipe",
       		"recipe2": "liroth:liroth_boots_recipe"
-    	}
+    	},
+    	{ 
+    		"type": "crafting",
+      		"recipe": "liroth:liroth_shield_recipe"
+      	}
     ]
 }

@@ -4729,7 +4729,7 @@
         "then_run": {
           "type": "minecraft:block",
           "result_state": {
-            "Name": "minecraft:deepslate",
+            "Name": "liroth:spinerios_stone",
             "Properties": {
               "axis": "y"
             }

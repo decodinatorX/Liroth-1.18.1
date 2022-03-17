@@ -10,7 +10,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "liroth:deepslate_liroth_gem_ore",
+              "name": "liroth:deepslate_tourmaline_ore",
               "conditions": [
                 {
                   "condition": "minecraft:match_tool",
@@ -29,7 +29,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "liroth:liroth_gem",
+              "name": "liroth:tourmaline",
               "functions": [
                 {
                   "function": "minecraft:apply_bonus",
