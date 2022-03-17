@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "liroth",
-  "version": "${version}",
+  "version": "1.0.0",
 
   "name": "Liroth",
-  "description": "cheese",
+  "description": "The Revamped Version of Liroth: The Mod Of Alternate Dimensions!",
   "authors": [
     "Decodinator"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/decodinatorX/Liroth-1.18.1"
   },
 
   "license": "CC0-1.0",
@@ -36,9 +36,14 @@
     "fabricloader": ">=0.12.12",
     "fabric": "*",
     "minecraft": "1.18.x",
-    "java": ">=17"
+    "java": ">=17",
+	"bclib": ">=1.2.0",
+    "cloth-config2": ">=6.0.42",
+    "no_null_processors": "*",
+    "feature_nbt_deadlock_be_gone": "*"
   },
   "suggests": {
-    "another-mod": "*"
+    "fabricskyboxes": ">=0.5.4",
+    "patchouli": ">=65"
   }
 }
