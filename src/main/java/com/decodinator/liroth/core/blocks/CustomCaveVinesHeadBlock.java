@@ -8,7 +8,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.CaveVines;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.entity.player.PlayerEntity;

@@ -23,24 +23,18 @@
     ],
     "client": [ 
     	"com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient"
-    ],
-      "rei": [
-    "com.decodinator.liroth.rei.LirothREIServerPlugin",
-    "com.decodinator.liroth.rei.LirothREIClientPlugin"
     ]
   },
   "mixins": [
     "liroth.mixins.json"
   ],
+
   "depends": {
-    "fabricloader": ">=0.12.12",
+    "fabricloader": ">=0.13.3",
     "fabric": "*",
-    "minecraft": "1.18.x",
+    "minecraft": "~1.18.2",
     "java": ">=17",
-	"bclib": ">=1.2.0",
-    "cloth-config2": ">=6.0.42",
-    "no_null_processors": "*",
-    "feature_nbt_deadlock_be_gone": "*"
+	"bclib": ">=1.4.3"
   },
   "suggests": {
     "fabricskyboxes": ">=0.5.4",

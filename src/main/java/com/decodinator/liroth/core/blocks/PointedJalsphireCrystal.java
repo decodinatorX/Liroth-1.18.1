@@ -273,7 +273,9 @@ Waterloggable {
 
     private static void spawnFallingBlock(BlockState state, ServerWorld world, BlockPos pos) {
         Vec3d vec3d = Vec3d.ofBottomCenter(pos);
-        FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(world, vec3d.x, vec3d.y, vec3d.z, state);
+        BlockPos.Mutable mutable = pos.mutableCopy();
+        BlockState blockState = state;
+        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, mutable, blockState);
         if (PointedJalsphireCrystal.isTip(state, true)) {
             int i = PointedJalsphireCrystal.getStalactiteSize(world, pos, 6);
             float f = 1.0f * (float)i;
