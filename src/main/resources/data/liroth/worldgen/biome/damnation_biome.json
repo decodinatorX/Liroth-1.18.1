@@ -2,7 +2,6 @@
   "temperature": 0.8,
   "downfall": 0.9,
   "precipitation": "rain",
-  "category": "swamp",
   "effects": {
     "sky_color": 328965,
     "fog_color": 78337,
@@ -35,14 +34,14 @@
     }
   },
   "spawners": {
-    "monster": [      
-    	{
+    "monster": [
+      {
         "type": "liroth:fungal_fiend",
         "weight": 100,
         "minCount": 4,
         "maxCount": 4
-      	}
-      ],
+      }
+    ],
     "creature": [],
     "ambient": [],
     "axolotls": [],

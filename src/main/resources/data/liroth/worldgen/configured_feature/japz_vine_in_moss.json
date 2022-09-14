@@ -4,9 +4,7 @@
     "direction": "down",
     "allowed_placement": {
       "type": "minecraft:matching_blocks",
-      "blocks": [
-        "minecraft:air"
-      ]
+      "blocks": "minecraft:air"
     },
     "prioritize_tip": true,
     "layers": [
@@ -80,8 +78,8 @@
                 "data": {
                   "Name": "liroth:japz_vines",
                   "Properties": {
-                    "berries": "false",
-                    "age": "0"
+                    "age": "0",
+                    "berries": "false"
                   }
                 }
               },
@@ -90,8 +88,8 @@
                 "data": {
                   "Name": "liroth:japz_vines",
                   "Properties": {
-                    "berries": "true",
-                    "age": "0"
+                    "age": "0",
+                    "berries": "true"
                   }
                 }
               }

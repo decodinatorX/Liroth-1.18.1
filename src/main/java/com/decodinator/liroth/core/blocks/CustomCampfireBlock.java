@@ -1,7 +1,7 @@
 package com.decodinator.liroth.core.blocks;
 
 import java.util.Optional;
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -86,7 +86,7 @@ implements Waterloggable {
         Optional<CampfireCookingRecipe> optional;
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CampfireBlockEntity && (optional = (campfireBlockEntity = (CampfireBlockEntity)blockEntity).getRecipeFor(itemStack = player.getStackInHand(hand))).isPresent()) {
-            if (!world.isClient && campfireBlockEntity.addItem(player.getAbilities().creativeMode ? itemStack.copy() : itemStack, optional.get().getCookTime())) {
+            if (!world.isClient && campfireBlockEntity.addItem(player, player.getAbilities().creativeMode ? itemStack.copy() : itemStack, optional.get().getCookTime())) {
                 player.incrementStat(Stats.INTERACT_WITH_CAMPFIRE);
                 return ActionResult.SUCCESS;
             }
@@ -203,7 +203,7 @@ implements Waterloggable {
     }
 
     public static void spawnSmokeParticle(World world, BlockPos pos, boolean isSignal, boolean lotsOfSmoke) {
-        Random random = world.getRandom();
+        net.minecraft.util.math.random.Random random = world.getRandom();
         DefaultParticleType defaultParticleType = isSignal ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
         world.addImportantParticle(defaultParticleType, true, (double)pos.getX() + 0.5 + random.nextDouble() / 3.0 * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + 0.5 + random.nextDouble() / 3.0 * (double)(random.nextBoolean() ? 1 : -1), 0.0, 0.07, 0.0);
         if (lotsOfSmoke) {

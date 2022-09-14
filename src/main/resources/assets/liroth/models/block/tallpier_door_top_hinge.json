@@ -1,5 +1,5 @@
 {
-  "parent": "block/door_top_rh",
+  "parent": "block/door_top_left_open",
   "textures": {
     "bottom": "liroth:blocks/tallpier_door_bottom",
     "top": "liroth:blocks/tallpier_door_top"

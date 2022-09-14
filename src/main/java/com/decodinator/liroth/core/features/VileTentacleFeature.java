@@ -1,6 +1,6 @@
 package com.decodinator.liroth.core.features;
 
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothBlocks;

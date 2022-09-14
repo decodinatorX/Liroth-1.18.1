@@ -21,10 +21,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.decodinator.liroth.entities.boats.ChestPierBoatEntity;
 import com.decodinator.liroth.entities.boats.PierBoatEntity;
+import com.decodinator.liroth.entities.boats.PierBoatEntity;
+import com.decodinator.liroth.entities.boats.PierBoatEntity;
+
 public class PierBoatItem
 extends Item {
-    private static final Predicate<Entity> RIDERS = EntityPredicates.EXCEPT_SPECTATOR.and(Entity::collides);
+    private static final Predicate<Entity> RIDERS = EntityPredicates.EXCEPT_SPECTATOR.and(Entity::canHit);
     private final boolean chest;
 
     public PierBoatItem(boolean chest, Item.Settings settings) {
@@ -58,7 +62,7 @@ extends Item {
             }
             if (!world.isClient) {
                 world.spawnEntity(PierBoatEntity);
-                world.emitGameEvent((Entity)user, GameEvent.ENTITY_PLACE, new BlockPos(hitResult.getPos()));
+                world.emitGameEvent((Entity)user, GameEvent.ENTITY_PLACE, hitResult.getPos());
                 if (!user.getAbilities().creativeMode) {
                     itemStack.decrement(1);
                 }
@@ -70,6 +74,9 @@ extends Item {
     }
 
     private PierBoatEntity createEntity(World world, HitResult hitResult) {
+        if (this.chest) {
+            return new ChestPierBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
+        }
         return new PierBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
     }
 }

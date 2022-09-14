@@ -30,14 +30,14 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.13.3",
+    "fabricloader": ">=0.14.9",
     "fabric": "*",
-    "minecraft": "~1.18.2",
+    "minecraft": "~1.19.2",
     "java": ">=17",
-	"bclib": ">=1.4.3"
+	"bclib": ">=2.0.20"
   },
   "suggests": {
-    "fabricskyboxes": ">=0.5.4",
-    "patchouli": ">=65"
+    "fabricskyboxes": ">=0.5.8",
+    "patchouli": ">=76"
   }
 }

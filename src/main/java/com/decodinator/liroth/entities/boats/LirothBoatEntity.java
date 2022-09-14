@@ -169,7 +169,7 @@ extends Entity {
         this.setDamageWobbleTicks(10);
         this.setDamageWobbleStrength(this.getDamageWobbleStrength() + amount * 10.0f);
         this.scheduleVelocityUpdate();
-        this.emitGameEvent(GameEvent.ENTITY_DAMAGED, source.getAttacker());
+        this.emitGameEvent(GameEvent.ENTITY_DAMAGE, source.getAttacker());
         boolean bl2 = bl = source.getAttacker() instanceof PlayerEntity && ((PlayerEntity)source.getAttacker()).getAbilities().creativeMode;
         if (bl || this.getDamageWobbleStrength() > 40.0f) {
             if (!bl && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
@@ -223,7 +223,7 @@ extends Entity {
     }
 
     @Override
-    public boolean collides() {
+    public boolean canHit() {
         return !this.isRemoved();
     }
 
@@ -325,7 +325,7 @@ extends Entity {
                         this.setVelocity(vec3d.add(0.0, -0.7, 0.0));
                         this.removeAllPassengers();
                     } else {
-                        this.setVelocity(vec3d.x, this.hasPassengerType((Entity entity) -> entity instanceof PlayerEntity) ? 2.7 : 0.6, vec3d.z);
+                        this.setVelocity(vec3d.x, this.hasPassenger((Entity entity) -> entity instanceof PlayerEntity) ? 2.7 : 0.6, vec3d.z);
                     }
                 }
                 this.onBubbleColumnSurface = false;

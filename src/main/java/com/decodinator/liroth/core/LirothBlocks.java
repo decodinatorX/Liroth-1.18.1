@@ -10,12 +10,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
-import ru.bclib.blocks.BaseChestBlock;
-import ru.bclib.blocks.BaseFurnaceBlock;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToIntFunction;
+
+import org.betterx.bclib.blocks.BaseChestBlock;
+import org.betterx.bclib.blocks.BaseFurnaceBlock;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.blocks.CustomAzaleaBlock;

@@ -7,15 +7,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.decodinator.liroth.core.LirothBlocks;
+import com.decodinator.liroth.core.LirothConfiguredFeatures;
+import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothFlattenables;
 import com.decodinator.liroth.core.LirothHoeables;
 import com.decodinator.liroth.core.LirothItems;
+import com.decodinator.liroth.core.LirothRenders;
 import com.decodinator.liroth.core.LirothStrippables;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
+import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreen;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreenHandler;
 import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorBlockEntity;
+import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreen;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreenHandler;
 import com.decodinator.liroth.core.features.DamnationVinesFeature;
 import com.decodinator.liroth.core.features.JalsphireCrystalClusterFeature;
@@ -56,9 +61,11 @@ import com.decodinator.liroth.entities.SoulArachnidEntity;
 import com.decodinator.liroth.entities.VileSharkEntity;
 import com.decodinator.liroth.entities.WarpEntity;
 import com.decodinator.liroth.entities.projectiles.BeamLaserProjectileEntity;
+import com.decodinator.liroth.mixin.access.ItemBlockRenderTypeAccess;
 import com.decodinator.liroth.world.generator.LirothStructures;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -202,6 +209,7 @@ public class Liroth implements ModInitializer {
             new Identifier("liroth", "fungal_fiend"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, FungalFiendEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2f)).build()
     );
+    
     
     public static final Item FUNGAL_FIEND_SPAWN_EGG = new SpawnEggItem(FUNGAL_FIEND, 1315860, 2031360, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
 	
@@ -433,7 +441,7 @@ public class Liroth implements ModInitializer {
 		    Registry.register(Registry.FEATURE, new Identifier("liroth", "petrified_crystal_cluster"), PETRIFIED_CRYSTAL_CLUSTER);
 		    Registry.register(Registry.FEATURE, new Identifier("liroth", "damnation_vines"), DAMNATION_VINES);
 		    Registry.register(Registry.FEATURE, new Identifier("liroth", "wilting_liroth_roses"), WILTING_LIROTH_ROSES);
-
+		   
 		    Registry.register(Registry.ITEM, new Identifier("liroth", "anomaly"), new BlockItem(LirothBlocks.ANOMALY, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 		    Registry.register(Registry.ITEM, new Identifier("liroth", "anomaly_block"), new BlockItem(LirothBlocks.ANOMALY_BLOCK, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
 		    Registry.register(Registry.ITEM, new Identifier("liroth", "blue_sand"), new BlockItem(LirothBlocks.BLUE_SAND, new Item.Settings().group(LirothCreativeTab.creativeBlocksTab)));
@@ -714,12 +722,19 @@ public class Liroth implements ModInitializer {
 //			Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "butterfly_spawn_egg"), BUTTERFLY_SPAWN_EGG);
 			
 	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_boat"), LirothItems.LIROTH_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "chest_liroth_boat"), LirothItems.CHEST_LIROTH_BOAT);
 	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "chest_damnation_boat"), LirothItems.CHEST_DAMNATION_BOAT);
 	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "spiced_boat"), LirothItems.SPICED_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "chest_spiced_boat"), LirothItems.CHEST_SPICED_BOAT);
 	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "pier_boat"), LirothItems.PIER_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "chest_pier_boat"), LirothItems.CHEST_PIER_BOAT);
 	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "japz_boat"), LirothItems.JAPZ_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "chest_japz_boat"), LirothItems.CHEST_JAPZ_BOAT);
 	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "koolaw_boat"), LirothItems.KOOLAW_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "chest_koolaw_boat"), LirothItems.CHEST_KOOLAW_BOAT);
 	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "petrified_boat"), LirothItems.PETRIFIED_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "chest_petrified_boat"), LirothItems.CHEST_PETRIFIED_BOAT);
 
 	        Registry.register(Registry.SOUND_EVENT, this.LIROTH_BLASTER_FIRING_SOUND_ID, LIROTH_BLASTER_FIRING_SOUND_EVENT);
 	        Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_DEATH_SOUND_ID, FUNGAL_FIEND_DEATH_SOUND_EVENT);
@@ -746,6 +761,7 @@ public class Liroth implements ModInitializer {
 			Registry.register(Registry.BLOCK_ENTITY_TYPE, id("dimensional_communicator"), DIMENSIONAL_COMMUNICATOR_ENTITY);*/
 		    
 		    LirothRegistries.registerItems();
+		    LirothRegistries.registerEntities();
 		    LirothRegistries.registerFuels();
 	        Liroth.threadSafeLoadFinish();
 
@@ -762,7 +778,7 @@ public class Liroth implements ModInitializer {
 			MOLTEN_SPINERIOS_BUCKET = Registry.register(Registry.ITEM, new Identifier(MOD_ID, "molten_spinerios_bucket"), 
 		        new BucketItem(MOLTEN_SPINERIOS_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(LirothCreativeTab.creativeItemsTab)));
 			MOLTEN_SPINERIOS = Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "molten_spinerios"), new SchluckedFluidBlock(MOLTEN_SPINERIOS_STILL, AbstractBlock.Settings.copy(Blocks.LAVA)){});
-
+					
 			CustomPortalBuilder.beginPortal()  
 		    .frameBlock(LirothBlocks.DIMENSIONAL_COMMUNICATOR)
 	        .customPortalBlock(LirothBlocks.LIROTH_DIMENSION_PORTAL)
@@ -818,6 +834,12 @@ public class Liroth implements ModInitializer {
 	        	Liroth.LOGGER.debug("Liroth: Registering items...");
 	        	LirothItems.init();
 	            Liroth.LOGGER.info("Liroth: Items registered!");
+	        }
+	        
+	        public static void registerEntities() {
+	        	Liroth.LOGGER.debug("Liroth: Registering entities...");
+	        	LirothEntities.RegisterEntities();
+	            Liroth.LOGGER.info("Liroth: Entities registered!");
 	        }
 	        
 	        public static void registerFuels() {

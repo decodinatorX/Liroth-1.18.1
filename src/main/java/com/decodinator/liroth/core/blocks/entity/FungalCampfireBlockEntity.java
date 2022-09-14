@@ -1,7 +1,7 @@
 package com.decodinator.liroth.core.blocks.entity;
 
 import java.util.Optional;
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 import com.decodinator.liroth.Liroth;
 

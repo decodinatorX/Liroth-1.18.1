@@ -30,9 +30,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -146,7 +144,7 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
 
     @Override
     public Text getDisplayName() {
-        return new TranslatableText("container.quantum_extractor");
+        return Text.translatable("container.quantum_extractor");
     }
 
     @Nullable

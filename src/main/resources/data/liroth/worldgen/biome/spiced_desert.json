@@ -2,7 +2,6 @@
   "temperature": 0.5,
   "downfall": 0,
   "precipitation": "none",
-  "category": "savanna",
   "effects": {
     "sky_color": 16755829,
     "fog_color": 16772290,
@@ -25,17 +24,16 @@
   },
   "spawners": {
     "monster": [
-        {
+      {
         "type": "liroth:soul_arachnid",
         "weight": 100,
         "minCount": 4,
         "maxCount": 4
-      	}
+      }
     ],
     "creature": [],
     "ambient": [],
-    "water_creature": [
-    ],
+    "water_creature": [],
     "water_ambient": [],
     "misc": []
   },
@@ -63,7 +61,7 @@
       "liroth:lirothian_cobalt_ore",
       "liroth:lirothian_petroleum_ore",
       "liroth:charred_lirothian_liroth_gem_ore",
-	  "liroth:liroth_bone_claw",
+      "liroth:liroth_bone_claw",
       "liroth:liroth_bone_mushroom",
       "liroth:liroth_bone_tree",
       "liroth:vile_tentacle"

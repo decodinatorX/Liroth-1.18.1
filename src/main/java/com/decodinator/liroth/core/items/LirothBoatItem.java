@@ -3,6 +3,7 @@ package com.decodinator.liroth.core.items;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.decodinator.liroth.entities.boats.ChestLirothBoatEntity;
 import com.decodinator.liroth.entities.boats.LirothBoatEntity;
 
 import net.minecraft.entity.Entity;
@@ -15,7 +16,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
@@ -24,7 +24,7 @@ import net.minecraft.world.event.GameEvent;
 
 public class LirothBoatItem
 extends Item {
-    private static final Predicate<Entity> RIDERS = EntityPredicates.EXCEPT_SPECTATOR.and(Entity::collides);
+    private static final Predicate<Entity> RIDERS = EntityPredicates.EXCEPT_SPECTATOR.and(Entity::canHit);
     private final boolean chest;
 
     public LirothBoatItem(boolean chest, Item.Settings settings) {
@@ -58,7 +58,7 @@ extends Item {
             }
             if (!world.isClient) {
                 world.spawnEntity(LirothBoatEntity);
-                world.emitGameEvent((Entity)user, GameEvent.ENTITY_PLACE, new BlockPos(hitResult.getPos()));
+                world.emitGameEvent((Entity)user, GameEvent.ENTITY_PLACE, hitResult.getPos());
                 if (!user.getAbilities().creativeMode) {
                     itemStack.decrement(1);
                 }
@@ -70,6 +70,9 @@ extends Item {
     }
 
     private LirothBoatEntity createEntity(World world, HitResult hitResult) {
+        if (this.chest) {
+            return new ChestLirothBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
+        }
         return new LirothBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
     }
 }

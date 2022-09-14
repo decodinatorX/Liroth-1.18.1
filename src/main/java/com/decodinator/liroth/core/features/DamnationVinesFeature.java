@@ -1,7 +1,7 @@
 package com.decodinator.liroth.core.features;
 
 import com.mojang.serialization.Codec;
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

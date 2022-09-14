@@ -3,7 +3,7 @@ package com.decodinator.liroth.core.blocks;
 import com.decodinator.liroth.core.LirothBlocks;
 import com.google.common.annotations.VisibleForTesting;
 import java.util.Optional;
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 import java.util.function.Predicate;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;
@@ -214,11 +214,6 @@ Waterloggable {
     @Override
     public boolean isShapeFullCube(BlockState state, BlockView world, BlockPos pos) {
         return false;
-    }
-
-    @Override
-    public AbstractBlock.OffsetType getOffsetType() {
-        return AbstractBlock.OffsetType.XZ;
     }
 
     @Override
@@ -505,7 +500,7 @@ Waterloggable {
 
     private static Fluid getDripFluid(World world, Fluid fluid) {
         if (fluid.matchesType(Fluids.EMPTY)) {
-            return world.getDimension().isUltrawarm() ? Fluids.LAVA : Fluids.WATER;
+            return world.getDimension().ultrawarm() ? Fluids.LAVA : Fluids.WATER;
         }
         return fluid;
     }
