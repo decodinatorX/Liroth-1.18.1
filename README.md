@@ -1,13 +1,3 @@
-<<<<<< 1.18.2
-# Fabric Example Mod
-
-## Setup
-
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
 ======
 Two Years Ago, I sent in a mod to CurseForge that would send me down a slippery slope of understanding Minecraft Mods. From the reason of why people weren't going about certain tasks such as making a certain BlockEntity or creating a whole new dimension with randomly generating structures, or possibly creating a complex boss through the code they were so familiar with. This mod offers new BlockEntities, new Dimensions and structures, no bosses however, as that is a difficult task in of itself to make a unique boss that doesn't directly copy from the vanilla game itself, of course the mod does copy a lot of vanilla code, after all it is a modification of the game and not it's own game. But with this small backstory of this mod out of the way, it is officially time to get to the introduction/description of what this mod is and how it has changed from it's Legacy version.
 
