@@ -1,6 +1,6 @@
 package com.decodinator.liroth.core.helpers;
 
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.minecraft.client.MinecraftClient;
@@ -21,7 +21,7 @@ public class PotestiumHelmetRenderer implements ArmorRenderer {
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
         if (potestiumHelmetModel == null) {
-        	potestiumHelmetModel = new PotestiumHelmetModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(LirothFluidRenderingModClient.MODEL_POTESTIUM_HELMET_LAYER));;
+        	potestiumHelmetModel = new PotestiumHelmetModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(LirothClient.MODEL_POTESTIUM_HELMET_LAYER));;
         }
 
         contextModel.setAttributes(potestiumHelmetModel);

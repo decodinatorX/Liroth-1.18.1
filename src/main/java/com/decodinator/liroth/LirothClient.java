@@ -1,10 +1,11 @@
-package com.decodinator.liroth.core.fluids;
+package com.decodinator.liroth;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.WhiteAshParticle;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -15,14 +16,15 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.UUID;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothItems;
+import com.decodinator.liroth.core.LirothRenders;
 import com.decodinator.liroth.core.helpers.PotestiumHelmetModel;
 import com.decodinator.liroth.core.helpers.PotestiumHelmetRenderer;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntityRenderer;
+import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreen;
 import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlockEntityRenderer;
-
+import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreen;
 import com.decodinator.liroth.entities.renderers.BeamLaserProjectileEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ButterflyEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ButterflyModel;
@@ -48,6 +50,7 @@ import com.decodinator.liroth.entities.renderers.VileSharkEntityRenderer;
 import com.decodinator.liroth.entities.renderers.VileSharkModel;
 import com.decodinator.liroth.entities.renderers.WarpEntityRenderer;
 import com.decodinator.liroth.entities.renderers.WarpModel;
+import com.decodinator.liroth.mixin.access.ItemBlockRenderTypeAccess;
 import com.decodinator.liroth.entities.EntitySpawnPacket;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -59,10 +62,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 
-public class LirothFluidRenderingModClient implements ClientModInitializer {
+public class LirothClient implements ClientModInitializer {
 	public static final Identifier PacketID = new Identifier(Liroth.MOD_ID, "spawn_packet");
 
     public static final EntityModelLayer MODEL_LIROTH_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "liroth_boat"), "main");
@@ -88,6 +92,15 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		
+        ScreenRegistry.register(Liroth.LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
+        ScreenRegistry.register(Liroth.QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
+				
+        LirothRenders.renderCutOuts(blockRenderTypeMap -> ItemBlockRenderTypeAccess.getTypeByBlock().putAll(blockRenderTypeMap));
+
+		EntityRendererRegistry.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
+		new FlyingItemEntityRenderer(context));
+		LirothClient.receiveEntityPacket();
 
 		FluidRenderHandlerRegistry.INSTANCE.register(Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING, new SimpleFluidRenderHandler(
 				new Identifier("liroth:blocks/liroth_fluid_still"),
@@ -95,6 +108,7 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
 		));
 		
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING);
+
 		
 		FluidRenderHandlerRegistry.INSTANCE.register(Liroth.MOLTEN_SPINERIOS_STILL, Liroth.MOLTEN_SPINERIOS_FLOWING, new SimpleFluidRenderHandler(
 				new Identifier("liroth:blocks/molten_spinerios_still"),
@@ -152,7 +166,7 @@ public class LirothFluidRenderingModClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(MODEL_PIER_PEEP_LAYER, PierPeepModel::getTexturedModelData);
         
         EntityRendererRegistry.register(Liroth.SHADE, (context) -> {
-            return new ShadeEntityRenderer(context, new ShadeModel(context.getPart(LirothFluidRenderingModClient.MODEL_SHADE_LAYER)), 0.5f);
+            return new ShadeEntityRenderer(context, new ShadeModel(context.getPart(LirothClient.MODEL_SHADE_LAYER)), 0.5f);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_SHADE_LAYER, ShadeModel::getTexturedModelData);

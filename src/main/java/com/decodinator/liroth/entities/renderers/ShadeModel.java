@@ -1,7 +1,7 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.WarpEntity;
 import com.decodinator.liroth.entities.renderers.FungalFiendModel;

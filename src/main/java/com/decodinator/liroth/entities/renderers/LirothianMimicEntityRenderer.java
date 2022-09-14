@@ -1,7 +1,7 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.LirothianMimicEntity;
 import com.decodinator.liroth.entities.SoulArachnidEntity;
@@ -20,7 +20,7 @@ import net.minecraft.util.Identifier;
 public class LirothianMimicEntityRenderer extends MobEntityRenderer<LirothianMimicEntity, LirothianMimicModel<LirothianMimicEntity>> {
 
     public LirothianMimicEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new LirothianMimicModel(context.getPart(LirothFluidRenderingModClient.MODEL_LIROTHIAN_MIMIC_LAYER)), 0.5f);
+        super(context, new LirothianMimicModel(context.getPart(LirothClient.MODEL_LIROTHIAN_MIMIC_LAYER)), 0.5f);
     }
  
     @Override

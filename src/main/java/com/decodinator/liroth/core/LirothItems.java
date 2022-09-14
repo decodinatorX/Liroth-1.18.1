@@ -17,16 +17,23 @@ import com.decodinator.liroth.core.items.BeamItem;
 import com.decodinator.liroth.core.items.CustomAxeItem;
 import com.decodinator.liroth.core.items.CustomHoeItem;
 import com.decodinator.liroth.core.items.CustomPickaxeItem;
+import com.decodinator.liroth.core.items.DamnationBoatItem;
+import com.decodinator.liroth.core.items.JapzBoatItem;
 import com.decodinator.liroth.core.items.KeyItem;
+import com.decodinator.liroth.core.items.KoolawBoatItem;
 import com.decodinator.liroth.core.items.LirothBlaster;
+import com.decodinator.liroth.core.items.LirothBoatItem;
 import com.decodinator.liroth.core.items.LirothShield;
 import com.decodinator.liroth.core.items.LuxArmorItem;
 import com.decodinator.liroth.core.items.LuxLirothShield;
+import com.decodinator.liroth.core.items.PetrifiedBoatItem;
+import com.decodinator.liroth.core.items.PierBoatItem;
 import com.decodinator.liroth.core.items.PotestiumArmorItem;
 import com.decodinator.liroth.core.items.QuantumArmorItem;
 import com.decodinator.liroth.core.items.QuantumLirothShield;
 import com.decodinator.liroth.core.items.SalemArmorItem;
 import com.decodinator.liroth.core.items.SalemLirothShield;
+import com.decodinator.liroth.core.items.SpicedBoatItem;
 
 public class LirothItems {
 	
@@ -61,6 +68,13 @@ public class LirothItems {
 
     public static final Item LIROTH_BLASTER = createRangedItem(new LirothBlaster(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "liroth_blaster");
     
+    public static final LirothBoatItem LIROTH_BOAT = new LirothBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final DamnationBoatItem DAMNATION_BOAT = new DamnationBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final SpicedBoatItem SPICED_BOAT = new SpicedBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final PierBoatItem PIER_BOAT = new PierBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final JapzBoatItem JAPZ_BOAT = new JapzBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final KoolawBoatItem KOOLAW_BOAT = new KoolawBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final PetrifiedBoatItem PETRIFIED_BOAT = new PetrifiedBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     
     public static final Item LIROTH_BONE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_bone");
 

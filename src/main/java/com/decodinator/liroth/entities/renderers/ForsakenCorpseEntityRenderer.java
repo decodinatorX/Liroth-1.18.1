@@ -1,7 +1,7 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.renderers.FungalFiendModel;
@@ -19,7 +19,7 @@ import net.minecraft.util.Identifier;
 public class ForsakenCorpseEntityRenderer extends MobEntityRenderer<ForsakenCorpseEntity, ForsakenCorpseModel<ForsakenCorpseEntity>> {
 
     public ForsakenCorpseEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new ForsakenCorpseModel(context.getPart(LirothFluidRenderingModClient.MODEL_FORSAKEN_CORPSE_LAYER)), 0.5f);
+        super(context, new ForsakenCorpseModel(context.getPart(LirothClient.MODEL_FORSAKEN_CORPSE_LAYER)), 0.5f);
         this.addFeature(new ForsakenCorpseFaceFeatureRenderer<ForsakenCorpseEntity>(this));
     }
  

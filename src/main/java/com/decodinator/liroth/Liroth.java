@@ -10,15 +10,12 @@ import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.LirothFlattenables;
 import com.decodinator.liroth.core.LirothHoeables;
 import com.decodinator.liroth.core.LirothItems;
-import com.decodinator.liroth.core.LirothRenders;
 import com.decodinator.liroth.core.LirothStrippables;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
-import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreen;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreenHandler;
 import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorBlockEntity;
-import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreen;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreenHandler;
 import com.decodinator.liroth.core.features.DamnationVinesFeature;
 import com.decodinator.liroth.core.features.JalsphireCrystalClusterFeature;
@@ -29,7 +26,6 @@ import com.decodinator.liroth.core.features.ObsidianSpikeFeature;
 import com.decodinator.liroth.core.features.PetrifiedCrystalClusterFeature;
 import com.decodinator.liroth.core.features.VileTentacleFeature;
 import com.decodinator.liroth.core.fluids.LirothFluid;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
 import com.decodinator.liroth.core.fluids.MoltenSpinerios;
 import com.decodinator.liroth.core.fluids.SchluckedFluidBlock;
 import com.decodinator.liroth.core.helpers.AnsalumLirothArmorMaterial;
@@ -60,16 +56,9 @@ import com.decodinator.liroth.entities.SoulArachnidEntity;
 import com.decodinator.liroth.entities.VileSharkEntity;
 import com.decodinator.liroth.entities.WarpEntity;
 import com.decodinator.liroth.entities.projectiles.BeamLaserProjectileEntity;
-import com.decodinator.liroth.mixin.access.ItemBlockRenderTypeAccess;
 import com.decodinator.liroth.world.generator.LirothStructures;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
-import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -80,8 +69,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -99,7 +86,6 @@ import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.WallStandingBlockItem;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
@@ -727,9 +713,13 @@ public class Liroth implements ModInitializer {
 			Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "lirothian_mimic_spawn_egg"), LIROTHIAN_MIMIC_SPAWN_EGG);
 //			Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "butterfly_spawn_egg"), BUTTERFLY_SPAWN_EGG);
 			
-			EntityRendererRegistry.INSTANCE.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
-				new FlyingItemEntityRenderer(context));
-			LirothFluidRenderingModClient.receiveEntityPacket();
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_boat"), LirothItems.LIROTH_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "spiced_boat"), LirothItems.SPICED_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "pier_boat"), LirothItems.PIER_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "japz_boat"), LirothItems.JAPZ_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "koolaw_boat"), LirothItems.KOOLAW_BOAT);
+	        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "petrified_boat"), LirothItems.PETRIFIED_BOAT);
 
 	        Registry.register(Registry.SOUND_EVENT, this.LIROTH_BLASTER_FIRING_SOUND_ID, LIROTH_BLASTER_FIRING_SOUND_EVENT);
 	        Registry.register(Registry.SOUND_EVENT, this.FUNGAL_FIEND_DEATH_SOUND_ID, FUNGAL_FIEND_DEATH_SOUND_EVENT);
@@ -755,7 +745,6 @@ public class Liroth implements ModInitializer {
 			Registry.register(Registry.ITEM, id("dimensional_communicator"), DIMENSIONAL_COMMUNICATOR_ITEM);
 			Registry.register(Registry.BLOCK_ENTITY_TYPE, id("dimensional_communicator"), DIMENSIONAL_COMMUNICATOR_ENTITY);*/
 		    
-	        LirothRenders.renderCutOuts(blockRenderTypeMap -> ItemBlockRenderTypeAccess.getTypeByBlock().putAll(blockRenderTypeMap));
 		    LirothRegistries.registerItems();
 		    LirothRegistries.registerFuels();
 	        Liroth.threadSafeLoadFinish();
@@ -773,30 +762,7 @@ public class Liroth implements ModInitializer {
 			MOLTEN_SPINERIOS_BUCKET = Registry.register(Registry.ITEM, new Identifier(MOD_ID, "molten_spinerios_bucket"), 
 		        new BucketItem(MOLTEN_SPINERIOS_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(LirothCreativeTab.creativeItemsTab)));
 			MOLTEN_SPINERIOS = Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "molten_spinerios"), new SchluckedFluidBlock(MOLTEN_SPINERIOS_STILL, AbstractBlock.Settings.copy(Blocks.LAVA)){});
-		
-			FluidRenderHandlerRegistry.INSTANCE.register(Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING, new SimpleFluidRenderHandler(
-					new Identifier("liroth:blocks/liroth_fluid_still"),
-					new Identifier("liroth:blocks/liroth_fluid_flowing")
-			));
-			
-			BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING);
 
-			
-			FluidRenderHandlerRegistry.INSTANCE.register(Liroth.MOLTEN_SPINERIOS_STILL, Liroth.MOLTEN_SPINERIOS_FLOWING, new SimpleFluidRenderHandler(
-					new Identifier("liroth:blocks/molten_spinerios_still"),
-					new Identifier("liroth:blocks/molten_spinerios_flowing")
-			));
-			
-			ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
-				registry.register(new Identifier("liroth:blocks/liroth_fluid_still"));
-				registry.register(new Identifier("liroth:blocks/liroth_fluid_flowing"));
-				registry.register(new Identifier("liroth:blocks/molten_spinerios_still"));
-				registry.register(new Identifier("liroth:blocks/molten_spinerios_flowing"));
-			});
-			
-	        ScreenRegistry.register(LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
-	        ScreenRegistry.register(QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
-					
 			CustomPortalBuilder.beginPortal()  
 		    .frameBlock(LirothBlocks.DIMENSIONAL_COMMUNICATOR)
 	        .customPortalBlock(LirothBlocks.LIROTH_DIMENSION_PORTAL)

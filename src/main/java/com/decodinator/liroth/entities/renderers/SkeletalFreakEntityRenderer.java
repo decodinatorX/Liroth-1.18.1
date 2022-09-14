@@ -1,7 +1,7 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.SkeletalFreakEntity;
@@ -20,7 +20,7 @@ import net.minecraft.util.Identifier;
 public class SkeletalFreakEntityRenderer extends MobEntityRenderer<SkeletalFreakEntity, SkeletalFreakModel<SkeletalFreakEntity>> {
 
     public SkeletalFreakEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new SkeletalFreakModel(context.getPart(LirothFluidRenderingModClient.MODEL_SKELETAL_FREAK_LAYER)), 0.5f);
+        super(context, new SkeletalFreakModel(context.getPart(LirothClient.MODEL_SKELETAL_FREAK_LAYER)), 0.5f);
         this.addFeature(new SkeletalFreakFaceFeatureRenderer<SkeletalFreakEntity>(this));
     }
  
