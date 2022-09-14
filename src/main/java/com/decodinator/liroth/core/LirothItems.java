@@ -17,6 +17,7 @@ import com.decodinator.liroth.core.items.BeamItem;
 import com.decodinator.liroth.core.items.CustomAxeItem;
 import com.decodinator.liroth.core.items.CustomHoeItem;
 import com.decodinator.liroth.core.items.CustomPickaxeItem;
+import com.decodinator.liroth.core.items.CustomScytheItem;
 import com.decodinator.liroth.core.items.DamnationBoatItem;
 import com.decodinator.liroth.core.items.JapzBoatItem;
 import com.decodinator.liroth.core.items.KeyItem;
@@ -69,12 +70,19 @@ public class LirothItems {
     public static final Item LIROTH_BLASTER = createRangedItem(new LirothBlaster(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "liroth_blaster");
     
     public static final LirothBoatItem LIROTH_BOAT = new LirothBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final LirothBoatItem CHEST_LIROTH_BOAT = new LirothBoatItem(true, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     public static final DamnationBoatItem DAMNATION_BOAT = new DamnationBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final DamnationBoatItem CHEST_DAMNATION_BOAT = new DamnationBoatItem(true, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     public static final SpicedBoatItem SPICED_BOAT = new SpicedBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final SpicedBoatItem CHEST_SPICED_BOAT = new SpicedBoatItem(true, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     public static final PierBoatItem PIER_BOAT = new PierBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final PierBoatItem CHEST_PIER_BOAT = new PierBoatItem(true, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     public static final JapzBoatItem JAPZ_BOAT = new JapzBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final JapzBoatItem CHEST_JAPZ_BOAT = new JapzBoatItem(true, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     public static final KoolawBoatItem KOOLAW_BOAT = new KoolawBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final KoolawBoatItem CHEST_KOOLAW_BOAT = new KoolawBoatItem(true, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     public static final PetrifiedBoatItem PETRIFIED_BOAT = new PetrifiedBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
+    public static final PetrifiedBoatItem CHEST_PETRIFIED_BOAT = new PetrifiedBoatItem(true, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     
     public static final Item LIROTH_BONE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_bone");
 
@@ -173,7 +181,7 @@ public class LirothItems {
     public static final Item POTESTIUM_LIROTH_LEGGINGS = createArmorItem(new PotestiumArmorItem(Liroth.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_liroth_leggings");
     public static final Item POTESTIUM_LIROTH_BOOTS = createArmorItem(new PotestiumArmorItem(Liroth.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_liroth_boots");
     
-    public static final Item POTESTIUM_SCYTHE = createToolItem(new CustomHoeItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, 3, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "potestium_scythe");
+    public static final Item POTESTIUM_SCYTHE = createToolItem(new CustomScytheItem(Liroth.QUANTUM_LIROTH_TOOL_MATERIAL, 3, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "potestium_scythe");
     
     public static final Item LIROTH_SWORD = createToolItem(new SwordItem(Liroth.LIROTH_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_sword");
     public static final Item LIROTH_SHOVEL = createToolItem(new ShovelItem(Liroth.LIROTH_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_shovel");

@@ -2,7 +2,6 @@
   "type": "liroth:jalsphire_plains",
   "generator": {
     "type": "minecraft:noise",
-    "seed": 1522850101,
     "settings": "liroth:jalsphire_plains",
     "biome_source": {
       "type": "minecraft:fixed",

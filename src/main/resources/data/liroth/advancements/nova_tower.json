@@ -1,5 +1,4 @@
 {
-  "parent": "liroth:enter_liroth",
   "display": {
     "icon": {
       "item": "liroth:gleemstone"
@@ -15,13 +14,22 @@
     "announce_to_chat": true,
     "hidden": false
   },
+  "parent": "liroth:enter_liroth",
   "criteria": {
     "nova_tower": {
       "trigger": "minecraft:location",
       "conditions": {
-        "location": {
-          "feature": "liroth:nova_tower"
-        }
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "liroth:nova_tower"
+              }
+            }
+          }
+        ]
       }
     }
   },

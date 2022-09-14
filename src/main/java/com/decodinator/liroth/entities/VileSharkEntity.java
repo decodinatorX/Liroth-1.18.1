@@ -93,11 +93,6 @@ public class VileSharkEntity extends WaterCreatureEntity {
     protected EntityNavigation createNavigation(World world) {
         return new SwimNavigation(this, world);
     }
-    
-    @Override
-    protected int getXpToDrop(PlayerEntity player) {
-        return 1 + this.world.random.nextInt(3);
-    }
 
     protected void tickWaterBreathingAir(int air) {
         if (this.isAlive() && !this.isInsideWaterOrBubbleColumn()) {

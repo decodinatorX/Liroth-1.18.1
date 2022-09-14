@@ -1,5 +1,5 @@
 {
-  "parent": "block/door_top",
+  "parent": "block/door_top_left",
   "textures": {
     "bottom": "liroth:blocks/japz_door_bottom",
     "top": "liroth:blocks/japz_door_top"

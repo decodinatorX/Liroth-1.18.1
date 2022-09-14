@@ -1,8 +1,21 @@
 {
   "type": "minecraft:disk",
   "config": {
-    "state": {
-      "Name": "minecraft:gravel"
+    "state_provider": {
+      "fallback": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:gravel"
+        }
+      },
+      "rules": []
+    },
+    "target": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "liroth:liroth_dirt",
+        "liroth:liroth_grass_block"
+      ]
     },
     "radius": {
       "type": "minecraft:uniform",
@@ -11,14 +24,6 @@
         "max_inclusive": 5
       }
     },
-    "half_height": 2,
-    "targets": [
-      {
-        "Name": "liroth:liroth_dirt"
-      },
-      {
-        "Name": "liroth:liroth_grass_block"
-      }
-    ]
+    "half_height": 2
   }
 }

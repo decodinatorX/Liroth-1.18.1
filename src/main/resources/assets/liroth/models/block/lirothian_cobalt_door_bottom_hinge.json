@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/door_bottom_rh",
+  "parent": "minecraft:block/door_bottom_left_open",
   "textures": {
     "top": "liroth:blocks/lirothian_cobalt_door_top",
     "bottom": "liroth:blocks/lirothian_cobalt_door_bottom"

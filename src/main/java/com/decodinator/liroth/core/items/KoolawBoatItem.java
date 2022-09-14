@@ -21,11 +21,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.decodinator.liroth.entities.boats.ChestKoolawBoatEntity;
+import com.decodinator.liroth.entities.boats.KoolawBoatEntity;
+import com.decodinator.liroth.entities.boats.KoolawBoatEntity;
 import com.decodinator.liroth.entities.boats.KoolawBoatEntity;
 
 public class KoolawBoatItem
 extends Item {
-    private static final Predicate<Entity> RIDERS = EntityPredicates.EXCEPT_SPECTATOR.and(Entity::collides);
+    private static final Predicate<Entity> RIDERS = EntityPredicates.EXCEPT_SPECTATOR.and(Entity::canHit);
     private final boolean chest;
 
     public KoolawBoatItem(boolean chest, Item.Settings settings) {
@@ -59,7 +62,7 @@ extends Item {
             }
             if (!world.isClient) {
                 world.spawnEntity(KoolawBoatEntity);
-                world.emitGameEvent((Entity)user, GameEvent.ENTITY_PLACE, new BlockPos(hitResult.getPos()));
+                world.emitGameEvent((Entity)user, GameEvent.ENTITY_PLACE, hitResult.getPos());
                 if (!user.getAbilities().creativeMode) {
                     itemStack.decrement(1);
                 }
@@ -71,6 +74,9 @@ extends Item {
     }
 
     private KoolawBoatEntity createEntity(World world, HitResult hitResult) {
+        if (this.chest) {
+            return new ChestKoolawBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
+        }
         return new KoolawBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
     }
 }

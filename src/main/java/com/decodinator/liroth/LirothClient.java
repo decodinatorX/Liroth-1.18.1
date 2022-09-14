@@ -1,19 +1,24 @@
 package com.decodinator.liroth;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.WhiteAshParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 
+import java.util.Map;
 import java.util.UUID;
 
 import com.decodinator.liroth.core.LirothEntities;
@@ -52,6 +57,35 @@ import com.decodinator.liroth.entities.renderers.WarpEntityRenderer;
 import com.decodinator.liroth.entities.renderers.WarpModel;
 import com.decodinator.liroth.mixin.access.ItemBlockRenderTypeAccess;
 import com.decodinator.liroth.entities.EntitySpawnPacket;
+import com.decodinator.liroth.entities.boats.ChestDamnationBoatEntityModel;
+import com.decodinator.liroth.entities.boats.ChestDamnationBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.ChestJapzBoatEntityModel;
+import com.decodinator.liroth.entities.boats.ChestJapzBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.ChestKoolawBoatEntityModel;
+import com.decodinator.liroth.entities.boats.ChestKoolawBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.ChestLirothBoatEntityModel;
+import com.decodinator.liroth.entities.boats.ChestLirothBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.ChestPetrifiedBoatEntityModel;
+import com.decodinator.liroth.entities.boats.ChestPetrifiedBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.ChestPierBoatEntityModel;
+import com.decodinator.liroth.entities.boats.ChestPierBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.ChestSpicedBoatEntityModel;
+import com.decodinator.liroth.entities.boats.ChestSpicedBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.DamnationBoatEntityModel;
+import com.decodinator.liroth.entities.boats.DamnationBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.JapzBoatEntityModel;
+import com.decodinator.liroth.entities.boats.JapzBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.KoolawBoatEntityModel;
+import com.decodinator.liroth.entities.boats.KoolawBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.LirothBoatEntity;
+import com.decodinator.liroth.entities.boats.LirothBoatEntityModel;
+import com.decodinator.liroth.entities.boats.LirothBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.PetrifiedBoatEntityModel;
+import com.decodinator.liroth.entities.boats.PetrifiedBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.PierBoatEntityModel;
+import com.decodinator.liroth.entities.boats.PierBoatEntityRenderer;
+import com.decodinator.liroth.entities.boats.SpicedBoatEntityModel;
+import com.decodinator.liroth.entities.boats.SpicedBoatEntityRenderer;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -61,21 +95,28 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.TexturedModelDataProvider;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 
 public class LirothClient implements ClientModInitializer {
 	public static final Identifier PacketID = new Identifier(Liroth.MOD_ID, "spawn_packet");
 
     public static final EntityModelLayer MODEL_LIROTH_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "liroth_boat"), "main");
+    public static final EntityModelLayer MODEL_CHEST_LIROTH_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "chest_liroth_boat"), "main");
     public static final EntityModelLayer MODEL_DAMNATION_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "damnation_boat"), "main");
+    public static final EntityModelLayer MODEL_CHEST_DAMNATION_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "chest_damnation_boat"), "main");
     public static final EntityModelLayer MODEL_JAPZ_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "japz_boat"), "main");
+    public static final EntityModelLayer MODEL_CHEST_JAPZ_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "chest_japz_boat"), "main");
     public static final EntityModelLayer MODEL_KOOLAW_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "koolaw_boat"), "main");
+    public static final EntityModelLayer MODEL_CHEST_KOOLAW_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "chest_koolaw_boat"), "main");
     public static final EntityModelLayer MODEL_PETRIFIED_DAMNATION_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "petrified_damnation_boat"), "main");
+    public static final EntityModelLayer MODEL_CHEST_PETRIFIED_DAMNATION_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "chest_petrified_damnation_boat"), "main");
     public static final EntityModelLayer MODEL_SPICED_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "spiced_boat"), "main");
+    public static final EntityModelLayer MODEL_CHEST_SPICED_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "chest_spiced_boat"), "main");
     public static final EntityModelLayer MODEL_TALLPIER_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "tallpier"), "main");
+    public static final EntityModelLayer MODEL_CHEST_TALLPIER_BOAT_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "chest_tallpier"), "main");
     public static final EntityModelLayer MODEL_FUNGAL_FIEND_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "fungal_fiend"), "main");
     public static final EntityModelLayer MODEL_FORSAKEN_CORPSE_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "forsaken_corpse"), "main");
     public static final EntityModelLayer MODEL_SKELETAL_FREAK_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "skeletal_freak"), "main");
@@ -89,18 +130,38 @@ public class LirothClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_LIROTHIAN_MIMIC_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "lirothian_mimic"), "main");
     public static final EntityModelLayer MODEL_BUTTERFLY_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "butterfly"), "main");
     public static final EntityModelLayer MODEL_POTESTIUM_HELMET_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "potestium_helmet"), "main");
-
+    
 	@Override
 	public void onInitializeClient() {
-		
-        ScreenRegistry.register(Liroth.LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
-        ScreenRegistry.register(Liroth.QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
-				
-        LirothRenders.renderCutOuts(blockRenderTypeMap -> ItemBlockRenderTypeAccess.getTypeByBlock().putAll(blockRenderTypeMap));
-
-		EntityRendererRegistry.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
-		new FlyingItemEntityRenderer(context));
-		LirothClient.receiveEntityPacket();
+ 
+        EntityRendererRegistry.register(LirothEntities.LIROTH_BOAT, LirothBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_LIROTH_BOAT_LAYER, LirothBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.CHEST_LIROTH_BOAT, ChestLirothBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_CHEST_LIROTH_BOAT_LAYER, ChestLirothBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.DAMNATION_BOAT, DamnationBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_DAMNATION_BOAT_LAYER, DamnationBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.CHEST_DAMNATION_BOAT, ChestDamnationBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_CHEST_DAMNATION_BOAT_LAYER, ChestDamnationBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.SPICED_BOAT, SpicedBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_SPICED_BOAT_LAYER, SpicedBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.CHEST_SPICED_BOAT, ChestSpicedBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_CHEST_SPICED_BOAT_LAYER, ChestSpicedBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.PIER_BOAT, PierBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_TALLPIER_BOAT_LAYER, PierBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.CHEST_PIER_BOAT, ChestPierBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_CHEST_TALLPIER_BOAT_LAYER, ChestPierBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.JAPZ_BOAT, JapzBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_JAPZ_BOAT_LAYER, JapzBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.CHEST_JAPZ_BOAT, ChestJapzBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_CHEST_JAPZ_BOAT_LAYER, ChestJapzBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.KOOLAW_BOAT, KoolawBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_KOOLAW_BOAT_LAYER, KoolawBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.CHEST_KOOLAW_BOAT, ChestKoolawBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_CHEST_KOOLAW_BOAT_LAYER, ChestKoolawBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.PETRIFIED_BOAT, PetrifiedBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_PETRIFIED_DAMNATION_BOAT_LAYER, PetrifiedBoatEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(LirothEntities.CHEST_PETRIFIED_BOAT, ChestPetrifiedBoatEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MODEL_CHEST_PETRIFIED_DAMNATION_BOAT_LAYER, ChestPetrifiedBoatEntityModel::getTexturedModelData);
 
 		FluidRenderHandlerRegistry.INSTANCE.register(Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING, new SimpleFluidRenderHandler(
 				new Identifier("liroth:blocks/liroth_fluid_still"),
@@ -122,7 +183,13 @@ public class LirothClient implements ClientModInitializer {
 			registry.register(new Identifier("liroth:blocks/molten_spinerios_flowing"));
 		});
         
-
+        LirothRenders.renderCutOuts(blockRenderTypeMap -> ItemBlockRenderTypeAccess.getTypeByBlock().putAll(blockRenderTypeMap));
+		
+        ScreenRegistry.register(Liroth.LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
+        ScreenRegistry.register(Liroth.QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
+        
+		EntityRendererRegistry.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
+		new FlyingItemEntityRenderer(context));
         
         // In 1.17, use EntityRendererRegistry.register (seen below) instead of EntityRendererRegistry.INSTANCE.register (seen above)
         EntityRendererRegistry.register(Liroth.FUNGAL_FIEND, (context) -> {
@@ -231,30 +298,4 @@ public class LirothClient implements ClientModInitializer {
 	}
 	
 	
-	
-	@SuppressWarnings("deprecation")
-	public static void receiveEntityPacket() {
-		ClientSidePacketRegistry.INSTANCE.register(PacketID, (ctx, byteBuf) -> {
-			EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
-			UUID uuid = byteBuf.readUuid();
-			int entityId = byteBuf.readVarInt();
-			Vec3d pos = EntitySpawnPacket.PacketBufUtil.readVec3d(byteBuf);
-			float pitch = EntitySpawnPacket.PacketBufUtil.readAngle(byteBuf);
-			float yaw = EntitySpawnPacket.PacketBufUtil.readAngle(byteBuf);
-			ctx.getTaskQueue().execute(() -> {
-				if (MinecraftClient.getInstance().world == null)
-					throw new IllegalStateException("Tried to spawn entity in a null world!");
-				Entity e = et.create(MinecraftClient.getInstance().world);
-				if (e == null)
-					throw new IllegalStateException("Failed to create instance of entity \"" + Registry.ENTITY_TYPE.getId(et) + "\"!");
-				e.updateTrackedPosition(pos);
-				e.setPos(pos.x, pos.y, pos.z);
-				e.prevPitch = pitch;
-				e.prevYaw = yaw;
-				e.setId(entityId);
-				e.setUuid(uuid);
-				MinecraftClient.getInstance().world.addEntity(entityId, e);
-			});
-		});
-	}
 }

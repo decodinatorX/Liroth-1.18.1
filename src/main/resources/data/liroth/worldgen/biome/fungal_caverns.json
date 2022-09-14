@@ -2,13 +2,12 @@
   "temperature": 2,
   "downfall": 0,
   "precipitation": "none",
-  "category": "underground",
   "effects": {
     "sky_color": 328965,
     "fog_color": 78337,
     "water_color": 328965,
     "water_fog_color": 328965,
-	"grass_color": 328965,
+    "grass_color": 328965,
     "foliage_color": 328965,
     "ambient_sound": "minecraft:ambient.soul_sand_valley.loop",
     "mood_sound": {
@@ -35,14 +34,14 @@
     }
   },
   "spawners": {
-    "monster": [      
-    	{
+    "monster": [
+      {
         "type": "liroth:fungal_fiend",
         "weight": 100,
         "minCount": 4,
         "maxCount": 4
-      	}
-      ],
+      }
+    ],
     "creature": [],
     "ambient": [],
     "axolotls": [],

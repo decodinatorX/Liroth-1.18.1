@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -32,7 +32,7 @@ extends LirothSkeletonFeature {
         BlockPos blockPos = mutable.toImmutable();
         int k = random.nextInt(3) + 2;
         ArrayList<Direction> list = Lists.newArrayList(Direction.Type.HORIZONTAL);
-        Collections.shuffle(list, random);
+        Collections.shuffle(list);
         List<Direction> list2 = list.subList(0, k);
         for (Direction direction : list2) {
             mutable.set(blockPos);

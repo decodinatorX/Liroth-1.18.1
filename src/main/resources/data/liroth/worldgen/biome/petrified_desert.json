@@ -2,7 +2,6 @@
   "temperature": 2,
   "downfall": 0,
   "precipitation": "none",
-  "category": "desert",
   "effects": {
     "sky_color": 7396351,
     "fog_color": 12775679,
@@ -25,12 +24,12 @@
   },
   "spawners": {
     "monster": [
-        {
+      {
         "type": "liroth:shade",
         "weight": 1,
         "minCount": 1,
         "maxCount": 1
-        }
+      }
     ],
     "creature": [],
     "ambient": [],

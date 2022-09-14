@@ -1,5 +1,4 @@
 {
-  "parent": "liroth:enter_liroth",
   "display": {
     "icon": {
       "item": "liroth:charred_liroth_stone_bricks"
@@ -15,13 +14,22 @@
     "announce_to_chat": true,
     "hidden": false
   },
+  "parent": "liroth:enter_liroth",
   "criteria": {
     "liroth_fortress": {
       "trigger": "minecraft:location",
       "conditions": {
-        "location": {
-          "feature": "liroth:liroth_fortress"
-        }
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "liroth:liroth_fortress"
+              }
+            }
+          }
+        ]
       }
     }
   },

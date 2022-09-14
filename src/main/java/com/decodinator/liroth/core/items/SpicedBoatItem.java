@@ -21,11 +21,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.decodinator.liroth.entities.boats.ChestSpicedBoatEntity;
+import com.decodinator.liroth.entities.boats.SpicedBoatEntity;
+import com.decodinator.liroth.entities.boats.SpicedBoatEntity;
 import com.decodinator.liroth.entities.boats.SpicedBoatEntity;
 
 public class SpicedBoatItem
 extends Item {
-    private static final Predicate<Entity> RIDERS = EntityPredicates.EXCEPT_SPECTATOR.and(Entity::collides);
+    private static final Predicate<Entity> RIDERS = EntityPredicates.EXCEPT_SPECTATOR.and(Entity::canHit);
     private final boolean chest;
 
     public SpicedBoatItem(boolean chest, Item.Settings settings) {
@@ -59,7 +62,7 @@ extends Item {
             }
             if (!world.isClient) {
                 world.spawnEntity(SpicedBoatEntity);
-                world.emitGameEvent((Entity)user, GameEvent.ENTITY_PLACE, new BlockPos(hitResult.getPos()));
+                world.emitGameEvent((Entity)user, GameEvent.ENTITY_PLACE, hitResult.getPos());
                 if (!user.getAbilities().creativeMode) {
                     itemStack.decrement(1);
                 }
@@ -71,6 +74,9 @@ extends Item {
     }
 
     private SpicedBoatEntity createEntity(World world, HitResult hitResult) {
+        if (this.chest) {
+            return new ChestSpicedBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
+        }
         return new SpicedBoatEntity(world, hitResult.getPos().x, hitResult.getPos().y, hitResult.getPos().z);
     }
 }

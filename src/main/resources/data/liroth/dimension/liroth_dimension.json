@@ -2,7 +2,6 @@
   "type": "liroth:liroth_dimension",
   "generator": {
     "type": "minecraft:noise",
-    "seed": -1077099148,
     "settings": "liroth:liroth_dimension",
     "biome_source": {
       "type": "minecraft:multi_noise",

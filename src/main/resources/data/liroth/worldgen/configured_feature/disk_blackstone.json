@@ -1,8 +1,20 @@
 {
   "type": "minecraft:disk",
   "config": {
-    "state": {
-      "Name": "minecraft:blackstone"
+    "state_provider": {
+      "fallback": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:blackstone"
+        }
+      },
+      "rules": []
+    },
+    "target": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "liroth:soulless_soil"
+      ]
     },
     "radius": {
       "type": "minecraft:uniform",
@@ -11,11 +23,6 @@
         "max_inclusive": 5
       }
     },
-    "half_height": 2,
-    "targets": [
-      {
-        "Name": "liroth:soulless_soil"
-      }
-    ]
+    "half_height": 2
   }
 }

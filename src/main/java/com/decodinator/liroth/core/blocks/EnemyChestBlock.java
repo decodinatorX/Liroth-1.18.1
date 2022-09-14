@@ -13,12 +13,14 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+
+import org.betterx.bclib.client.models.BasePatterns;
+import org.betterx.bclib.client.models.ModelsHelper;
+import org.betterx.bclib.client.models.PatternsHelper;
+import org.betterx.bclib.interfaces.BlockModelProvider;
+import org.betterx.bclib.registry.BaseBlockEntities;
 import org.jetbrains.annotations.Nullable;
-import ru.bclib.client.models.BasePatterns;
-import ru.bclib.client.models.ModelsHelper;
-import ru.bclib.client.models.PatternsHelper;
-import ru.bclib.interfaces.BlockModelProvider;
-import ru.bclib.registry.BaseBlockEntities;
+
 
 import java.util.List;
 import java.util.Optional;

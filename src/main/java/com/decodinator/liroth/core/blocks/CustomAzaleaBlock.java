@@ -1,6 +1,6 @@
 package com.decodinator.liroth.core.blocks;
 
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.world.trees.JapzTree;
@@ -43,13 +43,13 @@ implements Fertilizable {
         return world.getFluidState(pos.up()).isEmpty();
     }
 
-    @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-        return (double)world.random.nextFloat() < 0.45;
-    }
+	@Override
+	public boolean canGrow(World var1, Random var2, BlockPos var3, BlockState var4) {
+		return (double)var1.random.nextFloat() < 0.45;
+	}
 
-    @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        GENERATOR.generate(world, world.getChunkManager().getChunkGenerator(), pos, state, random);
-    }
+	@Override
+	public void grow(ServerWorld var1, Random var2, BlockPos var3, BlockState var4) {
+        GENERATOR.generate(var1, var1.getChunkManager().getChunkGenerator(), var3, var4, var2);
+	}
 }
