@@ -26,6 +26,12 @@ public class MixinFarmBlock {
             level.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, LirothBlocks.PIER_DIRT.getDefaultState(), level, pos));
         } else if (state.isOf(LirothBlocks.SPINERIOS_GRASS_BLOCK) ||state.isOf(LirothBlocks.SPINERIOS_FARMLAND_BLOCK)) {
             level.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, LirothBlocks.SPINERIOS_DIRT.getDefaultState(), level, pos));
+        } else if (state.isOf(LirothBlocks.LIROTH_GRASS_BLOCK) || state.isOf(LirothBlocks.LIROTH_FARMLAND_BLOCK)) {
+            level.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, LirothBlocks.LIROTH_DIRT.getDefaultState(), level, pos));
+        } else if (state.isOf(LirothBlocks.PIER_GRASS_BLOCK) || state.isOf(LirothBlocks.PIER_FARMLAND_BLOCK)) {
+            level.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, LirothBlocks.PIER_DIRT.getDefaultState(), level, pos));
+        } else if (state.isOf(LirothBlocks.SPINERIOS_GRASS_BLOCK) || state.isOf(LirothBlocks.SPINERIOS_FARMLAND_BLOCK)) {
+            level.setBlockState(pos, Block.pushEntitiesUpBeforeBlockChange(state, LirothBlocks.SPINERIOS_DIRT.getDefaultState(), level, pos));
         }
     }
 }

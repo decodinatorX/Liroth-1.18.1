@@ -1,3 +1,4 @@
+package com.decodinator.liroth.core.blocks;
 /*package com.decodinator.liroth.core.blocks;
 
 import java.util.Random;

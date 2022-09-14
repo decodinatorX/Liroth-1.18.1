@@ -1,5 +1,7 @@
 package com.decodinator.liroth.core.blocks;
 
+import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -15,7 +17,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class DimensionalCommunicator extends BlockWithEntity {
+public class DimensionalCommunicator extends Block {
 	public DimensionalCommunicator(Settings settings) {
 		super(settings);
 	}
@@ -31,11 +33,6 @@ public class DimensionalCommunicator extends BlockWithEntity {
 		}
 
 		return ActionResult.SUCCESS;
-	}
-
-	@Override
-	public BlockEntity createBlockEntity(BlockPos blockPos, BlockState blockState) {
-		return new DimensionalCommunicatorEntity(blockPos, blockState);
 	}
 
 	@Override

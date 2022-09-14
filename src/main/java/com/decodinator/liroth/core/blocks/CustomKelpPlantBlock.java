@@ -5,14 +5,10 @@ import com.decodinator.liroth.core.LirothBlocks;
 
 import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.KelpBlock;
 import net.minecraft.block.KelpPlantBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;

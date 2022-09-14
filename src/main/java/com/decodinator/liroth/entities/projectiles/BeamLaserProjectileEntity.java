@@ -5,7 +5,7 @@ import java.util.List;
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
-import com.decodinator.liroth.util.EntitySpawnPacket;
+import com.decodinator.liroth.entities.EntitySpawnPacket;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

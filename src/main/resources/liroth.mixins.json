@@ -23,14 +23,10 @@
     "access.StructureFeatureAccessor",
     "access.TrapDoorBlockAccess",
     "access.WoodButtonBlockAccess",
-    "bruh.MultiNoiseBiomeSourceMixin",
-    "bruh.GeneratorOptionsMixin",
-    "bruh.NoiseChunkGeneratorMixin",
     "bruh.ClientPlayerEntityMixin"
   ],
   "client": [
-    "LirothMixin"
-
+    
   ],
   "injectors": {
     "defaultRequire": 1

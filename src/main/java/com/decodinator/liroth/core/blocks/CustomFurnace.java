@@ -23,6 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
+@SuppressWarnings("unused")
 public class CustomFurnace extends AbstractFurnaceBlock {
     public CustomFurnace(AbstractBlock.Settings settings) {
         super(settings);

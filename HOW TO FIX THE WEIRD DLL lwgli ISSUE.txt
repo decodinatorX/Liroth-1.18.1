@@ -1,1 +1,0 @@
-OPEN procexp64.exe AND CLOSE THE WEIRD GRAYED OUT javaw.exe

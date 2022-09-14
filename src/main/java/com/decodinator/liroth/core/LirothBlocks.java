@@ -1,7 +1,6 @@
 package com.decodinator.liroth.core;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.particle.ParticleTypes;
@@ -11,11 +10,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.gen.feature.BlockPileFeatureConfig;
 import ru.bclib.blocks.BaseChestBlock;
 import ru.bclib.blocks.BaseFurnaceBlock;
-import ru.bclib.blocks.BasePathBlock;
-import ru.bclib.registry.BaseBlockEntities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +19,11 @@ import java.util.function.ToIntFunction;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.blocks.CustomAzaleaBlock;
-import com.decodinator.liroth.core.blocks.CustomCampfireBlock;
 import com.decodinator.liroth.core.blocks.CustomCaveVinesBodyBlock;
 import com.decodinator.liroth.core.blocks.CustomCaveVinesHeadBlock;
 import com.decodinator.liroth.core.blocks.CustomCraftingTable;
 import com.decodinator.liroth.core.blocks.CustomDeadWaterPlant;
 import com.decodinator.liroth.core.blocks.CustomFungalPlant;
-import com.decodinator.liroth.core.blocks.CustomFurnace;
 import com.decodinator.liroth.core.blocks.CustomKelpBlock;
 import com.decodinator.liroth.core.blocks.CustomKelpPlantBlock;
 import com.decodinator.liroth.core.blocks.CustomPane;
@@ -38,11 +32,9 @@ import com.decodinator.liroth.core.blocks.CustomRod;
 import com.decodinator.liroth.core.blocks.CustomSapling;
 import com.decodinator.liroth.core.blocks.CustomTorch;
 import com.decodinator.liroth.core.blocks.CustomWallTorch;
-import com.decodinator.liroth.core.blocks.CustomWartBlock;
 import com.decodinator.liroth.core.blocks.CustomWaterPlant;
 import com.decodinator.liroth.core.blocks.CustomWeepingVinesBlock;
 import com.decodinator.liroth.core.blocks.CustomWeepingVinesPlantBlock;
-import com.decodinator.liroth.core.blocks.EnemyChestBlock;
 import com.decodinator.liroth.core.blocks.FungalCampfireBlock;
 import com.decodinator.liroth.core.blocks.LirothFarmlandBlock;
 import com.decodinator.liroth.core.blocks.LirothGrassBlock;
@@ -75,7 +67,6 @@ import com.decodinator.liroth.mixin.access.StairBlockAccess;
 import com.decodinator.liroth.mixin.access.TrapDoorBlockAccess;
 import com.decodinator.liroth.mixin.access.WoodButtonBlockAccess;
 
-@SuppressWarnings("deprecation")
 public class LirothBlocks {
     public static List<Block> BLOCKS = new ArrayList<>();
     
@@ -793,7 +784,7 @@ public class LirothBlocks {
     }
 
     static Block createSand(int dustColor, String id) {
-        Block createBlock = new SandBlock(dustColor, FabricBlockSettings.of(Material.AGGREGATE).sounds(BlockSoundGroup.SAND).strength(0.2f).breakByTool(FabricToolTags.SHOVELS));
+        Block createBlock = new SandBlock(dustColor, FabricBlockSettings.of(Material.AGGREGATE).sounds(BlockSoundGroup.SAND).strength(0.2f));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
 
         BLOCKS.add(createBlock);
@@ -841,7 +832,7 @@ public class LirothBlocks {
     }
 
     static Block createStoneSlab(String id) {
-        Block createBlock = new SlabBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(2.0f, 6.0f).breakByTool(FabricToolTags.PICKAXES).requiresTool());
+        Block createBlock = new SlabBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(2.0f, 6.0f));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
 
         BLOCKS.add(createBlock);
@@ -849,7 +840,7 @@ public class LirothBlocks {
     }
 
     static Block createStoneWall(String id) {
-        Block createBlock = new WallBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(2.0f, 6.0f).breakByTool(FabricToolTags.PICKAXES).requiresTool());
+        Block createBlock = new WallBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(2.0f, 6.0f));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
 
         BLOCKS.add(createBlock);
@@ -973,7 +964,7 @@ public class LirothBlocks {
     }
 
     static Block createShroomlight(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.PURPLE).strength(1.0F).sounds(BlockSoundGroup.SHROOMLIGHT).breakByTool(FabricToolTags.HOES).luminance((state) -> 14));
+        Block createBlock = new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.PURPLE).strength(1.0F).sounds(BlockSoundGroup.SHROOMLIGHT).luminance((state) -> 14));
         //Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
@@ -981,7 +972,7 @@ public class LirothBlocks {
     }
 
     static Block createLeaves(String id) {
-        Block createBlock = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().blockVision((state, world, pos) -> false).suffocates((state, world, pos) -> false).breakByTool(FabricToolTags.HOES));
+        Block createBlock = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().blockVision((state, world, pos) -> false).suffocates((state, world, pos) -> false));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
 
         BLOCKS.add(createBlock);
@@ -993,7 +984,7 @@ public class LirothBlocks {
     }
 
     static Block createGlowingLeaves(int lightLevel, String id) {
-        Block createBlock = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().blockVision((state, world, pos) -> false).suffocates((state, world, pos) -> false).luminance((state) -> lightLevel).breakByTool(FabricToolTags.HOES));
+        Block createBlock = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().blockVision((state, world, pos) -> false).suffocates((state, world, pos) -> false).luminance((state) -> lightLevel));
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
 
         BLOCKS.add(createBlock);
@@ -1001,7 +992,7 @@ public class LirothBlocks {
     }
 
     static Block createPetal(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.GRASS).strength(0.2f).nonOpaque().breakByTool(FabricToolTags.HOES));
+        Block createBlock = new Block(FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.GRASS).strength(0.2f).nonOpaque());
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
 
         BLOCKS.add(createBlock);
@@ -1009,7 +1000,7 @@ public class LirothBlocks {
     }
 
     static Block createDirt(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.SOIL).sounds(BlockSoundGroup.GRAVEL).strength(0.2f).ticksRandomly().breakByTool(FabricToolTags.SHOVELS));
+        Block createBlock = new Block(FabricBlockSettings.of(Material.SOIL).sounds(BlockSoundGroup.GRAVEL).strength(0.2f).ticksRandomly());
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
 
         BLOCKS.add(createBlock);
@@ -1060,7 +1051,7 @@ public class LirothBlocks {
     }
     
     public static Block createGrassBlock(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.MOSS_BLOCK).sounds(BlockSoundGroup.GRASS).strength(0.2f).ticksRandomly().breakByTool(FabricToolTags.SHOVELS));
+        Block createBlock = new Block(FabricBlockSettings.of(Material.MOSS_BLOCK).sounds(BlockSoundGroup.GRASS).strength(0.2f).ticksRandomly());
         createBlock(createBlock, id);
         return createBlock;
     }
@@ -1179,4 +1170,5 @@ public class LirothBlocks {
 
     public static void init() {
     }
+    
 }

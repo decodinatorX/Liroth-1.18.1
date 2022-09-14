@@ -16,11 +16,4 @@ public class SchluckedFluidBlock extends FluidBlock {
 	protected SchluckedFluidBlock(FlowableFluid fluid, Settings settings) {
 		super(fluid, settings);
 	}
-	
-	@Override
-	public void onEntityCollision(BlockState blockstate, World world, BlockPos pos, Entity entity) {
-		super.onEntityCollision(blockstate, world, pos, entity);
-		if (entity instanceof LivingEntity _entity)
-			_entity.addStatusEffect(new StatusEffectInstance(Liroth.SCHLUCKED, 20, 1, (false), (false)));
-	}
 }

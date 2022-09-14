@@ -6,12 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
 
 public class CustomDeadWaterPlant extends CustomWaterPlantParentBlock {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;

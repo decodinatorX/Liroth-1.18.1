@@ -1,63 +1,35 @@
 package com.decodinator.liroth.core;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.item.ItemModels;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.util.ModelIdentifier;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.*;
-import net.minecraft.item.Item.Settings;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.common.properties.LirothCreativeTab;
-import com.decodinator.liroth.core.armor.PotestiumHelmItem;
+import com.decodinator.liroth.LirothCreativeTab;
+import com.decodinator.liroth.core.helpers.PotestiumHelmItem;
 import com.decodinator.liroth.core.items.AnsalumArmorItem;
 import com.decodinator.liroth.core.items.AnsalumLirothShield;
 import com.decodinator.liroth.core.items.BeamItem;
 import com.decodinator.liroth.core.items.CustomAxeItem;
-import com.decodinator.liroth.core.items.CustomBoatItem;
 import com.decodinator.liroth.core.items.CustomHoeItem;
 import com.decodinator.liroth.core.items.CustomPickaxeItem;
-import com.decodinator.liroth.core.items.DamnationBoatItem;
-import com.decodinator.liroth.core.items.JapzBoatItem;
 import com.decodinator.liroth.core.items.KeyItem;
-import com.decodinator.liroth.core.items.KoolawBoatItem;
 import com.decodinator.liroth.core.items.LirothBlaster;
 import com.decodinator.liroth.core.items.LirothShield;
 import com.decodinator.liroth.core.items.LuxArmorItem;
 import com.decodinator.liroth.core.items.LuxLirothShield;
-import com.decodinator.liroth.core.items.PetrifiedDamnationBoatItem;
 import com.decodinator.liroth.core.items.PotestiumArmorItem;
-import com.decodinator.liroth.core.items.PurpetuatedSpyglassItem;
 import com.decodinator.liroth.core.items.QuantumArmorItem;
 import com.decodinator.liroth.core.items.QuantumLirothShield;
 import com.decodinator.liroth.core.items.SalemArmorItem;
 import com.decodinator.liroth.core.items.SalemLirothShield;
-import com.decodinator.liroth.core.items.SpicedBoatItem;
-import com.decodinator.liroth.core.items.TallpierBoatItem;
-import com.decodinator.liroth.entities.boat.CustomBoatEntity;
 
-@SuppressWarnings("deprecation")
 public class LirothItems {
 	
-    private ItemModels models;
-
     public static List<Item> itemsList = new ArrayList<>();
     
 //    public static final Item TEMPLATE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeTab)), "template");
@@ -74,12 +46,6 @@ public class LirothItems {
     
 //    public static final Item CORRUPTED_ROD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeTab)), "corrupted_rod"); IS NOW THE COOL BEAM
     
-    public static final DamnationBoatItem DAMNATION_BOAT = new DamnationBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
-    public static final JapzBoatItem JAPZ_BOAT = new JapzBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
-    public static final KoolawBoatItem KOOLAW_BOAT = new KoolawBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
-    public static final PetrifiedDamnationBoatItem PETRIFIED_DAMNATION_BOAT = new PetrifiedDamnationBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
-    public static final SpicedBoatItem SPICED_BOAT = new SpicedBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
-    public static final TallpierBoatItem TALLPIER_BOAT = new TallpierBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1));
     
 //    public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
     
@@ -95,7 +61,6 @@ public class LirothItems {
 
     public static final Item LIROTH_BLASTER = createRangedItem(new LirothBlaster(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "liroth_blaster");
     
-    public static final CustomBoatItem LIROTH_BOAT = new CustomBoatItem(new FabricItemSettings().group(LirothCreativeTab.creativeItemsTab).maxCount(1).fireproof());
     
     public static final Item LIROTH_BONE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_bone");
 
@@ -219,16 +184,7 @@ public class LirothItems {
     public static final Item TOURMALINE_AXE = createToolItem(new CustomAxeItem(Liroth.TOURMALINE_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "tourmaline_axe");
     public static final Item TOURMALINE_HOE = createToolItem(new CustomHoeItem(Liroth.TOURMALINE_TOOL_MATERIAL, -4, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "tourmaline_hoe");
     
-    public static Item createItem(Item item, Identifier id) {
-        if (id != null && !id.equals(new Identifier("minecraft:air"))) {
-            Registry.register(Registry.ITEM, id, item);
-//            item.setRegistryName(id); //Forge
-            itemsList.add(item);
-            return item;
-        } else {
-            return null;
-        }
-    }
+
 
     private static Item createArmorItem(ArmorItem armorItem, String id) {
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), armorItem);

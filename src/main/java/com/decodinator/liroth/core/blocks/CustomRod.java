@@ -6,6 +6,7 @@ import com.decodinator.liroth.Liroth;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.EndRodBlock;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -24,7 +25,7 @@ public class CustomRod extends EndRodBlock {
         double f = (double)pos.getZ() + 0.55 - (double)(random.nextFloat() * 0.1f);
         double g = 0.4f - (random.nextFloat() + random.nextFloat()) * 0.4f;
         if (random.nextInt(5) == 0) {
-            world.addParticle(Liroth.CLOAK, d + (double)direction.getOffsetX() * g, e + (double)direction.getOffsetY() * g, f + (double)direction.getOffsetZ() * g, random.nextGaussian() * 0.005, random.nextGaussian() * 0.005, random.nextGaussian() * 0.005);
+            world.addParticle(ParticleTypes.ASH, d + (double)direction.getOffsetX() * g, e + (double)direction.getOffsetY() * g, f + (double)direction.getOffsetZ() * g, random.nextGaussian() * 0.005, random.nextGaussian() * 0.005, random.nextGaussian() * 0.005);
         }
     }
 

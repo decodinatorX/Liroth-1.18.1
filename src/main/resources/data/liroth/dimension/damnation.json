@@ -2,6 +2,7 @@
   "type": "liroth:damnation",
   "generator": {
     "type": "minecraft:noise",
+    "seed": 1663013285,
     "settings": "liroth:damnation",
     "biome_source": {
       "type": "minecraft:multi_noise",
