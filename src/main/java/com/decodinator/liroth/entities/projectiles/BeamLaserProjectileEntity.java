@@ -3,8 +3,8 @@ package com.decodinator.liroth.entities.projectiles;
 import java.util.List;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.core.LirothItems;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
 import com.decodinator.liroth.entities.EntitySpawnPacket;
 
 import net.fabricmc.api.EnvType;
@@ -97,7 +97,7 @@ public class BeamLaserProjectileEntity extends PersistentProjectileEntity {
 	
     @Override
     public Packet createSpawnPacket() {
-    	return EntitySpawnPacket.create(this, LirothFluidRenderingModClient.PacketID);
+    	return EntitySpawnPacket.create(this, LirothClient.PacketID);
     }
     
     public void initFromStack(ItemStack stack) {

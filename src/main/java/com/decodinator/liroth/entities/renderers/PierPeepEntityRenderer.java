@@ -1,7 +1,7 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.PierPeepEntity;
@@ -20,7 +20,7 @@ import net.minecraft.util.Identifier;
 public class PierPeepEntityRenderer extends MobEntityRenderer<PierPeepEntity, PierPeepModel<PierPeepEntity>> {
 
     public PierPeepEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new PierPeepModel(context.getPart(LirothFluidRenderingModClient.MODEL_PIER_PEEP_LAYER)), 0.5f);
+        super(context, new PierPeepModel(context.getPart(LirothClient.MODEL_PIER_PEEP_LAYER)), 0.5f);
         this.addFeature(new PierPeepGlowFeatureRenderer<PierPeepEntity>(this));
     }
  

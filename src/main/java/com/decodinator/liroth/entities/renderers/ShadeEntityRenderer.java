@@ -1,6 +1,6 @@
 package com.decodinator.liroth.entities.renderers;
 
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.ShadeEntity;
 import com.decodinator.liroth.entities.WarpEntity;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -20,7 +20,7 @@ import net.minecraft.util.Identifier;
 public class ShadeEntityRenderer extends MobEntityRenderer<ShadeEntity, ShadeModel<ShadeEntity>>{
 
 	public ShadeEntityRenderer(Context context, ShadeModel<ShadeEntity> entityModel, float f) {
-		super(context, new ShadeModel(context.getPart(LirothFluidRenderingModClient.MODEL_SHADE_LAYER)), 0.5f);
+		super(context, new ShadeModel(context.getPart(LirothClient.MODEL_SHADE_LAYER)), 0.5f);
 		this.addFeature(new ShadeShadedFeatureRenderer<ShadeEntity>(this));
 	}
 

@@ -1,7 +1,7 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.WarpEntity;
 import com.decodinator.liroth.entities.renderers.FungalFiendModel;
@@ -19,7 +19,7 @@ import net.minecraft.util.Identifier;
 public class WarpEntityRenderer extends MobEntityRenderer<WarpEntity, WarpModel<WarpEntity>> {
 
     public WarpEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new WarpModel(context.getPart(LirothFluidRenderingModClient.MODEL_WARP_LAYER)), 0.5f);
+        super(context, new WarpModel(context.getPart(LirothClient.MODEL_WARP_LAYER)), 0.5f);
         this.addFeature(new WarpGlowFeatureRenderer<WarpEntity>(this));
     }
  

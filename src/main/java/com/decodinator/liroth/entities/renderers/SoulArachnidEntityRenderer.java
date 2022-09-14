@@ -1,7 +1,7 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.SoulArachnidEntity;
 import com.decodinator.liroth.entities.renderers.FungalFiendModel;
@@ -19,7 +19,7 @@ import net.minecraft.util.Identifier;
 public class SoulArachnidEntityRenderer extends MobEntityRenderer<SoulArachnidEntity, SoulArachnidModel<SoulArachnidEntity>> {
 
     public SoulArachnidEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new SoulArachnidModel(context.getPart(LirothFluidRenderingModClient.MODEL_SOUL_ARACHNID_LAYER)), 0.5f);
+        super(context, new SoulArachnidModel(context.getPart(LirothClient.MODEL_SOUL_ARACHNID_LAYER)), 0.5f);
         this.addFeature(new SoulArachnidGlowFeatureRenderer<SoulArachnidEntity>(this));
     }
  

@@ -1,7 +1,7 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.fluids.LirothFluidRenderingModClient;
+import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.entities.FungalFiendEntity;
 import com.decodinator.liroth.entities.ProwlerEntity;
 import com.decodinator.liroth.entities.WarpEntity;
@@ -20,7 +20,7 @@ import net.minecraft.util.Identifier;
 public class ProwlerEntityRenderer extends MobEntityRenderer<ProwlerEntity, ProwlerModel<ProwlerEntity>> {
 
     public ProwlerEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new ProwlerModel(context.getPart(LirothFluidRenderingModClient.MODEL_PROWLER_LAYER)), 0.5f);
+        super(context, new ProwlerModel(context.getPart(LirothClient.MODEL_PROWLER_LAYER)), 0.5f);
         this.addFeature(new ProwlerGlowFeatureRenderer<ProwlerEntity>(this));
     }
  
