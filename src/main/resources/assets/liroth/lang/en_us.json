@@ -1,5 +1,9 @@
 { 
-	"itemGroup.liroth.liroth": "Liroth",
+	"itemGroup.liroth.liroth_items": "Liroth Items",
+	"itemGroup.liroth.liroth_blocks": "Liroth Blocks",
+	"itemGroup.liroth.liroth_combat": "Liroth Combat",
+	"itemGroup.liroth.liroth_entities": "Liroth Entities",
+	"itemGroup.liroth.liroth_plants": "Liroth Plants",
 	"block.liroth.anomaly": "Anomaly",
 	"block.liroth.anomaly_block": "Anomaly Block",
 	"block.liroth.blue_sand": "Blue Sand",
