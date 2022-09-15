@@ -214,7 +214,7 @@ extends Entity {
     }
 
     public Item asItem() {
-        return LirothItems.LIROTH_BOAT;
+        return LirothItems.PIER_BOAT;
     }
 
     @Override

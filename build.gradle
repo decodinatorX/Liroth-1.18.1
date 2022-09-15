@@ -45,6 +45,10 @@ dependencies {
     modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta50-1.18'
 	include 'net.kyrptonaught:customportalapi:0.0.1-beta50-1.18'
 	
+	modApi("me.shedaniel.cloth:cloth-config-fabric:6.4.90") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+	modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 processResources {

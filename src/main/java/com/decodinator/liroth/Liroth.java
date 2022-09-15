@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.decodinator.liroth.core.LirothBlocks;
+import com.decodinator.liroth.core.LirothConfigScreen;
+import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothFlattenables;
 import com.decodinator.liroth.core.LirothHoeables;
 import com.decodinator.liroth.core.LirothItems;
@@ -58,6 +60,9 @@ import com.decodinator.liroth.entities.WarpEntity;
 import com.decodinator.liroth.entities.projectiles.BeamLaserProjectileEntity;
 import com.decodinator.liroth.world.generator.LirothStructures;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -91,6 +96,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.tag.TagKey;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
@@ -115,6 +121,7 @@ import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
 public class Liroth implements ModInitializer {
 	public static String MOD_ID = "liroth";
 	public static final Logger LOGGER = LoggerFactory.getLogger("liroth");
+	public static LirothConfigScreen CONFIG;
 
 	public static FlowableFluid LIROTH_FLUID_STILL;
 	public static FlowableFluid LIROTH_FLUID_FLOWING;
@@ -745,6 +752,11 @@ public class Liroth implements ModInitializer {
 			Registry.register(Registry.ITEM, id("dimensional_communicator"), DIMENSIONAL_COMMUNICATOR_ITEM);
 			Registry.register(Registry.BLOCK_ENTITY_TYPE, id("dimensional_communicator"), DIMENSIONAL_COMMUNICATOR_ENTITY);*/
 		    
+			// Register config
+			AutoConfig.register(LirothConfigScreen.class, Toml4jConfigSerializer::new);
+			CONFIG = AutoConfig.getConfigHolder(LirothConfigScreen.class).getConfig();
+	        
+			LirothRegistries.registerEntities();
 		    LirothRegistries.registerItems();
 		    LirothRegistries.registerFuels();
 	        Liroth.threadSafeLoadFinish();
@@ -818,6 +830,12 @@ public class Liroth implements ModInitializer {
 	        	Liroth.LOGGER.debug("Liroth: Registering items...");
 	        	LirothItems.init();
 	            Liroth.LOGGER.info("Liroth: Items registered!");
+	        }
+	        
+	        public static void registerEntities() {
+	        	Liroth.LOGGER.debug("Liroth: Registering entities...");
+	        	LirothEntities.RegisterEntities();
+	            Liroth.LOGGER.info("Liroth: Entities registered!");
 	        }
 	        
 	        public static void registerFuels() {
