@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothItems;
+import com.decodinator.liroth.core.LirothSounds;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -94,7 +95,7 @@ public class LirothBlaster extends BowItem {
             }
             world.spawnEntity(persistentProjectileEntity);
         }
-        world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), Liroth.LIROTH_BLASTER_FIRING_SOUND_EVENT, SoundCategory.PLAYERS, 1.0f, 1.0f / (world.getRandom().nextFloat() * 0.4f + 1.2f) + f * 0.5f);
+        world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), LirothSounds.LIROTH_BLASTER_FIRING_SOUND_EVENT, SoundCategory.PLAYERS, 1.0f, 1.0f / (world.getRandom().nextFloat() * 0.4f + 1.2f) + f * 0.5f);
         if (!bl2 && !playerEntity.getAbilities().creativeMode) {
             itemStack.decrement(1);
             if (itemStack.isEmpty()) {

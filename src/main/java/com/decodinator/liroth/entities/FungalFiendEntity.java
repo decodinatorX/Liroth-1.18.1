@@ -1,6 +1,7 @@
 package com.decodinator.liroth.entities;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothSounds;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -26,12 +27,12 @@ public class FungalFiendEntity extends CreeperEntity {
 	
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return Liroth.FUNGAL_FIEND_HURT_SOUND_EVENT;
+        return LirothSounds.FUNGAL_FIEND_HURT_SOUND_EVENT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return Liroth.FUNGAL_FIEND_DEATH_SOUND_EVENT;
+        return LirothSounds.FUNGAL_FIEND_DEATH_SOUND_EVENT;
     }
 
 }

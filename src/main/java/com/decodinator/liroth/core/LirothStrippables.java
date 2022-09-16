@@ -11,7 +11,7 @@ import com.decodinator.liroth.mixin.access.AxeItemAccess;
 public class LirothStrippables {
 
     public static void strippableLogsLiroth() {
-        Liroth.LOGGER.debug("Liroth: Adding strippable Blocks...");
+        Liroth.LOGGER.debug("Liroth: Registering strippable Blocks...");
 
         Map<Block, Block> stripables = new IdentityHashMap<>(AxeItemAccess.getStripables());
 
@@ -25,7 +25,7 @@ public class LirothStrippables {
 
 
         AxeItemAccess.setStripables(stripables);
-        Liroth.LOGGER.info("Liroth: Added strippable Blocks...");
+        Liroth.LOGGER.info("Liroth: Strippables registered!");
 
     }
 }

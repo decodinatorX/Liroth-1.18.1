@@ -3,6 +3,7 @@ package com.decodinator.liroth.core.blocks;
 import net.minecraft.util.math.random.Random;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothFluids;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -42,7 +43,7 @@ public class CustomWaterPlant extends CustomDeadWaterPlant {
         }
         this.checkLivingConditions(state, world, pos);
         if (state.get(WATERLOGGED).booleanValue()) {
-            world.createAndScheduleFluidTick(pos, Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_STILL.getTickRate(world));
+            world.createAndScheduleFluidTick(pos, LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_STILL.getTickRate(world));
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }

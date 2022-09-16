@@ -56,6 +56,7 @@ import com.decodinator.liroth.core.blocks.QuantumExtractorBlock;
 import com.decodinator.liroth.core.blocks.SpineriosFarmlandBlock;
 import com.decodinator.liroth.core.blocks.SpineriosGrassBlock;
 import com.decodinator.liroth.core.blocks.SpineriosPathBlock;
+import com.decodinator.liroth.core.fluids.SchluckedFluidBlock;
 import com.decodinator.liroth.core.world.trees.DamnationTree;
 import com.decodinator.liroth.core.world.trees.JapzTree;
 import com.decodinator.liroth.core.world.trees.KoolawTree;
@@ -74,6 +75,9 @@ public class LirothBlocks {
     
     public static List<Block> flowerPotBlocks = new ArrayList<>();
     public static List<Identifier> flowerIDs = new ArrayList<>();
+    
+	public static Block LIROTH_FLUID;
+	public static Block MOLTEN_SPINERIOS;
     
     public static final Block ANOMALY = createAnomalyBlock("anomaly");
     public static final Block ANOMALY_BLOCK = createMetalBlock("anomaly_block");
@@ -1171,6 +1175,8 @@ public class LirothBlocks {
     }
 
     public static void init() {
+		LIROTH_FLUID = Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, "liroth_fluid"), new FluidBlock(LirothFluids.LIROTH_FLUID_STILL, AbstractBlock.Settings.copy(Blocks.WATER)){});
+		MOLTEN_SPINERIOS = Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, "molten_spinerios"), new SchluckedFluidBlock(LirothFluids.MOLTEN_SPINERIOS_STILL, AbstractBlock.Settings.copy(Blocks.LAVA)){});
     }
     
 }

@@ -3,6 +3,7 @@ package com.decodinator.liroth.core.blocks;
 import org.jetbrains.annotations.Nullable;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothFluids;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -46,7 +47,7 @@ implements Waterloggable {
             return true;
         }
         for (Direction direction : Direction.values()) {
-            if (!world.getFluidState(pos.offset(direction)).isOf(Liroth.LIROTH_FLUID_STILL)) continue;
+            if (!world.getFluidState(pos.offset(direction)).isOf(LirothFluids.LIROTH_FLUID_STILL)) continue;
             return true;
         }
         return false;
@@ -67,7 +68,7 @@ implements Waterloggable {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED).booleanValue()) {
-            world.createAndScheduleFluidTick(pos, Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_STILL.getTickRate(world));
+            world.createAndScheduleFluidTick(pos, LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_STILL.getTickRate(world));
         }
         if (direction == Direction.DOWN && !this.canPlaceAt(state, world, pos)) {
             return Blocks.AIR.getDefaultState();
@@ -89,7 +90,7 @@ implements Waterloggable {
     @Override
     public FluidState getFluidState(BlockState state) {
         if (state.get(WATERLOGGED).booleanValue()) {
-            return Liroth.LIROTH_FLUID_STILL.getStill(false);
+            return LirothFluids.LIROTH_FLUID_STILL.getStill(false);
         }
         return super.getFluidState(state);
     }

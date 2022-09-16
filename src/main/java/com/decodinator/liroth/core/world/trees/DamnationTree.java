@@ -1,6 +1,8 @@
 package com.decodinator.liroth.core.world.trees;
 
 import net.minecraft.util.math.random.Random;
+
+import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothConfiguredFeatures;
 
 import net.minecraft.block.sapling.SaplingGenerator;
@@ -12,6 +14,6 @@ public class DamnationTree
 extends SaplingGenerator {
     @Override
     protected RegistryEntry<? extends ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
-        return LirothConfiguredFeatures.DAMNATION;
+        return Liroth.DAMNATION;
     }
 }

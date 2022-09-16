@@ -2,6 +2,7 @@ package com.decodinator.liroth.core.blocks;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothBlocks;
+import com.decodinator.liroth.core.LirothFluids;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -26,12 +27,12 @@ public class CustomKelpBlock extends KelpBlock {
     
     @Override
     public FluidState getFluidState(BlockState state) {
-        return Liroth.LIROTH_FLUID_STILL.getStill(false);
+        return LirothFluids.LIROTH_FLUID_STILL.getStill(false);
     }
     
     @Override
     protected boolean chooseStemState(BlockState state) {
-        return state.isOf(Liroth.LIROTH_FLUID);
+        return state.isOf(LirothBlocks.LIROTH_FLUID);
     }
     
     @Override

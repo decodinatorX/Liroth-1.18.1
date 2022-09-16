@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothArmorMaterials;
 import com.decodinator.liroth.core.helpers.AnsalumLirothArmorMaterial;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
@@ -26,7 +27,7 @@ import net.minecraft.world.World;
 public class QuantumArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
-                    .put(Liroth.QUANTUM_LIROTH_ARMOR_MATERIAL,
+                    .put(LirothArmorMaterials.QUANTUM_LIROTH_ARMOR_MATERIAL,
                             new StatusEffectInstance(StatusEffects.REGENERATION, 200, 1, true, false, false)).build();
 
     public QuantumArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {

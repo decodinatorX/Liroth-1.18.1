@@ -15,7 +15,7 @@ import net.minecraft.item.ItemUsageContext;
 
 public class LirothHoeables {
     public static void tillablesLiroth() {
-        Liroth.LOGGER.debug("Liroth: Adding tillables...");
+        Liroth.LOGGER.debug("Liroth: Registering tillables...");
         Map<Block, Pair<Predicate<ItemUsageContext>, Consumer<ItemUsageContext>>> tillables = new IdentityHashMap<>(HoeItemAccess.getTillables());
         tillables.put(LirothBlocks.LIROTH_GRASS_BLOCK, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.LIROTH_FARMLAND_BLOCK.getDefaultState())));
         tillables.put(LirothBlocks.LIROTH_DIRT, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.LIROTH_FARMLAND_BLOCK.getDefaultState())));
@@ -24,6 +24,6 @@ public class LirothHoeables {
         tillables.put(LirothBlocks.SPINERIOS_GRASS_BLOCK, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.SPINERIOS_FARMLAND_BLOCK.getDefaultState())));
         tillables.put(LirothBlocks.SPINERIOS_DIRT, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.SPINERIOS_FARMLAND_BLOCK.getDefaultState())));
         HoeItemAccess.setTillables(tillables);
-        Liroth.LOGGER.info("Liroth: Added tillables!");
+        Liroth.LOGGER.info("Liroth: Tillables registered!");
     }
 }

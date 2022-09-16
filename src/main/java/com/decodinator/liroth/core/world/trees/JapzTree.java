@@ -1,5 +1,6 @@
 package com.decodinator.liroth.core.world.trees;
 
+import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothConfiguredFeatures;
 
 import net.minecraft.block.sapling.SaplingGenerator;
@@ -12,6 +13,6 @@ extends SaplingGenerator {
 	@Override
 	protected RegistryEntry<? extends ConfiguredFeature<?, ?>> getTreeFeature(
 			Random var1, boolean var2) {
-		return LirothConfiguredFeatures.JAPZ;
+		return Liroth.JAPZ;
 	}
 }

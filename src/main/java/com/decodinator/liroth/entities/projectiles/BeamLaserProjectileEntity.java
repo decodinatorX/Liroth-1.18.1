@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.LirothClient;
+import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.entities.EntitySpawnPacket;
 
@@ -45,11 +46,11 @@ public class BeamLaserProjectileEntity extends PersistentProjectileEntity {
 	}
  
 	public BeamLaserProjectileEntity(World world, LivingEntity owner) {
-		super(Liroth.BEAM_LASER_PROJECTILE_ENTITY, owner, world);
+		super(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, owner, world);
 	}
  
 	public BeamLaserProjectileEntity(World world, double x, double y, double z) {
-		super(Liroth.BEAM_LASER_PROJECTILE_ENTITY, x, y, z, world);
+		super(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, x, y, z, world);
 	}
  
  

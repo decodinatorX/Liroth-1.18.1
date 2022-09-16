@@ -32,12 +32,12 @@ extends Feature<DefaultFeatureConfig> {
         Random random = context.getRandom();
         int j = structureWorldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.getX(), blockPos.getZ());
         BlockPos blockPos2 = new BlockPos(blockPos.getX(), j, blockPos.getZ());
-        if (structureWorldAccess.getBlockState(blockPos2).isOf(Liroth.LIROTH_FLUID)) {
+        if (structureWorldAccess.getBlockState(blockPos2).isOf(LirothBlocks.LIROTH_FLUID)) {
             BlockState blockState = LirothBlocks.VILE_TENTACLE_TIP.getDefaultState();
             BlockState blockState2 = LirothBlocks.VILE_TENTACLE.getDefaultState();
             int k = 1 + random.nextInt(10);
             for (int l = 0; l <= k; ++l) {
-                if (structureWorldAccess.getBlockState(blockPos2).isOf(Liroth.LIROTH_FLUID) && structureWorldAccess.getBlockState(blockPos2.up()).isOf(Liroth.LIROTH_FLUID) && blockState2.canPlaceAt(structureWorldAccess, blockPos2)) {
+                if (structureWorldAccess.getBlockState(blockPos2).isOf(LirothBlocks.LIROTH_FLUID) && structureWorldAccess.getBlockState(blockPos2.up()).isOf(LirothBlocks.LIROTH_FLUID) && blockState2.canPlaceAt(structureWorldAccess, blockPos2)) {
                     if (l == k) {
                         structureWorldAccess.setBlockState(blockPos2, (BlockState)blockState.with(CustomKelpBlock.AGE, random.nextInt(4) + 20), Block.NOTIFY_LISTENERS);
                         ++i;

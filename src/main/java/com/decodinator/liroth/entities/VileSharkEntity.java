@@ -5,6 +5,7 @@ import java.util.Random;
 import org.jetbrains.annotations.Nullable;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothBlocks;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityData;
@@ -126,7 +127,7 @@ public class VileSharkEntity extends WaterCreatureEntity {
     public static boolean canSpawn(EntityType<? extends WaterCreatureEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random) {
         int i = world.getSeaLevel();
         int j = i - 13;
-        return world.getFluidState(pos.down()).isIn(FluidTags.WATER) && world.getBlockState(pos.up()).isOf(Liroth.LIROTH_FLUID) && pos.getY() >= j && pos.getY() <= i;
+        return world.getFluidState(pos.down()).isIn(FluidTags.WATER) && world.getBlockState(pos.up()).isOf(LirothBlocks.LIROTH_FLUID) && pos.getY() >= j && pos.getY() <= i;
     }
     
     public static DefaultAttributeContainer.Builder createVileSharkAttributes() {

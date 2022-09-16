@@ -1,6 +1,9 @@
 package com.decodinator.liroth.core.fluids;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothBlocks;
+import com.decodinator.liroth.core.LirothFluids;
+import com.decodinator.liroth.core.LirothItems;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
@@ -12,22 +15,22 @@ import net.minecraft.state.property.Properties;
 public abstract class MoltenSpinerios extends WaterTypeFluid {
 	@Override
 	public Fluid getStill() {
-		return Liroth.MOLTEN_SPINERIOS_STILL;
+		return LirothFluids.MOLTEN_SPINERIOS_STILL;
 	}
  
 	@Override
 	public Fluid getFlowing() {
-		return Liroth.MOLTEN_SPINERIOS_FLOWING;
+		return LirothFluids.MOLTEN_SPINERIOS_FLOWING;
 	}
  
 	@Override
 	public Item getBucketItem() {
-		return Liroth.MOLTEN_SPINERIOS_BUCKET;
+		return LirothItems.MOLTEN_SPINERIOS_BUCKET;
 	}
  
 	@Override
 	protected BlockState toBlockState(FluidState fluidState) {
-		return Liroth.MOLTEN_SPINERIOS.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(fluidState));
+		return LirothBlocks.MOLTEN_SPINERIOS.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(fluidState));
 	}
  
 	public static class Flowing extends MoltenSpinerios {

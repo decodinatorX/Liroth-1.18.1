@@ -22,7 +22,9 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.decodinator.liroth.core.LirothEntities;
+import com.decodinator.liroth.core.LirothFluids;
 import com.decodinator.liroth.core.LirothItems;
+import com.decodinator.liroth.core.LirothParticles;
 import com.decodinator.liroth.core.LirothRenders;
 import com.decodinator.liroth.core.helpers.PotestiumHelmetModel;
 import com.decodinator.liroth.core.helpers.PotestiumHelmetRenderer;
@@ -163,15 +165,15 @@ public class LirothClient implements ClientModInitializer {
         EntityRendererRegistry.register(LirothEntities.CHEST_PETRIFIED_BOAT, ChestPetrifiedBoatEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_CHEST_PETRIFIED_DAMNATION_BOAT_LAYER, ChestPetrifiedBoatEntityModel::getTexturedModelData);
 
-		FluidRenderHandlerRegistry.INSTANCE.register(Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING, new SimpleFluidRenderHandler(
+		FluidRenderHandlerRegistry.INSTANCE.register(LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_FLOWING, new SimpleFluidRenderHandler(
 				new Identifier("liroth:blocks/liroth_fluid_still"),
 				new Identifier("liroth:blocks/liroth_fluid_flowing")
 		));
 		
-		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), Liroth.LIROTH_FLUID_STILL, Liroth.LIROTH_FLUID_FLOWING);
+		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_FLOWING);
 
 		
-		FluidRenderHandlerRegistry.INSTANCE.register(Liroth.MOLTEN_SPINERIOS_STILL, Liroth.MOLTEN_SPINERIOS_FLOWING, new SimpleFluidRenderHandler(
+		FluidRenderHandlerRegistry.INSTANCE.register(LirothFluids.MOLTEN_SPINERIOS_STILL, LirothFluids.MOLTEN_SPINERIOS_FLOWING, new SimpleFluidRenderHandler(
 				new Identifier("liroth:blocks/molten_spinerios_still"),
 				new Identifier("liroth:blocks/molten_spinerios_flowing")
 		));
@@ -188,75 +190,75 @@ public class LirothClient implements ClientModInitializer {
         ScreenRegistry.register(Liroth.LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
         ScreenRegistry.register(Liroth.QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
         
-		EntityRendererRegistry.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
+		EntityRendererRegistry.register(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
 		new FlyingItemEntityRenderer(context));
         
         // In 1.17, use EntityRendererRegistry.register (seen below) instead of EntityRendererRegistry.INSTANCE.register (seen above)
-        EntityRendererRegistry.register(Liroth.FUNGAL_FIEND, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.FUNGAL_FIEND, (context) -> {
             return new FungalFiendEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_FUNGAL_FIEND_LAYER, FungalFiendModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.FORSAKEN_CORPSE, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.FORSAKEN_CORPSE, (context) -> {
             return new ForsakenCorpseEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_FORSAKEN_CORPSE_LAYER, ForsakenCorpseModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.SKELETAL_FREAK, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.SKELETAL_FREAK, (context) -> {
             return new SkeletalFreakEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_SKELETAL_FREAK_LAYER, SkeletalFreakModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.BEAM_LASER_PROJECTILE_ENTITY, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, (context) -> {
             return new BeamLaserProjectileEntityRenderer(context);
         });
         
-        EntityRendererRegistry.register(Liroth.WARP, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.WARP, (context) -> {
             return new WarpEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_WARP_LAYER, WarpModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.SOUL_ARACHNID, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.SOUL_ARACHNID, (context) -> {
             return new SoulArachnidEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_SOUL_ARACHNID_LAYER, SoulArachnidModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.PIER_PEEP, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.PIER_PEEP, (context) -> {
             return new PierPeepEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_PIER_PEEP_LAYER, PierPeepModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.SHADE, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.SHADE, (context) -> {
             return new ShadeEntityRenderer(context, new ShadeModel(context.getPart(LirothClient.MODEL_SHADE_LAYER)), 0.5f);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_SHADE_LAYER, ShadeModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.PROWLER, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.PROWLER, (context) -> {
             return new ProwlerEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_PROWLER_LAYER, ProwlerModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.FREAKSHOW, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.FREAKSHOW, (context) -> {
             return new FreakshowEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_FREAKSHOW_LAYER, FreakshowModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.VILE_SHARK, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.VILE_SHARK, (context) -> {
             return new VileSharkEntityRenderer(context);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_VILE_SHARK_LAYER, VileSharkModel::getTexturedModelData);
         
-        EntityRendererRegistry.register(Liroth.LIROTHIAN_MIMIC, (context) -> {
+        EntityRendererRegistry.register(LirothEntities.LIROTHIAN_MIMIC, (context) -> {
             return new LirothianMimicEntityRenderer(context);
         });
  
@@ -268,28 +270,25 @@ public class LirothClient implements ClientModInitializer {
             registry.register(new Identifier("liroth", "particle/purple_flame"));
         }));
         
-/*        ParticleFactoryRegistry.getInstance().register(Liroth.PURPLE_FLAME, FlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.PURPLE_FLAME, FlameParticle.Factory::new);
         
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
             registry.register(new Identifier("liroth", "particle/green_flame"));
         }));
         
-        ParticleFactoryRegistry.getInstance().register(Liroth.GREEN_FLAME, FlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.GREEN_FLAME, FlameParticle.Factory::new);
 
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
             registry.register(new Identifier("liroth", "particle/cloak"));
         }));
         
-        ParticleFactoryRegistry.getInstance().register(Liroth.CLOAK, EndRodParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.CLOAK, EndRodParticle.Factory::new);
         
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
             registry.register(new Identifier("liroth", "particle/green_spore"));
         }));
         
-        ParticleFactoryRegistry.getInstance().register(Liroth.GREEN_SPORE, WhiteAshParticle.Factory::new);
-        
-        BlockEntityRendererRegistry.register(Liroth.FUNGAL_CAMPFIRE_BLOCK_ENTITY, FungalCampfireBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(Liroth.LIROTHIAN_PETROLEUM_CAMPFIRE_BLOCK_ENTITY, LirothianPetroleumCampfireBlockEntityRenderer::new);*/
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.GREEN_SPORE, WhiteAshParticle.Factory::new);
         
         EntityModelLayerRegistry.registerModelLayer(MODEL_POTESTIUM_HELMET_LAYER, PotestiumHelmetModel::getTexturedModelData);
 

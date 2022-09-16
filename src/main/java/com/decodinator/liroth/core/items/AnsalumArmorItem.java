@@ -3,6 +3,7 @@ package com.decodinator.liroth.core.items;
 import java.util.Map;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothArmorMaterials;
 import com.decodinator.liroth.core.helpers.AnsalumLirothArmorMaterial;
 import com.google.common.collect.ImmutableMap;
 
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 public class AnsalumArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
-                    .put(Liroth.ANSALUM_LIROTH_ARMOR_MATERIAL,
+                    .put(LirothArmorMaterials.ANSALUM_LIROTH_ARMOR_MATERIAL,
                             new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 200, 1, true, false, false)).build();
 
     public AnsalumArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {

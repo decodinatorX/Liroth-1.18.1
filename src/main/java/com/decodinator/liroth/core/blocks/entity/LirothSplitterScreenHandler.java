@@ -1,7 +1,6 @@
 package com.decodinator.liroth.core.blocks.entity;
 
 import com.decodinator.liroth.Liroth;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.entity.BlockEntity;

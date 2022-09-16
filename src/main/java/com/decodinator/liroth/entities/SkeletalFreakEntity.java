@@ -1,6 +1,7 @@
 package com.decodinator.liroth.entities;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothEntities;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -41,7 +42,7 @@ public class SkeletalFreakEntity extends SkeletonEntity {
     }
 
     protected PersistentProjectileEntity createBeamProjectile(ItemStack arrow, float damageModifier) {
-        return Liroth.createBeamProjectile(this, arrow, damageModifier);
+        return LirothEntities.createBeamProjectile(this, arrow, damageModifier);
     }
     
     @Override

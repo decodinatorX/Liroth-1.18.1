@@ -1,6 +1,7 @@
 package com.decodinator.liroth.entities;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothSounds;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -30,16 +31,16 @@ public class FreakshowEntity extends ZombieEntity {
     
     @Override
     protected SoundEvent getAmbientSound() {
-        return Liroth.WARP_IDLE_SOUND_EVENT;
+        return LirothSounds.WARP_IDLE_SOUND_EVENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return Liroth.WARP_HURT_SOUND_EVENT;
+        return LirothSounds.WARP_HURT_SOUND_EVENT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return Liroth.WARP_DEATH_SOUND_EVENT;
+        return LirothSounds.WARP_DEATH_SOUND_EVENT;
     }
 }

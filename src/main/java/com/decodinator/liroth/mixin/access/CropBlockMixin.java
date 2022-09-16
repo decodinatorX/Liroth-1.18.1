@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothTags;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PlantBlock;
@@ -22,7 +23,7 @@ import net.minecraft.world.BlockView;
 public class CropBlockMixin {
     @Inject(at = @At("RETURN"), method = "canPlantOnTop", cancellable = true)
     private void isItTheFuckingFarmlandFromThisMod(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (floor.isIn(Liroth.LIROTH_FARMLANDS)) {
+        if (floor.isIn(LirothTags.LIROTH_FARMLANDS)) {
             cir.setReturnValue(true);
         }
     }

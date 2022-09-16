@@ -1,6 +1,9 @@
 package com.decodinator.liroth.core.fluids;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothBlocks;
+import com.decodinator.liroth.core.LirothFluids;
+import com.decodinator.liroth.core.LirothItems;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
@@ -12,22 +15,22 @@ import net.minecraft.state.property.Properties;
 public abstract class LirothFluid extends WaterTypeFluid {
 	@Override
 	public Fluid getStill() {
-		return Liroth.LIROTH_FLUID_STILL;
+		return LirothFluids.LIROTH_FLUID_STILL;
 	}
  
 	@Override
 	public Fluid getFlowing() {
-		return Liroth.LIROTH_FLUID_FLOWING;
+		return LirothFluids.LIROTH_FLUID_FLOWING;
 	}
  
 	@Override
 	public Item getBucketItem() {
-		return Liroth.LIROTH_FLUID_BUCKET;
+		return LirothItems.LIROTH_FLUID_BUCKET;
 	}
  
 	@Override
 	protected BlockState toBlockState(FluidState fluidState) {
-		return Liroth.LIROTH_FLUID.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(fluidState));
+		return LirothBlocks.LIROTH_FLUID.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(fluidState));
 	}
  
 	public static class Flowing extends LirothFluid {

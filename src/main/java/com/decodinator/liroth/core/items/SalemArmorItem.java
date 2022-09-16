@@ -1,6 +1,7 @@
 package com.decodinator.liroth.core.items;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothArmorMaterials;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class SalemArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
-                    .put(Liroth.SALEM_LIROTH_ARMOR_MATERIAL,
+                    .put(LirothArmorMaterials.SALEM_LIROTH_ARMOR_MATERIAL,
                             new StatusEffectInstance(StatusEffects.CONDUIT_POWER, 400, 1)).build();
 
     public SalemArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {

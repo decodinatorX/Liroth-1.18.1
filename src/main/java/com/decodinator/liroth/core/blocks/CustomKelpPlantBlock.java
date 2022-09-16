@@ -2,6 +2,7 @@ package com.decodinator.liroth.core.blocks;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothBlocks;
+import com.decodinator.liroth.core.LirothFluids;
 
 import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.BlockState;
@@ -26,7 +27,7 @@ public class CustomKelpPlantBlock extends KelpPlantBlock {
     
     @Override
     public FluidState getFluidState(BlockState state) {
-        return Liroth.LIROTH_FLUID_STILL.getStill(false);
+        return LirothFluids.LIROTH_FLUID_STILL.getStill(false);
     }
     
     @Override

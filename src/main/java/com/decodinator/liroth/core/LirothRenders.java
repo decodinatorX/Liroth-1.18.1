@@ -78,7 +78,7 @@ public class LirothRenders {
         map.put(LirothBlocks.JALSPHIRE_DIMENSION_PORTAL, RenderLayer.getTranslucent());
         map.put(LirothBlocks.DEVASTATED_DIMENSION_PORTAL, RenderLayer.getTranslucent());
 
-        map.put(Liroth.LIROTH_FLUID, RenderLayer.getTranslucent());
+        map.put(LirothBlocks.LIROTH_FLUID, RenderLayer.getTranslucent());
         
         map.put(LirothBlocks.LIROTH_GLASS_BLOCK, RenderLayer.getTranslucent());
         map.put(LirothBlocks.FORCEFIELD, RenderLayer.getTranslucent());

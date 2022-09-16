@@ -38,7 +38,7 @@ extends Feature<DefaultFeatureConfig> {
     protected boolean generateCoralPiece(WorldAccess world, Random random, BlockPos pos, BlockState state) {
         BlockPos blockPos = pos.up();
         BlockState blockState = world.getBlockState(pos);
-        if (!blockState.isOf(Liroth.LIROTH_FLUID) && !blockState.isOf(LirothBlocks.LIROTH_BONE_BLOCK) || !world.getBlockState(blockPos).isOf(Liroth.LIROTH_FLUID)) {
+        if (!blockState.isOf(LirothBlocks.LIROTH_FLUID) && !blockState.isOf(LirothBlocks.LIROTH_BONE_BLOCK) || !world.getBlockState(blockPos).isOf(LirothBlocks.LIROTH_FLUID)) {
             return false;
         }
         world.setBlockState(pos, state, Block.NOTIFY_ALL);

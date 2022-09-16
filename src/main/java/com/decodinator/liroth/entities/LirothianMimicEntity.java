@@ -1,6 +1,7 @@
 package com.decodinator.liroth.entities;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothSounds;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -22,6 +23,6 @@ public class LirothianMimicEntity extends SpiderEntity {
     
     @Override
     protected SoundEvent getAmbientSound() {
-        return Liroth.SHADE_IDLE_SOUND_EVENT;
+        return LirothSounds.SHADE_IDLE_SOUND_EVENT;
     }
 }

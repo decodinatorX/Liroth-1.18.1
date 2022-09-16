@@ -1,6 +1,8 @@
 package com.decodinator.liroth.entities;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothSounds;
+import com.decodinator.liroth.core.LirothTags;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -37,7 +39,7 @@ public class ShadeEntity extends ZombieEntity {
     @Override
     protected ActionResult interactMob(PlayerEntity player2, Hand hand) {
         ItemStack itemStack = player2.getStackInHand(hand);
-        if (itemStack.isIn(Liroth.TORCHES)) {
+        if (itemStack.isIn(LirothTags.TORCHES)) {
             this.world.playSound(player2, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_SOUL_SOIL_BREAK, this.getSoundCategory(), 1.0f, this.random.nextFloat() * 0.4f + 0.8f);
             if (!this.world.isClient) {
                 this.poof();
@@ -58,17 +60,17 @@ public class ShadeEntity extends ZombieEntity {
     
     @Override
     protected SoundEvent getAmbientSound() {
-        return Liroth.SHADE_IDLE_SOUND_EVENT;
+        return LirothSounds.SHADE_IDLE_SOUND_EVENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return Liroth.SHADE_HURT_SOUND_EVENT;
+        return LirothSounds.SHADE_HURT_SOUND_EVENT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return Liroth.SHADE_DEATH_SOUND_EVENT;
+        return LirothSounds.SHADE_DEATH_SOUND_EVENT;
     }
 
     protected SoundEvent getStepSound() {

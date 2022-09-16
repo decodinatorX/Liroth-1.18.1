@@ -4,7 +4,6 @@ import java.util.Optional;
 import net.minecraft.util.math.random.Random;
 
 import com.decodinator.liroth.Liroth;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
