@@ -10,6 +10,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -21,8 +22,10 @@ import net.minecraft.util.math.Vec3f;
 public class FungalCampfireBlockEntityRenderer
 implements BlockEntityRenderer<FungalCampfireBlockEntity> {
     private static final float SCALE = 0.375f;
+    private final ItemRenderer itemRenderer;
 
     public FungalCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+        this.itemRenderer = ctx.getItemRenderer();
     }
 
     @Override
@@ -41,7 +44,7 @@ implements BlockEntityRenderer<FungalCampfireBlockEntity> {
             matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0f));
             matrixStack.translate(-0.3125, -0.3125, 0.0);
             matrixStack.scale(0.375f, 0.375f, 0.375f);
-            MinecraftClient.getInstance().getItemRenderer().renderItem(itemStack, ModelTransformation.Mode.FIXED, i, j, matrixStack, vertexConsumerProvider, k + l);
+            this.itemRenderer.renderItem(itemStack, ModelTransformation.Mode.FIXED, i, j, matrixStack, vertexConsumerProvider, k + l);
             matrixStack.pop();
         }
     }

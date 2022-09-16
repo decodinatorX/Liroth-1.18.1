@@ -1,15 +1,13 @@
 package com.decodinator.liroth.core.blocks.entity;
 
-import com.decodinator.liroth.core.blocks.FungalCampfireBlock;
+import com.decodinator.liroth.core.blocks.LirothianPetroleumCampfireBlock;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.block.entity.CampfireBlockEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -21,13 +19,15 @@ import net.minecraft.util.math.Vec3f;
 public class LirothianPetroleumCampfireBlockEntityRenderer
 implements BlockEntityRenderer<LirothianPetroleumCampfireBlockEntity> {
     private static final float SCALE = 0.375f;
+    private final ItemRenderer itemRenderer;
 
     public LirothianPetroleumCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+        this.itemRenderer = ctx.getItemRenderer();
     }
 
     @Override
     public void render(LirothianPetroleumCampfireBlockEntity campfireBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
-        Direction direction = campfireBlockEntity.getCachedState().get(FungalCampfireBlock.FACING);
+        Direction direction = campfireBlockEntity.getCachedState().get(LirothianPetroleumCampfireBlock.FACING);
         DefaultedList<ItemStack> defaultedList = campfireBlockEntity.getItemsBeingCooked();
         int k = (int)campfireBlockEntity.getPos().asLong();
         for (int l = 0; l < defaultedList.size(); ++l) {
@@ -41,7 +41,7 @@ implements BlockEntityRenderer<LirothianPetroleumCampfireBlockEntity> {
             matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0f));
             matrixStack.translate(-0.3125, -0.3125, 0.0);
             matrixStack.scale(0.375f, 0.375f, 0.375f);
-            MinecraftClient.getInstance().getItemRenderer().renderItem(itemStack, ModelTransformation.Mode.FIXED, i, j, matrixStack, vertexConsumerProvider, k + l);
+            this.itemRenderer.renderItem(itemStack, ModelTransformation.Mode.FIXED, i, j, matrixStack, vertexConsumerProvider, k + l);
             matrixStack.pop();
         }
     }
