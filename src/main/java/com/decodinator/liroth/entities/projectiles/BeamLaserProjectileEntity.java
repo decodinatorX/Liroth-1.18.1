@@ -1,15 +1,10 @@
 package com.decodinator.liroth.entities.projectiles;
 
-import java.util.List;
-
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.entities.EntitySpawnPacket;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -22,16 +17,9 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.BlazeEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.network.Packet;
-import net.minecraft.particle.ItemStackParticleEffect;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -52,7 +40,6 @@ public class BeamLaserProjectileEntity extends PersistentProjectileEntity {
 	public BeamLaserProjectileEntity(World world, double x, double y, double z) {
 		super(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, x, y, z, world);
 	}
- 
  
     private void spawnParticles(int amount) {
         int i = this.getColor();
@@ -95,11 +82,6 @@ public class BeamLaserProjectileEntity extends PersistentProjectileEntity {
 	protected ItemStack asItemStack() {
 		return null;
 	}
-	
-    @Override
-    public Packet createSpawnPacket() {
-    	return EntitySpawnPacket.create(this, LirothClient.PacketID);
-    }
     
     public void initFromStack(ItemStack stack) {
     	if (stack.isOf(LirothItems.COOL_BEAM)) {
