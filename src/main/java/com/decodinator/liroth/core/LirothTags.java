@@ -14,4 +14,5 @@ public class LirothTags {
 	  public static final TagKey<Biome> LIROTH_BIOMES = TagKey.of(Registry.BIOME_KEY, new Identifier("liroth", "liroth_biomes"));
 	  public static final TagKey<Fluid> STICKY_FLUIDS = TagKey.of(Registry.FLUID_KEY, new Identifier("liroth", "sticky_fluids"));
 	  public static final TagKey<Item> TORCHES = TagKey.of(Registry.ITEM_KEY, new Identifier("liroth", "torches"));
+	  public static final TagKey<Item> CHEST = TagKey.of(Registry.ITEM_KEY, new Identifier("minecraft", "chest"));
 }
