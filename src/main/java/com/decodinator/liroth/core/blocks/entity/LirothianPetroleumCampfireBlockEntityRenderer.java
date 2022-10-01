@@ -1,11 +1,9 @@
 package com.decodinator.liroth.core.blocks.entity;
 
-import com.decodinator.liroth.core.blocks.FungalCampfireBlock;
+import com.decodinator.liroth.core.blocks.LirothianPetroleumCampfireBlock;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
@@ -27,7 +25,7 @@ implements BlockEntityRenderer<LirothianPetroleumCampfireBlockEntity> {
 
     @Override
     public void render(LirothianPetroleumCampfireBlockEntity campfireBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
-        Direction direction = campfireBlockEntity.getCachedState().get(FungalCampfireBlock.FACING);
+        Direction direction = campfireBlockEntity.getCachedState().get(LirothianPetroleumCampfireBlock.FACING);
         DefaultedList<ItemStack> defaultedList = campfireBlockEntity.getItemsBeingCooked();
         int k = (int)campfireBlockEntity.getPos().asLong();
         for (int l = 0; l < defaultedList.size(); ++l) {

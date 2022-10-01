@@ -12,6 +12,7 @@ import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothFlattenables;
 import com.decodinator.liroth.core.LirothHoeables;
 import com.decodinator.liroth.core.LirothItems;
+import com.decodinator.liroth.core.LirothParticles;
 import com.decodinator.liroth.core.LirothStrippables;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
@@ -758,6 +759,7 @@ public class Liroth implements ModInitializer {
 	        
 			LirothRegistries.registerEntities();
 		    LirothRegistries.registerItems();
+		    LirothRegistries.registerParticles();
 		    LirothRegistries.registerFuels();
 	        Liroth.threadSafeLoadFinish();
 
@@ -821,8 +823,6 @@ public class Liroth implements ModInitializer {
 	        public static void registerBlocks() {
 	        	Liroth.LOGGER.debug("Liroth: Registering blocks...");
 	        	LirothBlocks.init();
-	    		BlockStateModelGenerator blockStateModelGenerator = new BlockStateModelGenerator(null, null, null);
-				blockStateModelGenerator.registerTorch(LirothBlocks.FUNGAL_TORCH, LirothBlocks.WALL_FUNGAL_TORCH);
 	            Liroth.LOGGER.info("Liroth: Blocks registered!");
 	        }
 	    	
@@ -830,6 +830,12 @@ public class Liroth implements ModInitializer {
 	        	Liroth.LOGGER.debug("Liroth: Registering items...");
 	        	LirothItems.init();
 	            Liroth.LOGGER.info("Liroth: Items registered!");
+	        }
+	        
+	        public static void registerParticles() {
+	        	Liroth.LOGGER.debug("Liroth: Registering particles...");
+	        	LirothParticles.init();
+	            Liroth.LOGGER.info("Liroth: Particles registered!");
 	        }
 	        
 	        public static void registerEntities() {

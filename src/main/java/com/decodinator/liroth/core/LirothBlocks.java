@@ -614,21 +614,21 @@ public class LirothBlocks {
     }
     
     static Block createTorch(String id) {
-        Block createBlock = new CustomTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision(), ParticleTypes.HAPPY_VILLAGER);
+        Block createBlock = new CustomTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision(), LirothParticles.GREEN_FLAME);
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPetroleumTorch(String id) {
-        Block createBlock = new CustomTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision(), ParticleTypes.PORTAL);
+        Block createBlock = new CustomTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision(), LirothParticles.PURPLE_FLAME);
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createWallPetroleumTorch(String id) {
-        Block createBlock = new CustomWallTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision().dropsLike(FUNGAL_TORCH), ParticleTypes.PORTAL);
+        Block createBlock = new CustomWallTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision().dropsLike(LIROTHIAN_PETROLEUM_TORCH), LirothParticles.PURPLE_FLAME);
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
@@ -642,7 +642,7 @@ public class LirothBlocks {
     }
     
     static Block createWallTorch(String id) {
-        Block createBlock = new CustomWallTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision().dropsLike(FUNGAL_TORCH), ParticleTypes.HAPPY_VILLAGER);
+        Block createBlock = new CustomWallTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision().dropsLike(FUNGAL_TORCH), LirothParticles.GREEN_FLAME);
         Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;

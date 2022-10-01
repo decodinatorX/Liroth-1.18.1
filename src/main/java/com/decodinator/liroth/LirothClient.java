@@ -18,6 +18,7 @@ import java.util.UUID;
 
 import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothItems;
+import com.decodinator.liroth.core.LirothParticles;
 import com.decodinator.liroth.core.LirothRenders;
 import com.decodinator.liroth.core.helpers.PotestiumHelmetModel;
 import com.decodinator.liroth.core.helpers.PotestiumHelmetRenderer;
@@ -230,28 +231,28 @@ public class LirothClient implements ClientModInitializer {
             registry.register(new Identifier("liroth", "particle/purple_flame"));
         }));
         
-/*        ParticleFactoryRegistry.getInstance().register(Liroth.PURPLE_FLAME, FlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.PURPLE_FLAME, FlameParticle.Factory::new);
         
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
             registry.register(new Identifier("liroth", "particle/green_flame"));
         }));
         
-        ParticleFactoryRegistry.getInstance().register(Liroth.GREEN_FLAME, FlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.GREEN_FLAME, FlameParticle.Factory::new);
 
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
             registry.register(new Identifier("liroth", "particle/cloak"));
         }));
         
-        ParticleFactoryRegistry.getInstance().register(Liroth.CLOAK, EndRodParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.CLOAK, EndRodParticle.Factory::new);
         
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
             registry.register(new Identifier("liroth", "particle/green_spore"));
         }));
         
-        ParticleFactoryRegistry.getInstance().register(Liroth.GREEN_SPORE, WhiteAshParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.GREEN_SPORE, WhiteAshParticle.Factory::new);
         
         BlockEntityRendererRegistry.register(Liroth.FUNGAL_CAMPFIRE_BLOCK_ENTITY, FungalCampfireBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(Liroth.LIROTHIAN_PETROLEUM_CAMPFIRE_BLOCK_ENTITY, LirothianPetroleumCampfireBlockEntityRenderer::new);*/
+        BlockEntityRendererRegistry.register(Liroth.LIROTHIAN_PETROLEUM_CAMPFIRE_BLOCK_ENTITY, LirothianPetroleumCampfireBlockEntityRenderer::new);
         
         EntityModelLayerRegistry.registerModelLayer(MODEL_POTESTIUM_HELMET_LAYER, PotestiumHelmetModel::getTexturedModelData);
 
