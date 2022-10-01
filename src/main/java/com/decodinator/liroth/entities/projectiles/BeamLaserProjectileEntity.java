@@ -94,11 +94,6 @@ public class BeamLaserProjectileEntity extends PersistentProjectileEntity {
 	protected ItemStack asItemStack() {
 		return null;
 	}
-	
-    @Override
-    public Packet createSpawnPacket() {
-    	return EntitySpawnPacket.create(this, LirothClient.PacketID);
-    }
     
     public void initFromStack(ItemStack stack) {
     	if (stack.isOf(LirothItems.COOL_BEAM)) {
