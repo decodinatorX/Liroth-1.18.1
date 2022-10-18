@@ -1,6 +1,7 @@
 package com.decodinator.liroth.core;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
@@ -40,7 +41,8 @@ public class LirothItems {
 	
 	public static Item LIROTH_FLUID_BUCKET;
 	public static Item MOLTEN_SPINERIOS_BUCKET;
-
+	
+	private static int scytheDamage = getScytheDamage();
 	
     public static List<Item> itemsList = new ArrayList<>();
     
@@ -137,7 +139,7 @@ public class LirothItems {
     public static final Item QUANTUM_HORSE_ARMOR = createItem(new HorseArmorItem(10, "quantum", new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "quantum_horse_armor");
     public static final Item QUANTUM_PLATE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "quantum_plate");
     public static final Item RUBY = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "ruby");
-    public static final Item RUBY_HORSE_ARMOR = createItem(new HorseArmorItem(11, "ruby", new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ruby_horse_armor");
+    public static final Item RUBY_HORSE_ARMOR = createItem(new HorseArmorItem(7, "ruby", new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ruby_horse_armor");
     public static final Item POTESTIUM_SHARD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "potestium_shard");
     public static final Item POTESTIUM_HORSE_ARMOR = createItem(new HorseArmorItem(10, "potestium", new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_horse_armor");
     public static final Item POTESTIUM_PLATE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "potestium_plate");
@@ -145,7 +147,8 @@ public class LirothItems {
     public static final Item SPINERIOS_STONE_PEBBLE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "spinerios_stone_pebble");
     
     public static final Item TOURMALINE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "tourmaline");
-        
+    public static final Item TOURMALINE_HORSE_ARMOR = createItem(new HorseArmorItem(8, "tourmaline", new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "tourmaline_horse_armor");
+
     public static final Item LIROTH_HELMET = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_helmet");
     public static final Item LIROTH_CHESTPLATE = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_chestplate");
     public static final Item LIROTH_LEGGINGS = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "liroth_leggings");
@@ -191,7 +194,7 @@ public class LirothItems {
     public static final Item POTESTIUM_LIROTH_LEGGINGS = createArmorItem(new PotestiumArmorItem(LirothArmorMaterials.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_liroth_leggings");
     public static final Item POTESTIUM_LIROTH_BOOTS = createArmorItem(new PotestiumArmorItem(LirothArmorMaterials.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "potestium_liroth_boots");
     
-    public static final Item POTESTIUM_SCYTHE = createToolItem(new CustomScytheItem(LirothToolMaterials.POTESTIUM_LIROTH_TOOL_MATERIAL, 3, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "potestium_scythe");
+    public static final Item POTESTIUM_SCYTHE = createToolItem(new CustomScytheItem(LirothToolMaterials.POTESTIUM_LIROTH_TOOL_MATERIAL, LirothItems.scytheDamage, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "potestium_scythe");
     
     public static final Item LIROTH_SWORD = createToolItem(new SwordItem(LirothToolMaterials.LIROTH_TOOL_MATERIAL, 3, -2.4f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_sword");
     public static final Item LIROTH_SHOVEL = createToolItem(new ShovelItem(LirothToolMaterials.LIROTH_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab).fireproof()), "liroth_shovel");
@@ -302,6 +305,14 @@ public class LirothItems {
         itemsList.add(item);
         return item;
     }
+	
+	public static int getScytheDamage() {
+		if (FabricLoader.getInstance().isModLoaded("bettercombat")) {
+			return 1;
+		} else {
+			return 3;
+		}
+	}
 
     public static void init() {
 		LIROTH_FLUID_BUCKET = Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_fluid_bucket"), new BucketItem(LirothFluids.LIROTH_FLUID_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(LirothCreativeTab.creativeItemsTab)));
