@@ -4,6 +4,7 @@ import com.decodinator.liroth.core.helpers.AnsalumLirothToolMaterial;
 import com.decodinator.liroth.core.helpers.LirothToolMaterial;
 import com.decodinator.liroth.core.helpers.LirothianCobaltToolMaterial;
 import com.decodinator.liroth.core.helpers.LuxLirothToolMaterial;
+import com.decodinator.liroth.core.helpers.PotestiumLirothToolMaterial;
 import com.decodinator.liroth.core.helpers.QuantumLirothToolMaterial;
 import com.decodinator.liroth.core.helpers.SalemLirothToolMaterial;
 import com.decodinator.liroth.core.helpers.TourmalineToolMaterial;
@@ -18,4 +19,5 @@ public class LirothToolMaterials {
     public static final ToolMaterial LUX_LIROTH_TOOL_MATERIAL = new LuxLirothToolMaterial();
     public static final ToolMaterial SALEM_LIROTH_TOOL_MATERIAL = new SalemLirothToolMaterial();
     public static final ToolMaterial QUANTUM_LIROTH_TOOL_MATERIAL = new QuantumLirothToolMaterial();
+    public static final ToolMaterial POTESTIUM_LIROTH_TOOL_MATERIAL = new PotestiumLirothToolMaterial();
 }
