@@ -266,6 +266,7 @@ public class LirothBlocks {
     public static final Block POINTED_PETRIFIED_CRYSTAL = createPointedPetrifiedCrystal("pointed_petrified_crystal");
     public static final Block POTESTIUM_ORE = createSoilOre("potestium_ore");
     public static final Block POTESTIUM_BLOCK = createMetalBlock("potestium_block");
+    public static final Block POTESTIUM_PLATE_BLOCK = createMetalBlock("potestium_plate_block");
 //    public static final Block REDSTONE_BROKEN_STAGE_1 = createMetalBlock("redstone_broken_stage_1");
 //    public static final Block REDSTONE_BROKEN_STAGE_2 = createMetalBlock("redstone_broken_stage_2");
 //    public static final Block REDSTONE_BROKEN_STAGE_3 = createMetalBlock("redstone_broken_stage_3");

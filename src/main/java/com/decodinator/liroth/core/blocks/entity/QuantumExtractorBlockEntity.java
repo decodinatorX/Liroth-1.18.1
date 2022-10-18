@@ -201,7 +201,7 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
             int i = entity.getMaxCountPerStack();
             if (!entity.isBurning()) {
                 entity.fuelTime = entity.burnTime = entity.getFuelTime(itemStack);
-                if (entity.isBurning() && QuantumExtractorBlockEntity.hasRecipe(entity)) {
+                if (entity.isBurning() && QuantumExtractorBlockEntity.hasQuantumDiamondRecipe(entity) || QuantumExtractorBlockEntity.hasPotestiumShardRecipe(entity)) {
                     bl2 = true;
                     if (!itemStack.isEmpty()) {
                         Item item = itemStack.getItem();
@@ -213,15 +213,25 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
                     }
                 }
             }
-            if (entity.isBurning() && QuantumExtractorBlockEntity.hasRecipe(entity)) {
+            if (entity.isBurning() && QuantumExtractorBlockEntity.hasQuantumDiamondRecipe(entity)) {
                 ++entity.cookTime;
                 if (entity.cookTime == entity.cookTimeTotal) {
                     entity.cookTime = 0;
                     entity.cookTimeTotal = QuantumExtractorBlockEntity.getCookTime();
-                    QuantumExtractorBlockEntity.craftItem(entity);
+                    QuantumExtractorBlockEntity.craftQuantumItem(entity);
                     bl2 = true;
                 }
-            } else {
+            }
+            else if (entity.isBurning() && QuantumExtractorBlockEntity.hasPotestiumShardRecipe(entity)) {
+            	++entity.cookTime;
+            	if(entity.cookTime == entity.cookTimeTotal) {
+            		entity.cookTime = 0;
+            		entity.cookTimeTotal = QuantumExtractorBlockEntity.getCookTime();
+            		QuantumExtractorBlockEntity.craftPotestiumItem(entity);
+            		bl2 = true;
+            	}
+            }
+            else {
                 entity.cookTime = 0;
             }
         } else if (!entity.isBurning() && entity.cookTime > 0) {
@@ -237,41 +247,36 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
         }
     }
 
-    private static void craftItem(QuantumExtractorBlockEntity entity) {
+    private static void craftQuantumItem(QuantumExtractorBlockEntity entity) {
     	
         entity.removeStack(0, 1);
-        
-/*        if (entity.getStack(1).getItem() == Blocks.REDSTONE_BLOCK.asItem()) {
-        	entity.removeStack(1, 1);
-        	entity.setStack(2, new ItemStack(LirothBlocks.REDSTONE_BROKEN_STAGE_1.asItem(), entity.getStack(2).getCount() + 1));
-        }
-        if (entity.getStack(1).getItem() == LirothBlocks.REDSTONE_BROKEN_STAGE_1.asItem()) {
-        	entity.removeStack(1, 1);
-        	entity.setStack(2, new ItemStack(LirothBlocks.REDSTONE_BROKEN_STAGE_2.asItem(), entity.getStack(2).getCount() + 1));
-        }
-        if (entity.getStack(1).getItem() == LirothBlocks.REDSTONE_BROKEN_STAGE_2.asItem()) {
-        	entity.removeStack(1, 1);
-        	entity.setStack(2, new ItemStack(LirothBlocks.REDSTONE_BROKEN_STAGE_3.asItem(), entity.getStack(2).getCount() + 1));
-        }
-        if (entity.getStack(1).getItem() == LirothBlocks.REDSTONE_BROKEN_STAGE_3.asItem()) {
-        	entity.removeStack(1, 1);
-        }*/
+
         entity.setStack(2, new ItemStack(Items.DIAMOND, entity.getStack(2).getCount() + 1));
         entity.setStack(3, new ItemStack(LirothItems.QUANTUM_PLATE, entity.getStack(3).getCount() + 1));
         
         entity.ticks = 0;
     }
 
-    private static boolean hasRecipe(QuantumExtractorBlockEntity entity) {
-        boolean hasItemInFirstSlot = entity.getStack(0).getItem() == LirothItems.QUANTUM_DIAMOND;
+    private static boolean hasPotestiumShardRecipe(QuantumExtractorBlockEntity entity) {
+        boolean hasItemInFirstSlot = entity.getStack(0).getItem() == LirothItems.POTESTIUM_SHARD;
 
         return hasItemInFirstSlot;
     }
+    
+    private static void craftPotestiumItem(QuantumExtractorBlockEntity entity) {
+    	
+        entity.removeStack(0, 1);
 
-    private static boolean hasNotReachedStackLimit(QuantumExtractorBlockEntity entity) {
-        return /*entity.getStack(2).getCount() < entity.getStack(2).getMaxCount() ||*/
-        	   entity.getStack(2).getCount() < entity.getStack(2).getMaxCount() ||
-        	   entity.getStack(3).getCount() < entity.getStack(3).getMaxCount();
+        entity.setStack(2, new ItemStack(LirothItems.RUBY, entity.getStack(2).getCount() + 1));
+        entity.setStack(3, new ItemStack(LirothItems.POTESTIUM_PLATE, entity.getStack(3).getCount() + 1));
+        
+        entity.ticks = 0;
+    }
+
+    private static boolean hasQuantumDiamondRecipe(QuantumExtractorBlockEntity entity) {
+        boolean hasItemInFirstSlot = entity.getStack(0).getItem() == LirothItems.QUANTUM_DIAMOND;
+
+        return hasItemInFirstSlot;
     }
     
     private static int getCookTime() {
