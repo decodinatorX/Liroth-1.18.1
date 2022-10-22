@@ -32,6 +32,11 @@ public class ProwlerEntity extends EndermanEntity {
     }
     
     @Override
+    public int getLimitPerChunk() {
+        return 2;
+    }
+    
+    @Override
     protected SoundEvent getAmbientSound() {
         return this.isAngry() ? SoundEvents.ENTITY_ENDERMAN_SCREAM : LirothSounds.WARP_IDLE_SOUND_EVENT;
     }

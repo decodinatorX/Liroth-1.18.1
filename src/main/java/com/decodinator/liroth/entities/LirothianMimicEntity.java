@@ -22,6 +22,11 @@ public class LirothianMimicEntity extends SpiderEntity {
     }
     
     @Override
+    public int getLimitPerChunk() {
+        return 1;
+    }
+    
+    @Override
     protected SoundEvent getAmbientSound() {
         return LirothSounds.SHADE_IDLE_SOUND_EVENT;
     }

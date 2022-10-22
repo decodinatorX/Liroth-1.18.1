@@ -25,8 +25,13 @@ public class FreakshowEntity extends ZombieEntity {
     }
     
     @Override
-    protected void convertInWater() {
-
+    public int getLimitPerChunk() {
+        return 2;
+    }
+    
+    @Override
+    protected boolean canConvertInWater() {
+        return false;
     }
     
     @Override

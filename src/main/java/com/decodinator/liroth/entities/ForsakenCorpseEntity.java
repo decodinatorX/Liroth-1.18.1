@@ -32,12 +32,16 @@ public class ForsakenCorpseEntity extends ZombieEntity {
         		.add(EntityAttributes.GENERIC_ARMOR, 4.0)
         		.add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
     }
+    
+    @Override
+    public int getLimitPerChunk() {
+        return 2;
+    }
 
     @Override
-    protected void convertInWater() {
-
+    protected boolean canConvertInWater() {
+        return false;
     }
-    
 
     @Override
     protected SoundEvent getAmbientSound() {

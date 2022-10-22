@@ -27,6 +27,11 @@ public class SkeletalFreakEntity extends SkeletonEntity {
     public static DefaultAttributeContainer.Builder createSkeletalFreakAttributes() {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
     }
+    
+    @Override
+    public int getLimitPerChunk() {
+        return 2;
+    }
 	
     @Override
     public void attack(LivingEntity target, float pullProgress) {

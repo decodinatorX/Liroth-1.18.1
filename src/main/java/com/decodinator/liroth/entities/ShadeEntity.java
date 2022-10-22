@@ -24,16 +24,39 @@ public class ShadeEntity extends ZombieEntity {
 
 	public ShadeEntity(EntityType<? extends ZombieEntity> entityType, World world) {
 		super(entityType, world);
+        this.isInvulnerableTo(DamageSource.mob(getAttacker()));
+        this.isInvulnerableTo(DamageSource.player(attackingPlayer));
+        this.isInvulnerableTo(DamageSource.DROWN);
+        this.isInvulnerableTo(DamageSource.ANVIL);
+        this.isInvulnerableTo(DamageSource.CACTUS);
+        this.isInvulnerableTo(DamageSource.FALLING_BLOCK);
+        this.isInvulnerableTo(DamageSource.FALLING_STALACTITE);
+        this.isInvulnerableTo(DamageSource.FREEZE);
+        this.isInvulnerableTo(DamageSource.IN_WALL);
+        this.isInvulnerableTo(DamageSource.MAGIC);
+        this.isInvulnerableTo(DamageSource.WITHER);
+        this.isInvulnerableTo(DamageSource.SWEET_BERRY_BUSH);
+        this.isInvulnerableTo(DamageSource.DRAGON_BREATH);
 	}
 
     public static DefaultAttributeContainer.Builder createShadeAttributes() {
         return HostileEntity.createHostileAttributes()
         		.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0)
         		.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10f)
-        		.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10.0)
-        		.add(EntityAttributes.GENERIC_ARMOR, 1000.0)
-        		.add(EntityAttributes.GENERIC_MAX_HEALTH, 1000.0)
+        		.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 35.0)
+        		.add(EntityAttributes.GENERIC_ARMOR, 1.0)
+        		.add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
         		.add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+    }
+    
+    @Override
+    public int getLimitPerChunk() {
+        return 2;
+    }
+    
+    @Override
+    protected boolean canConvertInWater() {
+        return false;
     }
 	
     @Override
@@ -42,15 +65,16 @@ public class ShadeEntity extends ZombieEntity {
         if (itemStack.isIn(LirothTags.TORCHES)) {
             this.world.playSound(player2, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_SOUL_SOIL_BREAK, this.getSoundCategory(), 1.0f, this.random.nextFloat() * 0.4f + 0.8f);
             if (!this.world.isClient) {
-                this.poof();
+                this.poof(player2);
             }
             return ActionResult.success(this.world.isClient);
         }
         return super.interactMob(player2, hand);
     }
     
-    public void poof() {
-        this.kill();
+    public void poof(PlayerEntity player) {
+    	player.attack(this);
+    	this.kill();
     }
     
     @Override

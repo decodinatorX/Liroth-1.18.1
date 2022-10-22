@@ -21,6 +21,11 @@ public class WarpEntity extends EndermanEntity {
         this.stepHeight = 1.0f;
         this.setPathfindingPenalty(PathNodeType.WATER, -1.0f);
 	}
+	
+    @Override
+    public int getLimitPerChunk() {
+        return 2;
+    }
 
     public static DefaultAttributeContainer.Builder createWarpAttributes() {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 7.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64.0);

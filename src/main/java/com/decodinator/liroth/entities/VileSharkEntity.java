@@ -124,7 +124,7 @@ public class VileSharkEntity extends WaterCreatureEntity {
         return false;
     }
 
-    public static boolean canSpawn(EntityType<? extends WaterCreatureEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random) {
+    public static boolean canSpawn(EntityType<? extends VileSharkEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random) {
         int i = world.getSeaLevel();
         int j = i - 13;
         return world.getFluidState(pos.down()).isIn(FluidTags.WATER) && world.getBlockState(pos.up()).isOf(LirothBlocks.LIROTH_FLUID) && pos.getY() >= j && pos.getY() <= i;

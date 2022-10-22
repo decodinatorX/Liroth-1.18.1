@@ -26,6 +26,11 @@ public class FungalFiendEntity extends CreeperEntity {
 	}
 	
     @Override
+    public int getLimitPerChunk() {
+        return 2;
+    }
+	
+    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return LirothSounds.FUNGAL_FIEND_HURT_SOUND_EVENT;
     }

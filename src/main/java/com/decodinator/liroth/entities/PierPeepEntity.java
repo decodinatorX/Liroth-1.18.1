@@ -21,6 +21,11 @@ public class PierPeepEntity extends VexEntity {
     }
     
     @Override
+    public int getLimitPerChunk() {
+        return 3;
+    }
+    
+    @Override
     protected SoundEvent getAmbientSound() {
         return null;
     }
