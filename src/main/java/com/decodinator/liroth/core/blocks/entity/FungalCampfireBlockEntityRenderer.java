@@ -18,7 +18,6 @@ import net.minecraft.util.math.Vec3f;
 @Environment(value=EnvType.CLIENT)
 public class FungalCampfireBlockEntityRenderer
 implements BlockEntityRenderer<FungalCampfireBlockEntity> {
-    private static final float SCALE = 0.375f;
     private final ItemRenderer itemRenderer;
 
     public FungalCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {

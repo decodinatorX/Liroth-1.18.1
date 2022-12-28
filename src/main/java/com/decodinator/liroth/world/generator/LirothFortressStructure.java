@@ -1,6 +1,5 @@
 package com.decodinator.liroth.world.generator;
 
-import com.decodinator.liroth.Liroth;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 

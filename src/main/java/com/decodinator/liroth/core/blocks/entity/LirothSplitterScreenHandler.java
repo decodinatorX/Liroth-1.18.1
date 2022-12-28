@@ -1,9 +1,9 @@
 package com.decodinator.liroth.core.blocks.entity;
 
-import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothScreenHandlers;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -13,25 +13,19 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class LirothSplitterScreenHandler extends ScreenHandler {
     private final Inventory inventory;
-    private final World world;
     private final PropertyDelegate propertyDelegate;
-	private PlayerEntity entity;
 
     public LirothSplitterScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(5), new ArrayPropertyDelegate(4));
     }
 
     public LirothSplitterScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
-        super(Liroth.LIROTH_SPLITTER_SCREEN_HANDLER, syncId);
+        super(LirothScreenHandlers.LIROTH_SPLITTER_SCREEN_HANDLER, syncId);
         checkSize(inventory, 5);
         this.inventory = inventory;
-        this.world = playerInventory.player.world;
-		this.entity = entity;
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = propertyDelegate;
         

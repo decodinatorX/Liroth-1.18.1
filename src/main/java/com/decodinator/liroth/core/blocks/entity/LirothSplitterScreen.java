@@ -3,21 +3,15 @@ package com.decodinator.liroth.core.blocks.entity;
 import com.decodinator.liroth.Liroth;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.AbstractFurnaceScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 
 public class LirothSplitterScreen extends HandledScreen<LirothSplitterScreenHandler> {
-	private PlayerEntity entity;
-    private static final Identifier TEXTURE =
+	private static final Identifier TEXTURE =
             new Identifier(Liroth.MOD_ID, "textures/gui/liroth_splitter_gui.png");
 
     public LirothSplitterScreen(LirothSplitterScreenHandler handler, PlayerInventory inventory, Text title) {

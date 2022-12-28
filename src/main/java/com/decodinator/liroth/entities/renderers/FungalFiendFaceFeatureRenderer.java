@@ -7,9 +7,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.feature.EyesFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.model.EndermanEntityModel;
-import net.minecraft.client.render.entity.model.PhantomEntityModel;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
 @Environment(value=EnvType.CLIENT)

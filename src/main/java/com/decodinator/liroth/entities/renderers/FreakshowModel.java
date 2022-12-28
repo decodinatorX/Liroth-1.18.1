@@ -40,11 +40,11 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
 		ModelData meshdefinition = new ModelData();
 		ModelPartData partdefinition = meshdefinition.getRoot();
 
-		ModelPartData leftLeg = partdefinition.addChild("leftLeg", ModelPartBuilder.create().uv(0, 57).cuboid(-1.0F, 25.0F, -1.0F, 2.0F, 5.0F, 2.0F)
+		partdefinition.addChild("leftLeg", ModelPartBuilder.create().uv(0, 57).cuboid(-1.0F, 25.0F, -1.0F, 2.0F, 5.0F, 2.0F)
 		.uv(0, 34).cuboid(-1.0F, 5.0F, 0.0F, 2.0F, 20.0F, 2.0F)
 		.uv(0, 34).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F), ModelTransform.pivot(-3.0F, -6.0F, 0.0F));
 
-		ModelPartData rightLeg = partdefinition.addChild("rightLeg", ModelPartBuilder.create().uv(0, 57).cuboid(-1.0F, 25.0F, -1.0F, 2.0F, 5.0F, 2.0F)
+		partdefinition.addChild("rightLeg", ModelPartBuilder.create().uv(0, 57).cuboid(-1.0F, 25.0F, -1.0F, 2.0F, 5.0F, 2.0F)
 		.uv(0, 34).cuboid(-1.0F, 5.0F, 0.0F, 2.0F, 20.0F, 2.0F)
 		.uv(0, 34).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F), ModelTransform.pivot(3.0F, -6.0F, 0.0F));
 
@@ -61,7 +61,7 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
 		.uv(24, 34).cuboid(3.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(114, 27).cuboid(-4.0F, -6.0F, 1.0F, -5.0F, 5.0F, 0.0F), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
 
-		ModelPartData cube_r1 = head.addChild("cube_r1", ModelPartBuilder.create().uv(0, 4).cuboid(5.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		head.addChild("cube_r1", ModelPartBuilder.create().uv(0, 4).cuboid(5.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(0, 18).cuboid(5.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(0, 22).cuboid(6.0F, -16.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(32, 8).cuboid(5.0F, -14.0F, -1.0F, 2.0F, 2.0F, 2.0F)
@@ -69,13 +69,13 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
 		.uv(52, 28).cuboid(2.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(0, 0).cuboid(3.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F), ModelTransform.of(0.0F, 2.0F, 0.0F, -3.1416F, 0.0F, 3.1416F));
 
-		ModelPartData leftArm = partdefinition.addChild("leftArm", ModelPartBuilder.create().uv(20, 42).cuboid(-2.0F, -0.5F, -1.0F, 2.0F, 17.0F, 2.0F)
+		partdefinition.addChild("leftArm", ModelPartBuilder.create().uv(20, 42).cuboid(-2.0F, -0.5F, -1.0F, 2.0F, 17.0F, 2.0F)
 		.uv(10, 43).mirrored().cuboid(-2.0F, 16.5F, -0.5F, 2.0F, 13.0F, 2.0F).mirrored(false), ModelTransform.pivot(-5.0F, -17.5F, 0.0F));
 
-		ModelPartData rightArm = partdefinition.addChild("rightArm", ModelPartBuilder.create().uv(20, 42).cuboid(0.0F, -0.5F, -1.0F, 2.0F, 17.0F, 2.0F)
+		partdefinition.addChild("rightArm", ModelPartBuilder.create().uv(20, 42).cuboid(0.0F, -0.5F, -1.0F, 2.0F, 17.0F, 2.0F)
 		.uv(10, 43).cuboid(0.0F, 16.5F, -0.5F, 2.0F, 13.0F, 2.0F), ModelTransform.pivot(5.0F, -17.5F, 0.0F));
 
-		ModelPartData body = partdefinition.addChild("body", ModelPartBuilder.create().uv(21, 74).cuboid(-3.0F, 6.0F, -2.0F, 6.0F, 1.0F, 1.0F)
+		partdefinition.addChild("body", ModelPartBuilder.create().uv(21, 74).cuboid(-3.0F, 6.0F, -2.0F, 6.0F, 1.0F, 1.0F)
 		.uv(14, 76).cuboid(-4.0F, 2.0F, -2.0F, 8.0F, 3.0F, 1.0F)
 		.uv(17, 78).cuboid(-4.0F, 10.0F, -2.0F, 8.0F, 2.0F, 1.0F)
 		.uv(21, 76).cuboid(1.0F, 1.0F, -2.0F, 3.0F, 1.0F, 1.0F)
@@ -117,13 +117,8 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
         return angleTwo + angleOne * f;
     }
 
-    private float method_2807(float f) {
-        return -65.0f * f + f * f;
-    }
-
     @Override
     public void setAngles(T livingEntity, float f, float g, float h, float i, float j) {
-        boolean bl3;
         boolean bl = ((LivingEntity)livingEntity).getRoll() > 4;
         boolean bl2 = ((LivingEntity)livingEntity).isInSwimmingPose();
         this.head.yaw = i * ((float)Math.PI / 180);
@@ -147,7 +142,6 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
             this.leftArm.roll = -0.05f;
         }
         if (this.angry) {
-            float m = 1.0f;
             this.head.pivotY -= 5.0f;
         }
         this.rightArm.pitch = MathHelper.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f / k;
@@ -172,7 +166,6 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
         }
         this.rightArm.yaw = 0.0f;
         this.leftArm.yaw = 0.0f;
-            float p = 0.33333334f;
             this.leftLeg.pitch = MathHelper.lerp(this.leaningPitch, this.leftLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f + (float)Math.PI));
             this.rightLeg.pitch = MathHelper.lerp(this.leaningPitch, this.rightLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f));
             

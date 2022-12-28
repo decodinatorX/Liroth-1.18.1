@@ -1,6 +1,5 @@
 package com.decodinator.liroth.core.items;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothArmorMaterials;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.Entity;

@@ -1,10 +1,7 @@
 package com.decodinator.liroth.entities.projectiles;
 
-import com.decodinator.liroth.LirothClient;
 import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothItems;
-import com.decodinator.liroth.entities.EntitySpawnPacket;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,8 +15,6 @@ import net.minecraft.entity.mob.BlazeEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -41,19 +36,6 @@ public class BeamLaserProjectileEntity extends PersistentProjectileEntity {
 		super(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, x, y, z, world);
 	}
  
-    private void spawnParticles(int amount) {
-        int i = this.getColor();
-        if (i == -1 || amount <= 0) {
-            return;
-        }
-        double d = (double)(i >> 16 & 0xFF) / 255.0;
-        double e = (double)(i >> 8 & 0xFF) / 255.0;
-        double f = (double)(i >> 0 & 0xFF) / 255.0;
-        for (int j = 0; j < amount; ++j) {
-            this.world.addParticle(ParticleTypes.ENTITY_EFFECT, this.getParticleX(0.5), this.getRandomBodyY(), this.getParticleZ(0.5), d, e, f);
-        }
-    }
-    
     public int getColor() {
         return this.dataTracker.get(COLOR);
     }

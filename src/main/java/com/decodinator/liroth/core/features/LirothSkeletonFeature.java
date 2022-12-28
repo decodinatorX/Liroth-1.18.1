@@ -1,17 +1,11 @@
 package com.decodinator.liroth.core.features;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothBlocks;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DeadCoralWallFanBlock;
-import net.minecraft.block.SeaPickleBlock;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;

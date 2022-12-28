@@ -12,7 +12,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
@@ -32,7 +31,6 @@ public class ChestDamnationBoatEntity
 extends DamnationBoatEntity
 implements RideableInventory,
 VehicleInventory {
-    private static final int INVENTORY_SIZE = 27;
     private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
     @Nullable
     private Identifier lootTableId;

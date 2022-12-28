@@ -9,15 +9,10 @@ import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.CrossbowPosing;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.model.BipedEntityModel.ArmPose;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.util.Arm;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 
 public class ForsakenCorpseModel<T extends ForsakenCorpseEntity> extends EntityModel<T> {
@@ -42,21 +37,21 @@ public class ForsakenCorpseModel<T extends ForsakenCorpseEntity> extends EntityM
 		ModelData meshdefinition = new ModelData();
 		ModelPartData partdefinition = meshdefinition.getRoot();
 
-		ModelPartData head = partdefinition.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -7.0F, -4.0F, 8.0F, 7.0F, 7.0F)
+		partdefinition.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -7.0F, -4.0F, 8.0F, 7.0F, 7.0F)
 		.uv(0, 0).cuboid(-8.0F, -6.0F, 0.0F, 4.0F, 5.0F, 0.0F)
 		.uv(28, 16).cuboid(4.0F, -6.0F, 0.0F, 4.0F, 5.0F, 0.0F), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-		ModelPartData body = partdefinition.addChild("body", ModelPartBuilder.create().uv(24, 21).cuboid(-4.0F, 7.0F, -2.0F, 8.0F, 5.0F, 4.0F)
+		partdefinition.addChild("body", ModelPartBuilder.create().uv(24, 21).cuboid(-4.0F, 7.0F, -2.0F, 8.0F, 5.0F, 4.0F)
 		.uv(0, 14).cuboid(-5.0F, 0.0F, -2.0F, 10.0F, 7.0F, 4.0F), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-		ModelPartData leftArm = partdefinition.addChild("leftArm", ModelPartBuilder.create().uv(30, 0).cuboid(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(-5.0F, 2.0F, 0.0F));
+		partdefinition.addChild("leftArm", ModelPartBuilder.create().uv(30, 0).cuboid(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(-5.0F, 2.0F, 0.0F));
 
-		ModelPartData rightArm = partdefinition.addChild("rightArm", ModelPartBuilder.create().uv(0, 25).cuboid(0.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(5.0F, 2.0F, 0.0F));
+		partdefinition.addChild("rightArm", ModelPartBuilder.create().uv(0, 25).cuboid(0.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(5.0F, 2.0F, 0.0F));
 
-		ModelPartData leftLeg = partdefinition.addChild("leftLeg", ModelPartBuilder.create().uv(28, 40).cuboid(-3.0F, 0.0F, -1.0F, 4.0F, 6.0F, 4.0F)
+		partdefinition.addChild("leftLeg", ModelPartBuilder.create().uv(28, 40).cuboid(-3.0F, 0.0F, -1.0F, 4.0F, 6.0F, 4.0F)
 		.uv(16, 30).cuboid(-3.0F, 6.0F, 0.0F, 4.0F, 6.0F, 4.0F), ModelTransform.pivot(-1.9F, 12.0F, 0.0F));
 
-		ModelPartData rightLeg = partdefinition.addChild("rightLeg", ModelPartBuilder.create().uv(12, 40).cuboid(-1.0F, 0.0F, -1.0F, 4.0F, 6.0F, 4.0F)
+		partdefinition.addChild("rightLeg", ModelPartBuilder.create().uv(12, 40).cuboid(-1.0F, 0.0F, -1.0F, 4.0F, 6.0F, 4.0F)
 		.uv(32, 30).cuboid(-1.0F, 6.0F, 0.0F, 4.0F, 6.0F, 4.0F), ModelTransform.pivot(1.9F, 12.0F, 0.0F));
 
 		return TexturedModelData.of(meshdefinition, 64, 64);
@@ -73,13 +68,8 @@ public class ForsakenCorpseModel<T extends ForsakenCorpseEntity> extends EntityM
         return angleTwo + angleOne * f;
     }
 
-    private float method_2807(float f) {
-        return -65.0f * f + f * f;
-    }
-
     @Override
     public void setAngles(T livingEntity, float f, float g, float h, float i, float j) {
-        boolean bl3;
         boolean bl = ((LivingEntity)livingEntity).getRoll() > 4;
         boolean bl2 = ((LivingEntity)livingEntity).isInSwimmingPose();
         this.head.yaw = i * ((float)Math.PI / 180);
@@ -118,7 +108,6 @@ public class ForsakenCorpseModel<T extends ForsakenCorpseEntity> extends EntityM
         }
         this.rightArm.yaw = 0.0f;
         this.leftArm.yaw = 0.0f;
-            float p = 0.33333334f;
             this.leftLeg.pitch = MathHelper.lerp(this.leaningPitch, this.leftLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f + (float)Math.PI));
             this.rightLeg.pitch = MathHelper.lerp(this.leaningPitch, this.rightLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f));
     }

@@ -10,14 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothTags;
-
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PlantBlock;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
 
 @Mixin(CropBlock.class)
 public class CropBlockMixin {

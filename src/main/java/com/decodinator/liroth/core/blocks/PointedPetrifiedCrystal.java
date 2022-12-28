@@ -6,7 +6,6 @@ import java.util.Optional;
 import net.minecraft.util.math.random.Random;
 import java.util.function.Predicate;
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -55,32 +54,12 @@ Waterloggable {
     public static final DirectionProperty VERTICAL_DIRECTION = Properties.VERTICAL_DIRECTION;
     public static final EnumProperty<Thickness> THICKNESS = Properties.THICKNESS;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    private static final int field_31205 = 11;
-    private static final int field_31206 = Integer.MAX_VALUE;
-    private static final int field_31207 = 2;
-    private static final float field_31208 = 0.02f;
-    private static final float field_31209 = 0.12f;
-    private static final int field_31210 = 11;
-    private static final float field_31211 = 0.17578125f;
-    private static final float field_31212 = 0.05859375f;
-    private static final double field_31213 = 0.6;
-    private static final float field_31214 = 1.0f;
-    private static final int field_31215 = 40;
-    private static final int field_31200 = 6;
-    private static final float field_31201 = 2.0f;
-    private static final int field_31202 = 2;
-    private static final float field_33566 = 5.0f;
-    private static final float field_33567 = 0.011377778f;
-    private static final int MAX_STALACTITE_GROWTH = 7;
-    private static final int STALACTITE_FLOOR_SEARCH_RANGE = 10;
-    private static final float field_31203 = 0.6875f;
     private static final VoxelShape TIP_MERGE_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 16.0, 11.0);
     private static final VoxelShape UP_TIP_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 11.0, 11.0);
     private static final VoxelShape DOWN_TIP_SHAPE = Block.createCuboidShape(5.0, 5.0, 5.0, 11.0, 16.0, 11.0);
     private static final VoxelShape BASE_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 16.0, 12.0);
     private static final VoxelShape FRUSTUM_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 16.0, 13.0);
     private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
-    private static final float field_31204 = 0.125f;
 
     public PointedPetrifiedCrystal(AbstractBlock.Settings settings) {
         super(settings);
@@ -175,10 +154,9 @@ Waterloggable {
     @Override
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        Direction direction;
         BlockPos blockPos;
         World worldAccess = ctx.getWorld();
-        Direction direction2 = PointedPetrifiedCrystal.getDirectionToPlaceAt(worldAccess, blockPos = ctx.getBlockPos(), direction = ctx.getVerticalPlayerLookDirection().getOpposite());
+        Direction direction2 = PointedPetrifiedCrystal.getDirectionToPlaceAt(worldAccess, blockPos = ctx.getBlockPos(), ctx.getVerticalPlayerLookDirection().getOpposite());
         if (direction2 == null) {
             return null;
         }
@@ -195,7 +173,7 @@ Waterloggable {
         if (state.get(WATERLOGGED).booleanValue()) {
             return Fluids.WATER.getStill(false);
         }
-        return super.getFluidState(state);
+        return super.getDefaultState().getFluidState();
     }
 
     @Override
@@ -267,7 +245,6 @@ Waterloggable {
     }
 
     private static void spawnFallingBlock(BlockState state, ServerWorld world, BlockPos pos) {
-        Vec3d vec3d = Vec3d.ofBottomCenter(pos);
         BlockPos.Mutable mutable = pos.mutableCopy();
         BlockState blockState = state;
         FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, mutable, blockState);
@@ -281,9 +258,8 @@ Waterloggable {
 
     @VisibleForTesting
     public static void tryGrow(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        BlockState blockState2;
         BlockState blockState = world.getBlockState(pos.up(1));
-        if (!PointedPetrifiedCrystal.canGrow(blockState, blockState2 = world.getBlockState(pos.up(2)))) {
+        if (!PointedPetrifiedCrystal.canGrow(blockState, world.getBlockState(pos.up(2)))) {
             return;
         }
         BlockPos blockPos = PointedPetrifiedCrystal.getTipPos(state, world, pos, 7, false);
@@ -354,12 +330,11 @@ Waterloggable {
 
     private static void createParticle(World world, BlockPos pos, BlockState state, Fluid fluid) {
         Vec3d vec3d = state.getModelOffset(world, pos);
-        double d = 0.0625;
         double e = (double)pos.getX() + 0.5 + vec3d.x;
         double f = (double)((float)(pos.getY() + 1) - 0.6875f) - 0.0625;
         double g = (double)pos.getZ() + 0.5 + vec3d.z;
         Fluid fluid2 = PointedPetrifiedCrystal.getDripFluid(world, fluid);
-        DefaultParticleType particleEffect = fluid2.isIn(FluidTags.LAVA) ? ParticleTypes.DRIPPING_DRIPSTONE_LAVA : ParticleTypes.DRIPPING_DRIPSTONE_WATER;
+        DefaultParticleType particleEffect = fluid2.getDefaultState().isIn(FluidTags.LAVA) ? ParticleTypes.DRIPPING_DRIPSTONE_LAVA : ParticleTypes.DRIPPING_DRIPSTONE_WATER;
         world.addParticle(particleEffect, e, f, g, 0.0, 0.0, 0.0);
     }
 

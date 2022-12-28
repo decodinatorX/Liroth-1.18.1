@@ -1,8 +1,6 @@
 package com.decodinator.liroth.core.world.trees;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.LirothConfiguredFeatures;
-
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryEntry;

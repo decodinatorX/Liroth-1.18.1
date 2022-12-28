@@ -8,7 +8,6 @@ import com.decodinator.liroth.core.blocks.PointedJalsphireCrystal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.PointedDripstoneBlock;
 import net.minecraft.block.enums.Thickness;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +21,6 @@ public class JalsphireCrystalHelper {
         if (radius < bluntness) {
             radius = bluntness;
         }
-        double d = 0.384;
         double e = radius / scale * 0.384;
         double f = 0.75 * Math.pow(e, 1.3333333333333333);
         double g = Math.pow(e, 0.6666666666666666);
@@ -36,12 +34,10 @@ public class JalsphireCrystalHelper {
         if (JalsphireCrystalHelper.canGenerateOrLava(world, pos)) {
             return false;
         }
-        float f = 6.0f;
         float g = 6.0f / (float)height;
         for (float h = 0.0f; h < (float)Math.PI * 2; h += g) {
-            int j;
             int i = (int)(MathHelper.cos(h) * (float)height);
-            if (!JalsphireCrystalHelper.canGenerateOrLava(world, pos.add(i, 0, j = (int)(MathHelper.sin(h) * (float)height)))) continue;
+            if (!JalsphireCrystalHelper.canGenerateOrLava(world, pos.add(i, 0, (int)(MathHelper.sin(h) * (float)height)))) continue;
             return false;
         }
         return true;

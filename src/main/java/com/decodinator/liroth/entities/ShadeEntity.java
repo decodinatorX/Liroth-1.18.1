@@ -1,6 +1,5 @@
 package com.decodinator.liroth.entities;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothSounds;
 import com.decodinator.liroth.core.LirothTags;
 
@@ -12,13 +11,11 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
 
 public class ShadeEntity extends ZombieEntity {
 

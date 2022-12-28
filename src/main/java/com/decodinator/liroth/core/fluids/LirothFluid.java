@@ -1,6 +1,5 @@
 package com.decodinator.liroth.core.fluids;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.LirothFluids;
 import com.decodinator.liroth.core.LirothItems;

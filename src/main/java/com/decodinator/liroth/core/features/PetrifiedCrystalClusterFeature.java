@@ -20,7 +20,6 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.feature.DripstoneClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.CaveSurface;
-import net.minecraft.world.gen.feature.util.DripstoneHelper;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
 public class PetrifiedCrystalClusterFeature
@@ -72,7 +71,7 @@ extends Feature<DripstoneClusterFeatureConfig> {
         if (!optionalInt.isPresent() && !optionalInt2.isPresent()) {
             return;
         }
-        boolean bl5 = bl = random.nextFloat() < wetness;
+        bl = random.nextFloat() < wetness;
         if (bl && optionalInt2.isPresent() && this.canWaterSpawn(world, pos.withY(optionalInt2.getAsInt()))) {
             int i = optionalInt2.getAsInt();
             caveSurface = optional.get().withFloor(OptionalInt.of(i - 1));
@@ -81,7 +80,7 @@ extends Feature<DripstoneClusterFeatureConfig> {
             caveSurface = optional.get();
         }
         OptionalInt optionalInt3 = caveSurface.getFloorHeight();
-        boolean bl6 = bl2 = random.nextDouble() < dripstoneChance;
+        bl2 = random.nextDouble() < dripstoneChance;
         if (optionalInt.isPresent() && bl2 && !this.isLava(world, pos.withY(optionalInt.getAsInt()))) {
             j = config.dripstoneBlockLayerThickness.get(random);
             this.placeDripstoneBlocks(world, pos.withY(optionalInt.getAsInt()), j, Direction.UP);
@@ -90,7 +89,7 @@ extends Feature<DripstoneClusterFeatureConfig> {
         } else {
             l = 0;
         }
-        boolean bl7 = bl3 = random.nextDouble() < dripstoneChance;
+        bl3 = random.nextDouble() < dripstoneChance;
         if (optionalInt3.isPresent() && bl3 && !this.isLava(world, pos.withY(optionalInt3.getAsInt()))) {
             m = config.dripstoneBlockLayerThickness.get(random);
             this.placeDripstoneBlocks(world, pos.withY(optionalInt3.getAsInt()), m, Direction.DOWN);
@@ -111,7 +110,7 @@ extends Feature<DripstoneClusterFeatureConfig> {
             m = l;
             t = j;
         }
-        boolean bl8 = bl4 = random.nextBoolean() && m > 0 && t > 0 && caveSurface.getOptionalHeight().isPresent() && m + t == caveSurface.getOptionalHeight().getAsInt();
+        bl4 = random.nextBoolean() && m > 0 && t > 0 && caveSurface.getOptionalHeight().isPresent() && m + t == caveSurface.getOptionalHeight().getAsInt();
         if (optionalInt.isPresent()) {
         	PetrifiedCrystalHelper.generatePointedDripstone(world, pos.withY(optionalInt.getAsInt() - 1), Direction.DOWN, m, bl4);
         }

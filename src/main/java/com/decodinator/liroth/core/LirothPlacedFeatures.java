@@ -3,8 +3,6 @@ package com.decodinator.liroth.core;
 import java.util.Arrays;
 import java.util.List;
 
-import com.decodinator.liroth.Liroth;
-
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.PlacedFeature;

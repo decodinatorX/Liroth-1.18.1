@@ -12,7 +12,6 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -33,7 +32,6 @@ import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Nullable;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorBlockEntity;
 
 public class QuantumExtractorBlock extends BlockWithEntity implements BlockEntityProvider {
@@ -82,7 +80,7 @@ public class QuantumExtractorBlock extends BlockWithEntity implements BlockEntit
                 ItemScatterer.spawn(world, pos, (QuantumExtractorBlockEntity)blockEntity);
                 world.updateComparators(pos,this);
             }
-            super.onStateReplaced(state, world, pos, newState, moved);
+            super.getDefaultState().onStateReplaced(world, pos, newState, moved);
         }
     }
 
@@ -109,14 +107,5 @@ public class QuantumExtractorBlock extends BlockWithEntity implements BlockEntit
         if (random.nextDouble() < 0.1) {
             world.playSound(d, e, f, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
         }
-        Direction direction = state.get(FACING);
-        Direction.Axis axis = direction.getAxis();
-        double g = 0.52;
-        double h = random.nextDouble() * 0.6 - 0.3;
-        double i = axis == Direction.Axis.X ? (double)direction.getOffsetX() * 0.52 : h;
-        double j = random.nextDouble() * 6.0 / 16.0;
-        double k = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52 : h;
-//        world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0, 0.0, 0.0);
-//        world.addParticle(Liroth.PURPLE_FLAME, d + i, e + j, f + k, 0.0, 0.0, 0.0);
     }
 }

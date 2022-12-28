@@ -63,7 +63,6 @@ extends AbstractFurnaceBlock {
        }
        Direction direction = state.get(FACING);
        Direction.Axis axis = direction.getAxis();
-       double g = 0.52;
        double h = random.nextDouble() * 0.6 - 0.3;
        double i = axis == Direction.Axis.X ? (double)direction.getOffsetX() * 0.52 : h;
        double j = random.nextDouble() * 6.0 / 16.0;

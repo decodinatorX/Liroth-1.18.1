@@ -2,9 +2,7 @@ package com.decodinator.liroth.core.items;
 
 import java.util.Map;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothArmorMaterials;
-import com.decodinator.liroth.core.helpers.AnsalumLirothArmorMaterial;
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.entity.Entity;
@@ -15,7 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.property.Properties;
 import net.minecraft.world.World;
 
 public class LuxArmorItem extends ArmorItem {

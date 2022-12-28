@@ -1,31 +1,20 @@
 package com.decodinator.liroth;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.model.TexturedModelData;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.WhiteAshParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
-
-import java.util.Map;
-import java.util.UUID;
-
 import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothFluids;
 import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.LirothParticles;
 import com.decodinator.liroth.core.LirothRenders;
+import com.decodinator.liroth.core.LirothScreenHandlers;
 import com.decodinator.liroth.core.helpers.PotestiumHelmetModel;
 import com.decodinator.liroth.core.helpers.PotestiumHelmetRenderer;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntityRenderer;
@@ -33,8 +22,6 @@ import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreen;
 import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlockEntityRenderer;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreen;
 import com.decodinator.liroth.entities.renderers.BeamLaserProjectileEntityRenderer;
-import com.decodinator.liroth.entities.renderers.ButterflyEntityRenderer;
-import com.decodinator.liroth.entities.renderers.ButterflyModel;
 import com.decodinator.liroth.entities.renderers.ForsakenCorpseEntityRenderer;
 import com.decodinator.liroth.entities.renderers.ForsakenCorpseModel;
 import com.decodinator.liroth.entities.renderers.FreakshowEntityRenderer;
@@ -58,7 +45,7 @@ import com.decodinator.liroth.entities.renderers.VileSharkModel;
 import com.decodinator.liroth.entities.renderers.WarpEntityRenderer;
 import com.decodinator.liroth.entities.renderers.WarpModel;
 import com.decodinator.liroth.mixin.access.ItemBlockRenderTypeAccess;
-import com.decodinator.liroth.entities.EntitySpawnPacket;
+import com.decodinator.liroth.entities.ShadeEntity;
 import com.decodinator.liroth.entities.boats.ChestDamnationBoatEntityModel;
 import com.decodinator.liroth.entities.boats.ChestDamnationBoatEntityRenderer;
 import com.decodinator.liroth.entities.boats.ChestJapzBoatEntityModel;
@@ -79,7 +66,6 @@ import com.decodinator.liroth.entities.boats.JapzBoatEntityModel;
 import com.decodinator.liroth.entities.boats.JapzBoatEntityRenderer;
 import com.decodinator.liroth.entities.boats.KoolawBoatEntityModel;
 import com.decodinator.liroth.entities.boats.KoolawBoatEntityRenderer;
-import com.decodinator.liroth.entities.boats.LirothBoatEntity;
 import com.decodinator.liroth.entities.boats.LirothBoatEntityModel;
 import com.decodinator.liroth.entities.boats.LirothBoatEntityRenderer;
 import com.decodinator.liroth.entities.boats.PetrifiedBoatEntityModel;
@@ -97,9 +83,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.TexturedModelDataProvider;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 
 public class LirothClient implements ClientModInitializer {
@@ -133,6 +117,7 @@ public class LirothClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_BUTTERFLY_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "butterfly"), "main");
     public static final EntityModelLayer MODEL_POTESTIUM_HELMET_LAYER = new EntityModelLayer(new Identifier(Liroth.MOD_ID, "potestium_helmet"), "main");
     
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void onInitializeClient() {
  
@@ -187,11 +172,10 @@ public class LirothClient implements ClientModInitializer {
         
         LirothRenders.renderCutOuts(blockRenderTypeMap -> ItemBlockRenderTypeAccess.getTypeByBlock().putAll(blockRenderTypeMap));
 		
-        ScreenRegistry.register(Liroth.LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
-        ScreenRegistry.register(Liroth.QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
+        HandledScreens.register(LirothScreenHandlers.LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
+        HandledScreens.register(LirothScreenHandlers.QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
         
-		EntityRendererRegistry.register(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, (context) ->
-		new FlyingItemEntityRenderer(context));
+		EntityRendererRegistry.register(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, context -> new FlyingItemEntityRenderer(context, 3.0f, true));
         
         // In 1.17, use EntityRendererRegistry.register (seen below) instead of EntityRendererRegistry.INSTANCE.register (seen above)
         EntityRendererRegistry.register(LirothEntities.FUNGAL_FIEND, (context) -> {
@@ -235,7 +219,7 @@ public class LirothClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(MODEL_PIER_PEEP_LAYER, PierPeepModel::getTexturedModelData);
         
         EntityRendererRegistry.register(LirothEntities.SHADE, (context) -> {
-            return new ShadeEntityRenderer(context, new ShadeModel(context.getPart(LirothClient.MODEL_SHADE_LAYER)), 0.5f);
+            return new ShadeEntityRenderer(context, new ShadeModel<ShadeEntity>(context.getPart(LirothClient.MODEL_SHADE_LAYER)), 0.5f);
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_SHADE_LAYER, ShadeModel::getTexturedModelData);
@@ -263,9 +247,7 @@ public class LirothClient implements ClientModInitializer {
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_LIROTHIAN_MIMIC_LAYER, LirothianMimicModel::getTexturedModelData);
- 
-        EntityModelLayerRegistry.registerModelLayer(MODEL_BUTTERFLY_LAYER, ButterflyModel::getTexturedModelData);
-                
+                 
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
             registry.register(new Identifier("liroth", "particle/purple_flame"));
         }));

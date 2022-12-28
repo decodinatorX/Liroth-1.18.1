@@ -4,7 +4,6 @@ import com.decodinator.liroth.Liroth;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.structure.StructureType;
 
 public class LirothStructures {

@@ -10,7 +10,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowBlock;
 import net.minecraft.block.SnowyBlock;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldView;
@@ -36,7 +35,6 @@ extends SnowyBlock {
     }
 
     private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
         return LirothSpreadableBlock.canSurvive(state, world, pos);
     }
 

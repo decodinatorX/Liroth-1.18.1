@@ -1,35 +1,19 @@
 package com.decodinator.liroth.world.generator;
 
-import com.decodinator.liroth.Liroth;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.structure.PoolStructurePiece;
-import net.minecraft.structure.PostPlacementProcessor;
-import net.minecraft.structure.StructureGeneratorFactory;
-import net.minecraft.structure.StructurePiecesGenerator;
-import net.minecraft.structure.StructureSetKeys;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.HeightContext;
-import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.heightprovider.HeightProvider;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
-import net.minecraft.world.gen.structure.Structure.StructurePosition;
-
-import org.apache.logging.log4j.Level;
-
 import java.util.Optional;
 
 public class NovaTowerStructure extends Structure {

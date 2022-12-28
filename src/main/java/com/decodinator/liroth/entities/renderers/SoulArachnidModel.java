@@ -46,11 +46,11 @@ public class SoulArachnidModel<T extends SoulArachnidEntity> extends SinglePartE
 		ModelData meshdefinition = new ModelData();
 		ModelPartData ModelData = meshdefinition.getRoot();
 
-		ModelPartData head = ModelData.addChild("head", ModelPartBuilder.create().uv(0, 20).cuboid(-4.0F, -4.0F, -8.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, 15.0F, -3.0F));
+		ModelData.addChild("head", ModelPartBuilder.create().uv(0, 20).cuboid(-4.0F, -4.0F, -8.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, 15.0F, -3.0F));
 
-		ModelPartData body0 = ModelData.addChild("body0", ModelPartBuilder.create().uv(30, 36).cuboid(-3.0F, -3.0F, -3.5F, 6.0F, 6.0F, 6.0F), ModelTransform.pivot(0.0F, 15.0F, 1.0F));
+		ModelData.addChild("body0", ModelPartBuilder.create().uv(30, 36).cuboid(-3.0F, -3.0F, -3.5F, 6.0F, 6.0F, 6.0F), ModelTransform.pivot(0.0F, 15.0F, 1.0F));
 
-		ModelPartData body1 = ModelData.addChild("body1", ModelPartBuilder.create().uv(0, 0).cuboid(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 12.0F)
+		ModelData.addChild("body1", ModelPartBuilder.create().uv(0, 0).cuboid(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 12.0F)
 		.uv(0, 24).cuboid(-1.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
 		.uv(0, 8).cuboid(1.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
 		.uv(0, 4).cuboid(-3.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
@@ -60,21 +60,21 @@ public class SoulArachnidModel<T extends SoulArachnidEntity> extends SinglePartE
 		.uv(6, 6).cuboid(-0.5F, -13.0F, 10.0F, 1.0F, 2.0F, 2.0F)
 		.uv(6, 2).cuboid(0.0F, -12.0F, 8.0F, 0.0F, 2.0F, 2.0F), ModelTransform.pivot(0.0F, 15.0F, -3.0F));
 
-		ModelPartData leg0 = ModelData.addChild("leg0", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 2.0F));
+		ModelData.addChild("leg0", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 2.0F));
 
-		ModelPartData leg1 = ModelData.addChild("leg1", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 2.0F));
+		ModelData.addChild("leg1", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 2.0F));
 
-		ModelPartData leg2 = ModelData.addChild("leg2", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 1.0F));
+		ModelData.addChild("leg2", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 1.0F));
 
-		ModelPartData leg3 = ModelData.addChild("leg3", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 1.0F));
+		ModelData.addChild("leg3", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 1.0F));
 
-		ModelPartData leg4 = ModelData.addChild("leg4", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 0.0F));
+		ModelData.addChild("leg4", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 0.0F));
 
-		ModelPartData leg5 = ModelData.addChild("leg5", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 0.0F));
+		ModelData.addChild("leg5", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 0.0F));
 
-		ModelPartData leg6 = ModelData.addChild("leg6", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, -1.0F));
+		ModelData.addChild("leg6", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, -1.0F));
 
-		ModelPartData leg7 = ModelData.addChild("leg7", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, -1.0F));
+		ModelData.addChild("leg7", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, -1.0F));
 
 		return TexturedModelData.of(meshdefinition, 128, 128);
 	}
@@ -83,7 +83,6 @@ public class SoulArachnidModel<T extends SoulArachnidEntity> extends SinglePartE
     public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.head.yaw = headYaw * ((float)Math.PI / 180);
         this.head.pitch = headPitch * ((float)Math.PI / 180);
-        float f = 0.7853982f;
         this.leg1.roll = -0.7853982f;
         this.leg0.roll = 0.7853982f;
         this.leg3.roll = -0.58119464f;
@@ -92,8 +91,6 @@ public class SoulArachnidModel<T extends SoulArachnidEntity> extends SinglePartE
         this.leg4.roll = 0.58119464f;
         this.leg7.roll = -0.7853982f;
         this.leg6.roll = 0.7853982f;
-        float g = -0.0f;
-        float h = 0.3926991f;
         this.leg1.yaw = 0.7853982f;
         this.leg0.yaw = -0.7853982f;
         this.leg3.yaw = 0.3926991f;

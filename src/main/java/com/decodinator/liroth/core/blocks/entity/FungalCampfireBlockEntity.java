@@ -37,8 +37,6 @@ import net.minecraft.world.event.GameEvent;
 public class FungalCampfireBlockEntity
 extends BlockEntity
 implements Clearable {
-    private static final int field_31330 = 2;
-    private static final int field_31331 = 4;
     private final DefaultedList<ItemStack> itemsBeingCooked = DefaultedList.ofSize(4, ItemStack.EMPTY);
     private final int[] cookingTimes = new int[4];
     private final int[] cookingTotalTimes = new int[4];
@@ -93,7 +91,6 @@ implements Clearable {
         for (int j = 0; j < campfire.itemsBeingCooked.size(); ++j) {
             if (campfire.itemsBeingCooked.get(j).isEmpty() || !(random.nextFloat() < 0.2f)) continue;
             Direction direction = Direction.fromHorizontal(Math.floorMod(j + i, 4));
-            float f = 0.3125f;
             double d = (double)pos.getX() + 0.5 - (double)((float)direction.getOffsetX() * 0.3125f) + (double)((float)direction.rotateYClockwise().getOffsetX() * 0.3125f);
             double e = (double)pos.getY() + 0.5;
             double g = (double)pos.getZ() + 0.5 - (double)((float)direction.getOffsetZ() * 0.3125f) + (double)((float)direction.rotateYClockwise().getOffsetZ() * 0.3125f);
@@ -179,7 +176,8 @@ implements Clearable {
         }
     }
 
-    public /* synthetic */ Packet toUpdatePacket() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public /* synthetic */ Packet toUpdatePacket() {
         return this.toUpdatePacket1();
     }
 }

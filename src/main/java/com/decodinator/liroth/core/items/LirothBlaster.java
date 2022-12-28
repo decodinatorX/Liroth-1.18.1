@@ -2,8 +2,6 @@ package com.decodinator.liroth.core.items;
 
 import java.util.function.Predicate;
 
-import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.LirothSounds;
 
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -16,7 +14,6 @@ import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -32,7 +29,7 @@ public class LirothBlaster extends BowItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         boolean bl;
         ItemStack itemStack = user.getStackInHand(hand);
-        boolean bl2 = bl = !user.getArrowType(itemStack).isEmpty();
+        bl = !user.getArrowType(itemStack).isEmpty();
         if (user.getAbilities().creativeMode || bl) {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(itemStack);
@@ -53,7 +50,6 @@ public class LirothBlaster extends BowItem {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         boolean bl2;
-        int i;
         float f;
         if (!(user instanceof PlayerEntity)) {
             return;
@@ -67,10 +63,10 @@ public class LirothBlaster extends BowItem {
         if (itemStack.isEmpty()) {
             itemStack = new ItemStack(Items.ARROW);
         }
-        if ((double)(f = LirothBlaster.getPullProgress(i = this.getMaxUseTime(stack) - remainingUseTicks)) < 0.1) {
+        if ((double)(f = LirothBlaster.getPullProgress(this.getMaxUseTime(stack) - remainingUseTicks)) < 0.1) {
             return;
         }
-        boolean bl3 = bl2 = bl && itemStack.isOf(Items.ARROW);
+        bl2 = bl && itemStack.isOf(Items.ARROW);
         if (!world.isClient) {
             int k;
             int j;

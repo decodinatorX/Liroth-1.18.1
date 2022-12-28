@@ -26,7 +26,7 @@ public class PierPeepModel<T extends PierPeepEntity> extends EntityModel<T> {
 		ModelPartData head = partdefinition.addChild("head", ModelPartBuilder.create().uv(0, 0).mirrored().cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F).mirrored(false)
 		.uv(0, 14).cuboid(0.0F, -6.0F, 4.0F, 0.0F, 4.0F, 8.0F), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-		ModelPartData cube_r1 = head.addChild("cube_r1", ModelPartBuilder.create().uv(0, 14).cuboid(-4.0F, -2.0F, 4.0F, 0.0F, 4.0F, 8.0F), 
+		head.addChild("cube_r1", ModelPartBuilder.create().uv(0, 14).cuboid(-4.0F, -2.0F, 4.0F, 0.0F, 4.0F, 8.0F), 
 				ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5708F));
 
 		return TexturedModelData.of(meshdefinition, 32, 32);

@@ -42,7 +42,7 @@ public class WarpModel<T extends WarpEntity> extends EntityModel<T> {
 		ModelData meshdefinition = new ModelData();
 		ModelPartData ModelPartData = meshdefinition.getRoot();
 
-		ModelPartData body = ModelPartData.addChild("body", ModelPartBuilder.create().uv(28, 14).cuboid(-4.0F, 4.0F, -2.0F, 8.0F, 8.0F, 4.0F)
+		ModelPartData.addChild("body", ModelPartBuilder.create().uv(28, 14).cuboid(-4.0F, 4.0F, -2.0F, 8.0F, 8.0F, 4.0F)
 		.uv(8, 34).cuboid(-0.5F, 0.0F, -2.0F, 6.0F, 4.0F, 4.0F)
 		.uv(24, 0).cuboid(-5.5F, 0.0F, -2.0F, 6.0F, 4.0F, 4.0F), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
 
@@ -61,7 +61,7 @@ public class WarpModel<T extends WarpEntity> extends EntityModel<T> {
 		.uv(32, 12).mirrored().cuboid(-8.0F, -6.0F, 0.0F, 4.0F, 1.0F, 1.0F).mirrored(false)
 		.uv(40, 0).mirrored().cuboid(-9.0F, -7.0F, 0.0F, 5.0F, 1.0F, 1.0F).mirrored(false), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
 
-		ModelPartData cube_r1 = head.addChild("cube_r1", ModelPartBuilder.create().uv(0, 4).cuboid(5.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		head.addChild("cube_r1", ModelPartBuilder.create().uv(0, 4).cuboid(5.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(0, 18).cuboid(5.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(0, 22).cuboid(6.0F, -16.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(32, 8).cuboid(5.0F, -14.0F, -1.0F, 2.0F, 2.0F, 2.0F)
@@ -69,18 +69,18 @@ public class WarpModel<T extends WarpEntity> extends EntityModel<T> {
 		.uv(52, 28).cuboid(2.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
 		.uv(0, 0).cuboid(3.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F), ModelTransform.of(0.0F, 0.0F, 0.0F, -3.1416F, 0.0F, 3.1416F));
 
-		ModelPartData hat = ModelPartData.addChild("hat", ModelPartBuilder.create().uv(0, 18).cuboid(-4.0F, -7.5F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
+		ModelPartData.addChild("hat", ModelPartBuilder.create().uv(0, 18).cuboid(-4.0F, -7.5F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
 
-		ModelPartData rightArm = ModelPartData.addChild("rightArm", ModelPartBuilder.create().uv(20, 42).cuboid(0.0F, -2.0F, -1.0F, 2.0F, 17.0F, 2.0F)
+		ModelPartData.addChild("rightArm", ModelPartBuilder.create().uv(20, 42).cuboid(0.0F, -2.0F, -1.0F, 2.0F, 17.0F, 2.0F)
 		.uv(10, 43).cuboid(0.0F, 15.0F, -0.5F, 2.0F, 13.0F, 2.0F), ModelTransform.pivot(5.5F, -16.0F, 0.0F));
 
-		ModelPartData leftArm = ModelPartData.addChild("leftArm", ModelPartBuilder.create().uv(20, 42).cuboid(-2.0F, -2.0F, -1.0F, 2.0F, 17.0F, 2.0F)
+		ModelPartData.addChild("leftArm", ModelPartBuilder.create().uv(20, 42).cuboid(-2.0F, -2.0F, -1.0F, 2.0F, 17.0F, 2.0F)
 		.uv(10, 43).mirrored().cuboid(-2.0F, 15.0F, -0.5F, 2.0F, 13.0F, 2.0F).mirrored(false), ModelTransform.pivot(-5.5F, -16.0F, 0.0F));
 
-		ModelPartData rightLeg = ModelPartData.addChild("rightLeg", ModelPartBuilder.create().uv(0, 34).cuboid(0.0F, 5.0F, -1.0F, 2.0F, 25.0F, 2.0F)
+		ModelPartData.addChild("rightLeg", ModelPartBuilder.create().uv(0, 34).cuboid(0.0F, 5.0F, -1.0F, 2.0F, 25.0F, 2.0F)
 		.uv(41, 5).cuboid(-0.5F, 0.0F, -1.5F, 3.0F, 5.0F, 3.0F), ModelTransform.pivot(2.0F, -6.0F, 0.0F));
 
-		ModelPartData leftLeg = ModelPartData.addChild("leftLeg", ModelPartBuilder.create().uv(0, 34).cuboid(-2.0F, 5.0F, -1.0F, 2.0F, 25.0F, 2.0F)
+		ModelPartData.addChild("leftLeg", ModelPartBuilder.create().uv(0, 34).cuboid(-2.0F, 5.0F, -1.0F, 2.0F, 25.0F, 2.0F)
 		.uv(41, 5).cuboid(-2.5F, 0.0F, -1.5F, 3.0F, 5.0F, 3.0F), ModelTransform.pivot(-2.0F, -6.0F, 0.0F));
 
 		return TexturedModelData.of(meshdefinition, 64, 64);
@@ -97,13 +97,8 @@ public class WarpModel<T extends WarpEntity> extends EntityModel<T> {
         return angleTwo + angleOne * f;
     }
 
-    private float method_2807(float f) {
-        return -65.0f * f + f * f;
-    }
-
     @Override
     public void setAngles(T livingEntity, float f, float g, float h, float i, float j) {
-        boolean bl3;
         boolean bl = ((LivingEntity)livingEntity).getRoll() > 4;
         boolean bl2 = ((LivingEntity)livingEntity).isInSwimmingPose();
         this.head.yaw = i * ((float)Math.PI / 180);
@@ -127,7 +122,6 @@ public class WarpModel<T extends WarpEntity> extends EntityModel<T> {
             this.leftArm.roll = -0.05f;
         }
         if (this.angry) {
-            float m = 1.0f;
             this.head.pivotY -= 5.0f;
         }
         this.rightArm.pitch = MathHelper.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f / k;
@@ -152,7 +146,6 @@ public class WarpModel<T extends WarpEntity> extends EntityModel<T> {
         }
         this.rightArm.yaw = 0.0f;
         this.leftArm.yaw = 0.0f;
-            float p = 0.33333334f;
             this.leftLeg.pitch = MathHelper.lerp(this.leaningPitch, this.leftLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f + (float)Math.PI));
             this.rightLeg.pitch = MathHelper.lerp(this.leaningPitch, this.rightLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f));
             

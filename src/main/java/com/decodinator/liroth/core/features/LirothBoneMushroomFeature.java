@@ -6,7 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.feature.CoralFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
 public class LirothBoneMushroomFeature

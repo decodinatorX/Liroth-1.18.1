@@ -3,7 +3,6 @@ package com.decodinator.liroth.core.items;
 import com.decodinator.liroth.entities.projectiles.BeamLaserProjectileEntity;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

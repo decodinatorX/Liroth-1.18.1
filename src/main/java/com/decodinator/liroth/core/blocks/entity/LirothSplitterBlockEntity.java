@@ -1,38 +1,26 @@
 package com.decodinator.liroth.core.blocks.entity;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.AbstractCookingRecipe;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -49,11 +37,10 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
     private final DefaultedList<ItemStack> inventory =
             DefaultedList.ofSize(5, ItemStack.EMPTY);
 	private static final Map<Item, Integer> AVAILABLE_FUELS = Maps.newHashMap();
-    private int timer;
     int burnTime;
     int fuelTime;
     int cookTime;
-    int cookTimeTotal = this.getCookTime();
+    int cookTimeTotal = LirothSplitterBlockEntity.getCookTime();
     protected final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
         public int get(int index) {
@@ -104,9 +91,7 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
 
 	protected int processTime;
 	protected int totalProcessTime;
-	private int ticks;
-
-	// uses for both tile entity and jei recipe viewer
+	
 	public static final int totalTime = 50;
 
 	public int getField(int id) {
@@ -162,7 +147,6 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         this.burnTime = nbt.getInt("BurnTime");
         this.cookTime = nbt.getInt("CookTime");
         this.cookTimeTotal = nbt.getInt("CookTimeTotal");
-        this.timer = 0;
         this.fuelTime = getFuelTime(this.inventory.get(1));
     }
 
@@ -195,7 +179,6 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         }
         ItemStack itemStack = entity.inventory.get(1);
         if (entity.isBurning() || !itemStack.isEmpty() && !entity.inventory.get(0).isEmpty()) {
-            int i = entity.getMaxCountPerStack();
             if (!entity.isBurning()) {
                 entity.fuelTime = entity.burnTime = entity.getFuelTime(itemStack);
                 if (entity.isBurning() && LirothSplitterBlockEntity.hasRecipe(entity)) {
@@ -241,8 +224,6 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         entity.setStack(2, new ItemStack(LirothItems.LIROTH_DUST_ANSALUM, entity.getStack(2).getCount() + 1));
         entity.setStack(3, new ItemStack(LirothItems.LIROTH_DUST_LUX, entity.getStack(3).getCount() + 1));
         entity.setStack(4, new ItemStack(LirothItems.LIROTH_DUST_SALEM, entity.getStack(4).getCount() + 1));
-        
-        entity.ticks = 0;
     }
 
     private static boolean hasRecipe(LirothSplitterBlockEntity entity) {
@@ -251,12 +232,6 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
         return hasItemInFirstSlot;
     }
 
-    private static boolean hasNotReachedStackLimit(LirothSplitterBlockEntity entity) {
-        return entity.getStack(2).getCount() < entity.getStack(2).getMaxCount() ||
-        	   entity.getStack(3).getCount() < entity.getStack(3).getMaxCount() ||
-        	   entity.getStack(4).getCount() < entity.getStack(4).getMaxCount();
-    }
-    
     private static int getCookTime() {
         return (200);
     }
@@ -301,8 +276,4 @@ public class LirothSplitterBlockEntity extends BlockEntity implements NamedScree
 		Integer ticks = FuelRegistry.INSTANCE.get(stack.getItem());
 		return ticks == null ? 0 : ticks;
 	}
-    
-    private static boolean tickReached100(LirothSplitterBlockEntity entity) {
-    	return entity.ticks <= getCookTime();
-    }
 }

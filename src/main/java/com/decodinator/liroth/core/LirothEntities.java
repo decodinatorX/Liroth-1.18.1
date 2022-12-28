@@ -127,7 +127,7 @@ public class LirothEntities {
 			new Identifier(Liroth.MOD_ID, "beam_laser_projectile_entity"),
 			FabricEntityTypeBuilder.<BeamLaserProjectileEntity>create(SpawnGroup.MISC, BeamLaserProjectileEntity::new)
 					.dimensions(EntityDimensions.fixed(0.25F, 0.25F)) // dimensions in Minecraft units of the projectile
-					.trackable(4, 10) // necessary for all thrown projectiles (as it prevents it from breaking, lol)
+					.trackRangeBlocks(10) // necessary for all thrown projectiles (as it prevents it from breaking, lol)
 					.build() // VERY IMPORTANT DONT DELETE FOR THE LOVE OF GOD PSLSSSSSS
 	);
 	

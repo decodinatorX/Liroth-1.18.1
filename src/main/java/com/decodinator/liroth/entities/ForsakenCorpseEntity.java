@@ -1,21 +1,14 @@
 package com.decodinator.liroth.entities;
 
-import com.decodinator.liroth.Liroth;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
 
 public class ForsakenCorpseEntity extends ZombieEntity {
 

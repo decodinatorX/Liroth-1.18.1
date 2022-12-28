@@ -9,14 +9,10 @@ import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.CrossbowPosing;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.MathHelper;
 
 public class SkeletalFreakModel<T extends SkeletalFreakEntity> extends EntityModel<T> {
@@ -42,7 +38,7 @@ public class SkeletalFreakModel<T extends SkeletalFreakEntity> extends EntityMod
 		ModelData meshdefinition = new ModelData();
 		ModelPartData partdefinition = meshdefinition.getRoot();
 
-		ModelPartData body = partdefinition.addChild("body", ModelPartBuilder.create().uv(21, 10).cuboid(-3.0F, 6.0F, -2.0F, 6.0F, 1.0F, 1.0F)
+		partdefinition.addChild("body", ModelPartBuilder.create().uv(21, 10).cuboid(-3.0F, 6.0F, -2.0F, 6.0F, 1.0F, 1.0F)
 		.uv(14, 12).cuboid(-4.0F, 2.0F, -2.0F, 8.0F, 3.0F, 1.0F)
 		.uv(17, 14).cuboid(-4.0F, 10.0F, -2.0F, 8.0F, 2.0F, 1.0F)
 		.uv(21, 12).cuboid(1.0F, 1.0F, -2.0F, 3.0F, 1.0F, 1.0F)
@@ -78,16 +74,16 @@ public class SkeletalFreakModel<T extends SkeletalFreakEntity> extends EntityMod
 		.uv(56, 8).cuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 0.0F)
 		.uv(48, 0).cuboid(-2.0F, -6.0F, -2.0F, 4.0F, 4.0F, 4.0F), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-		ModelPartData cube_r1 = head.addChild("cube_r1", ModelPartBuilder.create().uv(58, 19).cuboid(0.0F, -3.0F, 4.0F, 0.0F, 8.0F, 3.0F)
+		head.addChild("cube_r1", ModelPartBuilder.create().uv(58, 19).cuboid(0.0F, -3.0F, 4.0F, 0.0F, 8.0F, 3.0F)
 		.uv(64, 25).cuboid(0.0F, -3.0F, -4.0F, 0.0F, 8.0F, -3.0F), ModelTransform.of(0.0F, -5.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
-		ModelPartData rightArm = partdefinition.addChild("rightArm", ModelPartBuilder.create(), ModelTransform.pivot(8.0F, 2.0F, 0.0F));
+		partdefinition.addChild("rightArm", ModelPartBuilder.create(), ModelTransform.pivot(8.0F, 2.0F, 0.0F));
 
-		ModelPartData leftArm = partdefinition.addChild("leftArm", ModelPartBuilder.create(), ModelTransform.pivot(-8.0F, 2.0F, 0.0F));
+		partdefinition.addChild("leftArm", ModelPartBuilder.create(), ModelTransform.pivot(-8.0F, 2.0F, 0.0F));
 
-		ModelPartData rightLeg = partdefinition.addChild("rightLeg", ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(0.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F).mirrored(false), ModelTransform.pivot(2.0F, 12.0F, 0.0F));
+		partdefinition.addChild("rightLeg", ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(0.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F).mirrored(false), ModelTransform.pivot(2.0F, 12.0F, 0.0F));
 
-		ModelPartData leftLeg = partdefinition.addChild("leftLeg", ModelPartBuilder.create().uv(0, 16).cuboid(-2.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F), ModelTransform.pivot(-2.0F, 12.0F, 0.0F));
+		partdefinition.addChild("leftLeg", ModelPartBuilder.create().uv(0, 16).cuboid(-2.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F), ModelTransform.pivot(-2.0F, 12.0F, 0.0F));
 
 		return TexturedModelData.of(meshdefinition, 64, 32);
 	}
@@ -103,13 +99,8 @@ public class SkeletalFreakModel<T extends SkeletalFreakEntity> extends EntityMod
         return angleTwo + angleOne * f;
     }
 
-    private float method_2807(float f) {
-        return -65.0f * f + f * f;
-    }
-
     @Override
     public void setAngles(T livingEntity, float f, float g, float h, float i, float j) {
-        boolean bl3;
         boolean bl = ((LivingEntity)livingEntity).getRoll() > 4;
         boolean bl2 = ((LivingEntity)livingEntity).isInSwimmingPose();
         this.head.yaw = i * ((float)Math.PI / 180);
@@ -148,7 +139,6 @@ public class SkeletalFreakModel<T extends SkeletalFreakEntity> extends EntityMod
         }
         this.rightArm.yaw = 0.0f;
         this.leftArm.yaw = 0.0f;
-            float p = 0.33333334f;
             this.leftLeg.pitch = MathHelper.lerp(this.pissnshit, this.leftLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f + (float)Math.PI));
             this.rightLeg.pitch = MathHelper.lerp(this.pissnshit, this.rightLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f));
     }

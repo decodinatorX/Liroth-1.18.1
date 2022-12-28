@@ -3,15 +3,10 @@ package com.decodinator.liroth.core.items;
 import java.util.Map;
 import java.util.UUID;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothArmorMaterials;
-import com.decodinator.liroth.core.helpers.AnsalumLirothArmorMaterial;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Multimap;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -20,8 +15,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.s2c.play.TeamS2CPacket.Operation;
-import net.minecraft.state.property.Properties;
 import net.minecraft.world.World;
 
 public class QuantumArmorItem extends ArmorItem {

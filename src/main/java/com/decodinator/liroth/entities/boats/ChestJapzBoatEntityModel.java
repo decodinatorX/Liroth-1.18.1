@@ -4,25 +4,12 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.CompositeEntityModel;
-import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class ChestJapzBoatEntityModel extends CompositeEntityModel<ChestJapzBoatEntity> {
     static Boolean chest = true;
-    private static final String LEFT_PADDLE = "left_paddle";
-    private static final String RIGHT_PADDLE = "right_paddle";
-    private static final String WATER_PATCH = "water_patch";
-    private static final String BOTTOM = "bottom";
-    private static final String BACK = "back";
-    private static final String FRONT = "front";
-    private static final String RIGHT = "right";
-    private static final String LEFT = "left";
-    private static final String CHEST_BOTTOM = "chest_bottom";
-    private static final String CHEST_LID = "chest_lid";
-    private static final String CHEST_LOCK = "chest_lock";
     private final ModelPart leftPaddle;
     private final ModelPart rightPaddle;
     private final ModelPart waterPatch;
@@ -43,7 +30,6 @@ public class ChestJapzBoatEntityModel extends CompositeEntityModel<ChestJapzBoat
         modelPartData.addChild("front", ModelPartBuilder.create().uv(0, 27).cuboid(-8.0F, -7.0F, -1.0F, 16.0F, 6.0F, 2.0F), ModelTransform.of(15.0F, 4.0F, 0.0F, 0.0F, 1.5707964F, 0.0F));
         modelPartData.addChild("right", ModelPartBuilder.create().uv(0, 35).cuboid(-14.0F, -7.0F, -1.0F, 28.0F, 6.0F, 2.0F), ModelTransform.of(0.0F, 4.0F, -9.0F, 0.0F, 3.1415927F, 0.0F));
         modelPartData.addChild("left", ModelPartBuilder.create().uv(0, 43).cuboid(-14.0F, -7.0F, -1.0F, 28.0F, 6.0F, 2.0F), ModelTransform.pivot(0.0F, 4.0F, 9.0F));
-        float f = -5.0F;
         modelPartData.addChild("chest_bottom", ModelPartBuilder.create().uv(0, 76).cuboid(0.0f, 0.0f, 0.0f, 12.0f, 8.0f, 12.0f), ModelTransform.of(-2.0f, -5.0f, -6.0f, 0.0f, -1.5707964f, 0.0f));
         modelPartData.addChild("chest_lid", ModelPartBuilder.create().uv(0, 59).cuboid(0.0f, 0.0f, 0.0f, 12.0f, 4.0f, 12.0f), ModelTransform.of(-2.0f, -9.0f, -6.0f, 0.0f, -1.5707964f, 0.0f));
         modelPartData.addChild("chest_lock", ModelPartBuilder.create().uv(0, 59).cuboid(0.0f, 0.0f, 0.0f, 2.0f, 4.0f, 1.0f), ModelTransform.of(-1.0f, -6.0f, -1.0f, 0.0f, -1.5707964f, 0.0f));

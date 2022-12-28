@@ -1,6 +1,5 @@
 package com.decodinator.liroth.entities;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothEntities;
 
 import net.minecraft.entity.EntityType;
@@ -63,9 +62,5 @@ public class SkeletalFreakEntity extends SkeletonEntity {
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_STRAY_DEATH;
-    }
-
-    protected SoundEvent getStepSound() {
-        return SoundEvents.ENTITY_WITHER_SKELETON_STEP;
     }
 }

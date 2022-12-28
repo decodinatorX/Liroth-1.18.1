@@ -4,22 +4,17 @@ import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothItems;
 import com.google.common.collect.Lists;
-import com.google.common.collect.UnmodifiableIterator;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.LilyPadBlock;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,7 +42,6 @@ import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class LirothBoatEntity
@@ -61,8 +55,6 @@ extends Entity {
     private static final TrackedData<Integer> BUBBLE_WOBBLE_TICKS = DataTracker.registerData(LirothBoatEntity.class, TrackedDataHandlerRegistry.INTEGER);
     public static final int field_30697 = 0;
     public static final int field_30698 = 1;
-    private static final int field_30695 = 60;
-    private static final float NEXT_PADDLE_PHASE = 0.3926991f;
     /**
      * A boat will emit a sound event every time a paddle is near this rotation.
      */
@@ -170,7 +162,7 @@ extends Entity {
         this.setDamageWobbleStrength(this.getDamageWobbleStrength() + amount * 10.0f);
         this.scheduleVelocityUpdate();
         this.emitGameEvent(GameEvent.ENTITY_DAMAGE, source.getAttacker());
-        boolean bl2 = bl = source.getAttacker() instanceof PlayerEntity && ((PlayerEntity)source.getAttacker()).getAbilities().creativeMode;
+        bl = source.getAttacker() instanceof PlayerEntity && ((PlayerEntity)source.getAttacker()).getAbilities().creativeMode;
         if (bl || this.getDamageWobbleStrength() > 40.0f) {
             if (!bl && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
                 this.dropItems(source);
@@ -344,8 +336,9 @@ extends Entity {
             case ON_LAND: {
                 return SoundEvents.ENTITY_BOAT_PADDLE_LAND;
             }
+		default:
+			return null;
         }
-        return null;
     }
 
     private void updatePositionAndRotation() {
@@ -509,7 +502,6 @@ extends Entity {
     }
 
     private void updateVelocity() {
-        double d = -0.04f;
         double e = this.hasNoGravity() ? 0.0 : (double)-0.04f;
         double f = 0.0;
         this.velocityDecay = 0.05f;

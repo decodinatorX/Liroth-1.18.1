@@ -68,7 +68,6 @@ implements Waterloggable {
      * The shape used to test whether a given block is considered 'smokey'.
      */
     private static final VoxelShape SMOKEY_SHAPE = Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
-    private static final int field_31049 = 5;
     private final boolean emitsParticles;
     private final int fireDamage;
 
@@ -100,7 +99,7 @@ implements Waterloggable {
         if (state.get(LIT).booleanValue() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
             entity.damage(DamageSource.IN_FIRE, this.fireDamage);
         }
-        super.onEntityCollision(state, world, pos, entity);
+        super.getDefaultState().onEntityCollision(world, pos, entity);
     }
 
     @Override
@@ -112,7 +111,7 @@ implements Waterloggable {
         if (blockEntity instanceof LirothianPetroleumCampfireBlockEntity) {
             ItemScatterer.spawn(world, pos, ((LirothianPetroleumCampfireBlockEntity)blockEntity).getItemsBeingCooked());
         }
-        super.onStateReplaced(state, world, pos, newState, moved);
+        super.getDefaultState().onStateReplaced(world, pos, newState, moved);
     }
 
     @Override
@@ -132,7 +131,7 @@ implements Waterloggable {
         if (direction == Direction.DOWN) {
             return (BlockState)state.with(SIGNAL_FIRE, this.isSignalFireBaseBlock(neighborState));
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.getDefaultState().getStateForNeighborUpdate(direction, neighborState, world, pos, neighborPos);
     }
 
     private boolean isSignalFireBaseBlock(BlockState state) {
@@ -230,12 +229,13 @@ implements Waterloggable {
         return state.contains(LIT) && state.isIn(BlockTags.CAMPFIRES) && state.get(LIT) != false;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public FluidState getFluidState(BlockState state) {
         if (state.get(WATERLOGGED).booleanValue()) {
             return Fluids.WATER.getStill(false);
         }
-        return super.getFluidState(state);
+		return super.getFluidState(state);
     }
 
     @Override

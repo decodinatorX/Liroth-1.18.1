@@ -1,62 +1,41 @@
 package com.decodinator.liroth.core.blocks.entity;
 
-import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.AbstractCookingRecipe;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-
-import java.util.Map;
 
 import org.jetbrains.annotations.Nullable;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.LirothItems;
-import com.decodinator.liroth.core.blocks.LirothSplitterBlock;
 import com.decodinator.liroth.core.blocks.QuantumExtractorBlock;
-import com.google.common.collect.Maps;
 
 public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory =
             DefaultedList.ofSize(4, ItemStack.EMPTY);
-	private static final Map<Item, Integer> AVAILABLE_FUELS = Maps.newHashMap();
-    private int timer;
-    int burnTime;
+	int burnTime;
     int fuelTime;
     int cookTime;
-    int cookTimeTotal = this.getCookTime();
+    int cookTimeTotal = QuantumExtractorBlockEntity.getCookTime();
     protected final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
         public int get(int index) {
@@ -107,8 +86,6 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
 
 	protected int processTime;
 	protected int totalProcessTime;
-	private int ticks;
-
 	// uses for both tile entity and jei recipe viewer
 	public static final int totalTime = 50;
 
@@ -165,7 +142,6 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
         this.burnTime = nbt.getInt("BurnTime");
         this.cookTime = nbt.getInt("CookTime");
         this.cookTimeTotal = nbt.getInt("CookTimeTotal");
-        this.timer = 0;
         this.fuelTime = getFuelTime(this.inventory.get(1));
     }
 
@@ -198,7 +174,6 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
         }
         ItemStack itemStack = entity.inventory.get(1);
         if (entity.isBurning() || !itemStack.isEmpty() && !entity.inventory.get(0).isEmpty()) {
-            int i = entity.getMaxCountPerStack();
             if (!entity.isBurning()) {
                 entity.fuelTime = entity.burnTime = entity.getFuelTime(itemStack);
                 if (entity.isBurning() && QuantumExtractorBlockEntity.hasQuantumDiamondRecipe(entity) || QuantumExtractorBlockEntity.hasPotestiumShardRecipe(entity)) {
@@ -253,8 +228,6 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
 
         entity.setStack(2, new ItemStack(Items.DIAMOND, entity.getStack(2).getCount() + 1));
         entity.setStack(3, new ItemStack(LirothItems.QUANTUM_PLATE, entity.getStack(3).getCount() + 1));
-        
-        entity.ticks = 0;
     }
 
     private static boolean hasPotestiumShardRecipe(QuantumExtractorBlockEntity entity) {
@@ -269,8 +242,6 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
 
         entity.setStack(2, new ItemStack(LirothItems.RUBY, entity.getStack(2).getCount() + 1));
         entity.setStack(3, new ItemStack(LirothItems.POTESTIUM_PLATE, entity.getStack(3).getCount() + 1));
-        
-        entity.ticks = 0;
     }
 
     private static boolean hasQuantumDiamondRecipe(QuantumExtractorBlockEntity entity) {
@@ -312,14 +283,5 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements NamedScr
             return AbstractFurnaceBlockEntity.canUseAsFuel(stack) || stack.isOf(Items.BUCKET) && !itemStack.isOf(Items.BUCKET);
         }
         return true;
-    }
-	
-	private static int getFabricFuel(ItemStack stack) {
-		Integer ticks = FuelRegistry.INSTANCE.get(stack.getItem());
-		return ticks == null ? 0 : ticks;
-	}
-    
-    private static boolean tickReached100(QuantumExtractorBlockEntity entity) {
-    	return entity.ticks <= getCookTime();
     }
 }

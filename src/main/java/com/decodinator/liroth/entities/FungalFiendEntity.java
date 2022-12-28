@@ -1,6 +1,5 @@
 package com.decodinator.liroth.entities;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothSounds;
 
 import net.minecraft.entity.EntityType;
@@ -10,7 +9,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 public class FungalFiendEntity extends CreeperEntity {

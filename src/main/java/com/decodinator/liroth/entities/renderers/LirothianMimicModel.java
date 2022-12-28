@@ -1,8 +1,6 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.entities.LirothianMimicEntity;
-import com.decodinator.liroth.entities.SoulArachnidEntity;
-
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;
@@ -10,10 +8,8 @@ import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 public class LirothianMimicModel<T extends LirothianMimicEntity> extends SinglePartEntityModel<T> {
@@ -51,23 +47,23 @@ public class LirothianMimicModel<T extends LirothianMimicEntity> extends SingleP
 		ModelData ModelData = new ModelData();
 		ModelPartData ModelPartData = ModelData.getRoot();
 
-		ModelPartData head = ModelPartData.addChild("head", ModelPartBuilder.create().uv(74, 0).cuboid(-4.0F, -8.0F, -3.0F, 8.0F, 5.0F, 6.0F), ModelTransform.pivot(0.0F, 11.0F, 0.0F));
+		ModelPartData.addChild("head", ModelPartBuilder.create().uv(74, 0).cuboid(-4.0F, -8.0F, -3.0F, 8.0F, 5.0F, 6.0F), ModelTransform.pivot(0.0F, 11.0F, 0.0F));
 
-		ModelPartData leg0 = ModelPartData.addChild("leg0", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(11.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(4.0F, 11.0F, 2.0F));
+		ModelPartData.addChild("leg0", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(11.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(4.0F, 11.0F, 2.0F));
 
-		ModelPartData leg1 = ModelPartData.addChild("leg1", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(-27.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 11.0F, 2.0F));
+		ModelPartData.addChild("leg1", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(-27.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 11.0F, 2.0F));
 
-		ModelPartData leg2 = ModelPartData.addChild("leg2", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(11.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(4.0F, 11.0F, 1.0F));
+		ModelPartData.addChild("leg2", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(11.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(4.0F, 11.0F, 1.0F));
 
-		ModelPartData leg3 = ModelPartData.addChild("leg3", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(-27.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 11.0F, 1.0F));
+		ModelPartData.addChild("leg3", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(-27.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 11.0F, 1.0F));
 
-		ModelPartData leg4 = ModelPartData.addChild("leg4", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(11.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(4.0F, 11.0F, 0.0F));
+		ModelPartData.addChild("leg4", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(11.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(4.0F, 11.0F, 0.0F));
 
-		ModelPartData leg5 = ModelPartData.addChild("leg5", ModelPartBuilder.create().uv(74, 12).mirrored().cuboid(-27.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 11.0F, 0.0F));
+		ModelPartData.addChild("leg5", ModelPartBuilder.create().uv(74, 12).mirrored().cuboid(-27.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 11.0F, 0.0F));
 
-		ModelPartData leg6 = ModelPartData.addChild("leg6", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(11.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(4.0F, 11.0F, -1.0F));
+		ModelPartData.addChild("leg6", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(11.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(4.0F, 11.0F, -1.0F));
 
-		ModelPartData leg7 = ModelPartData.addChild("leg7", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(-27.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 11.0F, -1.0F));
+		ModelPartData.addChild("leg7", ModelPartBuilder.create().uv(74, 11).mirrored().cuboid(-27.0F, 1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 11.0F, -1.0F));
 
 //		ModelPartData knob = leg7.addChild("knob", ModelPartBuilder.create().uv(0, 0).cuboid(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F)
 //		.uv(0, 0).cuboid(-1.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F), ModelTransform.of(4.0F, -1.0F, 7.0F, 1.5708F, 0.0F, 0.0F));
@@ -76,7 +72,7 @@ public class LirothianMimicModel<T extends LirothianMimicEntity> extends SingleP
 		.uv(0, 0).cuboid(-15.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F)
 		.uv(0, 62).cuboid(-15.0F, -2.0F, 14.0F, 30.0F, 2.0F, 0.0F), ModelTransform.of(0.0F, 9.0F, 7.0F, 1.5708F, 0.0F, 0.0F));
 
-		ModelPartData teeth_left_r1 = lid.addChild("teeth_left_r1", ModelPartBuilder.create().uv(2, 50).mirrored().cuboid(-15.0F, 10.0F, 2.0F, 0.0F, 1.0F, 13.0F).mirrored(false)
+		lid.addChild("teeth_left_r1", ModelPartBuilder.create().uv(2, 50).mirrored().cuboid(-15.0F, 10.0F, 2.0F, 0.0F, 1.0F, 13.0F).mirrored(false)
 		.uv(2, 50).mirrored().cuboid(15.0F, 10.0F, 2.0F, 0.0F, 1.0F, 13.0F).mirrored(false), ModelTransform.of(0.0F, 10.0F, -1.0F, 0.0F, 0.0F, -3.1416F));
 
 		ModelPartData base = ModelPartData.addChild("base", ModelPartBuilder.create().uv(0, 19).mirrored().cuboid(0.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F).mirrored(false)
@@ -84,7 +80,7 @@ public class LirothianMimicModel<T extends LirothianMimicEntity> extends SingleP
 		.uv(1, 49).mirrored().cuboid(-15.0F, 10.0F, 1.0F, 0.0F, 1.0F, 14.0F).mirrored(false)
 		.uv(1, 49).mirrored().cuboid(15.0F, 10.0F, 1.0F, 0.0F, 1.0F, 14.0F).mirrored(false), ModelTransform.of(0.0F, 18.0F, 8.0F, 3.1416F, 0.0F, 0.0F));
 
-		ModelPartData teeth_front_r1 = base.addChild("teeth_front_r1", ModelPartBuilder.create().uv(0, 62).cuboid(-15.0F, -12.0F, 15.0F, 30.0F, 2.0F, 0.0F), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -3.1416F));
+		base.addChild("teeth_front_r1", ModelPartBuilder.create().uv(0, 62).cuboid(-15.0F, -12.0F, 15.0F, 30.0F, 2.0F, 0.0F), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -3.1416F));
 
 		return TexturedModelData.of(ModelData, 128, 64);
 	}
@@ -93,7 +89,6 @@ public class LirothianMimicModel<T extends LirothianMimicEntity> extends SingleP
     public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.head.yaw = headYaw * ((float)Math.PI / 180);
         this.head.pitch = headPitch * ((float)Math.PI / 180);
-        float f = 0.7853982f;
         this.leg1.roll = -0.7853982f;
         this.leg0.roll = 0.7853982f;
         this.leg3.roll = -0.58119464f;
@@ -102,8 +97,6 @@ public class LirothianMimicModel<T extends LirothianMimicEntity> extends SingleP
         this.leg4.roll = 0.58119464f;
         this.leg7.roll = -0.7853982f;
         this.leg6.roll = 0.7853982f;
-        float g = -0.0f;
-        float h = 0.3926991f;
         this.leg1.yaw = 0.7853982f;
         this.leg0.yaw = -0.7853982f;
         this.leg3.yaw = 0.3926991f;

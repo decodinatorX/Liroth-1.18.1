@@ -9,12 +9,10 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.CaveVines;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
@@ -29,8 +27,6 @@ public class PetrifiedCaveVinesHeadBlock
 extends AbstractPlantStemBlock
 implements Fertilizable,
 CaveVines {
-    private static final float GROW_CHANCE = 0.11f;
-
     public PetrifiedCaveVinesHeadBlock(AbstractBlock.Settings settings) {
         super(settings, Direction.DOWN, SHAPE, false, 0.1);
         this.setDefaultState((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(AGE, 0)).with(BERRIES, false));

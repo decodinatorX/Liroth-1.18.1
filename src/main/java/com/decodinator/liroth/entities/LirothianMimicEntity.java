@@ -1,6 +1,5 @@
 package com.decodinator.liroth.entities;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothSounds;
 
 import net.minecraft.entity.EntityType;

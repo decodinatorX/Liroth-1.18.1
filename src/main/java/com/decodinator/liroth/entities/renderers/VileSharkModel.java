@@ -39,24 +39,24 @@ public class VileSharkModel<T extends VileSharkEntity> extends EntityModel<T> {
 		ModelData meshdefinition = new ModelData();
 		ModelPartData partdefinition = meshdefinition.getRoot();
 
-		ModelPartData head = partdefinition.addChild("head", ModelPartBuilder.create().uv(26, 28).cuboid(-5.0F, -4.0F, -8.0F, 10.0F, 5.0F, 8.0F)
+		partdefinition.addChild("head", ModelPartBuilder.create().uv(26, 28).cuboid(-5.0F, -4.0F, -8.0F, 10.0F, 5.0F, 8.0F)
 		.uv(33, 0).cuboid(-5.0F, 2.0F, -6.0F, 10.0F, 1.0F, 6.0F), ModelTransform.pivot(0.0F, 20.0F, -3.0F));
 
-		ModelPartData body = partdefinition.addChild("body", ModelPartBuilder.create().uv(0, 42).cuboid(-6.0F, -5.0F, 0.0F, 12.0F, 9.0F, 13.0F), ModelTransform.pivot(0.0F, 20.0F, -3.0F));
+		partdefinition.addChild("body", ModelPartBuilder.create().uv(0, 42).cuboid(-6.0F, -5.0F, 0.0F, 12.0F, 9.0F, 13.0F), ModelTransform.pivot(0.0F, 20.0F, -3.0F));
 
-		ModelPartData tail = partdefinition.addChild("tail", ModelPartBuilder.create().uv(0, 20).cuboid(-3.0F, -2.5F, 0.0F, 6.0F, 5.0F, 11.0F), ModelTransform.pivot(0.0F, 20.5F, 10.0F));
+		partdefinition.addChild("tail", ModelPartBuilder.create().uv(0, 20).cuboid(-3.0F, -2.5F, 0.0F, 6.0F, 5.0F, 11.0F), ModelTransform.pivot(0.0F, 20.5F, 10.0F));
 
-		ModelPartData tail_fin = partdefinition.addChild("tail_fin", ModelPartBuilder.create().uv(23, 20).cuboid(-6.0F, -0.5F, -1.0F, 12.0F, 1.0F, 6.0F), ModelTransform.pivot(0.0F, 20.5F, 20.0F));
+		partdefinition.addChild("tail_fin", ModelPartBuilder.create().uv(23, 20).cuboid(-6.0F, -0.5F, -1.0F, 12.0F, 1.0F, 6.0F), ModelTransform.pivot(0.0F, 20.5F, 20.0F));
 
 		ModelPartData back_fin = partdefinition.addChild("back_fin", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 16.0F, 5.0F));
 
-		ModelPartData back_fin_r1 = back_fin.addChild("back_fin_r1", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -12.0F, 3.0F, 1.0F, 5.0F, 4.0F), ModelTransform.of(0.0F, 7.0F, -5.0F, -0.1745F, 0.0F, 0.0F));
+		back_fin.addChild("back_fin_r1", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -12.0F, 3.0F, 1.0F, 5.0F, 4.0F), ModelTransform.of(0.0F, 7.0F, -5.0F, -0.1745F, 0.0F, 0.0F));
 
-		ModelPartData left_fin = partdefinition.addChild("left_fin", ModelPartBuilder.create().uv(0, 36).cuboid(-8.0F, -1.0F, -1.0F, 8.0F, 1.0F, 4.0F), ModelTransform.pivot(-6.0F, 22.0F, -1.0F));
+		partdefinition.addChild("left_fin", ModelPartBuilder.create().uv(0, 36).cuboid(-8.0F, -1.0F, -1.0F, 8.0F, 1.0F, 4.0F), ModelTransform.pivot(-6.0F, 22.0F, -1.0F));
 
-		ModelPartData right_fin = partdefinition.addChild("right_fin", ModelPartBuilder.create().uv(33, 7).cuboid(0.0F, -1.0F, -1.0F, 8.0F, 1.0F, 4.0F), ModelTransform.pivot(6.0F, 22.0F, -1.0F));
+		partdefinition.addChild("right_fin", ModelPartBuilder.create().uv(33, 7).cuboid(0.0F, -1.0F, -1.0F, 8.0F, 1.0F, 4.0F), ModelTransform.pivot(6.0F, 22.0F, -1.0F));
 
-		ModelPartData nose = partdefinition.addChild("nose", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 20.0F, -11.0F));
+		partdefinition.addChild("nose", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 20.0F, -11.0F));
 
 		return TexturedModelData.of(meshdefinition, 64, 64);
 	}

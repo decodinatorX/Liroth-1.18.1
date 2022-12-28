@@ -27,8 +27,6 @@ public class CustomCaveVinesHeadBlock
 extends AbstractPlantStemBlock
 implements Fertilizable,
 CaveVines {
-    private static final float GROW_CHANCE = 0.11f;
-
     public CustomCaveVinesHeadBlock(AbstractBlock.Settings settings) {
         super(settings, Direction.DOWN, SHAPE, false, 0.1);
         this.setDefaultState((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(AGE, 0)).with(BERRIES, false));

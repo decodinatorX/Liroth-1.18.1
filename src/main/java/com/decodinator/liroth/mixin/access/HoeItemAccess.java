@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;

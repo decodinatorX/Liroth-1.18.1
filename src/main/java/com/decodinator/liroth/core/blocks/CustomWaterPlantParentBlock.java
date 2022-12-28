@@ -2,18 +2,15 @@ package com.decodinator.liroth.core.blocks;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothFluids;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CoralParentBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -73,7 +70,7 @@ implements Waterloggable {
         if (direction == Direction.DOWN && !this.canPlaceAt(state, world, pos)) {
             return Blocks.AIR.getDefaultState();
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.getDefaultState().getStateForNeighborUpdate(direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -92,6 +89,6 @@ implements Waterloggable {
         if (state.get(WATERLOGGED).booleanValue()) {
             return LirothFluids.LIROTH_FLUID_STILL.getStill(false);
         }
-        return super.getFluidState(state);
+        return super.getDefaultState().getFluidState();
     }
 }
