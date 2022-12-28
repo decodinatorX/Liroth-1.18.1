@@ -230,17 +230,17 @@ public class LirothItems {
     public static final Item RUBY_AXE = createToolItem(new CustomAxeItem(LirothToolMaterials.RUBY_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ruby_axe");
     public static final Item RUBY_HOE = createToolItem(new CustomHoeItem(LirothToolMaterials.RUBY_TOOL_MATERIAL, -3, 0.0f, new Item.Settings().group(LirothCreativeTab.creativeCombatTab)), "ruby_hoe");
     
-    public static final Item FUNGAL_FIEND_SPAWN_EGG = new SpawnEggItem(LirothEntities.FUNGAL_FIEND, 1315860, 2031360, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item FORSAKEN_CORPSE_SPAWN_EGG = new SpawnEggItem(LirothEntities.FORSAKEN_CORPSE, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item SKELETAL_FREAK_SPAWN_EGG = new SpawnEggItem(LirothEntities.SKELETAL_FREAK, 1513239, 16711900, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item WARP_SPAWN_EGG = new SpawnEggItem(LirothEntities.WARP, 524305, 4260003, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item SOUL_ARACHNID_SPAWN_EGG = new SpawnEggItem(LirothEntities.SOUL_ARACHNID, 73758, 5078138, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item PIER_PEEP_SPAWN_EGG = new SpawnEggItem(LirothEntities.PIER_PEEP, 1638400, 11665663, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item SHADE_SPAWN_EGG = new SpawnEggItem(LirothEntities.SHADE, 328965, 1579032, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item PROWLER_SPAWN_EGG = new SpawnEggItem(LirothEntities.PROWLER, 16312063, 4260003, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item FREAKSHOW_SPAWN_EGG = new SpawnEggItem(LirothEntities.FREAKSHOW, 524305, 1579032, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item VILE_SHARK_SPAWN_EGG = new SpawnEggItem(LirothEntities.VILE_SHARK, 5963996, 7667865, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
-    public static final Item LIROTHIAN_MIMIC_SPAWN_EGG = new SpawnEggItem(LirothEntities.LIROTHIAN_MIMIC, 41655, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab));
+    public static final Item FUNGAL_FIEND_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.FUNGAL_FIEND, 1315860, 2031360, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "fungal_fiend_spawn_egg");
+    public static final Item FORSAKEN_CORPSE_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.FORSAKEN_CORPSE, 1842204, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "forsaken_corpse_spawn_egg");
+    public static final Item SKELETAL_FREAK_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.SKELETAL_FREAK, 1513239, 16711900, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "skeletal_freak_spawn_egg");
+    public static final Item WARP_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.WARP, 524305, 4260003, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "warp_spawn_egg");
+    public static final Item SOUL_ARACHNID_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.SOUL_ARACHNID, 73758, 5078138, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "soul_arachnid_spawn_egg");
+    public static final Item PIER_PEEP_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.PIER_PEEP, 1638400, 11665663, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "pier_peep_spawn_egg");
+    public static final Item SHADE_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.SHADE, 328965, 1579032, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "shade_spawn_egg");
+    public static final Item PROWLER_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.PROWLER, 16312063, 4260003, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "prowler_spawn_egg");
+    public static final Item FREAKSHOW_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.FREAKSHOW, 524305, 1579032, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "freakshow_spawn_egg");
+    public static final Item VILE_SHARK_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.VILE_SHARK, 5963996, 7667865, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "vile_shark_spawn_egg");
+    public static final Item LIROTHIAN_MIMIC_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.LIROTHIAN_MIMIC, 41655, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "lirothian_mimic_spawn_egg");
 
 
     private static Item createArmorItem(ArmorItem armorItem, String id) {
@@ -248,6 +248,16 @@ public class LirothItems {
 //      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
       itemsList.add(armorItem);
       return armorItem;
+	}
+    
+    private static Item createSpawnEggItem(SpawnEggItem spawnEggItem, String id) {
+        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), spawnEggItem);
+//      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
+      itemsList.add(spawnEggItem);
+      if(!FabricLoader.getInstance().isModLoaded("liroth_addendum")) {
+    	  return spawnEggItem;
+      }
+      return null;
 	}
     
     private static Item createShieldItem(LirothShield shieldItem, String id) {
@@ -317,20 +327,7 @@ public class LirothItems {
     public static void init() {
 		LIROTH_FLUID_BUCKET = Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_fluid_bucket"), new BucketItem(LirothFluids.LIROTH_FLUID_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(LirothCreativeTab.creativeItemsTab)));
 		MOLTEN_SPINERIOS_BUCKET = Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "molten_spinerios_bucket"), new BucketItem(LirothFluids.MOLTEN_SPINERIOS_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(LirothCreativeTab.creativeItemsTab)));
-    	
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "fungal_fiend_spawn_egg"), FUNGAL_FIEND_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "forsaken_corpse_spawn_egg"), FORSAKEN_CORPSE_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "skeletal_freak_spawn_egg"), SKELETAL_FREAK_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "warp_spawn_egg"), WARP_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "soul_arachnid_spawn_egg"), SOUL_ARACHNID_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "pier_peep_spawn_egg"), PIER_PEEP_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "shade_spawn_egg"), SHADE_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "prowler_spawn_egg"), PROWLER_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "freakshow_spawn_egg"), FREAKSHOW_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "vile_shark_spawn_egg"), VILE_SHARK_SPAWN_EGG);
-		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "lirothian_mimic_spawn_egg"), LIROTHIAN_MIMIC_SPAWN_EGG);
-//		Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "butterfly_spawn_egg"), BUTTERFLY_SPAWN_EGG);
-		
+
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "liroth_boat"), LirothItems.LIROTH_BOAT);
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "chest_liroth_boat"), LirothItems.CHEST_LIROTH_BOAT);
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, "damnation_boat"), LirothItems.DAMNATION_BOAT);

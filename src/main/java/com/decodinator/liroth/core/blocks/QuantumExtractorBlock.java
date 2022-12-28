@@ -72,7 +72,8 @@ public class QuantumExtractorBlock extends BlockWithEntity implements BlockEntit
         return ActionResult.SUCCESS;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -80,7 +81,7 @@ public class QuantumExtractorBlock extends BlockWithEntity implements BlockEntit
                 ItemScatterer.spawn(world, pos, (QuantumExtractorBlockEntity)blockEntity);
                 world.updateComparators(pos,this);
             }
-            super.getDefaultState().onStateReplaced(world, pos, newState, moved);
+            super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
 

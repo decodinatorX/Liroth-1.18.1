@@ -38,6 +38,7 @@ public class DimensionalCommunicator extends Block {
 		return BlockRenderType.MODEL;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
 		if (state.getBlock() != newState.getBlock()) {
@@ -48,7 +49,7 @@ public class DimensionalCommunicator extends Block {
 				world.updateComparators(pos, this);
 			}
 
-			super.getDefaultState().onStateReplaced(world, pos, newState, moved);
+			super.onStateReplaced(newState, world, pos, newState, moved);
 		}
 	}
 
