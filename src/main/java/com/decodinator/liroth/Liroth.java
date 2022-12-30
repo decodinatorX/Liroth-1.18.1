@@ -26,6 +26,10 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
@@ -90,6 +94,7 @@ public class Liroth implements ModInitializer {
 		    LirothRegistries.registerStructures();
 		    LirothRegistries.registerFuels();
 	        Liroth.threadSafeLoadFinish();
+			addClassicPack();
 		
 		}
 		
@@ -158,6 +163,12 @@ public class Liroth implements ModInitializer {
 	        	Liroth.LOGGER.info("Liroth: Fuels registered!");
 	        }
 	    }
+	    
+		public static void addClassicPack() {
+			ModContainer liroth = FabricLoader.getInstance().getModContainer(MOD_ID)
+					.orElseThrow(() -> new IllegalStateException("Liroth's ModContainer couldn't be found!"));
+			ResourceManagerHelper.registerBuiltinResourcePack(new Identifier(MOD_ID, "classic"), liroth, "Liroth Legacy", ResourcePackActivationType.NORMAL);
+		}
 	    
 	    public static void threadSafeLoadFinish() {
 	        LOGGER.debug("Liroth: Loading almost done...");

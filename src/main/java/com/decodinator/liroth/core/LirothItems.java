@@ -36,6 +36,7 @@ import com.decodinator.liroth.core.items.QuantumLirothShield;
 import com.decodinator.liroth.core.items.SalemArmorItem;
 import com.decodinator.liroth.core.items.SalemLirothShield;
 import com.decodinator.liroth.core.items.SpicedBoatItem;
+import com.decodinator.liroth.core.items.UnusedItem;
 
 public class LirothItems {
 	
@@ -45,6 +46,8 @@ public class LirothItems {
 	private static int scytheDamage = getScytheDamage();
 	
     public static List<Item> itemsList = new ArrayList<>();
+    
+    public static final Item ANOMALY_CHARGE = createItem(new UnusedItem(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "anomaly_charge");
     
 //    public static final Item TEMPLATE = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeTab)), "template");
     
@@ -60,21 +63,26 @@ public class LirothItems {
     
 //    public static final Item CORRUPTED_ROD = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeTab)), "corrupted_rod"); IS NOW THE COOL BEAM
     
+    public static final Item DAMNATION_CHARGE = createItem(new UnusedItem(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "damnation_charge");
     
-//    public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
+    public static final Item EMBUED_LIROTH_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "embued_liroth_gem");
     
     public static final Item GLEEMSTONE_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "gleemstone_dust");
-    
+   
+    public static final Item JALSPHIRE_CHARGE = createItem(new UnusedItem(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jalsphire_charge");
     public static final Item JALSPHIRE_DUST = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jalsphire_dust");
     public static final Item JALSPHIRE_DUST_HEAP = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jalsphire_dust_heap");
     public static final Item JALSPHIRE_GEM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jalsphire_gem");
+    
+    public static final Item JANTIRO_CHARGE = createItem(new UnusedItem(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "jantiro_charge");
     
     public static final Item LIROTH_GEM_ANSALUM = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_gem_ansalum");
 
     public static final Item LIROTH_BERRY = createItem(new Item(new Item.Settings().group(LirothCreativeTab.creativeItemsTab).food(FoodComponents.SUSPICIOUS_STEW)), "liroth_berry");
 
     public static final Item LIROTH_BLASTER = createRangedItem(new LirothBlaster(new Item.Settings().group(LirothCreativeTab.creativeCombatTab).maxCount(1)), "liroth_blaster");
-    
+    public static final Item LIROTH_CHARGE = createItem(new UnusedItem(new Item.Settings().group(LirothCreativeTab.creativeItemsTab)), "liroth_charge");
+
     public static final LirothBoatItem LIROTH_BOAT = new LirothBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     public static final LirothBoatItem CHEST_LIROTH_BOAT = new LirothBoatItem(true, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
     public static final DamnationBoatItem DAMNATION_BOAT = new DamnationBoatItem(false, new FabricItemSettings().group(ItemGroup.TRANSPORTATION).maxCount(1));
@@ -242,7 +250,8 @@ public class LirothItems {
     public static final Item VILE_SHARK_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.VILE_SHARK, 5963996, 7667865, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "vile_shark_spawn_egg");
     public static final Item LIROTHIAN_MIMIC_SPAWN_EGG = createSpawnEggItem(new SpawnEggItem(LirothEntities.LIROTHIAN_MIMIC, 41655, 10551525, new Item.Settings().group(LirothCreativeTab.creativeEntitiesTab)), "lirothian_mimic_spawn_egg");
 
-
+    public static final Item UNOBTAINABLE_FORSAKEN_CORPSE_SPAWN_EGG = createItem(new SpawnEggItem(LirothEntities.FORSAKEN_CORPSE, 1842204, 10551525, new Item.Settings()), "unobtainable_forsaken_corpse_spawn_egg");
+    
     private static Item createArmorItem(ArmorItem armorItem, String id) {
         Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), armorItem);
 //      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
@@ -251,10 +260,10 @@ public class LirothItems {
 	}
     
     private static Item createSpawnEggItem(SpawnEggItem spawnEggItem, String id) {
-        Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), spawnEggItem);
 //      item.setRegistryName(new Identifier(BYG.MOD_ID, id)); //Forge
       itemsList.add(spawnEggItem);
       if(!FabricLoader.getInstance().isModLoaded("liroth_addendum")) {
+          Registry.register(Registry.ITEM, new Identifier(Liroth.MOD_ID, id), spawnEggItem);
     	  return spawnEggItem;
       }
       return null;

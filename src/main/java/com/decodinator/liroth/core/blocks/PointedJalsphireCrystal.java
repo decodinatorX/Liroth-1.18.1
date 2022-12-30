@@ -168,12 +168,13 @@ Waterloggable {
         return (BlockState)((BlockState)((BlockState)this.getDefaultState().with(VERTICAL_DIRECTION, direction2)).with(THICKNESS, thickness)).with(WATERLOGGED, worldAccess.getFluidState(blockPos).getFluid() == Fluids.WATER);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public FluidState getFluidState(BlockState state) {
         if (state.get(WATERLOGGED).booleanValue()) {
             return Fluids.WATER.getStill(false);
         }
-        return super.getDefaultState().getFluidState();
+        return super.getFluidState(state);
     }
 
     @Override
@@ -335,7 +336,8 @@ Waterloggable {
         double f = (double)((float)(pos.getY() + 1) - 0.6875f) - 0.0625;
         double g = (double)pos.getZ() + 0.5 + vec3d.z;
         Fluid fluid2 = PointedJalsphireCrystal.getDripFluid(world, fluid);
-        DefaultParticleType particleEffect = fluid2.getDefaultState().isIn(FluidTags.LAVA) ? ParticleTypes.DRIPPING_DRIPSTONE_LAVA : ParticleTypes.DRIPPING_DRIPSTONE_WATER;
+        @SuppressWarnings("deprecation")
+		DefaultParticleType particleEffect = fluid2.isIn(FluidTags.LAVA) ? ParticleTypes.DRIPPING_DRIPSTONE_LAVA : ParticleTypes.DRIPPING_DRIPSTONE_WATER;
         world.addParticle(particleEffect, e, f, g, 0.0, 0.0, 0.0);
     }
 

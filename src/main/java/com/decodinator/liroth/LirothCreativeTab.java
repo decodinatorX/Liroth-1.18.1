@@ -13,7 +13,7 @@ public class LirothCreativeTab {
     public static final ItemGroup creativeBlocksTab = FabricItemGroupBuilder.build(new Identifier(Liroth.MOD_ID, "liroth_blocks"), () -> new ItemStack(LirothBlocks.LIROTH_GEM_BLOCK));
     public static final ItemGroup creativeCombatTab = FabricItemGroupBuilder.build(new Identifier(Liroth.MOD_ID, "liroth_combat"), () -> new ItemStack(LirothItems.LIROTH_SWORD));
     public static final ItemGroup creativePlantsTab = FabricItemGroupBuilder.build(new Identifier(Liroth.MOD_ID, "liroth_plants"), () -> new ItemStack(LirothBlocks.LIROTH_ROSE));
-    public static final ItemGroup creativeEntitiesTab = FabricItemGroupBuilder.build(new Identifier(Liroth.MOD_ID, "liroth_entities"), () -> new ItemStack(LirothItems.FORSAKEN_CORPSE_SPAWN_EGG));
+    public static final ItemGroup creativeEntitiesTab = FabricItemGroupBuilder.build(new Identifier(Liroth.MOD_ID, "liroth_entities"), () -> new ItemStack(LirothItems.UNOBTAINABLE_FORSAKEN_CORPSE_SPAWN_EGG));
 
     public static void init() {
         Liroth.LOGGER.debug("Liroth: Item Groups Created!");

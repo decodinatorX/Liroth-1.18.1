@@ -95,15 +95,17 @@ implements Waterloggable {
         return ActionResult.PASS;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!entity.isFireImmune() && state.get(LIT).booleanValue() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
             entity.damage(DamageSource.IN_FIRE, this.fireDamage);
         }
-        super.getDefaultState().onEntityCollision(world, pos, entity);
+        super.onEntityCollision(state, world, pos, entity);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.isOf(newState.getBlock())) {
             return;
@@ -112,7 +114,7 @@ implements Waterloggable {
         if (blockEntity instanceof CampfireBlockEntity) {
             ItemScatterer.spawn(world, pos, ((CampfireBlockEntity)blockEntity).getItemsBeingCooked());
         }
-        super.getDefaultState().onStateReplaced(world, pos, newState, moved);
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 
     @Override
@@ -124,7 +126,8 @@ implements Waterloggable {
         return (BlockState)((BlockState)((BlockState)((BlockState)this.getDefaultState().with(WATERLOGGED, bl)).with(SIGNAL_FIRE, this.doesBlockCauseSignalFire(worldAccess.getBlockState(blockPos.down())))).with(LIT, !bl)).with(FACING, ctx.getPlayerFacing());
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED).booleanValue()) {
             world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
@@ -132,7 +135,7 @@ implements Waterloggable {
         if (direction == Direction.DOWN) {
             return (BlockState)state.with(SIGNAL_FIRE, this.doesBlockCauseSignalFire(neighborState));
         }
-        return super.getDefaultState().getStateForNeighborUpdate(direction, neighborState, world, pos, neighborPos);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     private boolean doesBlockCauseSignalFire(BlockState state) {

@@ -62,7 +62,8 @@ implements Waterloggable {
         return SHAPE;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED).booleanValue()) {
             world.createAndScheduleFluidTick(pos, LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_STILL.getTickRate(world));
@@ -70,7 +71,7 @@ implements Waterloggable {
         if (direction == Direction.DOWN && !this.canPlaceAt(state, world, pos)) {
             return Blocks.AIR.getDefaultState();
         }
-        return super.getDefaultState().getStateForNeighborUpdate(direction, neighborState, world, pos, neighborPos);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -84,11 +85,12 @@ implements Waterloggable {
         builder.add(WATERLOGGED);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public FluidState getFluidState(BlockState state) {
         if (state.get(WATERLOGGED).booleanValue()) {
             return LirothFluids.LIROTH_FLUID_STILL.getStill(false);
         }
-        return super.getDefaultState().getFluidState();
+        return super.getFluidState(state);
     }
 }

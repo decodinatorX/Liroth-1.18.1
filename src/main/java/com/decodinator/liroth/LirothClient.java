@@ -9,6 +9,7 @@ import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
+
 import com.decodinator.liroth.core.LirothEntities;
 import com.decodinator.liroth.core.LirothFluids;
 import com.decodinator.liroth.core.LirothItems;
@@ -278,8 +279,6 @@ public class LirothClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(MODEL_POTESTIUM_HELMET_LAYER, PotestiumHelmetModel::getTexturedModelData);
 
         ArmorRenderer.register(new PotestiumHelmetRenderer(), LirothItems.POTESTIUM_LIROTH_HELMET);
-
+        
 	}
-	
-	
 }
