@@ -40,7 +40,7 @@ public class CustomWaterPlant extends CustomDeadWaterPlant {
         }
         this.checkLivingConditions(state, world, pos);
         if (state.get(WATERLOGGED).booleanValue()) {
-            world.createAndScheduleFluidTick(pos, LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_STILL.getTickRate(world));
+            world.scheduleFluidTick(pos, LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_STILL.getTickRate(world));
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }

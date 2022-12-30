@@ -9,8 +9,9 @@ import com.decodinator.liroth.core.features.ObsidianSpikeFeature;
 import com.decodinator.liroth.core.features.PetrifiedCrystalClusterFeature;
 import com.decodinator.liroth.core.features.VileTentacleFeature;
 
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.DripstoneClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -30,15 +31,15 @@ public class LirothFeatures {
 	  private static final Feature<RandomPatchFeatureConfig> WILTING_LIROTH_ROSES = new RandomPatchFeature(RandomPatchFeatureConfig.CODEC);
 	
 	public static void init() {
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "obsidian_spike"), OBSIDIAN_SPIKE);
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "vile_tentacle"), VILE_TENTALCE);
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_claw"), LIROTH_BONE_CLAW);
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_mushroom"), LIROTH_BONE_MUSHROOM);
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "liroth_bone_tree"), LIROTH_BONE_TREE);
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "jalsphire_crystal_cluster"), JALSPHIRE_CRYSTAL_CLUSTER);
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "petrified_crystal_cluster"), PETRIFIED_CRYSTAL_CLUSTER);
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "damnation_vines"), DAMNATION_VINES);
-	    Registry.register(Registry.FEATURE, new Identifier("liroth", "wilting_liroth_roses"), WILTING_LIROTH_ROSES);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "obsidian_spike"), OBSIDIAN_SPIKE);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "vile_tentacle"), VILE_TENTALCE);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "liroth_bone_claw"), LIROTH_BONE_CLAW);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "liroth_bone_mushroom"), LIROTH_BONE_MUSHROOM);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "liroth_bone_tree"), LIROTH_BONE_TREE);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "jalsphire_crystal_cluster"), JALSPHIRE_CRYSTAL_CLUSTER);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "petrified_crystal_cluster"), PETRIFIED_CRYSTAL_CLUSTER);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "damnation_vines"), DAMNATION_VINES);
+	    Registry.register(Registries.FEATURE, new Identifier("liroth", "wilting_liroth_roses"), WILTING_LIROTH_ROSES);
 	}
 
 }

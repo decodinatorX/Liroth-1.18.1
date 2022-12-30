@@ -41,19 +41,19 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	
-    modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.25'
-	modImplementation ("com.terraformersmc:modmenu:4.0.6")
+    modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19.3:4.0.2'
+	modImplementation ("com.terraformersmc:modmenu:5.0.2")
 
-    modImplementation "dev.emi:trinkets:3.4.0"
+    modImplementation "dev.emi:trinkets:3.5.0"
 
 	    println "Using local BCLib: ${local_bclib}"
     if (local_bclib){		
         implementation( project(path:":BCLib", configuration: 'dev') )
     } else {
-        modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
+        modImplementation "curse.maven:bclib-495191:4162884"
     }
-    modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta54-1.19'
-	include 'net.kyrptonaught:customportalapi:0.0.1-beta54-1.19'
+    modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta59-1.19'
+	include 'net.kyrptonaught:customportalapi:0.0.1-beta59-1.19'
 	
 }
 

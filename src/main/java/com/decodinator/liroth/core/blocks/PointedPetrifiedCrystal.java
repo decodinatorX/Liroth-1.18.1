@@ -27,13 +27,13 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -79,7 +79,7 @@ Waterloggable {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED).booleanValue()) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
         if (direction != Direction.UP && direction != Direction.DOWN) {
             return state;
@@ -92,7 +92,7 @@ Waterloggable {
             if (direction2 == Direction.DOWN) {
                 this.scheduleFall(state, world, pos);
             } else {
-                world.createAndScheduleBlockTick(pos, this, 1);
+                world.scheduleBlockTick(pos, this, 1);
             }
             return state;
         }
@@ -208,8 +208,8 @@ Waterloggable {
     }
 
     @Override
-    public DamageSource getDamageSource() {
-        return DamageSource.FALLING_STALACTITE;
+    public DamageSource getDamageSource(Entity attacker) {
+        return DamageSource.fallingStalactite(attacker);
     }
 
     @Override
@@ -231,7 +231,7 @@ Waterloggable {
         }
         mutable.move(Direction.UP);
         while (PointedPetrifiedCrystal.isPointingDown(world.getBlockState(mutable))) {
-            world.createAndScheduleBlockTick(mutable, this, 2);
+            world.scheduleBlockTick(mutable, this, 2);
             mutable.move(Direction.UP);
         }
     }

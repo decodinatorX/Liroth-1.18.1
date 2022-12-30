@@ -3,12 +3,16 @@ package com.decodinator.liroth.core;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 
 
@@ -25,9 +29,11 @@ import com.decodinator.liroth.core.blocks.CustomCaveVinesBodyBlock;
 import com.decodinator.liroth.core.blocks.CustomCaveVinesHeadBlock;
 import com.decodinator.liroth.core.blocks.CustomCraftingTable;
 import com.decodinator.liroth.core.blocks.CustomDeadWaterPlant;
+import com.decodinator.liroth.core.blocks.CustomDoorBlock;
 import com.decodinator.liroth.core.blocks.CustomFungalPlant;
 import com.decodinator.liroth.core.blocks.CustomKelpBlock;
 import com.decodinator.liroth.core.blocks.CustomKelpPlantBlock;
+import com.decodinator.liroth.core.blocks.CustomMetalDoorBlock;
 import com.decodinator.liroth.core.blocks.CustomPane;
 import com.decodinator.liroth.core.blocks.CustomPortalFrameBlock;
 import com.decodinator.liroth.core.blocks.CustomRod;
@@ -72,6 +78,8 @@ import com.decodinator.liroth.mixin.access.WoodButtonBlockAccess;
 
 public class LirothBlocks {
     public static List<Block> BLOCKS = new ArrayList<>();
+    public static List<Item> ITEMS = new ArrayList<>();
+    public static List<Item> PLANT_ITEMS = new ArrayList<>();
     
     public static List<Block> flowerPotBlocks = new ArrayList<>();
     public static List<Identifier> flowerIDs = new ArrayList<>();
@@ -141,8 +149,8 @@ public class LirothBlocks {
     public static final Block DEVASTATED_PILLAR_BLOCK = createPillarBlock("devastated_pillar_block");
     public static final LirothPortalBlock DEVASTATED_DIMENSION_PORTAL = createLirothPortal("devastated_plains_portal");
     public static final Block DIMENSIONAL_COMMUNICATOR = createPortalFrame("dimensional_communicator");
-    public static final Block DIMENSIONAL_COMMUNICATOR_OFF = createMetalBlock("dimensional_communicator_off");
-    public static final Block DIMENSIONAL_COMMUNICATOR_ON = createMetalBlock("dimensional_communicator_on");
+    public static final Block DIMENSIONAL_COMMUNICATOR_OFF = createDimBlock("dimensional_communicator_off");
+    public static final Block DIMENSIONAL_COMMUNICATOR_ON = createDimBlock("dimensional_communicator_on");
     public static final Block END_LIROTH_GEM_ORE = createOre("end_liroth_gem_ore");
     public static final Block FORCEFIELD = createForcefieldPane("forcefield");
     public static final Block FUNGAL_CAMPFIRE = createCampfire("fungal_campfire");
@@ -407,7 +415,7 @@ public class LirothBlocks {
    
     static Block createStone(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.STONE));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
@@ -416,153 +424,153 @@ public class LirothBlocks {
     
     static Block createGleemStone(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.GLOWSTONE).sounds(BlockSoundGroup.GLASS).luminance(state -> 15));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createLockBlock(String id) {
         Block createBlock = new LockBlock(FabricBlockSettings.copy(Blocks.STONE));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createCoalBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.COAL_BLOCK));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPetrifiedCrystalBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.GLASS));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPointedPetrifiedCrystal(String id) {
         Block createBlock = new PointedPetrifiedCrystal(FabricBlockSettings.copy(Blocks.GLASS).dynamicBounds());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPetrifiedCaveVinesHead(String id) {
         Block createBlock = new PetrifiedCaveVinesHeadBlock(FabricBlockSettings.copy(Blocks.CAVE_VINES));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPetrifiedCaveVinesBody(String id) {
         Block createBlock = new PetrifiedCaveVinesBodyBlock(FabricBlockSettings.copy(Blocks.CAVE_VINES_PLANT));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPetrifiedPlant(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.STONE));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPetrifiedFlower(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.STONE));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     public  static Block createFungalGrass(String id) {
         Block createBlock = new GrassBlock(FabricBlockSettings.copy(Blocks.CRIMSON_ROOTS).noCollision().emissiveLighting(LirothBlocks::always));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createMoss(String id) {
         Block createBlock = new MossBlock(FabricBlockSettings.copy(Blocks.MOSS_BLOCK));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createWeepingVinesHead(String id) {
         Block createBlock = new CustomWeepingVinesBlock(FabricBlockSettings.copy(Blocks.WEEPING_VINES).noCollision().emissiveLighting(LirothBlocks::always));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createWeepingVinesBody(String id) {
         Block createBlock = new CustomWeepingVinesPlantBlock(FabricBlockSettings.copy(Blocks.WEEPING_VINES_PLANT).noCollision().emissiveLighting(LirothBlocks::always));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createCaveVinesHead(String id) {
         Block createBlock = new CustomCaveVinesHeadBlock(FabricBlockSettings.copy(Blocks.CAVE_VINES));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createCaveVinesBody(String id) {
         Block createBlock = new CustomCaveVinesBodyBlock(FabricBlockSettings.copy(Blocks.CAVE_VINES_PLANT));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createSporeBlossom(String id) {
         Block createBlock = new SporeBlossomBlock(FabricBlockSettings.copy(Blocks.SPORE_BLOSSOM).luminance(state -> 8));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createAzalea(String id) {
         Block createBlock = new CustomAzaleaBlock(FabricBlockSettings.copy(Blocks.AZALEA));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createMossCarpet(String id) {
         Block createBlock = new CarpetBlock(FabricBlockSettings.copy(Blocks.MOSS_CARPET));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createCrystalBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.GLASS).luminance(state -> 8));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPointedCrystal(String id) {
         Block createBlock = new PointedJalsphireCrystal(FabricBlockSettings.copy(Blocks.GLASS).dynamicBounds().luminance(state -> 8));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     private static Block createLirothSplitter(String id) {
         Block createBlock = new LirothSplitterBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5f).luminance(LirothBlocks.createLightLevelFromLitBlockState(13)));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
 	}
 
     private static Block createQuantumExtractor(String id) {
         Block createBlock = new QuantumExtractorBlock(AbstractBlock.Settings.of(Material.METAL).requiresTool().strength(3.5f).nonOpaque().luminance(LirothBlocks.createLightLevelFromLitBlockState(13)));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
 	}
@@ -573,218 +581,218 @@ public class LirothBlocks {
 
 	static Block createWaterPlant(String id) {
         Block createBlock = new CustomWaterPlant(DEAD_SEA_EYE, FabricBlockSettings.copy(Blocks.FIRE_CORAL_FAN));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createDeadWaterPlant(String id) {
         Block createBlock = new CustomDeadWaterPlant(FabricBlockSettings.copy(Blocks.DEAD_FIRE_CORAL_FAN));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createFungusPlant(String id) {
-        Block createBlock = new CustomFungalPlant(FabricBlockSettings.copy(Blocks.CRIMSON_FUNGUS).noCollision().emissiveLighting(LirothBlocks::always), null);
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Block createBlock = new CustomFungalPlant(FabricBlockSettings.copy(Blocks.CRIMSON_FUNGUS).noCollision().emissiveLighting(LirothBlocks::always), null, LirothBlocks.DAMNATION_SOIL);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createWartBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.NETHER_WART_BLOCK).emissiveLighting(LirothBlocks::always));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createShroomlightBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.NETHER_WART_BLOCK).emissiveLighting(LirothBlocks::always).strength(1.0f).sounds(BlockSoundGroup.SHROOMLIGHT).luminance(state -> 15));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createCampfire(String id) {
         Block createBlock = new FungalCampfireBlock(false, 1, FabricBlockSettings.copy(Blocks.CAMPFIRE).luminance(LirothBlocks.createLightLevelFromLitBlockState(15)).nonOpaque());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createLirothianPetroleumCampfire(String id) {
         Block createBlock = new LirothianPetroleumCampfireBlock(false, 1, FabricBlockSettings.copy(Blocks.CAMPFIRE).luminance(LirothBlocks.createLightLevelFromLitBlockState(15)).nonOpaque());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createTorch(String id) {
         Block createBlock = new CustomTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision(), LirothParticles.GREEN_FLAME);
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPetroleumTorch(String id) {
         Block createBlock = new CustomTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision(), LirothParticles.PURPLE_FLAME);
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createWallPetroleumTorch(String id) {
         Block createBlock = new CustomWallTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision().dropsLike(FUNGAL_TORCH), ParticleTypes.PORTAL);
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createLantern(String id) {
         Block createBlock = new LanternBlock(FabricBlockSettings.copy(Blocks.LANTERN));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createWallTorch(String id) {
         Block createBlock = new CustomWallTorch(FabricBlockSettings.copy(Blocks.TORCH).noCollision().dropsLike(FUNGAL_TORCH), ParticleTypes.HAPPY_VILLAGER);
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createFungusClusterPlant(String id) {
         Block createBlock = new TallFlowerBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FUNGUS).noCollision().emissiveLighting(LirothBlocks::always));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createUnderwaterReedTop(String id) {
         Block createBlock = new CustomKelpBlock(FabricBlockSettings.copy(Blocks.KELP));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createUnderwaterReed(String id) {
         Block createBlock = new CustomKelpPlantBlock(FabricBlockSettings.copy(Blocks.KELP_PLANT));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createCraftingTable(String id) {
         Block createBlock = new CustomCraftingTable(FabricBlockSettings.copy(Blocks.CRAFTING_TABLE));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createBrewingStand(String id) {
         Block createBlock = new BrewingStandBlock(FabricBlockSettings.copy(Blocks.BREWING_STAND));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createFurnace(String id) {
         Block createBlock = new BaseFurnaceBlock(FabricBlockSettings.copy(Blocks.STONE).luminance(LirothBlocks.createLightLevelFromLitBlockState(13)));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
 
     static Block createChest(String id) {
         Block createBlock = new BaseChestBlock(Blocks.CHEST);
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static LirothPortalBlock createLirothPortal(String id) {
     	LirothPortalBlock createBlock = new LirothPortalBlock(FabricBlockSettings.copy(Blocks.END_PORTAL));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createAnomalyBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK).nonOpaque());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPortalFrame(String id) {
         Block createBlock = new CustomPortalFrameBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).nonOpaque());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createBoneBlock(String id) {
         Block createBlock = new PillarBlock(FabricBlockSettings.copy(Blocks.BONE_BLOCK));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createSpineriosAncientDebris(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.ANCIENT_DEBRIS));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
 	}
 
 	static Block createFireBlock(String id) {
         Block createBlock = new FireBlock(FabricBlockSettings.copy(Blocks.FIRE));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createRod(String id) {
         Block createBlock = new CustomRod(FabricBlockSettings.copy(Blocks.STONE));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createGlassBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.GLASS));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createForcefieldPane(String id) {
         Block createBlock = new CustomPane(AbstractBlock.Settings.copy(Blocks.BARRIER).nonOpaque());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
 
     static Block createObsidianBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.OBSIDIAN));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createFence(String id) {
         Block createBlock = new FenceBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
     }
 
     static Block createFenceGate(String id) {
-        Block createBlock = new FenceGateBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Block createBlock = new FenceGateBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f), SoundEvents.BLOCK_FENCE_GATE_OPEN, null);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -792,7 +800,7 @@ public class LirothBlocks {
 
     static Block createSand(int dustColor, String id) {
         Block createBlock = new SandBlock(dustColor, FabricBlockSettings.of(Material.AGGREGATE).sounds(BlockSoundGroup.SAND).strength(0.2f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -800,7 +808,7 @@ public class LirothBlocks {
     
     static Block createNonFallingSand(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.DIRT).sounds(BlockSoundGroup.SAND).strength(0.2f).requiresTool());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -808,7 +816,7 @@ public class LirothBlocks {
     
     static Block createDamnationSoil(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.DIRT).sounds(BlockSoundGroup.SOUL_SAND).strength(0.2f).requiresTool());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -816,7 +824,7 @@ public class LirothBlocks {
 
     static Block createLirothSoulSand(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.DIRT).sounds(BlockSoundGroup.SOUL_SAND).strength(0.2f).requiresTool());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -824,7 +832,7 @@ public class LirothBlocks {
     
     static Block createSoullessSoil(String id) {
         Block createBlock = new Block(FabricBlockSettings.copy(Blocks.DIRT).sounds(BlockSoundGroup.SOUL_SOIL).strength(0.2f).requiresTool());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -832,7 +840,7 @@ public class LirothBlocks {
     
     static Block createWoodSlab(String id) {
         Block createBlock = new SlabBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -840,7 +848,7 @@ public class LirothBlocks {
 
     static Block createStoneSlab(String id) {
         Block createBlock = new SlabBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(2.0f, 6.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -848,63 +856,63 @@ public class LirothBlocks {
 
     static Block createStoneWall(String id) {
         Block createBlock = new WallBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(2.0f, 6.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
     }
 
     static Block createWoodPressurePlate(String id) {
-        Block createBlock = PressurePlateBlockAccess.create(PressurePlateBlock.ActivationRule.EVERYTHING, AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).noCollision().strength(0.5F));
-        createBlock(createBlock, id);
+        Block createBlock = PressurePlateBlockAccess.create(PressurePlateBlock.ActivationRule.EVERYTHING, AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).noCollision().strength(0.5F), SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
     static Block createWoodStairs(String id) {
-        Block createBlock = StairBlockAccess.create(Registry.BLOCK.get(new Identifier(Liroth.MOD_ID, id.replace("_stairs", "planks"))).getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f));
-        createBlock(createBlock, id);
+        Block createBlock = StairBlockAccess.create(Registries.BLOCK.get(new Identifier(Liroth.MOD_ID, id.replace("_stairs", "planks"))).getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f));
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createStoneStairs(String id) {
-        Block createBlock = StairBlockAccess.create(Registry.BLOCK.get(new Identifier(Liroth.MOD_ID, id.replace("_stairs", "planks"))).getDefaultState(), AbstractBlock.Settings.copy(Blocks.STONE).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f));
-        createBlock(createBlock, id);
+        Block createBlock = StairBlockAccess.create(Registries.BLOCK.get(new Identifier(Liroth.MOD_ID, id.replace("_stairs", "planks"))).getDefaultState(), AbstractBlock.Settings.copy(Blocks.STONE).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f));
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
     static Block createTrapDoor(String id) {
-        Block createBlock = TrapDoorBlockAccess.create(AbstractBlock.Settings.of(Material.WOOD, MapColor.BROWN).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f).nonOpaque());
-        createBlock(createBlock, id);
+        Block createBlock = TrapDoorBlockAccess.create(AbstractBlock.Settings.of(Material.WOOD, MapColor.BROWN).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f).nonOpaque(), SoundEvents.BLOCK_WOODEN_TRAPDOOR_OPEN, SoundEvents.BLOCK_WOODEN_TRAPDOOR_CLOSE);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createMetalTrapDoor(String id) {
-        Block createBlock = TrapDoorBlockAccess.create(AbstractBlock.Settings.of(Material.METAL, MapColor.BLUE).sounds(BlockSoundGroup.METAL).strength(3.0f, 4.0f).nonOpaque());
-        createBlock(createBlock, id);
+        Block createBlock = TrapDoorBlockAccess.create(AbstractBlock.Settings.of(Material.METAL, MapColor.BLUE).sounds(BlockSoundGroup.METAL).strength(3.0f, 4.0f).nonOpaque(), SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN, SoundEvents.BLOCK_IRON_TRAPDOOR_CLOSE);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
     static Block createWoodButton(String id) {
-        Block createBlock = WoodButtonBlockAccess.create(AbstractBlock.Settings.of(Material.DECORATION).sounds(BlockSoundGroup.WOOD).noCollision().strength(0.5F));
-        createBlock(createBlock, id);
+        Block createBlock = WoodButtonBlockAccess.create(AbstractBlock.Settings.of(Material.DECORATION).sounds(BlockSoundGroup.WOOD).noCollision().strength(0.5F), 0, true, SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON, SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
     static Block createDoor(String id) {
-        Block createBlock = DoorBlockAccess.create(AbstractBlock.Settings.of(Material.WOOD, MapColor.BROWN).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f).nonOpaque());
-        createBlock(createBlock, id);
+        Block createBlock = DoorBlockAccess.create(AbstractBlock.Settings.of(Material.WOOD, MapColor.BROWN).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f).nonOpaque(), SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundEvents.BLOCK_WOODEN_DOOR_CLOSE);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createMetalDoor(String id) {
-        Block createBlock = DoorBlockAccess.create(AbstractBlock.Settings.of(Material.METAL, MapColor.BLUE).sounds(BlockSoundGroup.METAL).strength(3.0f, 4.0f).nonOpaque());
-        createBlock(createBlock, id);
+        Block createBlock = DoorBlockAccess.create(AbstractBlock.Settings.of(Material.METAL, MapColor.BLUE).sounds(BlockSoundGroup.METAL).strength(3.0f, 4.0f).nonOpaque(), SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundEvents.BLOCK_IRON_DOOR_CLOSE);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
     static Block createPlanks(String id) {
         Block createBlock = new Block(FabricBlockSettings.of(Material.WOOD, MapColor.BROWN).sounds(BlockSoundGroup.WOOD).strength(2.0f, 3.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -912,7 +920,7 @@ public class LirothBlocks {
 
     static Block createWood(String id) {
         Block createBlock = new PillarBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -920,7 +928,7 @@ public class LirothBlocks {
 
     static Block createStrippedLog(String id) {
         Block createBlock = new PillarBlock(FabricBlockSettings.of(Material.WOOD, MapColor.BLACK).sounds(BlockSoundGroup.WOOD).strength(2.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -928,7 +936,7 @@ public class LirothBlocks {
 
     static Block createLog(String id) {
         Block createBlock = new PillarBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0f));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -936,7 +944,7 @@ public class LirothBlocks {
     
     static Block createDamnationLog(String id) {
         Block createBlock = new PillarBlock(FabricBlockSettings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).strength(2.0f).emissiveLighting(LirothBlocks::always));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -944,7 +952,7 @@ public class LirothBlocks {
 
     static Block createFlower(String id) {
         Block createBlock = new FlowerBlock(StatusEffects.SATURATION, 7, FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.GRASS).strength(0.0f).noCollision().nonOpaque());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
 
         createPottedBlock(createBlock, id);
         BLOCKS.add(createBlock);
@@ -954,7 +962,7 @@ public class LirothBlocks {
 
     static Block createTallFlower(String id) {
         Block createBlock = new TallFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).sounds(BlockSoundGroup.GRASS).strength(0.0f).noCollision().nonOpaque());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         flowerIDs.add(new Identifier(Liroth.MOD_ID, id));
@@ -963,8 +971,8 @@ public class LirothBlocks {
 
     static Block createPottedBlock(Block blockForPot, String id) {
         Block createBlock = new FlowerPotBlock(blockForPot, FabricBlockSettings.of(Material.WOOD).breakInstantly().nonOpaque());
-//        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, "potted_" + id), createBlock);
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, "potted_" + id), createBlock); //Forge
+//        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, "potted_" + id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, "potted_" + id), createBlock); //Forge
         flowerPotBlocks.add(createBlock);
 //        BLOCKS.add(createBlock);
 		return createBlock;
@@ -972,15 +980,15 @@ public class LirothBlocks {
 
     static Block createShroomlight(String id) {
         Block createBlock = new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.PURPLE).strength(1.0F).sounds(BlockSoundGroup.SHROOMLIGHT).luminance((state) -> 14));
-        //Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        //Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
 
     static Block createLeaves(String id) {
         Block createBlock = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().blockVision((state, world, pos) -> false).suffocates((state, world, pos) -> false));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -992,7 +1000,7 @@ public class LirothBlocks {
 
     static Block createGlowingLeaves(int lightLevel, String id) {
         Block createBlock = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().blockVision((state, world, pos) -> false).suffocates((state, world, pos) -> false).luminance((state) -> lightLevel));
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -1000,7 +1008,7 @@ public class LirothBlocks {
 
     static Block createPetal(String id) {
         Block createBlock = new Block(FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.GRASS).strength(0.2f).nonOpaque());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -1008,7 +1016,7 @@ public class LirothBlocks {
 
     static Block createDirt(String id) {
         Block createBlock = new Block(FabricBlockSettings.of(Material.SOIL).sounds(BlockSoundGroup.GRAVEL).strength(0.2f).ticksRandomly());
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
         return createBlock;
@@ -1016,30 +1024,36 @@ public class LirothBlocks {
     
     static Block createOre(String id) {
         Block createBlock = new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_ORE));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createSoilOre(String id) {
         Block createBlock = new Block(AbstractBlock.Settings.copy(Blocks.SOUL_SOIL));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
 
     static Block createDirtOre(String id) {
         Block createBlock = new Block(AbstractBlock.Settings.copy(Blocks.DIRT));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createDeepslateOre(String id) {
         Block createBlock = new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_DIAMOND_ORE));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createMetalBlock(String id) {
+        Block createBlock = new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
+        return createBlock;
+    }
+    
+    static Block createDimBlock(String id) {
         Block createBlock = new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
         createBlock(createBlock, id);
         return createBlock;
@@ -1047,73 +1061,73 @@ public class LirothBlocks {
     
     static Block createPillarMetalBlock(String id) {
         Block createBlock = new PillarBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createPillarBlock(String id) {
         Block createBlock = new PillarBlock(AbstractBlock.Settings.copy(Blocks.STONE));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createGrassBlock(String id) {
         Block createBlock = new Block(FabricBlockSettings.of(Material.MOSS_BLOCK).sounds(BlockSoundGroup.GRASS).strength(0.2f).ticksRandomly());
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createLirothGrassBlock(String id) {
         Block createBlock = new LirothGrassBlock(FabricBlockSettings.copy(Blocks.GRASS_BLOCK));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createLirothFarmlandBlock(String id) {
         Block createBlock = new LirothFarmlandBlock(FabricBlockSettings.copy(Blocks.FARMLAND));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createLirothPathBlock(String id) {
         Block createBlock = new LirothPathBlock(FabricBlockSettings.copy(Blocks.DIRT_PATH));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createPierGrassBlock(String id) {
         Block createBlock = new PierGrassBlock(FabricBlockSettings.copy(Blocks.GRASS_BLOCK));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createPierFarmlandBlock(String id) {
         Block createBlock = new PierFarmlandBlock(FabricBlockSettings.copy(Blocks.FARMLAND));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createPierPathBlock(String id) {
         Block createBlock = new PierPathBlock(FabricBlockSettings.copy(Blocks.DIRT_PATH));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createSpineriosGrassBlock(String id) {
         Block createBlock = new SpineriosGrassBlock(FabricBlockSettings.copy(Blocks.GRASS_BLOCK));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createSpineriosFarmlandBlock(String id) {
         Block createBlock = new SpineriosFarmlandBlock(FabricBlockSettings.copy(Blocks.FARMLAND));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createSpineriosPathBlock(String id) {
         Block createBlock = new SpineriosPathBlock(FabricBlockSettings.copy(Blocks.DIRT_PATH));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
@@ -1125,50 +1139,74 @@ public class LirothBlocks {
     
     public static Block createLirothSapling(String id) {
         Block createBlock = new CustomSapling(new LirothTree(), AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createSpicedSapling(String id) {
         Block createBlock = new CustomSapling(new SpicedTree(), AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createTallpierSapling(String id) {
         Block createBlock = new CustomSapling(new TallpierTree(), AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createJapzSapling(String id) {
         Block createBlock = new CustomSapling(new JapzTree(), AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createKoolawSapling(String id) {
         Block createBlock = new CustomSapling(new KoolawTree(), AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createDamnationSapling(String id) {
         Block createBlock = new CustomSapling(new DamnationTree(), AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createPetrifiedSapling(String id) {
         Block createBlock = new CustomSapling(new PetrifiedDamnationTree(), AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS));
-        createBlock(createBlock, id);
+        createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createBlock(Block block, String id) {
-        Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, id), block);
+        Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, id), block);
         BLOCKS.add(block);
         return block;
+    }
+    
+    public static Item createBlockItem(Block block, String id) {
+    	Item createItem = new BlockItem(block, new Item.Settings());
+    	createItem(id, createItem);
+    	return createItem;
+    }
+    
+    public static Item createPlantBlockItem(Block block, String id) {
+    	Item createPlantItem = new BlockItem(block, new Item.Settings());
+    	createPlantItem(id, createPlantItem);
+    	return createPlantItem;
+    }
+    
+    static Item createPlantItem(String id, Item item) {
+	    Registry.register(Registries.ITEM, new Identifier(Liroth.MOD_ID, id), item);
+	    PLANT_ITEMS.add(item);
+	    return item;
+    }
+    
+    static Item createItem(String id, Item item) {
+	    Registry.register(Registries.ITEM, new Identifier(Liroth.MOD_ID, id), item);
+	    ITEMS.add(item);
+	    return item;
     }
     
     private static boolean always(BlockState state, BlockView world, BlockPos pos) {
@@ -1176,8 +1214,15 @@ public class LirothBlocks {
     }
 
     public static void init() {
-		LIROTH_FLUID = Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, "liroth_fluid"), new FluidBlock(LirothFluids.LIROTH_FLUID_STILL, AbstractBlock.Settings.copy(Blocks.WATER)){});
-		MOLTEN_SPINERIOS = Registry.register(Registry.BLOCK, new Identifier(Liroth.MOD_ID, "molten_spinerios"), new SchluckedFluidBlock(LirothFluids.MOLTEN_SPINERIOS_STILL, AbstractBlock.Settings.copy(Blocks.LAVA)){});
+		LIROTH_FLUID = Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, "liroth_fluid"), new FluidBlock(LirothFluids.LIROTH_FLUID_STILL, AbstractBlock.Settings.copy(Blocks.WATER)){});
+		MOLTEN_SPINERIOS = Registry.register(Registries.BLOCK, new Identifier(Liroth.MOD_ID, "molten_spinerios"), new SchluckedFluidBlock(LirothFluids.MOLTEN_SPINERIOS_STILL, AbstractBlock.Settings.copy(Blocks.LAVA)){});
     }
     
+	public static List<Item> getBlocks() {
+		return ITEMS;
+	}
+	
+	public static List<Item> getPlantBlocks() {
+		return PLANT_ITEMS;
+	}
 }

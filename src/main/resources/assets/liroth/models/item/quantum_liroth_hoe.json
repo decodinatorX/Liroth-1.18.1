@@ -1,7 +1,7 @@
 {
 	"__comment": "Designed by Cm@BlackSpigotMC with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"quantum_liroth_hoe": "liroth:items/quantum_liroth_hoe"
+		"quantum_liroth_hoe": "liroth:item/quantum_liroth_hoe"
 	},
 	"elements": [
 		{

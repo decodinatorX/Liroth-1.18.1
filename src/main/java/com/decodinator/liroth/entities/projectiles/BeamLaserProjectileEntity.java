@@ -48,7 +48,7 @@ public class BeamLaserProjectileEntity extends PersistentProjectileEntity {
  
 		if (entity instanceof LivingEntity livingEntity) { // checks if entity is an instance of LivingEntity (meaning it is not a boat or minecart)
 			livingEntity.addStatusEffect((new StatusEffectInstance(StatusEffects.BLINDNESS, 20 * 3, 0))); // applies a status effect
-			livingEntity.playSound(SoundEvents.AMBIENT_CAVE, 2F, 1F); // plays a sound for the entity hit only
+			livingEntity.playSound(SoundEvents.AMBIENT_CAVE.value(), 2F, 1F); // plays a sound for the entity hit only
 		}
 	}
  

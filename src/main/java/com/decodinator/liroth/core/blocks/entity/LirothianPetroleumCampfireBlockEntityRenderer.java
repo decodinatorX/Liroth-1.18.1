@@ -13,7 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 
 @Environment(value=EnvType.CLIENT)
 public class LirothianPetroleumCampfireBlockEntityRenderer
@@ -36,8 +36,8 @@ implements BlockEntityRenderer<LirothianPetroleumCampfireBlockEntity> {
             matrixStack.translate(0.5, 0.44921875, 0.5);
             Direction direction2 = Direction.fromHorizontal((l + direction.getHorizontal()) % 4);
             float g = -direction2.asRotation();
-            matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(g));
-            matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0f));
+            matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(g));
+            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0f));
             matrixStack.translate(-0.3125, -0.3125, 0.0);
             matrixStack.scale(0.375f, 0.375f, 0.375f);
             this.itemRenderer.renderItem(itemStack, ModelTransformation.Mode.FIXED, i, j, matrixStack, vertexConsumerProvider, k + l);

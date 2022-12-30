@@ -3,12 +3,13 @@ package com.decodinator.liroth.world.generator;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.HeightContext;
 import net.minecraft.world.gen.heightprovider.HeightProvider;
@@ -39,7 +40,7 @@ public class LirothFortressStructure extends Structure {
     private final int maxDistanceFromCenter;
 
     public LirothFortressStructure(Structure.Config config,
-                         RegistryEntry<StructurePool> startPool,
+    					RegistryEntry<StructurePool> startPool,
                          Optional<Identifier> startJigsawName,
                          int size,
                          HeightProvider startHeight,

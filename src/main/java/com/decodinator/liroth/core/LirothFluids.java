@@ -5,8 +5,9 @@ import com.decodinator.liroth.core.fluids.LirothFluid;
 import com.decodinator.liroth.core.fluids.MoltenSpinerios;
 
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class LirothFluids {
 	public static FlowableFluid LIROTH_FLUID_STILL;
@@ -16,9 +17,9 @@ public class LirothFluids {
 
 	
 	public static void init() {
-		LIROTH_FLUID_STILL = Registry.register(Registry.FLUID, new Identifier(Liroth.MOD_ID, "liroth_fluid_still"), new LirothFluid.Still());
-		LIROTH_FLUID_FLOWING = Registry.register(Registry.FLUID, new Identifier(Liroth.MOD_ID, "liroth_fluid_flowing"), new LirothFluid.Flowing());
-		MOLTEN_SPINERIOS_STILL = Registry.register(Registry.FLUID, new Identifier(Liroth.MOD_ID, "molten_spinerios_still"), new MoltenSpinerios.Still());
-		MOLTEN_SPINERIOS_FLOWING = Registry.register(Registry.FLUID, new Identifier(Liroth.MOD_ID, "molten_spinerios_flowing"), new MoltenSpinerios.Flowing());
+		LIROTH_FLUID_STILL = Registry.register(Registries.FLUID, new Identifier(Liroth.MOD_ID, "liroth_fluid_still"), new LirothFluid.Still());
+		LIROTH_FLUID_FLOWING = Registry.register(Registries.FLUID, new Identifier(Liroth.MOD_ID, "liroth_fluid_flowing"), new LirothFluid.Flowing());
+		MOLTEN_SPINERIOS_STILL = Registry.register(Registries.FLUID, new Identifier(Liroth.MOD_ID, "molten_spinerios_still"), new MoltenSpinerios.Still());
+		MOLTEN_SPINERIOS_FLOWING = Registry.register(Registries.FLUID, new Identifier(Liroth.MOD_ID, "molten_spinerios_flowing"), new MoltenSpinerios.Flowing());
 	}
 }

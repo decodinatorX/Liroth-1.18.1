@@ -31,7 +31,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     public Input input;
 
     public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile, PlayerPublicKey publicKey) {
-        super(world, profile, publicKey);
+        super(world, profile);
     }
 
 

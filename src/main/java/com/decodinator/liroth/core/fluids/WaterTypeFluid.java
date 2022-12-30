@@ -22,14 +22,6 @@ public abstract class WaterTypeFluid extends FlowableFluid {
 	}
  
 	/**
-	 * @return whether the fluid infinite like water
-	 */
-	@Override
-	protected boolean isInfinite() {
-		return true;
-	}
- 
-	/**
 	 * Perform actions when fluid flows into a replaceable block. Water drops
 	 * the block's loot table. Lava plays the "block.lava.extinguish" sound.
 	 */
