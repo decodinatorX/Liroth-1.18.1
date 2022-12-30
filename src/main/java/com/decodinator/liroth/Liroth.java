@@ -15,6 +15,7 @@ import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.LirothParticles;
 import com.decodinator.liroth.core.LirothPortalBuilders;
 import com.decodinator.liroth.core.LirothSounds;
+import com.decodinator.liroth.core.LirothSpawnEggs;
 import com.decodinator.liroth.core.LirothStrippables;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
@@ -95,6 +96,9 @@ public class Liroth implements ModInitializer {
 		    LirothRegistries.registerFuels();
 	        Liroth.threadSafeLoadFinish();
 			addClassicPack();
+		      if(!FabricLoader.getInstance().isModLoaded("liroth_addendum")) {
+		    	  LirothRegistries.registerSpawnEggItems();
+		      }
 		
 		}
 		
@@ -115,6 +119,12 @@ public class Liroth implements ModInitializer {
 	        	Liroth.LOGGER.debug("Liroth: Registering items...");
 	        	LirothItems.init();
 	            Liroth.LOGGER.info("Liroth: Items registered!");
+	        }
+	        
+	        public static void registerSpawnEggItems() {
+	        	Liroth.LOGGER.debug("Liroth: Registering spawn eggs...");
+	        	LirothSpawnEggs.init();
+	            Liroth.LOGGER.info("Liroth: Spawn Eggs registered!");
 	        }
 	        
 	        public static void registerEntities() {
