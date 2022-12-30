@@ -10,6 +10,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
+import net.minecraft.world.World;
 
 public abstract class LirothFluid extends WaterTypeFluid {
 	@Override
@@ -48,6 +49,11 @@ public abstract class LirothFluid extends WaterTypeFluid {
 		public boolean isStill(FluidState fluidState) {
 			return false;
 		}
+
+		@Override
+		protected boolean isInfinite(World var1) {
+			return true;
+		}
 	}
  
 	public static class Still extends LirothFluid {
@@ -59,6 +65,11 @@ public abstract class LirothFluid extends WaterTypeFluid {
 		@Override
 		public boolean isStill(FluidState fluidState) {
 			return true;
+		}
+
+		@Override
+		protected boolean isInfinite(World var1) {
+			return false;
 		}
 	}
 }

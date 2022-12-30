@@ -24,7 +24,7 @@ public class PotestiumHelmetRenderer implements ArmorRenderer {
         	potestiumHelmetModel = new PotestiumHelmetModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(LirothClient.MODEL_POTESTIUM_HELMET_LAYER));;
         }
 
-        contextModel.setAttributes(potestiumHelmetModel);
+        contextModel.copyBipedStateTo(potestiumHelmetModel);
         potestiumHelmetModel.setVisible(false);
         potestiumHelmetModel.head.visible = slot == EquipmentSlot.HEAD;
             ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, potestiumHelmetModel, TEXTURE);

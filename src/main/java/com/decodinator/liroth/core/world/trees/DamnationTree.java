@@ -4,13 +4,13 @@ import net.minecraft.util.math.random.Random;
 
 import com.decodinator.liroth.Liroth;
 import net.minecraft.block.sapling.SaplingGenerator;
-import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 public class DamnationTree 
 extends SaplingGenerator {
     @Override
-    protected RegistryEntry<? extends ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
+    protected RegistryKey<ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
         return Liroth.DAMNATION;
     }
 }

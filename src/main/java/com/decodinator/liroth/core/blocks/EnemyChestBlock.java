@@ -10,10 +10,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.render.model.json.JsonUnbakedModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-
 import org.betterx.bclib.client.models.BasePatterns;
 import org.betterx.bclib.client.models.ModelsHelper;
 import org.betterx.bclib.client.models.PatternsHelper;
@@ -56,7 +55,7 @@ public class EnemyChestBlock extends ChestBlock implements BlockModelProvider {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public @Nullable JsonUnbakedModel getBlockModel(Identifier resourceLocation, BlockState blockState) {
-		Identifier parentId = Registry.BLOCK.getId(parent);
+		Identifier parentId = Registries.BLOCK.getId(parent);
 		return ModelsHelper.createBlockEmpty(parentId);
 	}
 }

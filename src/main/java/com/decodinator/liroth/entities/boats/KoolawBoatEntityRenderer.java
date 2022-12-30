@@ -1,5 +1,7 @@
 package com.decodinator.liroth.entities.boats;
 
+import org.joml.Quaternionf;
+
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.LirothClient;
 import net.minecraft.client.render.OverlayTexture;
@@ -11,8 +13,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Quaternion;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 
 public class KoolawBoatEntityRenderer extends EntityRenderer<KoolawBoatEntity> {
 
@@ -28,30 +29,27 @@ public class KoolawBoatEntityRenderer extends EntityRenderer<KoolawBoatEntity> {
     }
 
     public void render(KoolawBoatEntity boatEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+        float k;
         matrixStack.push();
-        matrixStack.translate(0.0D, 0.375D, 0.0D);
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F - f));
+        matrixStack.translate(0.0f, 0.375f, 0.0f);
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f - f));
         float h = (float)boatEntity.getDamageWobbleTicks() - g;
         float j = boatEntity.getDamageWobbleStrength() - g;
-        if (j < 0.0F) {
-            j = 0.0F;
+        if (j < 0.0f) {
+            j = 0.0f;
         }
-
-        if (h > 0.0F) {
-            matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.sin(h) * h * j / 10.0F * (float)boatEntity.getDamageWobbleSide()));
+        if (h > 0.0f) {
+            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.sin(h) * h * j / 10.0f * (float)boatEntity.getDamageWobbleSide()));
         }
-
-        float k = boatEntity.interpolateBubbleWobble(g);
-        if (!MathHelper.approximatelyEquals(k, 0.0F)) {
-            matrixStack.multiply(new Quaternion(new Vec3f(1.0F, 0.0F, 1.0F), boatEntity.interpolateBubbleWobble(g), true));
+        if (!MathHelper.approximatelyEquals(k = boatEntity.interpolateBubbleWobble(g), 0.0f)) {
+            matrixStack.multiply(new Quaternionf().setAngleAxis(boatEntity.interpolateBubbleWobble(g) * ((float)Math.PI / 180), 1.0f, 0.0f, 1.0f));
         }
-
         Identifier texture = this.texture;
         KoolawBoatEntityModel model = this.model;
         Identifier identifier = texture;
         KoolawBoatEntityModel boatEntityModel = model;
         matrixStack.scale(-1.0F, -1.0F, 1.0F);
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90.0F));
         boatEntityModel.setAngles(boatEntity, g, 0.0F, -0.1F, 0.0F, 0.0F);
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(boatEntityModel.getLayer(identifier));
         boatEntityModel.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);

@@ -1,21 +1,19 @@
 package com.decodinator.liroth.core.blocks;
 
-import java.util.function.Supplier;
-
 import com.decodinator.liroth.core.LirothBlocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FungusBlock;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
 public class CustomFungalPlant extends FungusBlock {
 
-	public CustomFungalPlant(Settings settings, Supplier<RegistryEntry<ConfiguredFeature<HugeFungusFeatureConfig, ?>>> feature) {
-		super(settings, feature);
+	public CustomFungalPlant(Settings settings, RegistryKey<ConfiguredFeature<?, ?>> feature, Block block) {
+		super(settings, feature, block);
 	}
 
     @Override

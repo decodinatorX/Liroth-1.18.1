@@ -36,8 +36,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class LirothEntities {
 
@@ -57,73 +58,73 @@ public class LirothEntities {
     public static final EntityType<ChestPetrifedBoatEntity> CHEST_PETRIFIED_BOAT;
     
     public static final EntityType<FungalFiendEntity> FUNGAL_FIEND = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier("liroth", "fungal_fiend"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, FungalFiendEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2f)).build()
     );
     
     public static final EntityType<ForsakenCorpseEntity> FORSAKEN_CORPSE = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "forsaken_corpse"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ForsakenCorpseEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build()
     );
     
     public static final EntityType<SkeletalFreakEntity> SKELETAL_FREAK = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "skeletal_freak"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SkeletalFreakEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build()
     );
     
     public static final EntityType<WarpEntity> WARP = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "warp"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, WarpEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
     public static final EntityType<SoulArachnidEntity> SOUL_ARACHNID = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "soul_arachnid"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SoulArachnidEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
     public static final EntityType<PierPeepEntity> PIER_PEEP = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "pier_peep"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, PierPeepEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
     public static final EntityType<ShadeEntity> SHADE = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "shade"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ShadeEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
     public static final EntityType<ProwlerEntity> PROWLER = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "prowler"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ProwlerEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
     public static final EntityType<FreakshowEntity> FREAKSHOW = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "freakshow"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, FreakshowEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
     public static final EntityType<VileSharkEntity> VILE_SHARK = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "vile_shark"),
             FabricEntityTypeBuilder.create(SpawnGroup.WATER_CREATURE, VileSharkEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
     public static final EntityType<LirothianMimicEntity> LIROTHIAN_MIMIC = Registry.register(
-            Registry.ENTITY_TYPE,
+    		Registries.ENTITY_TYPE,
             new Identifier("liroth", "lirothian_mimic"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, LirothianMimicEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.9f)).build()
     );
     
 	public static final EntityType<BeamLaserProjectileEntity> BEAM_LASER_PROJECTILE_ENTITY = Registry.register(
-			Registry.ENTITY_TYPE,
+			Registries.ENTITY_TYPE,
 			new Identifier(Liroth.MOD_ID, "beam_laser_projectile_entity"),
 			FabricEntityTypeBuilder.<BeamLaserProjectileEntity>create(SpawnGroup.MISC, BeamLaserProjectileEntity::new)
 					.dimensions(EntityDimensions.fixed(0.25F, 0.25F)) // dimensions in Minecraft units of the projectile
@@ -167,19 +168,19 @@ public class LirothEntities {
     }
 
     public static void init() {
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "liroth_boat"), LIROTH_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_liroth_boat"), CHEST_LIROTH_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "damnation_boat"), DAMNATION_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_damnation_boat"), CHEST_DAMNATION_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "spiced_boat"), SPICED_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_spiced_boat"), CHEST_SPICED_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "pier_boat"), PIER_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_pier_boat"), CHEST_PIER_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "japz_boat"), JAPZ_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_japz_boat"), CHEST_JAPZ_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "koolaw_boat"), KOOLAW_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_koolaw_boat"), CHEST_KOOLAW_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "petrified_boat"), PETRIFIED_BOAT);
-        Registry.register(Registry.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_petrified_boat"), CHEST_PETRIFIED_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "liroth_boat"), LIROTH_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_liroth_boat"), CHEST_LIROTH_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "damnation_boat"), DAMNATION_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_damnation_boat"), CHEST_DAMNATION_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "spiced_boat"), SPICED_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_spiced_boat"), CHEST_SPICED_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "pier_boat"), PIER_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_pier_boat"), CHEST_PIER_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "japz_boat"), JAPZ_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_japz_boat"), CHEST_JAPZ_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "koolaw_boat"), KOOLAW_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_koolaw_boat"), CHEST_KOOLAW_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "petrified_boat"), PETRIFIED_BOAT);
+        Registry.register(Registries.ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "chest_petrified_boat"), CHEST_PETRIFIED_BOAT);
     }
 }

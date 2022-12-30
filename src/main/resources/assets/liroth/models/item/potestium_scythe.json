@@ -1,7 +1,7 @@
 {
 	"__comment": "Designed by Cm@BlackSpigotMC with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"potestium_scythe": "liroth:items/potestium_scythe"
+		"potestium_scythe": "liroth:item/potestium_scythe"
 	},
 	"elements": [
 		{

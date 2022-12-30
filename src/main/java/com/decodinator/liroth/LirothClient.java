@@ -85,7 +85,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 
 public class LirothClient implements ClientModInitializer {
 	public static final Identifier PacketID = new Identifier(Liroth.MOD_ID, "spawn_packet");
@@ -163,13 +162,6 @@ public class LirothClient implements ClientModInitializer {
 				new Identifier("liroth:blocks/molten_spinerios_still"),
 				new Identifier("liroth:blocks/molten_spinerios_flowing")
 		));
-		
-		ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
-			registry.register(new Identifier("liroth:blocks/liroth_fluid_still"));
-			registry.register(new Identifier("liroth:blocks/liroth_fluid_flowing"));
-			registry.register(new Identifier("liroth:blocks/molten_spinerios_still"));
-			registry.register(new Identifier("liroth:blocks/molten_spinerios_flowing"));
-		});
         
         LirothRenders.renderCutOuts(blockRenderTypeMap -> ItemBlockRenderTypeAccess.getTypeByBlock().putAll(blockRenderTypeMap));
 		
@@ -248,29 +240,10 @@ public class LirothClient implements ClientModInitializer {
         });
  
         EntityModelLayerRegistry.registerModelLayer(MODEL_LIROTHIAN_MIMIC_LAYER, LirothianMimicModel::getTexturedModelData);
-                 
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-            registry.register(new Identifier("liroth", "particle/purple_flame"));
-        }));
-        
-        ParticleFactoryRegistry.getInstance().register(LirothParticles.PURPLE_FLAME, FlameParticle.Factory::new);
-        
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-            registry.register(new Identifier("liroth", "particle/green_flame"));
-        }));
-        
-        ParticleFactoryRegistry.getInstance().register(LirothParticles.GREEN_FLAME, FlameParticle.Factory::new);
-
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-            registry.register(new Identifier("liroth", "particle/cloak"));
-        }));
         
         ParticleFactoryRegistry.getInstance().register(LirothParticles.CLOAK, EndRodParticle.Factory::new);
-        
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-            registry.register(new Identifier("liroth", "particle/green_spore"));
-        }));
-        
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.GREEN_FLAME, FlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LirothParticles.PURPLE_FLAME, FlameParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(LirothParticles.GREEN_SPORE, WhiteAshParticle.Factory::new);
         
         BlockEntityRendererRegistry.register(Liroth.FUNGAL_CAMPFIRE_BLOCK_ENTITY, FungalCampfireBlockEntityRenderer::new);

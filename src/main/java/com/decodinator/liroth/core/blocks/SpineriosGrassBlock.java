@@ -6,11 +6,12 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
@@ -24,7 +25,7 @@ implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return world.getBlockState(pos.up()).isAir();
     }
 
@@ -33,7 +34,8 @@ implements Fertilizable {
         return true;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos blockPos = pos.up();
         BlockState blockState = Blocks.GRASS.getDefaultState();
@@ -53,7 +55,7 @@ implements Fertilizable {
                 if (list.isEmpty()) continue;
                 registryEntry = ((RandomPatchFeatureConfig)list.get(0).config()).feature();
             } else {
-                registryEntry = VegetationPlacedFeatures.GRASS_BONEMEAL;
+                registryEntry = (RegistryEntry<PlacedFeature>) VegetationPlacedFeatures.GRASS_BONEMEAL;
             }
             registryEntry.value().generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
         }

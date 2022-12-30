@@ -17,6 +17,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 public class CustomAzaleaBlock
 extends PlantBlock
@@ -38,11 +39,6 @@ implements Fertilizable {
         return floor.isOf(LirothBlocks.SPINERIOS_DIRT) || super.canPlantOnTop(floor, world, pos);
     }
 
-    @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return world.getFluidState(pos.up()).isEmpty();
-    }
-
 	@Override
 	public boolean canGrow(World var1, Random var2, BlockPos var3, BlockState var4) {
 		return (double)var1.random.nextFloat() < 0.45;
@@ -51,5 +47,10 @@ implements Fertilizable {
 	@Override
 	public void grow(ServerWorld var1, Random var2, BlockPos var3, BlockState var4) {
         GENERATOR.generate(var1, var1.getChunkManager().getChunkGenerator(), var3, var4, var2);
+	}
+
+	@Override
+	public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean bool) {
+        return world.getFluidState(pos.up()).isEmpty();
 	}
 }

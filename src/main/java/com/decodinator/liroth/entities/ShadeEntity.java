@@ -24,10 +24,10 @@ public class ShadeEntity extends ZombieEntity {
         this.isInvulnerableTo(DamageSource.mob(getAttacker()));
         this.isInvulnerableTo(DamageSource.player(attackingPlayer));
         this.isInvulnerableTo(DamageSource.DROWN);
-        this.isInvulnerableTo(DamageSource.ANVIL);
+        this.isInvulnerableTo(DamageSource.anvil(getAttacker()));
         this.isInvulnerableTo(DamageSource.CACTUS);
-        this.isInvulnerableTo(DamageSource.FALLING_BLOCK);
-        this.isInvulnerableTo(DamageSource.FALLING_STALACTITE);
+        this.isInvulnerableTo(DamageSource.fallingBlock(getAttacker()));
+        this.isInvulnerableTo(DamageSource.fallingStalactite(getAttacker()));
         this.isInvulnerableTo(DamageSource.FREEZE);
         this.isInvulnerableTo(DamageSource.IN_WALL);
         this.isInvulnerableTo(DamageSource.MAGIC);
