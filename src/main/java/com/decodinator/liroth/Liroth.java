@@ -91,9 +91,19 @@ public class Liroth implements ModInitializer {
         ).build();
         public static final ItemGroup creativeEntitiesTab = FabricItemGroup.builder(new Identifier(Liroth.MOD_ID, "liroth_entities")).icon(() -> new ItemStack(LirothItems.UNOBTAINABLE_FORSAKEN_CORPSE_SPAWN_EGG))
             .entries((enableFeatures, entries, operatorEnabled) -> {
-                for (var supplier : LirothSpawnEggs.getSpawnEggs()) {
-                    entries.add(supplier);
-                }
+            	if (!FabricLoader.getInstance().isModLoaded("liroth_addendum")) {
+            		entries.add(LirothSpawnEggs.FORSAKEN_CORPSE_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.FREAKSHOW_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.FUNGAL_FIEND_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.LIROTHIAN_MIMIC_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.PIER_PEEP_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.PROWLER_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.SHADE_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.SKELETAL_FREAK_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.SOUL_ARACHNID_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.VILE_SHARK_SPAWN_EGG);
+            		entries.add(LirothSpawnEggs.WARP_SPAWN_EGG);
+            	}
             }
         ).build();  
     

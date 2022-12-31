@@ -29,7 +29,6 @@ public class DamnationBoatEntityRenderer extends EntityRenderer<DamnationBoatEnt
     }
 
     public void render(DamnationBoatEntity boatEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        float k;
         matrixStack.push();
         matrixStack.translate(0.0f, 0.375f, 0.0f);
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f - f));
@@ -41,7 +40,7 @@ public class DamnationBoatEntityRenderer extends EntityRenderer<DamnationBoatEnt
         if (h > 0.0f) {
             matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.sin(h) * h * j / 10.0f * (float)boatEntity.getDamageWobbleSide()));
         }
-        if (!MathHelper.approximatelyEquals(k = boatEntity.interpolateBubbleWobble(g), 0.0f)) {
+        if (!MathHelper.approximatelyEquals(boatEntity.interpolateBubbleWobble(g), 0.0f)) {
             matrixStack.multiply(new Quaternionf().setAngleAxis(boatEntity.interpolateBubbleWobble(g) * ((float)Math.PI / 180), 1.0f, 0.0f, 1.0f));
         }
         Identifier texture = this.texture;

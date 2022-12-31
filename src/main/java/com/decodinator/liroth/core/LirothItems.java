@@ -10,11 +10,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.LirothCreativeTab;
 import com.decodinator.liroth.core.helpers.PotestiumHelmItem;
 import com.decodinator.liroth.core.items.AnsalumArmorItem;
 import com.decodinator.liroth.core.items.AnsalumLirothShield;

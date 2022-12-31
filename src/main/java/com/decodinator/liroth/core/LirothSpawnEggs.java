@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.LirothCreativeTab;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
