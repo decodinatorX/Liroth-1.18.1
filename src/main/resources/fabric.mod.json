@@ -23,12 +23,14 @@
     ],
     "client": [ 
     	"com.decodinator.liroth.LirothClient"
-    ]
+    ],
+  	"jei_mod_plugin": [
+    	"com.decodinator.liroth.compat.jei.LirothJEI"
+  	]
   },
   "mixins": [
     "liroth.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.14.9",
     "fabric": "*",
