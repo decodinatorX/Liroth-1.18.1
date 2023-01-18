@@ -1,21 +1,27 @@
 package com.decodinator.liroth.entities.renderers;
 
-import com.decodinator.liroth.LirothClient;
+import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothModelLayers;
 import com.decodinator.liroth.entities.FungalFiendEntity;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.util.Identifier;
 
-public class FungalFiendEntityRenderer extends MobEntityRenderer<FungalFiendEntity, FungalFiendModel<FungalFiendEntity>> {
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-    public FungalFiendEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new FungalFiendModel<FungalFiendEntity>(context.getPart(LirothClient.MODEL_FUNGAL_FIEND_LAYER)), 0.5f);
-        this.addFeature(new FungalFiendFaceFeatureRenderer<FungalFiendEntity>(this));
+@Environment(value=EnvType.CLIENT)
+public class FungalFiendEntityRenderer extends MobRenderer<FungalFiendEntity, FungalFiendModel<FungalFiendEntity>> {
+
+    public FungalFiendEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new FungalFiendModel(context.bakeLayer(LirothModelLayers.FUNGAL_FIEND)), 0.5f);
+        this.addLayer(new FungalFiendFaceFeatureRenderer<FungalFiendEntity>(this));
     }
  
     @Override
-    public Identifier getTexture(FungalFiendEntity entity) {
-        return new Identifier("liroth", "textures/entity/fungal_fiend/fungal_fiend.png");
+    public ResourceLocation getTextureLocation(FungalFiendEntity entity) {
+        return new ResourceLocation("liroth", "textures/entity/fungal_fiend/fungal_fiend.png");
         
     }
 }

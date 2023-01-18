@@ -1,22 +1,28 @@
 package com.decodinator.liroth.entities.renderers;
 
-import com.decodinator.liroth.LirothClient;
+import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothModelLayers;
 import com.decodinator.liroth.entities.FreakshowEntity;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.util.Identifier;
 
-public class FreakshowEntityRenderer extends MobEntityRenderer<FreakshowEntity, FreakshowModel<FreakshowEntity>> {
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-    public FreakshowEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new FreakshowModel<FreakshowEntity>(context.getPart(LirothClient.MODEL_FREAKSHOW_LAYER)), 0.5f);
-        this.addFeature(new FreakshowGlowFeatureRenderer<FreakshowEntity>(this));
-        this.addFeature(new FreakshowTranslucentFeatureRenderer<FreakshowEntity>(this));
+@Environment(value=EnvType.CLIENT)
+public class FreakshowEntityRenderer extends MobRenderer<FreakshowEntity, FreakshowModel<FreakshowEntity>> {
+
+    public FreakshowEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new FreakshowModel(context.bakeLayer(LirothModelLayers.FREAKSHOW)), 0.5f);
+        this.addLayer(new FreakshowGlowFeatureRenderer<FreakshowEntity>(this));
+        this.addLayer(new FreakshowTranslucentFeatureRenderer<FreakshowEntity>(this));
     }
  
     @Override
-    public Identifier getTexture(FreakshowEntity entity) {
-        return new Identifier("liroth", "textures/entity/freakshow/nothing.png");
+    public ResourceLocation getTextureLocation(FreakshowEntity entity) {
+        return new ResourceLocation("liroth", "textures/entity/freakshow/nothing.png");
         
     }
 }

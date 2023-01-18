@@ -1,7 +1,7 @@
 package com.decodinator.liroth.core;
 
 import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class LirothPortalBuilders {
 
@@ -9,7 +9,7 @@ public class LirothPortalBuilders {
 		CustomPortalBuilder.beginPortal()  
 	    .frameBlock(LirothBlocks.DIMENSIONAL_COMMUNICATOR)
         .customPortalBlock(LirothBlocks.LIROTH_DIMENSION_PORTAL)
-	    .destDimID(new Identifier("liroth:liroth_dimension"))  
+	    .destDimID(new ResourceLocation("liroth:liroth_dimension"))  
 	    .tintColor(33, 0, 33)
 	    .flatPortal()
 	    .registerPortal();
@@ -17,7 +17,7 @@ public class LirothPortalBuilders {
 		CustomPortalBuilder.beginPortal()  
 	    .frameBlock(LirothBlocks.CHARRED_ACCESSWAY_BLOCK)
         .customPortalBlock(LirothBlocks.DAMNATION_DIMENSION_PORTAL)
-	    .destDimID(new Identifier("liroth:damnation"))  
+	    .destDimID(new ResourceLocation("liroth:damnation"))  
 	    .tintColor(38, 0, 9)
 	    .flatPortal()
 	    .registerPortal();
@@ -25,7 +25,7 @@ public class LirothPortalBuilders {
 		CustomPortalBuilder.beginPortal()  
 	    .frameBlock(LirothBlocks.DAMNED_PASSAGEWAY)
         .customPortalBlock(LirothBlocks.JANTIRO_DIMENSION_PORTAL)
-	    .destDimID(new Identifier("liroth:jantiros_escape_dimension"))  
+	    .destDimID(new ResourceLocation("liroth:jantiros_escape_dimension"))  
 	    .tintColor(0, 38, 38)
 	    .flatPortal()
 	    .registerPortal();
@@ -33,7 +33,7 @@ public class LirothPortalBuilders {
 		CustomPortalBuilder.beginPortal()  
 	    .frameBlock(LirothBlocks.HAUNTED_THROUGHFARE_BLOCK)
         .customPortalBlock(LirothBlocks.JALSPHIRE_DIMENSION_PORTAL)
-	    .destDimID(new Identifier("liroth:jalsphire_plains"))  
+	    .destDimID(new ResourceLocation("liroth:jalsphire_plains"))  
 	    .tintColor(0, 0, 38)
 	    .flatPortal()
 	    .registerPortal();
@@ -41,7 +41,7 @@ public class LirothPortalBuilders {
 		CustomPortalBuilder.beginPortal()  
 	    .frameBlock(LirothBlocks.JALSPHIRE_TRACKWAY)
         .customPortalBlock(LirothBlocks.DEVASTATED_DIMENSION_PORTAL)
-	    .destDimID(new Identifier("liroth:devastated_plains"))  
+	    .destDimID(new ResourceLocation("liroth:devastated_plains"))  
 	    .tintColor(38, 31, 0)
 	    .flatPortal()
 	    .registerPortal();

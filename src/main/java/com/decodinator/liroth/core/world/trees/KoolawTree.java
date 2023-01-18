@@ -1,15 +1,14 @@
 package com.decodinator.liroth.core.world.trees;
 
-import net.minecraft.util.math.random.Random;
-import net.minecraft.block.sapling.SaplingGenerator;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothConfiguredFeatures;
 
-public class KoolawTree 
-extends SaplingGenerator {
-    @Override
-    protected RegistryKey<ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
-        return Liroth.KOOLAW;
-    }
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+
+public class KoolawTree extends AbstractTreeGrower {
+	   protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource p_256119_, boolean p_256536_) {
+		   return LirothConfiguredFeatures.KOOLAW;	   
+	   }
 }

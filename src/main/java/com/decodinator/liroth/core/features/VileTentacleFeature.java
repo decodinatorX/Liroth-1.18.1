@@ -1,54 +1,53 @@
 package com.decodinator.liroth.core.features;
 
-import net.minecraft.util.math.random.Random;
-
 import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.blocks.CustomKelpBlock;
 import com.mojang.serialization.Codec;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public class VileTentacleFeature 
-extends Feature<DefaultFeatureConfig> {
-    public VileTentacleFeature(Codec<DefaultFeatureConfig> codec) {
+extends Feature<NoneFeatureConfiguration> {
+    public VileTentacleFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
 
     @Override
-    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         int i = 0;
-        StructureWorldAccess structureWorldAccess = context.getWorld();
-        BlockPos blockPos = context.getOrigin();
-        Random random = context.getRandom();
-        int j = structureWorldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.getX(), blockPos.getZ());
+        WorldGenLevel structureWorldAccess = context.level();
+        BlockPos blockPos = context.origin();
+        RandomSource random = context.random();
+        int j = structureWorldAccess.getHeight(Heightmap.Types.OCEAN_FLOOR, blockPos.getX(), blockPos.getZ());
         BlockPos blockPos2 = new BlockPos(blockPos.getX(), j, blockPos.getZ());
-        if (structureWorldAccess.getBlockState(blockPos2).isOf(LirothBlocks.LIROTH_FLUID)) {
-            BlockState blockState = LirothBlocks.VILE_TENTACLE_TIP.getDefaultState();
-            BlockState blockState2 = LirothBlocks.VILE_TENTACLE.getDefaultState();
+        if (structureWorldAccess.getBlockState(blockPos2).is(LirothBlocks.LIROTH_FLUID)) {
+            BlockState blockState = LirothBlocks.VILE_TENTACLE_TIP.defaultBlockState();
+            BlockState blockState2 = LirothBlocks.VILE_TENTACLE.defaultBlockState();
             int k = 1 + random.nextInt(10);
             for (int l = 0; l <= k; ++l) {
-                if (structureWorldAccess.getBlockState(blockPos2).isOf(LirothBlocks.LIROTH_FLUID) && structureWorldAccess.getBlockState(blockPos2.up()).isOf(LirothBlocks.LIROTH_FLUID) && blockState2.canPlaceAt(structureWorldAccess, blockPos2)) {
+                if (structureWorldAccess.getBlockState(blockPos2).is(LirothBlocks.LIROTH_FLUID) && structureWorldAccess.getBlockState(blockPos2.above()).is(LirothBlocks.LIROTH_FLUID) && blockState2.canSurvive(structureWorldAccess, blockPos2)) {
                     if (l == k) {
-                        structureWorldAccess.setBlockState(blockPos2, (BlockState)blockState.with(CustomKelpBlock.AGE, random.nextInt(4) + 20), Block.NOTIFY_LISTENERS);
+                        structureWorldAccess.setBlock(blockPos2, (BlockState)blockState.setValue(CustomKelpBlock.AGE, random.nextInt(4) + 20), Block.UPDATE_NEIGHBORS);
                         ++i;
                     } else {
-                        structureWorldAccess.setBlockState(blockPos2, blockState2, Block.NOTIFY_LISTENERS);
+                        structureWorldAccess.setBlock(blockPos2, blockState2, Block.UPDATE_NEIGHBORS);
                     }
                 } else if (l > 0) {
-                    BlockPos blockPos3 = blockPos2.down();
-                    if (!blockState.canPlaceAt(structureWorldAccess, blockPos3) || structureWorldAccess.getBlockState(blockPos3.down()).isOf(LirothBlocks.VILE_TENTACLE_TIP)) break;
-                    structureWorldAccess.setBlockState(blockPos3, (BlockState)blockState.with(CustomKelpBlock.AGE, random.nextInt(4) + 20), Block.NOTIFY_LISTENERS);
+                    BlockPos blockPos3 = blockPos2.below();
+                    if (!blockState.canSurvive(structureWorldAccess, blockPos3) || structureWorldAccess.getBlockState(blockPos3.below()).is(LirothBlocks.VILE_TENTACLE_TIP)) break;
+                    structureWorldAccess.setBlock(blockPos3, (BlockState)blockState.setValue(CustomKelpBlock.AGE, random.nextInt(4) + 20), Block.UPDATE_NEIGHBORS);
                     ++i;
                     break;
                 }
-                blockPos2 = blockPos2.up();
+                blockPos2 = blockPos2.above();
             }
         }
         return i > 0;

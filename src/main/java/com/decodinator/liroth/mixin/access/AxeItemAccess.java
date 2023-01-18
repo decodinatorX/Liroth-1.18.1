@@ -5,10 +5,10 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Map;
 
@@ -16,16 +16,16 @@ import java.util.Map;
 public interface AxeItemAccess {
 
     @Invoker("<init>")
-    static AxeItem create(ToolMaterial tier, float f, float g, Item.Settings properties) {
+    static AxeItem create(Tier tier, float f, float g, Properties properties) {
         throw new Error("Mixin did not apply");
     }
 
-    @Accessor("STRIPPED_BLOCKS")
+    @Accessor("STRIPPABLES")
     static Map<Block, Block> getStripables() {
         throw new Error("Mixin did not apply");
     }
 
-    @Accessor("STRIPPED_BLOCKS")
+    @Accessor("STRIPPABLES")
     @Mutable
     static void setStripables(Map<Block, Block> newMap) {
         throw new Error("Mixin did not apply");

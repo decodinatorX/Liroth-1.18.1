@@ -4,17 +4,17 @@ import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.LirothFluids;
 import com.decodinator.liroth.core.LirothItems;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.Item;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.Properties;
-import net.minecraft.world.World;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 
 public abstract class LirothFluid extends WaterTypeFluid {
 	@Override
-	public Fluid getStill() {
+	public Fluid getSource() {
 		return LirothFluids.LIROTH_FLUID_STILL;
 	}
  
@@ -24,52 +24,52 @@ public abstract class LirothFluid extends WaterTypeFluid {
 	}
  
 	@Override
-	public Item getBucketItem() {
+	public Item getBucket() {
 		return LirothItems.LIROTH_FLUID_BUCKET;
 	}
  
 	@Override
-	protected BlockState toBlockState(FluidState fluidState) {
-		return LirothBlocks.LIROTH_FLUID.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(fluidState));
+	protected BlockState createLegacyBlock(FluidState fluidState) {
+		return LirothBlocks.LIROTH_FLUID.defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(fluidState));
 	}
  
 	public static class Flowing extends LirothFluid {
 		@Override
-		protected void appendProperties(StateManager.Builder<Fluid, FluidState> builder) {
-			super.appendProperties(builder);
+		protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
+			super.createFluidStateDefinition(builder);
 			builder.add(LEVEL);
 		}
  
 		@Override
-		public int getLevel(FluidState fluidState) {
-			return fluidState.get(LEVEL);
+		public int getAmount(FluidState fluidState) {
+			return fluidState.getValue(LEVEL);
 		}
  
 		@Override
-		public boolean isStill(FluidState fluidState) {
+		public boolean isSource(FluidState fluidState) {
 			return false;
 		}
 
 		@Override
-		protected boolean isInfinite(World var1) {
+		protected boolean canConvertToSource(Level var1) {
 			return true;
 		}
 	}
  
 	public static class Still extends LirothFluid {
 		@Override
-		public int getLevel(FluidState fluidState) {
+		public int getAmount(FluidState fluidState) {
 			return 8;
-		}
- 
-		@Override
-		public boolean isStill(FluidState fluidState) {
-			return true;
 		}
 
 		@Override
-		protected boolean isInfinite(World var1) {
+		protected boolean canConvertToSource(Level var1) {
 			return false;
+		}
+
+		@Override
+		public boolean isSource(FluidState var1) {
+			return true;
 		}
 	}
 }

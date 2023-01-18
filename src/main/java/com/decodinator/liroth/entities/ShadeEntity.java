@@ -1,83 +1,60 @@
 package com.decodinator.liroth.entities;
 
+import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothSounds;
 import com.decodinator.liroth.core.LirothTags;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-public class ShadeEntity extends ZombieEntity {
+public class ShadeEntity extends Zombie {
 
-	public ShadeEntity(EntityType<? extends ZombieEntity> entityType, World world) {
+	public ShadeEntity(EntityType<? extends Zombie> entityType, Level world) {
 		super(entityType, world);
-        this.isInvulnerableTo(DamageSource.mob(getAttacker()));
-        this.isInvulnerableTo(DamageSource.player(attackingPlayer));
-        this.isInvulnerableTo(DamageSource.DROWN);
-        this.isInvulnerableTo(DamageSource.anvil(getAttacker()));
-        this.isInvulnerableTo(DamageSource.CACTUS);
-        this.isInvulnerableTo(DamageSource.fallingBlock(getAttacker()));
-        this.isInvulnerableTo(DamageSource.fallingStalactite(getAttacker()));
-        this.isInvulnerableTo(DamageSource.FREEZE);
-        this.isInvulnerableTo(DamageSource.IN_WALL);
-        this.isInvulnerableTo(DamageSource.MAGIC);
-        this.isInvulnerableTo(DamageSource.WITHER);
-        this.isInvulnerableTo(DamageSource.SWEET_BERRY_BUSH);
-        this.isInvulnerableTo(DamageSource.DRAGON_BREATH);
 	}
 
-    public static DefaultAttributeContainer.Builder createShadeAttributes() {
-        return HostileEntity.createHostileAttributes()
-        		.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 100.0)
-        		.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10f)
-        		.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 35.0)
-        		.add(EntityAttributes.GENERIC_ARMOR, 1.0)
-        		.add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
-        		.add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
-    }
-    
-    @Override
-    public int getLimitPerChunk() {
-        return 2;
-    }
-    
-    @Override
-    protected boolean canConvertInWater() {
-        return false;
+    public static AttributeSupplier.Builder createShadeAttributes() {
+        return Monster.createMonsterAttributes()
+        		.add(Attributes.FOLLOW_RANGE, 100.0)
+        		.add(Attributes.MOVEMENT_SPEED, 0.10f)
+        		.add(Attributes.ATTACK_DAMAGE, 10.0)
+        		.add(Attributes.ARMOR, 1000.0)
+        		.add(Attributes.MAX_HEALTH, 1000.0)
+        		.add(Attributes.SPAWN_REINFORCEMENTS_CHANCE);
     }
 	
     @Override
-    protected ActionResult interactMob(PlayerEntity player2, Hand hand) {
-        ItemStack itemStack = player2.getStackInHand(hand);
-        if (itemStack.isIn(LirothTags.TORCHES)) {
-            this.world.playSound(player2, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_SOUL_SOIL_BREAK, this.getSoundCategory(), 1.0f, this.random.nextFloat() * 0.4f + 0.8f);
-            if (!this.world.isClient) {
-                this.poof(player2);
+    protected InteractionResult mobInteract(Player player2, InteractionHand hand) {
+        ItemStack itemStack = player2.getItemInHand(hand);
+        if (itemStack.is(LirothTags.TORCHES)) {
+            this.level.playSound(player2, this.getX(), this.getY(), this.getZ(), SoundEvents.SOUL_SOIL_BREAK, this.getSoundSource(), 1.0f, this.random.nextFloat() * 0.4f + 0.8f);
+            if (!this.level.isClientSide) {
+                this.poof();
             }
-            return ActionResult.success(this.world.isClient);
+            return InteractionResult.sidedSuccess(this.level.isClientSide);
         }
-        return super.interactMob(player2, hand);
+        return super.mobInteract(player2, hand);
     }
     
-    public void poof(PlayerEntity player) {
-    	player.attack(this);
-    	this.kill();
+    public void poof() {
+        this.kill();
     }
     
     @Override
-    protected void convertInWater() {
-    	
-    }
+    protected boolean convertsInWater() {
+        return false;
+     }
     
     @Override
     protected SoundEvent getAmbientSound() {
@@ -95,6 +72,6 @@ public class ShadeEntity extends ZombieEntity {
     }
 
     protected SoundEvent getStepSound() {
-    	return SoundEvents.BLOCK_SOUL_SAND_STEP;
+    	return SoundEvents.SOUL_SAND_STEP;
 	}
 }

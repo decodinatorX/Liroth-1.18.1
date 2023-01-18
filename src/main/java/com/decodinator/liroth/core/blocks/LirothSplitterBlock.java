@@ -1,121 +1,117 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-
-import net.minecraft.util.math.random.Random;
-
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothParticles;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
+import com.decodinator.liroth.core.blocks.entity.SplitterBlockEntity;
 
-public class LirothSplitterBlock extends BlockWithEntity implements BlockEntityProvider {
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-    public static final BooleanProperty LIT = Properties.LIT;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
 
-    public LirothSplitterBlock(AbstractBlock.Settings settings) {
+public class LirothSplitterBlock extends BaseEntityBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
+    public LirothSplitterBlock(Block.Properties settings) {
         super(settings);
-		setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH).with(LIT, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.valueOf(false)));
 	}
  
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LIT);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_48725_) {
+        p_48725_.add(FACING, LIT);
     }
     
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
+    public RenderShape getRenderShape(BlockState p_48727_) {
+        return RenderShape.MODEL;
+     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos,
-                              PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
+            Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        		if (!pLevel.isClientSide) {
+        			MenuProvider screenHandlerFactory = pState.getMenuProvider(pLevel, pPos);
 
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
-            }
-        }
+        			if (screenHandlerFactory != null) {
+        				pPlayer.openMenu(screenHandlerFactory);
+        			}
+        		}
 
-        return ActionResult.SUCCESS;
-    }
+    			return InteractionResult.sidedSuccess(pLevel.isClientSide());
+    	}
 
-    @SuppressWarnings("deprecation")
-	@Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    @Override
+    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof LirothSplitterBlockEntity) {
-                ItemScatterer.spawn(world, pos, (LirothSplitterBlockEntity)blockEntity);
-                world.updateComparators(pos,this);
+                ((LirothSplitterBlockEntity) blockEntity).drops();
             }
-            super.onStateReplaced(state, world, pos, newState, moved);
         }
+        super.onRemove(state, world, pos, newState, moved);
     }
 
     @Nullable
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new LirothSplitterBlockEntity(pos, state);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new SplitterBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, Liroth.LIROTH_SPLITTER_BLOCK_ENTITY, LirothSplitterBlockEntity::tick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(type, Liroth.LIROTH_SPLITTER_BLOCK_ENTITY, LirothSplitterBlockEntity::serverTick);
     }
     
     @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (!state.get(LIT).booleanValue()) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+        if (!state.getValue(LIT).booleanValue()) {
             return;
         }
         double d = (double)pos.getX() + 0.5;
         double e = pos.getY();
         double f = (double)pos.getZ() + 0.5;
         if (random.nextDouble() < 0.1) {
-            world.playSound(d, e, f, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
+            world.playLocalSound(d, e, f, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
         }
-        Direction direction = state.get(FACING);
+        Direction direction = state.getValue(FACING);
         Direction.Axis axis = direction.getAxis();
+        double g = 0.52;
         double h = random.nextDouble() * 0.6 - 0.3;
-        double i = axis == Direction.Axis.X ? (double)direction.getOffsetX() * 0.52 : h;
+        double i = axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52 : h;
         double j = random.nextDouble() * 6.0 / 16.0;
-        double k = axis == Direction.Axis.Z ? (double)direction.getOffsetZ() * 0.52 : h;
+        double k = axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52 : h;
         world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0, 0.0, 0.0);
         world.addParticle(LirothParticles.PURPLE_FLAME, d + i, e + j, f + k, 0.0, 0.0, 0.0);
     }

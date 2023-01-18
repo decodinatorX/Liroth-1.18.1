@@ -1,27 +1,22 @@
 package com.decodinator.liroth.entities;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.VexEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Vex;
+import net.minecraft.world.level.Level;
 
-public class PierPeepEntity extends VexEntity {
+public class PierPeepEntity extends Vex {
 
-	public PierPeepEntity(EntityType<? extends VexEntity> entityType, World world) {
+	public PierPeepEntity(EntityType<? extends Vex> entityType, Level world) {
 		super(entityType, world);
 	}
 
-    public static DefaultAttributeContainer.Builder createPierPeepAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 14.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0);
-    }
-    
-    @Override
-    public int getLimitPerChunk() {
-        return 3;
+    public static AttributeSupplier.Builder createPierPeepAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 14.0).add(Attributes.ATTACK_DAMAGE, 4.0);
     }
     
     @Override

@@ -1,16 +1,14 @@
 package com.decodinator.liroth.core.world.trees;
 
-import net.minecraft.util.math.random.Random;
+import com.decodinator.liroth.core.LirothConfiguredFeatures;
 
-import com.decodinator.liroth.Liroth;
-import net.minecraft.block.sapling.SaplingGenerator;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-public class DamnationTree 
-extends SaplingGenerator {
-    @Override
-    protected RegistryKey<ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
-        return Liroth.DAMNATION;
-    }
+public class DamnationTree extends AbstractTreeGrower {
+	   protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource p_256119_, boolean p_256536_) {
+		   return LirothConfiguredFeatures.DAMNATION;	   
+	}
 }

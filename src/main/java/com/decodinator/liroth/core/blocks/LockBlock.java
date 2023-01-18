@@ -1,42 +1,41 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 
 public class LockBlock extends Block {
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-	public LockBlock(Settings settings) {
+	public LockBlock(Properties settings) {
 		super(settings);
-		setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
  
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_48725_) {
+        p_48725_.add(FACING);
+     }
     
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
-    }
+    public BlockState getStateForPlacement(BlockPlaceContext p_48689_) {
+        return this.defaultBlockState().setValue(FACING, p_48689_.getHorizontalDirection().getOpposite());
+     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
+    public RenderShape getRenderShape(BlockState p_48727_) {
+        return RenderShape.MODEL;
+     }
     
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate(state.get(FACING)));
-    }
+    public BlockState rotate(BlockState p_48722_, Rotation p_48723_) {
+        return p_48722_.setValue(FACING, p_48723_.rotate(p_48722_.getValue(FACING)));
+     }
 
 }

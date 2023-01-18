@@ -6,64 +6,64 @@ import org.jetbrains.annotations.Nullable;
 
 import com.decodinator.liroth.core.LirothItems;
 
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.BannerItem;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShieldItem;
-import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BannerItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 
 public class QuantumLirothShield
-	extends Item {
-	    public static final int field_30918 = 5;
-	    public static final float field_30919 = 3.0f;
-	    public static final String BASE_KEY = "Base";
+extends Item {
+    public static final int field_30918 = 5;
+    public static final float field_30919 = 3.0f;
+    public static final String BASE_KEY = "Base";
 
-	    public QuantumLirothShield(Item.Settings settings) {
-	        super(settings);
-	        DispenserBlock.registerBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
-	    }
+    public QuantumLirothShield(Item.Properties settings) {
+        super(settings);
+        DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
+    }
 
-	    @Override
-	    public String getTranslationKey(ItemStack stack) {
-	        if (BlockItem.getBlockEntityNbt(stack) != null) {
-	            return this.getTranslationKey() + "." + ShieldItem.getColor(stack).getName();
-	        }
-	        return super.getTranslationKey(stack);
-	    }
+    @Override
+    public String getDescriptionId(ItemStack itemStack) {
+        if (BlockItem.getBlockEntityData(itemStack) != null) {
+            return this.getDescriptionId() + "." + ShieldItem.getColor(itemStack).getName();
+        }
+        return super.getDescriptionId(itemStack);
+    }
 
-	    @Override
-	    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-	        BannerItem.appendBannerTooltip(stack, tooltip);
-	    }
+    @Override
+    public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
+        BannerItem.appendHoverTextFromBannerBlockEntityTag(itemStack, list);
+    }
 
-	    @Override
-	    public UseAction getUseAction(ItemStack stack) {
-	        return UseAction.BLOCK;
-	    }
+    @Override
+    public UseAnim getUseAnimation(ItemStack itemStack) {
+        return UseAnim.BLOCK;
+    }
 
-	    @Override
-	    public int getMaxUseTime(ItemStack stack) {
-	        return 72000;
-	    }
+    @Override
+    public int getUseDuration(ItemStack itemStack) {
+        return 72000;
+    }
 
-	    @Override
-	    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-	        ItemStack itemStack = user.getStackInHand(hand);
-	        user.setCurrentHand(hand);
-	        return TypedActionResult.consume(itemStack);
-	    }
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
+        ItemStack itemStack = player.getItemInHand(interactionHand);
+        player.startUsingItem(interactionHand);
+        return InteractionResultHolder.consume(itemStack);
+    }
 
-	    @Override
-	    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
-	        return ingredient.isOf(LirothItems.QUANTUM_PLATE) || super.canRepair(stack, ingredient);
-	    }
-	}
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
+        return ingredient.is(LirothItems.QUANTUM_PLATE) || super.isValidRepairItem(stack, ingredient);
+    }
+}

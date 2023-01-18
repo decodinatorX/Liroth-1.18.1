@@ -10,7 +10,7 @@ import com.decodinator.liroth.core.helpers.RubyArmorMaterial;
 import com.decodinator.liroth.core.helpers.SalemLirothArmorMaterial;
 import com.decodinator.liroth.core.helpers.TourmalineArmorMaterial;
 
-import net.minecraft.item.ArmorMaterial;
+import net.minecraft.world.item.ArmorMaterial;
 
 public class LirothArmorMaterials {
     public static final ArmorMaterial POTESTIUM_LIROTH_ARMOR_MATERIAL = new PotestiumLirothArmorMaterial();

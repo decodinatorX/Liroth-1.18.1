@@ -12,14 +12,14 @@ import com.decodinator.liroth.core.LirothHoeables;
 import com.decodinator.liroth.core.LirothItems;
 import com.decodinator.liroth.core.LirothParticles;
 import com.decodinator.liroth.core.LirothPortalBuilders;
-//import com.decodinator.liroth.core.LirothPortalBuilders;
+import com.decodinator.liroth.core.LirothRecipeTypes;
 import com.decodinator.liroth.core.LirothSounds;
 import com.decodinator.liroth.core.LirothSpawnEggs;
 import com.decodinator.liroth.core.LirothStrippables;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntity;
-import com.decodinator.liroth.core.blocks.entity.LirothSplitterBlockEntity;
 import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlockEntity;
-import com.decodinator.liroth.core.blocks.entity.QuantumExtractorBlockEntity;
+import com.decodinator.liroth.core.blocks.entity.QuantumBlockEntity;
+import com.decodinator.liroth.core.blocks.entity.SplitterBlockEntity;
 import com.decodinator.liroth.world.generator.LirothStructures;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -29,80 +29,80 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 public class Liroth implements ModInitializer {
 	public static String MOD_ID = "liroth";
 	public static final Logger LOGGER = LoggerFactory.getLogger("liroth");
 	    
     // IF THIS WORKS I'LL EAT MY OWN SANDAL!! update: it didn't... UPDATE: IT DOES NOW! SANDAL SPICES TIME!!!! :)
-    public static BlockEntityType<FungalCampfireBlockEntity> FUNGAL_CAMPFIRE_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "fungal_campfire"), FabricBlockEntityTypeBuilder.create(FungalCampfireBlockEntity::new, LirothBlocks.FUNGAL_CAMPFIRE).build(null));
-    public static BlockEntityType<LirothianPetroleumCampfireBlockEntity> LIROTHIAN_PETROLEUM_CAMPFIRE_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "lirothian_petroleum_campfire"), FabricBlockEntityTypeBuilder.create(LirothianPetroleumCampfireBlockEntity::new, LirothBlocks.LIROTHIAN_PETROLEUM_CAMPFIRE).build(null));
-    public static BlockEntityType<QuantumExtractorBlockEntity> QUANTUM_EXTRACTOR_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "quantum_extractor"), FabricBlockEntityTypeBuilder.create(QuantumExtractorBlockEntity::new, LirothBlocks.QUANTUM_EXTRACTOR).build(null));
-    public static BlockEntityType<LirothSplitterBlockEntity> LIROTH_SPLITTER_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Liroth.MOD_ID, "liroth_splitter"), FabricBlockEntityTypeBuilder.create(LirothSplitterBlockEntity::new, LirothBlocks.LIROTH_SPLITTER).build(null));
+    public static BlockEntityType<FungalCampfireBlockEntity> FUNGAL_CAMPFIRE_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Liroth.MOD_ID, "fungal_campfire"), FabricBlockEntityTypeBuilder.create(FungalCampfireBlockEntity::new, LirothBlocks.FUNGAL_CAMPFIRE).build(null));
+    public static BlockEntityType<LirothianPetroleumCampfireBlockEntity> LIROTHIAN_PETROLEUM_CAMPFIRE_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Liroth.MOD_ID, "lirothian_petroleum_campfire"), FabricBlockEntityTypeBuilder.create(LirothianPetroleumCampfireBlockEntity::new, LirothBlocks.LIROTHIAN_PETROLEUM_CAMPFIRE).build(null));
+    public static BlockEntityType<QuantumBlockEntity> QUANTUM_EXTRACTOR_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Liroth.MOD_ID, "quantum_extractor"), FabricBlockEntityTypeBuilder.create(QuantumBlockEntity::new, LirothBlocks.QUANTUM_EXTRACTOR).build(null));
+    public static BlockEntityType<SplitterBlockEntity> LIROTH_SPLITTER_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Liroth.MOD_ID, "liroth_splitter"), FabricBlockEntityTypeBuilder.create(SplitterBlockEntity::new, LirothBlocks.LIROTH_SPLITTER).build(null));
 
     
-//    public static ScreenHandlerType<LirothSplitterScreenHandler> LIROTH_SPLITTER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(Liroth.MOD_ID, "liroth_splitter"), LirothSplitterScreenHandler::new);
-//    public static ScreenHandlerType<QuantumExtractorScreenHandler> QUANTUM_EXTRACTOR_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(Liroth.MOD_ID, "quantum_extractor"), QuantumExtractorScreenHandler::new);
+//    public static ScreenHandlerType<LirothSplitterScreenHandler> LIROTH_SPLITTER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new ResourceLocation(Liroth.MOD_ID, "liroth_splitter"), LirothSplitterScreenHandler::new);
+//    public static ScreenHandlerType<QuantumExtractorScreenHandler> QUANTUM_EXTRACTOR_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new ResourceLocation(Liroth.MOD_ID, "quantum_extractor"), QuantumExtractorScreenHandler::new);
     
-   	public static final RegistryKey<ConfiguredFeature<?, ?>> LIROTH = ConfiguredFeatures.of("liroth");
-    public static final RegistryKey<ConfiguredFeature<?, ?>> SPICED = ConfiguredFeatures.of("spiced");
-    public static final RegistryKey<ConfiguredFeature<?, ?>> TALLPIER = ConfiguredFeatures.of("tallpier");
-    public static final RegistryKey<ConfiguredFeature<?, ?>> DAMNATION = ConfiguredFeatures.of("damnation");
-    public static final RegistryKey<ConfiguredFeature<?, ?>> JAPZ = ConfiguredFeatures.of("japz");
-    public static final RegistryKey<ConfiguredFeature<?, ?>> KOOLAW = ConfiguredFeatures.of("koolaw");
-    public static final RegistryKey<ConfiguredFeature<?, ?>> PETRIFIED = ConfiguredFeatures.of("pretrified"); 
+   	public static final ResourceKey<ConfiguredFeature<?, ?>> LIROTH = FeatureUtils.createKey("liroth");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SPICED = FeatureUtils.createKey("spiced");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TALLPIER = FeatureUtils.createKey("tallpier");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DAMNATION = FeatureUtils.createKey("damnation");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> JAPZ = FeatureUtils.createKey("japz");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KOOLAW = FeatureUtils.createKey("koolaw");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED = FeatureUtils.createKey("pretrified"); 
     
-    public static final ItemGroup creativeItemsTab = FabricItemGroup.builder(new Identifier(Liroth.MOD_ID, "liroth_items")).icon(() -> new ItemStack(LirothItems.LIROTH_GEM))
-        	.entries((enableFeatures, entries, operatorEnabled) -> {
+    public static final CreativeModeTab creativeItemsTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_items")).icon(() -> new ItemStack(LirothItems.LIROTH_GEM))
+        	.displayItems((enableFeatures, entries, operatorEnabled) -> {
                 for (var supplier : LirothItems.getItems()) {
-                	entries.add(supplier);
+                	entries.accept(supplier);
                 }
         	}
         ).build();
-        public static final ItemGroup creativeBlocksTab = FabricItemGroup.builder(new Identifier(Liroth.MOD_ID, "liroth_blocks")).icon(() -> new ItemStack(LirothBlocks.LIROTH_GEM_BLOCK.asItem()))
-            .entries((enableFeatures, entries, operatorEnabled) -> {
+        public static final CreativeModeTab creativeBlocksTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_blocks")).icon(() -> new ItemStack(LirothBlocks.LIROTH_GEM_BLOCK.asItem()))
+            .displayItems((enableFeatures, entries, operatorEnabled) -> {
                 for (var supplier : LirothBlocks.getBlocks()) {
-                    entries.add(supplier);
+                    entries.accept(supplier);
                 }
             }
         ).build();
-        public static final ItemGroup creativeCombatTab = FabricItemGroup.builder(new Identifier(Liroth.MOD_ID, "liroth_combat")).icon(() -> new ItemStack(LirothItems.LIROTH_SWORD))
-            .entries((enableFeatures, entries, operatorEnabled) -> {
+        public static final CreativeModeTab creativeCombatTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_combat")).icon(() -> new ItemStack(LirothItems.LIROTH_SWORD))
+            .displayItems((enableFeatures, entries, operatorEnabled) -> {
                 for (var supplier : LirothItems.getCombatItems()) {
-                    entries.add(supplier);
+                    entries.accept(supplier);
                 }
             }
         ).build();
-        public static final ItemGroup creativePlantsTab = FabricItemGroup.builder(new Identifier(Liroth.MOD_ID, "liroth_plants")).icon(() -> new ItemStack(LirothBlocks.LIROTH_ROSE.asItem()))
-            .entries((enableFeatures, entries, operatorEnabled) -> {
+        public static final CreativeModeTab creativePlantsTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_plants")).icon(() -> new ItemStack(LirothBlocks.LIROTH_ROSE.asItem()))
+            .displayItems((enableFeatures, entries, operatorEnabled) -> {
                 for (var supplier : LirothBlocks.getPlantBlocks()) {
-                    entries.add(supplier);
+                    entries.accept(supplier);
                 }
             }
         ).build();
-        public static final ItemGroup creativeEntitiesTab = FabricItemGroup.builder(new Identifier(Liroth.MOD_ID, "liroth_entities")).icon(() -> new ItemStack(LirothItems.UNOBTAINABLE_FORSAKEN_CORPSE_SPAWN_EGG))
-            .entries((enableFeatures, entries, operatorEnabled) -> {
+        public static final CreativeModeTab creativeEntitiesTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_entities")).icon(() -> new ItemStack(LirothItems.UNOBTAINABLE_FORSAKEN_CORPSE_SPAWN_EGG))
+            .displayItems((enableFeatures, entries, operatorEnabled) -> {
             	if (!FabricLoader.getInstance().isModLoaded("liroth_addendum")) {
-            		entries.add(LirothSpawnEggs.FORSAKEN_CORPSE_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.FREAKSHOW_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.FUNGAL_FIEND_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.LIROTHIAN_MIMIC_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.PIER_PEEP_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.PROWLER_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.SHADE_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.SKELETAL_FREAK_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.SOUL_ARACHNID_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.VILE_SHARK_SPAWN_EGG);
-            		entries.add(LirothSpawnEggs.WARP_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.FORSAKEN_CORPSE_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.FREAKSHOW_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.FUNGAL_FIEND_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.LIROTHIAN_MIMIC_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.PIER_PEEP_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.PROWLER_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.SHADE_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.SKELETAL_FREAK_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.SOUL_ARACHNID_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.VILE_SHARK_SPAWN_EGG);
+            		entries.accept(LirothSpawnEggs.WARP_SPAWN_EGG);
             	}
             }
         ).build();  
@@ -120,6 +120,7 @@ public class Liroth implements ModInitializer {
 		    LirothRegistries.registerSounds();
 		    LirothRegistries.registerFeatures();
 		    LirothRegistries.registerStructures();
+		    LirothRegistries.registerRecipeTypes();
 		    LirothRegistries.registerFuels();
 	        Liroth.threadSafeLoadFinish();
 			addClassicPack();
@@ -190,6 +191,12 @@ public class Liroth implements ModInitializer {
 				Liroth.LOGGER.info("Liroth: Structures registered!");
 	        }
 	        
+	        public static void registerRecipeTypes() {
+	        	Liroth.LOGGER.debug("Liroth: Registering Recipe Types...");
+	        	LirothRecipeTypes.init();
+	        	Liroth.LOGGER.info("Liroth: Recipe Types registered!");
+	        }
+	        
 	        public static void registerFuels() {
 	        	Liroth.LOGGER.debug("Liroth: Registering fuels...");
 	        	FuelRegistry registry = FuelRegistry.INSTANCE;
@@ -205,7 +212,7 @@ public class Liroth implements ModInitializer {
 		public static void addClassicPack() {
 			ModContainer liroth = FabricLoader.getInstance().getModContainer(MOD_ID)
 					.orElseThrow(() -> new IllegalStateException("Liroth's ModContainer couldn't be found!"));
-			ResourceManagerHelper.registerBuiltinResourcePack(new Identifier(MOD_ID, "classic"), liroth, "Liroth Legacy", ResourcePackActivationType.NORMAL);
+			ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation(MOD_ID, "classic"), liroth, "Liroth Legacy", ResourcePackActivationType.NORMAL);
 		}
 	    
 	    public static void threadSafeLoadFinish() {

@@ -4,19 +4,20 @@ import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreenHandler;
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreenHandler;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.ScreenHandlerType.Factory;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.MenuType.MenuSupplier;
 
-public class LirothScreenHandlers<T extends ScreenHandler> {
+public class LirothScreenHandlers {
 
-    public static final ScreenHandlerType<LirothSplitterScreenHandler> LIROTH_SPLITTER_SCREEN_HANDLER = LirothScreenHandlers.register(Liroth.MOD_ID.toString() + ":liroth_splitter", LirothSplitterScreenHandler::new);
-    public static final ScreenHandlerType<QuantumExtractorScreenHandler> QUANTUM_EXTRACTOR_SCREEN_HANDLER = LirothScreenHandlers.register(Liroth.MOD_ID.toString() + ":quantum_extractor", QuantumExtractorScreenHandler::new);
+    public static final MenuType<LirothSplitterScreenHandler> LIROTH_SPLITTER_SCREEN_HANDLER = LirothScreenHandlers.register(Liroth.MOD_ID.toString() + ":liroth_splitter", LirothSplitterScreenHandler::new);
+    public static final MenuType<QuantumExtractorScreenHandler> QUANTUM_EXTRACTOR_SCREEN_HANDLER = LirothScreenHandlers.register(Liroth.MOD_ID.toString() + ":quantum_extractor", QuantumExtractorScreenHandler::new);
     
-    private static <T extends ScreenHandler> ScreenHandlerType<T> register(String id, Factory<T> factory) {
-        return Registry.register(Registries.SCREEN_HANDLER, id, new ScreenHandlerType<T>(factory));
+    private static <T extends AbstractContainerMenu> MenuType<T> register(String string, MenuSupplier<T> menuSupplier) {
+        return Registry.register(BuiltInRegistries.MENU, string, new MenuType<T>(menuSupplier));
     }
+    
     public void init() {}
 }

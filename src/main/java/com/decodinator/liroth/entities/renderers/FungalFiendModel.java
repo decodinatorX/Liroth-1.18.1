@@ -1,19 +1,20 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.entities.FungalFiendEntity;
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.MathHelper;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class FungalFiendModel<T extends FungalFiendEntity>
-extends SinglePartEntityModel<T> {
+extends HierarchicalModel<T> {
     private final ModelPart root;
 	private final ModelPart body;
 	private final ModelPart head;
@@ -31,40 +32,40 @@ extends SinglePartEntityModel<T> {
 		this.leg3 = root.getChild("leg3");
 	}
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData meshdefinition = new ModelData();
-		ModelPartData partdefinition = meshdefinition.getRoot();
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		partdefinition.addChild("body", ModelPartBuilder.create().uv(16, 16).mirrored().cuboid(-4.0F, -18.0F, -2.0F, 8.0F, 12.0F, 4.0F).mirrored(false)
-		.uv(16, 16).mirrored().cuboid(-3.0F, -22.0F, -2.0F, 6.0F, 4.0F, 4.0F).mirrored(false)
-		.uv(50, 27).cuboid(-4.0F, -17.0F, 0.0F, -5.0F, 5.0F, 0.0F)
-		.uv(40, 27).cuboid(3.0F, -23.0F, 0.0F, 5.0F, 5.0F, 0.0F), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+		partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).mirror().addBox(-4.0F, -18.0F, -2.0F, 8.0F, 12.0F, 4.0F).mirror(false)
+		.texOffs(16, 16).mirror().addBox(-3.0F, -22.0F, -2.0F, 6.0F, 4.0F, 4.0F).mirror(false)
+		.texOffs(50, 27).addBox(-4.0F, -17.0F, 0.0F, -5.0F, 5.0F, 0.0F)
+		.texOffs(40, 27).addBox(3.0F, -23.0F, 0.0F, 5.0F, 5.0F, 0.0F), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		partdefinition.addChild("head", ModelPartBuilder.create().uv(0, 0).mirrored().cuboid(-4.0F, -12.0F, -4.0F, 8.0F, 8.0F, 8.0F).mirrored(false), ModelTransform.pivot(0.0F, 6.0F, 0.0F));
+		partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-4.0F, -12.0F, -4.0F, 8.0F, 8.0F, 8.0F).mirror(false), PartPose.offset(0.0F, 6.0F, 0.0F));
 
-		partdefinition.addChild("leg0", ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F).mirrored(false), ModelTransform.pivot(3.0F, 18.0F, 4.0F));
+		partdefinition.addOrReplaceChild("leg0", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F).mirror(false), PartPose.offset(3.0F, 18.0F, 4.0F));
 
-		partdefinition.addChild("leg1", ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F).mirrored(false), ModelTransform.pivot(-3.0F, 18.0F, 4.0F));
+		partdefinition.addOrReplaceChild("leg1", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F).mirror(false), PartPose.offset(-3.0F, 18.0F, 4.0F));
 
-		partdefinition.addChild("leg2", ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F).mirrored(false), ModelTransform.pivot(3.0F, 18.0F, -4.0F));
+		partdefinition.addOrReplaceChild("leg2", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F).mirror(false), PartPose.offset(3.0F, 18.0F, -4.0F));
 
-		partdefinition.addChild("leg3", ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F).mirrored(false), ModelTransform.pivot(-3.0F, 18.0F, -4.0F));
+		partdefinition.addOrReplaceChild("leg3", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F).mirror(false), PartPose.offset(-3.0F, 18.0F, -4.0F));
 
-		return TexturedModelData.of(meshdefinition, 64, 32);
+		return LayerDefinition.create(meshdefinition, 64, 32);
 	}
 
 	@Override
-	public void setAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.yaw = netHeadYaw * ((float)Math.PI / 180);
-        this.head.pitch = headPitch * ((float)Math.PI / 180);
-        this.leg0.pitch = MathHelper.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount;
-        this.leg1.pitch = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 1.4f * limbSwingAmount;
-        this.leg2.pitch = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 1.4f * limbSwingAmount;
-        this.leg3.pitch = MathHelper.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount;
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.head.yRot = netHeadYaw * ((float)Math.PI / 180);
+        this.head.xRot = headPitch * ((float)Math.PI / 180);
+        this.leg0.xRot = Mth.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount;
+        this.leg1.xRot = Mth.cos(limbSwing * 0.6662f + (float)Math.PI) * 1.4f * limbSwingAmount;
+        this.leg2.xRot = Mth.cos(limbSwing * 0.6662f + (float)Math.PI) * 1.4f * limbSwingAmount;
+        this.leg3.xRot = Mth.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount;
     }
 
 	@Override
-	public void render(MatrixStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		body.render(poseStack, buffer, packedLight, packedOverlay);
 		head.render(poseStack, buffer, packedLight, packedOverlay);
 		leg0.render(poseStack, buffer, packedLight, packedOverlay);
@@ -74,7 +75,7 @@ extends SinglePartEntityModel<T> {
 	}
 
     @Override
-    public ModelPart getPart() {
+    public ModelPart root() {
         return this.root;
     }
 }

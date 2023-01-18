@@ -6,85 +6,85 @@ import java.util.function.Consumer;
 
 import com.decodinator.liroth.Liroth;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.Block;
 
 public class LirothRenders {
-    public static void renderCutOuts(Consumer<Map<Block, RenderLayer>> mapConsumer) {
+    public static void renderCutOuts(Consumer<Map<Block, RenderType>> mapConsumer) {
         Liroth.LOGGER.debug("Liroth: Rendering Texture Shits...");
-        Map<Block, RenderLayer> map = new HashMap<>();
+        Map<Block, RenderType> map = new HashMap<>();
         
-        map.put(LirothBlocks.DAMNATION_SAPLING, RenderLayer.getCutout());
-        map.put(LirothBlocks.JAPZ_SAPLING, RenderLayer.getCutout());
-        map.put(LirothBlocks.KOOLAW_SAPLING, RenderLayer.getCutout());
-        map.put(LirothBlocks.LIROTH_SAPLING, RenderLayer.getCutout());
-        map.put(LirothBlocks.PETRIFIED_DAMNATION_SAPLING, RenderLayer.getCutout());
-        map.put(LirothBlocks.SPICED_SAPLING, RenderLayer.getCutout());
-        map.put(LirothBlocks.TALLPIER_SAPLING, RenderLayer.getCutout());
-        map.put(LirothBlocks.LIROTH_GRASS, RenderLayer.getCutout());
+        map.put(LirothBlocks.DAMNATION_SAPLING, RenderType.cutout());
+        map.put(LirothBlocks.JAPZ_SAPLING, RenderType.cutout());
+        map.put(LirothBlocks.KOOLAW_SAPLING, RenderType.cutout());
+        map.put(LirothBlocks.LIROTH_SAPLING, RenderType.cutout());
+        map.put(LirothBlocks.PETRIFIED_DAMNATION_SAPLING, RenderType.cutout());
+        map.put(LirothBlocks.SPICED_SAPLING, RenderType.cutout());
+        map.put(LirothBlocks.TALLPIER_SAPLING, RenderType.cutout());
+        map.put(LirothBlocks.LIROTH_GRASS, RenderType.cutout());
 
-        map.put(LirothBlocks.POINTED_JALSPHIRE_CRYSTAL, RenderLayer.getCutout());
-        map.put(LirothBlocks.POINTED_PETRIFIED_CRYSTAL, RenderLayer.getCutout());
+        map.put(LirothBlocks.POINTED_JALSPHIRE_CRYSTAL, RenderType.cutout());
+        map.put(LirothBlocks.POINTED_PETRIFIED_CRYSTAL, RenderType.cutout());
         
-        map.put(LirothBlocks.DAMNATION_VINES_PLANT, RenderLayer.getCutout());
-        map.put(LirothBlocks.DAMNATION_VINES, RenderLayer.getCutout());
-        map.put(LirothBlocks.JAPZ_VINES, RenderLayer.getCutout());
-        map.put(LirothBlocks.JAPZ_VINES_PLANT, RenderLayer.getCutout());
-        map.put(LirothBlocks.PETRIFIED_VINES, RenderLayer.getCutout());
-        map.put(LirothBlocks.PETRIFIED_VINES_PLANT, RenderLayer.getCutout());
-        map.put(LirothBlocks.JAPZ_BLOSSOM, RenderLayer.getCutout());
-        map.put(LirothBlocks.DAMNATION_FUNGAL_FUSS, RenderLayer.getCutout());
-        map.put(LirothBlocks.DAMNATION_FUNGAL_HEAP, RenderLayer.getCutout());
-        map.put(LirothBlocks.DAMNATION_FUNGAL_PATCH, RenderLayer.getCutout());
-        map.put(LirothBlocks.FUNGAL_LANTERN, RenderLayer.getCutout());
-        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_LANTERN, RenderLayer.getCutout());
+        map.put(LirothBlocks.DAMNATION_VINES_PLANT, RenderType.cutout());
+        map.put(LirothBlocks.DAMNATION_VINES, RenderType.cutout());
+        map.put(LirothBlocks.JAPZ_VINES, RenderType.cutout());
+        map.put(LirothBlocks.JAPZ_VINES_PLANT, RenderType.cutout());
+        map.put(LirothBlocks.PETRIFIED_VINES, RenderType.cutout());
+        map.put(LirothBlocks.PETRIFIED_VINES_PLANT, RenderType.cutout());
+        map.put(LirothBlocks.JAPZ_BLOSSOM, RenderType.cutout());
+        map.put(LirothBlocks.DAMNATION_FUNGAL_FUSS, RenderType.cutout());
+        map.put(LirothBlocks.DAMNATION_FUNGAL_HEAP, RenderType.cutout());
+        map.put(LirothBlocks.DAMNATION_FUNGAL_PATCH, RenderType.cutout());
+        map.put(LirothBlocks.FUNGAL_LANTERN, RenderType.cutout());
+        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_LANTERN, RenderType.cutout());
         
-        map.put(LirothBlocks.LIROTH_ROSE, RenderLayer.getCutout());
-        map.put(LirothBlocks.WILITING_LIROTH_ROSE, RenderLayer.getCutout());
-        map.put(LirothBlocks.VILE_TENTACLE, RenderLayer.getCutout());
-        map.put(LirothBlocks.VILE_TENTACLE_TIP, RenderLayer.getCutout());
-        map.put(LirothBlocks.DAMNATION_FUNGAL_CLUSTER, RenderLayer.getCutout());
-        map.put(LirothBlocks.DAMNATION_FUNGUS, RenderLayer.getCutout());
-        map.put(LirothBlocks.SEA_EYE, RenderLayer.getCutout());
+        map.put(LirothBlocks.LIROTH_ROSE, RenderType.cutout());
+        map.put(LirothBlocks.WILITING_LIROTH_ROSE, RenderType.cutout());
+        map.put(LirothBlocks.VILE_TENTACLE, RenderType.cutout());
+        map.put(LirothBlocks.VILE_TENTACLE_TIP, RenderType.cutout());
+        map.put(LirothBlocks.DAMNATION_FUNGAL_CLUSTER, RenderType.cutout());
+        map.put(LirothBlocks.DAMNATION_FUNGUS, RenderType.cutout());
+        map.put(LirothBlocks.SEA_EYE, RenderType.cutout());
         
-//        map.put(LirothBlocks.CORRUPTED_BREWING_STAND, RenderLayer.getCutout());
+//        map.put(LirothBlocks.CORRUPTED_BREWING_STAND, RenderType.getCutout());
         
-        map.put(LirothBlocks.FUNGAL_TORCH, RenderLayer.getCutout());
-        map.put(LirothBlocks.WALL_FUNGAL_TORCH, RenderLayer.getCutout());
-        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_TORCH, RenderLayer.getCutout());
-        map.put(LirothBlocks.WALL_LIROTHIAN_PETROLEUM_TORCH, RenderLayer.getCutout());
-        map.put(LirothBlocks.FUNGAL_CAMPFIRE, RenderLayer.getCutout());
-        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_CAMPFIRE, RenderLayer.getCutout());
+        map.put(LirothBlocks.FUNGAL_TORCH, RenderType.cutout());
+        map.put(LirothBlocks.WALL_FUNGAL_TORCH, RenderType.cutout());
+        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_TORCH, RenderType.cutout());
+        map.put(LirothBlocks.WALL_LIROTHIAN_PETROLEUM_TORCH, RenderType.cutout());
+        map.put(LirothBlocks.FUNGAL_CAMPFIRE, RenderType.cutout());
+        map.put(LirothBlocks.LIROTHIAN_PETROLEUM_CAMPFIRE, RenderType.cutout());
         
-        map.put(LirothBlocks.DAMNATION_TRAPDOOR, RenderLayer.getCutoutMipped());
-        map.put(LirothBlocks.JAPZ_TRAPDOOR, RenderLayer.getCutoutMipped());
-        map.put(LirothBlocks.KOOLAW_TRAPDOOR, RenderLayer.getCutoutMipped());
-        map.put(LirothBlocks.LIROTH_TRAPDOOR, RenderLayer.getCutoutMipped());
-        map.put(LirothBlocks.PETRIFIED_DAMNATION_TRAPDOOR, RenderLayer.getCutoutMipped());
-        map.put(LirothBlocks.SPICED_TRAPDOOR, RenderLayer.getCutoutMipped());
-        map.put(LirothBlocks.TALLPIER_TRAPDOOR, RenderLayer.getCutoutMipped());
+        map.put(LirothBlocks.DAMNATION_TRAPDOOR, RenderType.cutoutMipped());
+        map.put(LirothBlocks.JAPZ_TRAPDOOR, RenderType.cutoutMipped());
+        map.put(LirothBlocks.KOOLAW_TRAPDOOR, RenderType.cutoutMipped());
+        map.put(LirothBlocks.LIROTH_TRAPDOOR, RenderType.cutoutMipped());
+        map.put(LirothBlocks.PETRIFIED_DAMNATION_TRAPDOOR, RenderType.cutoutMipped());
+        map.put(LirothBlocks.SPICED_TRAPDOOR, RenderType.cutoutMipped());
+        map.put(LirothBlocks.TALLPIER_TRAPDOOR, RenderType.cutoutMipped());
         
-        map.put(LirothBlocks.DAMNATION_DOOR, RenderLayer.getCutout());
-        map.put(LirothBlocks.JAPZ_DOOR, RenderLayer.getCutout());
-        map.put(LirothBlocks.KOOLAW_DOOR, RenderLayer.getCutout());
-        map.put(LirothBlocks.LIROTH_DOOR, RenderLayer.getCutout());
-        map.put(LirothBlocks.PETRIFIED_DAMNATION_DOOR, RenderLayer.getCutout());
-        map.put(LirothBlocks.SPICED_DOOR, RenderLayer.getCutout());
-        map.put(LirothBlocks.TALLPIER_DOOR, RenderLayer.getCutout());
+        map.put(LirothBlocks.DAMNATION_DOOR, RenderType.cutout());
+        map.put(LirothBlocks.JAPZ_DOOR, RenderType.cutout());
+        map.put(LirothBlocks.KOOLAW_DOOR, RenderType.cutout());
+        map.put(LirothBlocks.LIROTH_DOOR, RenderType.cutout());
+        map.put(LirothBlocks.PETRIFIED_DAMNATION_DOOR, RenderType.cutout());
+        map.put(LirothBlocks.SPICED_DOOR, RenderType.cutout());
+        map.put(LirothBlocks.TALLPIER_DOOR, RenderType.cutout());
         
-        map.put(LirothBlocks.LIROTH_DIMENSION_PORTAL, RenderLayer.getTranslucent());
-        map.put(LirothBlocks.DAMNATION_DIMENSION_PORTAL, RenderLayer.getTranslucent());
-        map.put(LirothBlocks.JANTIRO_DIMENSION_PORTAL, RenderLayer.getTranslucent());
-        map.put(LirothBlocks.JALSPHIRE_DIMENSION_PORTAL, RenderLayer.getTranslucent());
-        map.put(LirothBlocks.DEVASTATED_DIMENSION_PORTAL, RenderLayer.getTranslucent());
+        map.put(LirothBlocks.LIROTH_DIMENSION_PORTAL, RenderType.translucent());
+        map.put(LirothBlocks.DAMNATION_DIMENSION_PORTAL, RenderType.translucent());
+        map.put(LirothBlocks.JANTIRO_DIMENSION_PORTAL, RenderType.translucent());
+        map.put(LirothBlocks.JALSPHIRE_DIMENSION_PORTAL, RenderType.translucent());
+        map.put(LirothBlocks.DEVASTATED_DIMENSION_PORTAL, RenderType.translucent());
 
-        map.put(LirothBlocks.LIROTH_FLUID, RenderLayer.getTranslucent());
+        map.put(LirothBlocks.LIROTH_FLUID, RenderType.translucent());
         
-        map.put(LirothBlocks.LIROTH_GLASS_BLOCK, RenderLayer.getTranslucent());
-        map.put(LirothBlocks.FORCEFIELD, RenderLayer.getTranslucent());
+        map.put(LirothBlocks.LIROTH_GLASS_BLOCK, RenderType.translucent());
+        map.put(LirothBlocks.FORCEFIELD, RenderType.translucent());
         
         for (Block potBlock : LirothBlocks.flowerPotBlocks)
-            map.put(potBlock, RenderLayer.getCutout());
+            map.put(potBlock, RenderType.cutout());
         
         Liroth.LOGGER.debug("Liroth: Texture Shits Rendered!");
 
