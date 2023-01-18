@@ -2,39 +2,39 @@ package com.decodinator.liroth.core.helpers;
 
 import com.decodinator.liroth.core.LirothItems;
 
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
-public class AnsalumLirothToolMaterial implements ToolMaterial {
+public class AnsalumLirothToolMaterial implements Tier {
 
 	@Override
-	public int getDurability() {
+	public int getUses() {
 		return 3031;
 	}
 
 	@Override
-	public float getMiningSpeedMultiplier() {
+	public float getSpeed() {
 		return 10.0f;
 	}
 
 	@Override
-	public float getAttackDamage() {
+	public float getAttackDamageBonus() {
 		return 6.0f;
 	}
 
 	@Override
-	public int getMiningLevel() {
+	public int getLevel() {
 		return 5;
 	}
 
 	@Override
-	public int getEnchantability() {
+	public int getEnchantmentValue() {
 		return 15;
 	}
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(LirothItems.LIROTH_GEM_ANSALUM);
+		return Ingredient.of(LirothItems.LIROTH_GEM_ANSALUM);
 	}
 
 }

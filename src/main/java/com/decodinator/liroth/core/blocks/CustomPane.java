@@ -1,10 +1,10 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.block.PaneBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 
-public class CustomPane extends PaneBlock {
+public class CustomPane extends IronBarsBlock {
 
-	public CustomPane(Settings settings) {
+	public CustomPane(Properties settings) {
 		super(settings);
 	}
 

@@ -1,61 +1,77 @@
 package com.decodinator.liroth.core.blocks;
 
 import java.util.List;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
-import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
+import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-public class LirothGrassBlock
-extends LirothSpreadableBlock
-implements Fertilizable {
-    public LirothGrassBlock(AbstractBlock.Settings settings) {
-        super(settings);
-    }
+public class LirothGrassBlock extends LirothSpreadableBlock implements BonemealableBlock {
+	   public LirothGrassBlock(BlockBehaviour.Properties p_53685_) {
+		      super(p_53685_);
+		   }
 
-    @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        return world.getBlockState(pos.up()).isAir();
-    }
+		   public boolean isValidBonemealTarget(LevelReader p_53692_, BlockPos p_53693_, BlockState p_53694_, boolean p_53695_) {
+		      return p_53692_.getBlockState(p_53693_.above()).isAir();
+		   }
 
-    @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-        return true;
-    }
+		   public boolean isBonemealSuccess(Level p_221275_, RandomSource p_221276_, BlockPos p_221277_, BlockState p_221278_) {
+		      return true;
+		   }
 
-    @SuppressWarnings("unchecked")
-	@Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        BlockPos blockPos = pos.up();
-        BlockState blockState = Blocks.GRASS.getDefaultState();
-        block0: for (int i = 0; i < 128; ++i) {
-            net.minecraft.registry.entry.RegistryEntry<PlacedFeature> registryEntry;
-            BlockPos blockPos2 = blockPos;
-            for (int j = 0; j < i / 16; ++j) {
-                if (!world.getBlockState((blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1)).down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) continue block0;
-            }
-            BlockState blockState2 = world.getBlockState(blockPos2);
-            if (blockState2.isOf(blockState.getBlock()) && random.nextInt(10) == 0) {
-                ((Fertilizable)((Object)blockState.getBlock())).grow(world, random, blockPos2, blockState2);
-            }
-            if (!blockState2.isAir()) continue;
-            if (random.nextInt(8) == 0) {
-                List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).value().getGenerationSettings().getFlowerFeatures();
-                if (list.isEmpty()) continue;
-                registryEntry = ((RandomPatchFeatureConfig)list.get(0).config()).feature();
-            } else {
-                registryEntry = (net.minecraft.registry.entry.RegistryEntry<PlacedFeature>) VegetationPlacedFeatures.GRASS_BONEMEAL;
-            }
-            registryEntry.value().generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
-        }
-    }
-}
+		   public void performBonemeal(ServerLevel p_221270_, RandomSource p_221271_, BlockPos p_221272_, BlockState p_221273_) {
+		      BlockPos blockpos = p_221272_.above();
+		      BlockState blockstate = Blocks.GRASS.defaultBlockState();
+		      Optional<Holder.Reference<PlacedFeature>> optional = p_221270_.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(VegetationPlacements.GRASS_BONEMEAL);
+
+		      label46:
+		      for(int i = 0; i < 128; ++i) {
+		         BlockPos blockpos1 = blockpos;
+
+		         for(int j = 0; j < i / 16; ++j) {
+		            blockpos1 = blockpos1.offset(p_221271_.nextInt(3) - 1, (p_221271_.nextInt(3) - 1) * p_221271_.nextInt(3) / 2, p_221271_.nextInt(3) - 1);
+		            if (!p_221270_.getBlockState(blockpos1.below()).is(this) || p_221270_.getBlockState(blockpos1).isCollisionShapeFullBlock(p_221270_, blockpos1)) {
+		               continue label46;
+		            }
+		         }
+
+		         BlockState blockstate1 = p_221270_.getBlockState(blockpos1);
+		         if (blockstate1.is(blockstate.getBlock()) && p_221271_.nextInt(10) == 0) {
+		            ((BonemealableBlock)blockstate.getBlock()).performBonemeal(p_221270_, p_221271_, blockpos1, blockstate1);
+		         }
+
+		         if (blockstate1.isAir()) {
+		            Holder<PlacedFeature> holder;
+		            if (p_221271_.nextInt(8) == 0) {
+		                List<ConfiguredFeature<?, ?>> list = p_221270_.getBiome(blockpos1).value().getGenerationSettings().getFlowerFeatures();
+		                if (list.isEmpty()) {
+		                   continue;
+		                }
+
+		                holder = ((RandomPatchConfiguration)list.get(0).config()).feature();
+		             } else {
+		                if (!optional.isPresent()) {
+		                   continue;
+		                }
+
+		                holder = optional.get();
+		             }
+
+		             holder.value().place(p_221270_, p_221270_.getChunkSource().getGenerator(), p_221271_, blockpos1);
+		          }
+		       }
+
+		    }
+		}

@@ -1,18 +1,17 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.entities.VileSharkEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class VileSharkModel<T extends VileSharkEntity> extends EntityModel<T> {
 	private final ModelPart head;
@@ -35,45 +34,46 @@ public class VileSharkModel<T extends VileSharkEntity> extends EntityModel<T> {
 		this.nose = root.getChild("nose");
 	}
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData meshdefinition = new ModelData();
-		ModelPartData partdefinition = meshdefinition.getRoot();
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		partdefinition.addChild("head", ModelPartBuilder.create().uv(26, 28).cuboid(-5.0F, -4.0F, -8.0F, 10.0F, 5.0F, 8.0F)
-		.uv(33, 0).cuboid(-5.0F, 2.0F, -6.0F, 10.0F, 1.0F, 6.0F), ModelTransform.pivot(0.0F, 20.0F, -3.0F));
+		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(26, 28).addBox(-5.0F, -4.0F, -8.0F, 10.0F, 5.0F, 8.0F)
+		.texOffs(33, 0).addBox(-5.0F, 2.0F, -6.0F, 10.0F, 1.0F, 6.0F), PartPose.offset(0.0F, 20.0F, -3.0F));
 
-		partdefinition.addChild("body", ModelPartBuilder.create().uv(0, 42).cuboid(-6.0F, -5.0F, 0.0F, 12.0F, 9.0F, 13.0F), ModelTransform.pivot(0.0F, 20.0F, -3.0F));
+		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 42).addBox(-6.0F, -5.0F, 0.0F, 12.0F, 9.0F, 13.0F), PartPose.offset(0.0F, 20.0F, -3.0F));
 
-		partdefinition.addChild("tail", ModelPartBuilder.create().uv(0, 20).cuboid(-3.0F, -2.5F, 0.0F, 6.0F, 5.0F, 11.0F), ModelTransform.pivot(0.0F, 20.5F, 10.0F));
+		PartDefinition tail = partdefinition.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 20).addBox(-3.0F, -2.5F, 0.0F, 6.0F, 5.0F, 11.0F), PartPose.offset(0.0F, 20.5F, 10.0F));
 
-		partdefinition.addChild("tail_fin", ModelPartBuilder.create().uv(23, 20).cuboid(-6.0F, -0.5F, -1.0F, 12.0F, 1.0F, 6.0F), ModelTransform.pivot(0.0F, 20.5F, 20.0F));
+		PartDefinition tail_fin = partdefinition.addOrReplaceChild("tail_fin", CubeListBuilder.create().texOffs(23, 20).addBox(-6.0F, -0.5F, -1.0F, 12.0F, 1.0F, 6.0F), PartPose.offset(0.0F, 20.5F, 20.0F));
 
-		ModelPartData back_fin = partdefinition.addChild("back_fin", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 16.0F, 5.0F));
+		PartDefinition back_fin = partdefinition.addOrReplaceChild("back_fin", CubeListBuilder.create(), PartPose.offset(0.0F, 16.0F, 5.0F));
 
-		back_fin.addChild("back_fin_r1", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5F, -12.0F, 3.0F, 1.0F, 5.0F, 4.0F), ModelTransform.of(0.0F, 7.0F, -5.0F, -0.1745F, 0.0F, 0.0F));
+		PartDefinition back_fin_r1 = back_fin.addOrReplaceChild("back_fin_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -12.0F, 3.0F, 1.0F, 5.0F, 4.0F), PartPose.offsetAndRotation(0.0F, 7.0F, -5.0F, -0.1745F, 0.0F, 0.0F));
 
-		partdefinition.addChild("left_fin", ModelPartBuilder.create().uv(0, 36).cuboid(-8.0F, -1.0F, -1.0F, 8.0F, 1.0F, 4.0F), ModelTransform.pivot(-6.0F, 22.0F, -1.0F));
+		PartDefinition left_fin = partdefinition.addOrReplaceChild("left_fin", CubeListBuilder.create().texOffs(0, 36).addBox(-8.0F, -1.0F, -1.0F, 8.0F, 1.0F, 4.0F), PartPose.offset(-6.0F, 22.0F, -1.0F));
 
-		partdefinition.addChild("right_fin", ModelPartBuilder.create().uv(33, 7).cuboid(0.0F, -1.0F, -1.0F, 8.0F, 1.0F, 4.0F), ModelTransform.pivot(6.0F, 22.0F, -1.0F));
+		PartDefinition right_fin = partdefinition.addOrReplaceChild("right_fin", CubeListBuilder.create().texOffs(33, 7).addBox(0.0F, -1.0F, -1.0F, 8.0F, 1.0F, 4.0F), PartPose.offset(6.0F, 22.0F, -1.0F));
 
-		partdefinition.addChild("nose", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 20.0F, -11.0F));
+		PartDefinition nose = partdefinition.addOrReplaceChild("nose", CubeListBuilder.create(), PartPose.offset(0.0F, 20.0F, -11.0F));
 
-		return TexturedModelData.of(meshdefinition, 64, 64);
+		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
     @Override
-    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-//        this.body.pitch = headPitch * ((float)Math.PI / 180);
-//        this.body.yaw = headYaw * ((float)Math.PI / 180);
-        if (((Entity)entity).getVelocity().horizontalLengthSquared() > 1.0E-7) {
-//            this.body.pitch += -0.05f - 0.05f * MathHelper.cos(animationProgress * 0.3f);
-            this.tail.pitch = -0.1f * MathHelper.cos(animationProgress * 0.3f);
-            this.tail_fin.pitch = -0.2f * MathHelper.cos(animationProgress * 0.3f);
-        }
+    public void setupAnim(T p_102475_, float p_102476_, float p_102477_, float p_102478_, float p_102479_, float p_102480_) {
+//       this.body.xRot = p_102480_ * ((float)Math.PI / 180F);
+//       this.body.yRot = p_102479_ * ((float)Math.PI / 180F);
+       if (p_102475_.getDeltaMovement().horizontalDistanceSqr() > 1.0E-7D) {
+//          this.body.xRot += -0.05F - 0.05F * Mth.cos(p_102478_ * 0.3F);
+           this.tail.xRot = -0.1F * Mth.cos(p_102478_ * 0.3F);
+           this.tail_fin.xRot = -0.2F * Mth.cos(p_102478_ * 0.3F);
+       }
+
     }
 
 	@Override
-	public void render(MatrixStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		head.render(poseStack, buffer, packedLight, packedOverlay);
 		body.render(poseStack, buffer, packedLight, packedOverlay);
 		tail.render(poseStack, buffer, packedLight, packedOverlay);

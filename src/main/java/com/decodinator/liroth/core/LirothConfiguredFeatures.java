@@ -1,54 +1,82 @@
 package com.decodinator.liroth.core;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.structure.rule.BlockMatchRuleTest;
-import net.minecraft.structure.rule.RuleTest;
-import net.minecraft.structure.rule.TagMatchRuleTest;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.PlacedFeatures;
+import java.util.List;
+import java.util.OptionalInt;
 
-public class LirothConfiguredFeatures extends PlacedFeatures {  
+import com.decodinator.liroth.Liroth;
+import com.google.common.collect.ImmutableList;
 
-    public static final RuleTest STONE_ORE_REPLACEABLES = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
-    public static final RuleTest DEEPSLATE_ORE_REPLACEABLES = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
-    public static final RuleTest NETHERRACK = new BlockMatchRuleTest(Blocks.NETHERRACK);
-	public static final RuleTest END_STONE = new BlockMatchRuleTest(Blocks.END_STONE);
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.MegaJungleTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
-		  @SuppressWarnings({ "unchecked", "rawtypes" })
-		static ConfiguredFeature<?, ?> OVERWORLD_TOURMALINE_GEM_ORE_CONFIGURED_FEATURE = new ConfiguredFeature
-				  (Feature.ORE, new OreFeatureConfig(
-						  LirothConfiguredFeatures.STONE_ORE_REPLACEABLES,
-			          LirothBlocks.TOURMALINE_ORE.getDefaultState(),
-			          3)); // vein size
-		  
-		  @SuppressWarnings({ "unchecked", "rawtypes" })
-		static ConfiguredFeature<?, ?> OVERWORLD_DEEPSLATE_LIROTH_GEM_ORE_CONFIGURED_FEATURE = new ConfiguredFeature
-				  (Feature.ORE, new OreFeatureConfig(
-						  LirothConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES,
-				      LirothBlocks.DEEPSLATE_LIROTH_ORE.getDefaultState(),
-				      2)); // vein size
-		  
-		  @SuppressWarnings({ "unchecked", "rawtypes" })
-		static ConfiguredFeature<?, ?> NETHER_LIROTH_GEM_ORE_CONFIGURED_FEATURE = new ConfiguredFeature
-				  (Feature.ORE, new OreFeatureConfig(
-						  LirothConfiguredFeatures.NETHERRACK,
-				      LirothBlocks.NETHER_LIROTH_GEM_ORE.getDefaultState(),
-				      4)); // vein size
-		  
-		  @SuppressWarnings({ "unchecked", "rawtypes" })
-		static ConfiguredFeature<?, ?> END_LIROTH_GEM_ORE_CONFIGURED_FEATURE = new ConfiguredFeature
-				  (Feature.ORE, new OreFeatureConfig(
-				      LirothConfiguredFeatures.END_STONE,
-				      LirothBlocks.END_LIROTH_GEM_ORE.getDefaultState(),
-				      5)); // vein size
-		  
-		  @SuppressWarnings({ "unchecked", "rawtypes" })
-		static ConfiguredFeature<?, ?> OVERWORLD_DEEPSLATE_TOURMALINE_GEM_ORE_CONFIGURED_FEATURE = new ConfiguredFeature
-				  (Feature.ORE, new OreFeatureConfig(
-						  LirothConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES,
-				      LirothBlocks.DEEPSLATE_TOURMALINE_ORE.getDefaultState(),
-				      4)); // vein size
+
+public class LirothConfiguredFeatures {  
+    BootstapContext<ConfiguredFeature<?, ?>> p_256317_;
+    HolderGetter<Block> holdergetter = p_256317_.lookup(Registries.BLOCK);
+    public static ResourceKey<ConfiguredFeature<?, ?>> LIROTH = FeatureUtils.createKey("liroth");
+    public static ResourceKey<ConfiguredFeature<?, ?>> SPICED = FeatureUtils.createKey("spiced");
+    public static ResourceKey<ConfiguredFeature<?, ?>> TALLPIER = FeatureUtils.createKey("tallpier");
+    public static ResourceKey<ConfiguredFeature<?, ?>> DAMNATION = FeatureUtils.createKey("damnation");
+    public static ResourceKey<ConfiguredFeature<?, ?>> JAPZ = FeatureUtils.createKey("japz");
+    public static ResourceKey<ConfiguredFeature<?, ?>> KOOLAW = FeatureUtils.createKey("koolaw");
+    public static ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED = FeatureUtils.createKey("petrified");
+	
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_LIROTH_ORE = FeatureUtils.createKey("liroth_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_LIROTH_ORE = FeatureUtils.createKey("nether_liroth_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> END_LIROTH_ORE = FeatureUtils.createKey("end_liroth_ore");
+   
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TOURMALINE_ORE = FeatureUtils.createKey("tourmaline_ore");
+    
+    public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> p_256319_) {
+        FeatureUtils.register(p_256319_, LIROTH, Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.LIROTH_LOG), new FancyTrunkPlacer(3, 11, 0), BlockStateProvider.simple(LirothBlocks.LIROTH_LEAVES), new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().build());
+        FeatureUtils.register(p_256319_, SPICED, Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.SPICED_LOG), new ForkingTrunkPlacer(5, 2, 2), BlockStateProvider.simple(LirothBlocks.SPICED_LEAVES), new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2))).ignoreVines().build());
+        FeatureUtils.register(p_256319_, TALLPIER, Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.TALLPIER_LOG), new MegaJungleTrunkPlacer(10, 2, 19), BlockStateProvider.simple(LirothBlocks.TALLPIER_LEAVES), new MegaJungleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2), new TwoLayersFeatureSize(1, 1, 2))).decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25F))).build());
+        FeatureUtils.register(p_256319_, DAMNATION, Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.DAMNATION_LOG), new DarkOakTrunkPlacer(6, 2, 1), BlockStateProvider.simple(LirothBlocks.DAMNATION_LEAVES), new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)), new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))).ignoreVines().build());
+        FeatureUtils.register(p_256319_, JAPZ, Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.JAPZ_LOG), new StraightTrunkPlacer(5, 2, 1), BlockStateProvider.simple(LirothBlocks.JAPZ_LEAVES), new SpruceFoliagePlacer(UniformInt.of(2, 3), UniformInt.of(0, 2), UniformInt.of(1, 2)), new TwoLayersFeatureSize(2, 0, 2))).ignoreVines().build());
+        FeatureUtils.register(p_256319_, KOOLAW, Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.KOOLAW_LOG), new StraightTrunkPlacer(4, 2, 0), BlockStateProvider.simple(LirothBlocks.KOOLAW_LEAVES), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1)).build()));
+        FeatureUtils.register(p_256319_, PETRIFIED, Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.PETRIFIED_DAMNATION_LOG), new ForkingTrunkPlacer(5, 2, 2), BlockStateProvider.simple(LirothBlocks.DAMNATION_LEAVES), new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2))).ignoreVines().build());
+    
+        RuleTest stoneTest = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
+        RuleTest deepSlateTest = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
+        RuleTest netherTest = new BlockMatchTest(Blocks.NETHERRACK);
+        RuleTest endTest = new BlockMatchTest(Blocks.END_STONE);
+        
+        List<OreConfiguration.TargetBlockState> overworld_liroth_list = List.of(OreConfiguration.target(stoneTest, LirothBlocks.LIROTH_ORE.defaultBlockState()), OreConfiguration.target(deepSlateTest, LirothBlocks.DEEPSLATE_LIROTH_ORE.defaultBlockState()));
+        List<OreConfiguration.TargetBlockState> tourmaline_list = List.of(OreConfiguration.target(stoneTest, LirothBlocks.TOURMALINE_ORE.defaultBlockState()), OreConfiguration.target(deepSlateTest, LirothBlocks.DEEPSLATE_TOURMALINE_ORE.defaultBlockState()));
+        FeatureUtils.register(p_256319_, OVERWORLD_LIROTH_ORE, Feature.ORE, new OreConfiguration(overworld_liroth_list, 4, 0.5F));
+        FeatureUtils.register(p_256319_, NETHER_LIROTH_ORE, Feature.ORE, new OreConfiguration(netherTest, LirothBlocks.NETHER_LIROTH_GEM_ORE.defaultBlockState(), 4));
+        FeatureUtils.register(p_256319_, NETHER_LIROTH_ORE, Feature.ORE, new OreConfiguration(endTest, LirothBlocks.END_LIROTH_GEM_ORE.defaultBlockState(), 6));
+        FeatureUtils.register(p_256319_, TOURMALINE_ORE, Feature.ORE, new OreConfiguration(tourmaline_list, 4, 0.5F));
+    }
 }

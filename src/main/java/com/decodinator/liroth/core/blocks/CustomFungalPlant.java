@@ -2,23 +2,24 @@ package com.decodinator.liroth.core.blocks;
 
 import com.decodinator.liroth.core.LirothBlocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FungusBlock;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FungusBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 public class CustomFungalPlant extends FungusBlock {
 
-	public CustomFungalPlant(Settings settings, RegistryKey<ConfiguredFeature<?, ?>> feature, Block block) {
-		super(settings, feature, block);
+	public CustomFungalPlant(BlockBehaviour.Properties settings, ResourceKey<ConfiguredFeature<?, ?>> feature, Block requiredBlock) {
+		super(settings, feature, requiredBlock);
 	}
 
     @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(LirothBlocks.DAMNATION_SOIL) || /* floor.isOf(Blocks.MYCELIUM) || floor.isOf(Blocks.SOUL_SOIL) ||*/ super.canPlantOnTop(floor, world, pos);
+    protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
+        return floor.is(LirothBlocks.DAMNATION_SOIL) || /* floor.isOf(Blocks.MYCELIUM) || floor.isOf(Blocks.SOUL_SOIL) ||*/ super.mayPlaceOn(floor, world, pos);
     }
 	
 }

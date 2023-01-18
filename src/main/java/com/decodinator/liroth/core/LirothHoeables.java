@@ -9,20 +9,20 @@ import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.mixin.access.HoeItemAccess;
 import com.mojang.datafixers.util.Pair;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.ItemUsageContext;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
 
 public class LirothHoeables {
     public static void tillablesLiroth() {
         Liroth.LOGGER.debug("Liroth: Registering tillables...");
-        Map<Block, Pair<Predicate<ItemUsageContext>, Consumer<ItemUsageContext>>> tillables = new IdentityHashMap<>(HoeItemAccess.getTillables());
-        tillables.put(LirothBlocks.LIROTH_GRASS_BLOCK, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.LIROTH_FARMLAND_BLOCK.getDefaultState())));
-        tillables.put(LirothBlocks.LIROTH_DIRT, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.LIROTH_FARMLAND_BLOCK.getDefaultState())));
-        tillables.put(LirothBlocks.PIER_GRASS_BLOCK, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.PIER_FARMLAND_BLOCK.getDefaultState())));
-        tillables.put(LirothBlocks.PIER_DIRT, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.PIER_FARMLAND_BLOCK.getDefaultState())));
-        tillables.put(LirothBlocks.SPINERIOS_GRASS_BLOCK, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.SPINERIOS_FARMLAND_BLOCK.getDefaultState())));
-        tillables.put(LirothBlocks.SPINERIOS_DIRT, Pair.of(HoeItem::canTillFarmland, HoeItem.createTillAction(LirothBlocks.SPINERIOS_FARMLAND_BLOCK.getDefaultState())));
+        Map<Block, Pair<Predicate<UseOnContext>, Consumer<UseOnContext>>> tillables = new IdentityHashMap<>(HoeItemAccess.getTillables());
+        tillables.put(LirothBlocks.LIROTH_GRASS_BLOCK, Pair.of(HoeItem::onlyIfAirAbove, HoeItem.changeIntoState(LirothBlocks.LIROTH_FARMLAND_BLOCK.defaultBlockState())));
+        tillables.put(LirothBlocks.LIROTH_DIRT, Pair.of(HoeItem::onlyIfAirAbove, HoeItem.changeIntoState(LirothBlocks.LIROTH_FARMLAND_BLOCK.defaultBlockState())));
+        tillables.put(LirothBlocks.PIER_GRASS_BLOCK, Pair.of(HoeItem::onlyIfAirAbove, HoeItem.changeIntoState(LirothBlocks.PIER_FARMLAND_BLOCK.defaultBlockState())));
+        tillables.put(LirothBlocks.PIER_DIRT, Pair.of(HoeItem::onlyIfAirAbove, HoeItem.changeIntoState(LirothBlocks.PIER_FARMLAND_BLOCK.defaultBlockState())));
+        tillables.put(LirothBlocks.SPINERIOS_GRASS_BLOCK, Pair.of(HoeItem::onlyIfAirAbove, HoeItem.changeIntoState(LirothBlocks.SPINERIOS_FARMLAND_BLOCK.defaultBlockState())));
+        tillables.put(LirothBlocks.SPINERIOS_DIRT, Pair.of(HoeItem::onlyIfAirAbove, HoeItem.changeIntoState(LirothBlocks.SPINERIOS_FARMLAND_BLOCK.defaultBlockState())));
         HoeItemAccess.setTillables(tillables);
         Liroth.LOGGER.info("Liroth: Tillables registered!");
     }

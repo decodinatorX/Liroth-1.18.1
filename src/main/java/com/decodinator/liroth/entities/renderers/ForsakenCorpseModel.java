@@ -1,60 +1,59 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.AbstractZombieModel;
+import net.minecraft.client.model.AnimationUtils;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
 
-public class ForsakenCorpseModel<T extends ForsakenCorpseEntity> extends EntityModel<T> {
+public class ForsakenCorpseModel<T extends ForsakenCorpseEntity> extends AbstractZombieModel<T> {
+	public boolean carrying;
+	public boolean creepy;
 	private final ModelPart head;
+	private final ModelPart hat;
 	private final ModelPart body;
 	private final ModelPart leftArm;
 	private final ModelPart rightArm;
 	private final ModelPart leftLeg;
 	private final ModelPart rightLeg;
-    public float leaningPitch;
+    public float leaningxRot;
 
 	public ForsakenCorpseModel(ModelPart root) {
+		super(root);
 		this.head = root.getChild("head");
+		this.hat = root.getChild("hat");
 		this.body = root.getChild("body");
-		this.leftArm = root.getChild("leftArm");
-		this.rightArm = root.getChild("rightArm");
-		this.leftLeg = root.getChild("leftLeg");
-		this.rightLeg = root.getChild("rightLeg");
+		this.leftArm = root.getChild("left_arm");
+		this.rightArm = root.getChild("right_arm");
+		this.leftLeg = root.getChild("left_leg");
+		this.rightLeg = root.getChild("right_leg");
 	}
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData meshdefinition = new ModelData();
-		ModelPartData partdefinition = meshdefinition.getRoot();
-
-		partdefinition.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -7.0F, -4.0F, 8.0F, 7.0F, 7.0F)
-		.uv(0, 0).cuboid(-8.0F, -6.0F, 0.0F, 4.0F, 5.0F, 0.0F)
-		.uv(28, 16).cuboid(4.0F, -6.0F, 0.0F, 4.0F, 5.0F, 0.0F), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
-
-		partdefinition.addChild("body", ModelPartBuilder.create().uv(24, 21).cuboid(-4.0F, 7.0F, -2.0F, 8.0F, 5.0F, 4.0F)
-		.uv(0, 14).cuboid(-5.0F, 0.0F, -2.0F, 10.0F, 7.0F, 4.0F), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
-
-		partdefinition.addChild("leftArm", ModelPartBuilder.create().uv(30, 0).cuboid(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(-5.0F, 2.0F, 0.0F));
-
-		partdefinition.addChild("rightArm", ModelPartBuilder.create().uv(0, 25).cuboid(0.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(5.0F, 2.0F, 0.0F));
-
-		partdefinition.addChild("leftLeg", ModelPartBuilder.create().uv(28, 40).cuboid(-3.0F, 0.0F, -1.0F, 4.0F, 6.0F, 4.0F)
-		.uv(16, 30).cuboid(-3.0F, 6.0F, 0.0F, 4.0F, 6.0F, 4.0F), ModelTransform.pivot(-1.9F, 12.0F, 0.0F));
-
-		partdefinition.addChild("rightLeg", ModelPartBuilder.create().uv(12, 40).cuboid(-1.0F, 0.0F, -1.0F, 4.0F, 6.0F, 4.0F)
-		.uv(32, 30).cuboid(-1.0F, 6.0F, 0.0F, 4.0F, 6.0F, 4.0F), ModelTransform.pivot(1.9F, 12.0F, 0.0F));
-
-		return TexturedModelData.of(meshdefinition, 64, 64);
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
+		partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -7.0F, -4.0F, 8.0F, 7.0F, 7.0F).texOffs(0, 0).addBox(-8.0F, -6.0F, 0.0F, 4.0F, 5.0F, 0.0F).texOffs(28, 16).addBox(4.0F, -6.0F, 0.0F, 4.0F, 5.0F, 0.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+		partdefinition.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -7.0F, -4.0F, 8.0F, 7.0F, 7.0F).texOffs(63, 63).addBox(-8.0F, -6.0F, 0.0F, 4.0F, 5.0F, 0.0F).texOffs(28, 16).addBox(4.0F, -6.0F, 0.0F, 4.0F, 5.0F, 0.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+		partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(24, 21).addBox(-4.0F, 7.0F, -2.0F, 8.0F, 5.0F, 4.0F).texOffs(0, 14).addBox(-5.0F, 0.0F, -2.0F, 10.0F, 7.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+		partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(30, 0).addBox(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), PartPose.offset(-5.0F, 2.0F, 0.0F));
+		partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(0, 25).addBox(0.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), PartPose.offset(5.0F, 2.0F, 0.0F));
+		partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(28, 40).addBox(-3.0F, 0.0F, -1.0F, 4.0F, 6.0F, 4.0F).texOffs(16, 30).addBox(-3.0F, 6.0F, 0.0F, 4.0F, 6.0F, 4.0F), PartPose.offset(-1.9F, 12.0F, 0.0F));
+		partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(12, 40).addBox(-1.0F, 0.0F, -1.0F, 4.0F, 6.0F, 4.0F).texOffs(32, 30).addBox(-1.0F, 6.0F, 0.0F, 4.0F, 6.0F, 4.0F), PartPose.offset(1.9F, 12.0F, 0.0F));
+		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 	
     protected float lerpAngle(float angleOne, float angleTwo, float magnitude) {
@@ -68,58 +67,69 @@ public class ForsakenCorpseModel<T extends ForsakenCorpseEntity> extends EntityM
         return angleTwo + angleOne * f;
     }
 
-    @Override
-    public void setAngles(T livingEntity, float f, float g, float h, float i, float j) {
-        boolean bl = ((LivingEntity)livingEntity).getRoll() > 4;
-        boolean bl2 = ((LivingEntity)livingEntity).isInSwimmingPose();
-        this.head.yaw = i * ((float)Math.PI / 180);
-        this.head.pitch = bl ? -0.7853982f : (this.leaningPitch > 0.0f ? (bl2 ? this.lerpAngle(this.leaningPitch, this.head.pitch, -0.7853982f) : this.lerpAngle(this.leaningPitch, this.head.pitch, j * ((float)Math.PI / 180))) : j * ((float)Math.PI / 180));
-        this.body.yaw = 0.0f;
-        this.rightArm.pivotZ = 0.0f;
-        this.leftArm.pivotZ = 0.0f;
+    private float method_2807(float f) {
+        return -65.0f * f + f * f;
+    }
+    
+    public void setupAnim(T livingEntity, float f, float g, float h, float i, float j) {
+        boolean bl3;
+        boolean bl = ((LivingEntity)livingEntity).getFallFlyingTicks() > 4;
+        boolean bl2 = ((LivingEntity)livingEntity).isVisuallySwimming();
+        this.head.yRot = i * ((float)Math.PI / 180);
+        this.head.xRot = bl ? -0.7853982f : (this.leaningxRot > 0.0f ? (bl2 ? this.lerpAngle(this.leaningxRot, this.head.xRot, -0.7853982f) : this.lerpAngle(this.leaningxRot, this.head.xRot, j * ((float)Math.PI / 180))) : j * ((float)Math.PI / 180));
+        this.body.yRot = 0.0f;
+        this.rightArm.z = 0.0f;
+        this.leftArm.z = 0.0f;
         float k = 1.0f;
         if (bl) {
-            k = (float)((Entity)livingEntity).getVelocity().lengthSquared();
+            k = (float)((Entity)livingEntity).getDeltaMovement().lengthSqr();
             k /= 0.2f;
             k *= k * k;
         }
         if (k < 1.0f) {
             k = 1.0f;
         }
-        this.rightArm.pitch = MathHelper.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f / k;
-        this.leftArm.pitch = MathHelper.cos(f * 0.6662f) * 2.0f * g * 0.5f / k;
-        this.rightArm.roll = 0.0f;
-        this.leftArm.roll = 0.0f;
-        this.rightLeg.pitch = MathHelper.cos(f * 0.6662f) * 1.4f * g / k;
-        this.leftLeg.pitch = MathHelper.cos(f * 0.6662f + (float)Math.PI) * 1.4f * g / k;
-        this.rightLeg.yaw = 0.0f;
-        this.leftLeg.yaw = 0.0f;
-        this.rightLeg.roll = 0.0f;
-        this.leftLeg.roll = 0.0f;
+        this.rightArm.xRot = Mth.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f / k;
+        this.leftArm.xRot = Mth.cos(f * 0.6662f) * 2.0f * g * 0.5f / k;
+        this.rightArm.zRot = 0.0f;
+        this.leftArm.zRot = 0.0f;
+        this.rightLeg.xRot = Mth.cos(f * 0.6662f) * 1.4f * g / k;
+        this.leftLeg.xRot = Mth.cos(f * 0.6662f + (float)Math.PI) * 1.4f * g / k;
+        this.rightLeg.yRot = 0.0f;
+        this.leftLeg.yRot = 0.0f;
+        this.rightLeg.zRot = 0.0f;
+        this.leftLeg.zRot = 0.0f;
         if (this.riding) {
-            this.rightArm.pitch += -0.62831855f;
-            this.leftArm.pitch += -0.62831855f;
-            this.rightLeg.pitch = -1.4137167f;
-            this.rightLeg.yaw = 0.31415927f;
-            this.rightLeg.roll = 0.07853982f;
-            this.leftLeg.pitch = -1.4137167f;
-            this.leftLeg.yaw = -0.31415927f;
-            this.leftLeg.roll = -0.07853982f;
+            this.rightArm.xRot += -0.62831855f;
+            this.leftArm.xRot += -0.62831855f;
+            this.rightLeg.xRot = -1.4137167f;
+            this.rightLeg.yRot = 0.31415927f;
+            this.rightLeg.zRot = 0.07853982f;
+            this.leftLeg.xRot = -1.4137167f;
+            this.leftLeg.yRot = -0.31415927f;
+            this.leftLeg.zRot = -0.07853982f;
         }
-        this.rightArm.yaw = 0.0f;
-        this.leftArm.yaw = 0.0f;
-            this.leftLeg.pitch = MathHelper.lerp(this.leaningPitch, this.leftLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f + (float)Math.PI));
-            this.rightLeg.pitch = MathHelper.lerp(this.leaningPitch, this.rightLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f));
+        this.rightArm.yRot = 0.0f;
+        this.leftArm.yRot = 0.0f;
+            float p = 0.33333334f;
+            this.leftLeg.xRot = Mth.lerp(this.leaningxRot, this.leftLeg.xRot, 0.3f * Mth.cos(f * 0.33333334f + (float)Math.PI));
+            this.rightLeg.xRot = Mth.lerp(this.leaningxRot, this.rightLeg.xRot, 0.3f * Mth.cos(f * 0.33333334f));
     }
     
 
 	@Override
-	public void render(MatrixStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		head.render(poseStack, buffer, packedLight, packedOverlay);
+		hat.render(poseStack, buffer, packedLight, packedOverlay);
 		body.render(poseStack, buffer, packedLight, packedOverlay);
 		leftArm.render(poseStack, buffer, packedLight, packedOverlay);
 		rightArm.render(poseStack, buffer, packedLight, packedOverlay);
 		leftLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		rightLeg.render(poseStack, buffer, packedLight, packedOverlay);
+	}
+
+	@Override
+	public boolean isAggressive(T p_101999_) {
+		return p_101999_.isAggressive();
 	}
 }

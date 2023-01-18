@@ -1,26 +1,29 @@
 package com.decodinator.liroth.core.features;
 
-import com.google.common.collect.Lists;
-import com.mojang.serialization.Codec;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+
+import com.google.common.collect.Lists;
+import com.mojang.serialization.Codec;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public class LirothBoneTreeFeature
 extends LirothSkeletonFeature {
-    public LirothBoneTreeFeature(Codec<DefaultFeatureConfig> codec) {
+    public LirothBoneTreeFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
 
     @Override
-    protected boolean generateCoral(WorldAccess world, Random random, BlockPos pos, BlockState state) {
-        BlockPos.Mutable mutable = pos.mutableCopy();
+    protected boolean generateCoral(LevelAccessor world, RandomSource random, BlockPos pos, BlockState state) {
+        MutableBlockPos mutable = pos.mutable();
         int i = random.nextInt(3) + 1;
         for (int j = 0; j < i; ++j) {
             if (!this.generateCoralPiece(world, random, mutable, state)) {
@@ -28,9 +31,9 @@ extends LirothSkeletonFeature {
             }
             mutable.move(Direction.UP);
         }
-        BlockPos blockPos = mutable.toImmutable();
+        BlockPos blockPos = mutable.immutable();
         int k = random.nextInt(3) + 2;
-        ArrayList<Direction> list = Lists.newArrayList(Direction.Type.HORIZONTAL);
+        ArrayList<Direction> list = Lists.newArrayList(Direction.Plane.HORIZONTAL);
         Collections.shuffle(list);
         List<Direction> list2 = list.subList(0, k);
         for (Direction direction : list2) {

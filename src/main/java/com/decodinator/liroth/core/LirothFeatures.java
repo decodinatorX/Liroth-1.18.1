@@ -9,37 +9,37 @@ import com.decodinator.liroth.core.features.ObsidianSpikeFeature;
 import com.decodinator.liroth.core.features.PetrifiedCrystalClusterFeature;
 import com.decodinator.liroth.core.features.VileTentacleFeature;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.DripstoneClusterFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.RandomPatchFeature;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.PointedDripstoneConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 
 public class LirothFeatures {
 	
-	  private static final Feature<DefaultFeatureConfig> OBSIDIAN_SPIKE = new ObsidianSpikeFeature(DefaultFeatureConfig.CODEC);
-	  private static final Feature<DefaultFeatureConfig> VILE_TENTALCE = new VileTentacleFeature(DefaultFeatureConfig.CODEC);
-	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_CLAW = new LirothBoneClawFeature(DefaultFeatureConfig.CODEC);
-	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_MUSHROOM = new LirothBoneMushroomFeature(DefaultFeatureConfig.CODEC);
-	  private static final Feature<DefaultFeatureConfig> LIROTH_BONE_TREE = new LirothBoneTreeFeature(DefaultFeatureConfig.CODEC);
-	  private static final Feature<DripstoneClusterFeatureConfig> JALSPHIRE_CRYSTAL_CLUSTER = new JalsphireCrystalClusterFeature(DripstoneClusterFeatureConfig.CODEC);
-	  private static final Feature<DripstoneClusterFeatureConfig> PETRIFIED_CRYSTAL_CLUSTER = new PetrifiedCrystalClusterFeature(DripstoneClusterFeatureConfig.CODEC);
-	  private static final Feature<DefaultFeatureConfig> DAMNATION_VINES = new DamnationVinesFeature(DefaultFeatureConfig.CODEC);
-	  private static final Feature<RandomPatchFeatureConfig> WILTING_LIROTH_ROSES = new RandomPatchFeature(RandomPatchFeatureConfig.CODEC);
+	  private static final Feature<NoneFeatureConfiguration> OBSIDIAN_SPIKE = new ObsidianSpikeFeature(NoneFeatureConfiguration.CODEC);
+	  private static final Feature<NoneFeatureConfiguration> VILE_TENTALCE = new VileTentacleFeature(NoneFeatureConfiguration.CODEC);
+	  private static final Feature<NoneFeatureConfiguration> LIROTH_BONE_CLAW = new LirothBoneClawFeature(NoneFeatureConfiguration.CODEC);
+	  private static final Feature<NoneFeatureConfiguration> LIROTH_BONE_MUSHROOM = new LirothBoneMushroomFeature(NoneFeatureConfiguration.CODEC);
+	  private static final Feature<NoneFeatureConfiguration> LIROTH_BONE_TREE = new LirothBoneTreeFeature(NoneFeatureConfiguration.CODEC);
+	  private static final Feature<PointedDripstoneConfiguration> JALSPHIRE_CRYSTAL_CLUSTER = new JalsphireCrystalClusterFeature(PointedDripstoneConfiguration.CODEC);
+	  private static final Feature<PointedDripstoneConfiguration> PETRIFIED_CRYSTAL_CLUSTER = new PetrifiedCrystalClusterFeature(PointedDripstoneConfiguration.CODEC);
+	  private static final Feature<NoneFeatureConfiguration> DAMNATION_VINES = new DamnationVinesFeature(NoneFeatureConfiguration.CODEC);
+	  private static final Feature<RandomPatchConfiguration> WILTING_LIROTH_ROSES = new RandomPatchFeature(RandomPatchConfiguration.CODEC);
 	
 	public static void init() {
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "obsidian_spike"), OBSIDIAN_SPIKE);
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "vile_tentacle"), VILE_TENTALCE);
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "liroth_bone_claw"), LIROTH_BONE_CLAW);
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "liroth_bone_mushroom"), LIROTH_BONE_MUSHROOM);
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "liroth_bone_tree"), LIROTH_BONE_TREE);
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "jalsphire_crystal_cluster"), JALSPHIRE_CRYSTAL_CLUSTER);
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "petrified_crystal_cluster"), PETRIFIED_CRYSTAL_CLUSTER);
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "damnation_vines"), DAMNATION_VINES);
-	    Registry.register(Registries.FEATURE, new Identifier("liroth", "wilting_liroth_roses"), WILTING_LIROTH_ROSES);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "obsidian_spike"), OBSIDIAN_SPIKE);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "vile_tentacle"), VILE_TENTALCE);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "liroth_bone_claw"), LIROTH_BONE_CLAW);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "liroth_bone_mushroom"), LIROTH_BONE_MUSHROOM);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "liroth_bone_tree"), LIROTH_BONE_TREE);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "jalsphire_crystal_cluster"), JALSPHIRE_CRYSTAL_CLUSTER);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "petrified_crystal_cluster"), PETRIFIED_CRYSTAL_CLUSTER);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "damnation_vines"), DAMNATION_VINES);
+	    Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("liroth", "wilting_liroth_roses"), WILTING_LIROTH_ROSES);
 	}
 
 }

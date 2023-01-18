@@ -2,40 +2,39 @@ package com.decodinator.liroth.core.helpers;
 
 import com.decodinator.liroth.core.LirothItems;
 
-import net.fabricmc.yarn.constants.MiningLevels;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
-public class LirothianCobaltToolMaterial implements ToolMaterial {
+public class LirothianCobaltToolMaterial implements Tier {
 
 	@Override
-	public int getDurability() {
+	public int getUses() {
 		return 250;
 	}
 
 	@Override
-	public float getMiningSpeedMultiplier() {
+	public float getSpeed() {
 		return 6.0f;
 	}
 
 	@Override
-	public float getAttackDamage() {
+	public float getAttackDamageBonus() {
 		return 2.0f;
 	}
 
 	@Override
-	public int getMiningLevel() {
-		return MiningLevels.IRON;
+	public int getLevel() {
+		return 2;
 	}
 
 	@Override
-	public int getEnchantability() {
+	public int getEnchantmentValue() {
 		return 14;
 	}
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(LirothItems.LIROTHIAN_COBALT_INGOT);
+		return Ingredient.of(LirothItems.LIROTHIAN_COBALT_INGOT);
 	}
 
 }

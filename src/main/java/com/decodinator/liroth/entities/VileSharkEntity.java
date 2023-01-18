@@ -2,126 +2,136 @@ package com.decodinator.liroth.entities;
 
 import java.util.Random;
 
-import net.minecraft.entity.EntityGroup;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.control.AquaticMoveControl;
-import net.minecraft.entity.ai.control.YawAdjustingLookControl;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
-import net.minecraft.entity.ai.goal.ChaseBoatGoal;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.MoveIntoWaterGoal;
-import net.minecraft.entity.ai.goal.SwimAroundGoal;
-import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.ai.pathing.SwimNavigation;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.WaterCreatureEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.Nullable;
 
-public class VileSharkEntity extends WaterCreatureEntity {
+import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothBlocks;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.goal.FollowBoatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.Dolphin;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.Vec3;
+
+public class VileSharkEntity extends WaterAnimal {
     public static final int MAX_AIR = 4800;
-    private static final TrackedData<Integer> MOISTNESS = DataTracker.registerData(VileSharkEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    public VileSharkEntity(EntityType<? extends WaterCreatureEntity> entityType, World world) {
+    private static final EntityDataAccessor<Integer> MOISTNESS_LEVEL = SynchedEntityData.defineId(Dolphin.class, EntityDataSerializers.INT);
+    private static final int MAX_MOISTNESS = 2400;
+    
+	public VileSharkEntity(EntityType<? extends WaterAnimal> entityType, Level world) {
 		super(entityType, world);
-        this.moveControl = new AquaticMoveControl(this, 85, 10, 0.02f, 0.1f, true);
-        this.lookControl = new YawAdjustingLookControl(this, 10);
-        this.setPathfindingPenalty(PathNodeType.WATER, 0.0f);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02f, 0.1f, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0f);
         this.isInvulnerableTo(DamageSource.SWEET_BERRY_BUSH);
     }
 
     @Override
-    public boolean canBreatheInWater() {
+    public boolean canBreatheUnderwater() {
         return true;
     }
     
     @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.AQUATIC;
+    public MobType getMobType() {
+        return MobType.WATER;
     }
     
     @Override
-    public boolean canSpawn(WorldView world) {
-        return world.doesNotIntersectEntities(this);
-    }
+    public boolean checkSpawnObstruction(LevelReader p_30348_) {
+        return p_30348_.isUnobstructed(this);
+     }
     
     @Override
-    protected EntityNavigation createNavigation(World world) {
-        return new SwimNavigation(this, world);
-    }
+    protected PathNavigation createNavigation(Level p_28362_) {
+        return new WaterBoundPathNavigation(this, p_28362_);
+     }
 
-    protected void tickWaterBreathingAir(int air) {
-        if (this.isAlive() && !this.isInsideWaterOrBubbleColumn()) {
-            this.setAir(air - 1);
-            if (this.getAir() == -20) {
-                this.setAir(0);
-                this.damage(DamageSource.DROWN, 2.0f);
-            }
+    protected void handleAirSupply(int p_30344_) {
+        if (this.isAlive() && !this.isInWaterOrBubble()) {
+           this.setAirSupply(p_30344_ - 1);
+           if (this.getAirSupply() == -20) {
+              this.setAirSupply(0);
+              this.hurt(DamageSource.DROWN, 2.0F);
+           }
         } else {
-            this.setAir(300);
+           this.setAirSupply(300);
         }
-    }
+
+     }
 
     @Override
     public void baseTick() {
-        int i = this.getAir();
+        int i = this.getAirSupply();
         super.baseTick();
-        this.tickWaterBreathingAir(i);
-    }
+        this.handleAirSupply(i);
+     }
 
     @Override
-    public boolean isPushedByFluids() {
+     public boolean isPushedByFluid() {
         return false;
-    }
+     }
 
     @Override
-    public boolean canBeLeashedBy(PlayerEntity player) {
+     public boolean canBeLeashed(Player p_30346_) {
         return false;
-    }
+     }
 
-    public static boolean canSpawn(EntityType<? extends VileSharkEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random) {
-        return !(random.nextInt(20) != 0 && world.isSkyVisibleAllowingSea(pos) || world.getDifficulty() == Difficulty.PEACEFUL || reason != SpawnReason.SPAWNER && !world.getFluidState(pos).isIn(FluidTags.WATER) || !world.getFluidState(pos.down()).isIn(FluidTags.WATER));
-    }
+    public static boolean checkSurfaceWaterAnimalSpawnRules(EntityType<? extends WaterAnimal> p_218283_, LevelAccessor p_218284_, MobSpawnType p_218285_, BlockPos p_218286_, RandomSource p_218287_) {
+        int i = p_218284_.getSeaLevel();
+        int j = i - 13;
+        return p_218286_.getY() >= j && p_218286_.getY() <= i && p_218284_.getFluidState(p_218286_.below()).is(FluidTags.WATER) && p_218284_.getBlockState(p_218286_.above()).is(Blocks.WATER);
+     }
     
-    public static DefaultAttributeContainer.Builder createVileSharkAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.23f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0).add(EntityAttributes.GENERIC_ARMOR, 2.0).add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
-    }
-    
-    @Override
-    protected void initGoals() {
-        this.goalSelector.add(0, new MeleeAttackGoal(this, 1.2f, false));
-        this.goalSelector.add(1, new MoveIntoWaterGoal(this));
-        this.goalSelector.add(4, new SwimAroundGoal(this, 1.0, 10));
-        this.goalSelector.add(4, new LookAroundGoal(this));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
-        this.goalSelector.add(8, new ChaseBoatGoal(this));
-        this.targetSelector.add(2, new ActiveTargetGoal<PlayerEntity>((MobEntity)this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<ForsakenCorpseEntity>((MobEntity)this, ForsakenCorpseEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<SkeletalFreakEntity>((MobEntity)this, SkeletalFreakEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<SoulArachnidEntity>((MobEntity)this, SoulArachnidEntity.class, true));
+    public static AttributeSupplier.Builder createVileSharkAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.FOLLOW_RANGE, 35.0).add(Attributes.MOVEMENT_SPEED, 1.23f).add(Attributes.ATTACK_DAMAGE, 3.0).add(Attributes.ARMOR, 2.0).add(Attributes.SPAWN_REINFORCEMENTS_CHANCE);
     }
     
     @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.2f, false));
+        this.goalSelector.addGoal(1, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0, 10));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0f));
+        this.goalSelector.addGoal(8, new FollowBoatGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, ForsakenCorpseEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SkeletalFreakEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SoulArachnidEntity.class, true));
+    }
+    
+/*    @Override
     public void travel(Vec3d movementInput) {
         if (this.canMoveVoluntarily() && this.isTouchingWater()) {
             this.updateVelocity(this.getMovementSpeed(), movementInput);
@@ -133,68 +143,72 @@ public class VileSharkEntity extends WaterCreatureEntity {
         } else {
             super.travel(movementInput);
         }
-    }
+    }*/
     
-    public int getMoistness() {
-        return this.dataTracker.get(MOISTNESS);
-    }
+    public int getMoistnessLevel() {
+        return this.entityData.get(MOISTNESS_LEVEL);
+     }
 
-    public void setMoistness(int moistness) {
-        this.dataTracker.set(MOISTNESS, moistness);
-    }
+     public void setMoisntessLevel(int p_28344_) {
+        this.entityData.set(MOISTNESS_LEVEL, p_28344_);
+     }
     
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(MOISTNESS, 2400);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(MOISTNESS_LEVEL, 2400);
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        nbt.putInt("Moistness", this.getMoistness());
+    public void addAdditionalSaveData(CompoundTag nbt) {
+        super.addAdditionalSaveData(nbt);
+        nbt.putInt("Moistness", this.getMoistnessLevel());
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        this.setMoistness(nbt.getInt("Moistness"));
+    public void readAdditionalSaveData(CompoundTag nbt) {
+        super.readAdditionalSaveData(nbt);
+        this.setMoisntessLevel(nbt.getInt("Moistness"));
     }
     
     @Override
     public void tick() {
         super.tick();
-        if (this.isAiDisabled()) {
-            this.setAir(this.getMaxAir());
-            return;
-        }
-        if (this.isWet()) {
-            this.setMoistness(2400);
+        if (this.isNoAi()) {
+           this.setAirSupply(this.getMaxAirSupply());
         } else {
-            this.setMoistness(this.getMoistness() - 1);
-            if (this.getMoistness() <= 0) {
-                this.damage(DamageSource.DRYOUT, 1.0f);
-            }
-            if (this.onGround) {
-                this.setVelocity(this.getVelocity().add((this.random.nextFloat() * 2.0f - 1.0f) * 0.2f, 0.5, (this.random.nextFloat() * 2.0f - 1.0f) * 0.2f));
-                this.setYaw(this.random.nextFloat() * 360.0f);
-                this.onGround = false;
-                this.velocityDirty = true;
-            }
+           if (this.isInWaterRainOrBubble()) {
+              this.setMoisntessLevel(2400);
+           } else {
+              this.setMoisntessLevel(this.getMoistnessLevel() - 1);
+              if (this.getMoistnessLevel() <= 0) {
+                 this.hurt(DamageSource.DRY_OUT, 1.0F);
+              }
+
+              if (this.onGround) {
+                 this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.2F), 0.5D, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.2F)));
+                 this.setYRot(this.random.nextFloat() * 360.0F);
+                 this.onGround = false;
+                 this.hasImpulse = true;
+              }
+           }
+
+           if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
+              Vec3 vec3 = this.getViewVector(0.0F);
+              float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
+              float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
+              float f2 = 1.2F - this.random.nextFloat() * 0.7F;
+
+              for(int i = 0; i < 2; ++i) {
+                 this.level.addParticle(ParticleTypes.DOLPHIN, this.getX() - vec3.x * (double)f2 + (double)f, this.getY() - vec3.y, this.getZ() - vec3.z * (double)f2 + (double)f1, 0.0D, 0.0D, 0.0D);
+                 this.level.addParticle(ParticleTypes.DOLPHIN, this.getX() - vec3.x * (double)f2 - (double)f, this.getY() - vec3.y, this.getZ() - vec3.z * (double)f2 - (double)f1, 0.0D, 0.0D, 0.0D);
+              }
+           }
+
         }
-        if (this.world.isClient && this.isTouchingWater() && this.getVelocity().lengthSquared() > 0.03) {
-            Vec3d vec3d = this.getRotationVec(0.0f);
-            float f = MathHelper.cos(this.getYaw() * ((float)Math.PI / 180)) * 0.3f;
-            float g = MathHelper.sin(this.getYaw() * ((float)Math.PI / 180)) * 0.3f;
-            float h = 1.2f - this.random.nextFloat() * 0.7f;
-            for (int i = 0; i < 2; ++i) {
-                this.world.addParticle(ParticleTypes.DOLPHIN, this.getX() - vec3d.x * (double)h + (double)f, this.getY() - vec3d.y, this.getZ() - vec3d.z * (double)h + (double)g, 0.0, 0.0, 0.0);
-                this.world.addParticle(ParticleTypes.DOLPHIN, this.getX() - vec3d.x * (double)h - (double)f, this.getY() - vec3d.y, this.getZ() - vec3d.z * (double)h - (double)g, 0.0, 0.0, 0.0);
-            }
-        }
-    }
+     }
     
-    public boolean isAngryAt(PlayerEntity player) {
+    public boolean isAngryAt(Player player) {
         return true;
     }
 }

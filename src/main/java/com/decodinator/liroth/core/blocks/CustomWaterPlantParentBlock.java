@@ -1,96 +1,86 @@
 package com.decodinator.liroth.core.blocks;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import com.decodinator.liroth.core.LirothFluids;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CustomWaterPlantParentBlock extends Block
-implements Waterloggable {
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    private static final VoxelShape SHAPE = Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 4.0, 14.0);
+public class CustomWaterPlantParentBlock extends Block implements SimpleWaterloggedBlock {
+	   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	   private static final VoxelShape AABB = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
 
-    protected CustomWaterPlantParentBlock(AbstractBlock.Settings settings) {
-        super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(WATERLOGGED, true));
-    }
+	   public CustomWaterPlantParentBlock(BlockBehaviour.Properties p_49161_) {
+	      super(p_49161_);
+	      this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.valueOf(true)));
+	   }
 
-    protected void checkLivingConditions(BlockState state, WorldAccess world, BlockPos pos) {
-        if (!CustomWaterPlantParentBlock.isInWater(state, world, pos)) {
-            world.scheduleBlockTick(pos, this, 60 + world.getRandom().nextInt(40));
-        }
-    }
+	   protected void tryScheduleDieTick(BlockState p_49165_, LevelAccessor p_49166_, BlockPos p_49167_) {
+	      if (!scanForWater(p_49165_, p_49166_, p_49167_)) {
+	         p_49166_.scheduleTick(p_49167_, this, 60 + p_49166_.getRandom().nextInt(40));
+	      }
 
-    protected static boolean isInWater(BlockState state, BlockView world, BlockPos pos) {
-        if (state.get(WATERLOGGED).booleanValue()) {
-            return true;
-        }
-        for (Direction direction : Direction.values()) {
-            if (!world.getFluidState(pos.offset(direction)).isOf(LirothFluids.LIROTH_FLUID_STILL)) continue;
-            return true;
-        }
-        return false;
-    }
+	   }
 
-    @Override
-    @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return (BlockState)this.getDefaultState().with(WATERLOGGED, fluidState.isIn(FluidTags.WATER) && fluidState.getLevel() == 8);
-    }
+	   protected static boolean scanForWater(BlockState p_49187_, BlockGetter p_49188_, BlockPos p_49189_) {
+	      if (p_49187_.getValue(WATERLOGGED)) {
+	         return true;
+	      } else {
+	         for(Direction direction : Direction.values()) {
+	            if (p_49188_.getFluidState(p_49189_.relative(direction)).is(FluidTags.WATER)) {
+	               return true;
+	            }
+	         }
 
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
-    }
+	         return false;
+	      }
+	   }
 
-    @SuppressWarnings("deprecation")
-	@Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (state.get(WATERLOGGED).booleanValue()) {
-            world.scheduleFluidTick(pos, LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_STILL.getTickRate(world));
-        }
-        if (direction == Direction.DOWN && !this.canPlaceAt(state, world, pos)) {
-            return Blocks.AIR.getDefaultState();
-        }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-    }
+	   @Nullable
+	   public BlockState getStateForPlacement(BlockPlaceContext p_49163_) {
+	      FluidState fluidstate = p_49163_.getLevel().getFluidState(p_49163_.getClickedPos());
+	      return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8));
+	   }
 
-    @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.down();
-        return world.getBlockState(blockPos).isSideSolidFullSquare(world, blockPos, Direction.UP);
-    }
+	   public VoxelShape getShape(BlockState p_49182_, BlockGetter p_49183_, BlockPos p_49184_, CollisionContext p_49185_) {
+	      return AABB;
+	   }
 
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
-    }
+	   public BlockState updateShape(BlockState p_49173_, Direction p_49174_, BlockState p_49175_, LevelAccessor p_49176_, BlockPos p_49177_, BlockPos p_49178_) {
+	      if (p_49173_.getValue(WATERLOGGED)) {
+	         p_49176_.scheduleTick(p_49177_, LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_STILL.getTickDelay(p_49176_));
+	      }
 
-    @SuppressWarnings("deprecation")
-	@Override
-    public FluidState getFluidState(BlockState state) {
-        if (state.get(WATERLOGGED).booleanValue()) {
-            return LirothFluids.LIROTH_FLUID_STILL.getStill(false);
-        }
-        return super.getFluidState(state);
-    }
-}
+	      return p_49174_ == Direction.DOWN && !this.canSurvive(p_49173_, p_49176_, p_49177_) ? Blocks.AIR.defaultBlockState() : super.updateShape(p_49173_, p_49174_, p_49175_, p_49176_, p_49177_, p_49178_);
+	   }
+
+	   public boolean canSurvive(BlockState p_49169_, LevelReader p_49170_, BlockPos p_49171_) {
+	      BlockPos blockpos = p_49171_.below();
+	      return p_49170_.getBlockState(blockpos).isFaceSturdy(p_49170_, blockpos, Direction.UP);
+	   }
+
+	   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_49180_) {
+	      p_49180_.add(WATERLOGGED);
+	   }
+
+	   public FluidState getFluidState(BlockState p_49191_) {
+	      return p_49191_.getValue(WATERLOGGED) ? LirothFluids.LIROTH_FLUID_STILL.getSource(false) : super.getFluidState(p_49191_);
+	   }
+	}

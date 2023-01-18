@@ -2,24 +2,26 @@ package com.decodinator.liroth.core.blocks;
 
 import com.decodinator.liroth.core.LirothBlocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractPlantBlock;
-import net.minecraft.block.AbstractPlantStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GrowingPlantBodyBlock;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.NetherVines;
+import net.minecraft.world.level.block.WeepingVinesBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CustomWeepingVinesPlantBlock
-extends AbstractPlantBlock {
-    public static final VoxelShape SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+public class CustomWeepingVinesPlantBlock extends GrowingPlantBodyBlock {
+	   public static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
-    public CustomWeepingVinesPlantBlock(AbstractBlock.Settings settings) {
-        super(settings, Direction.DOWN, SHAPE, false);
-    }
+	   public CustomWeepingVinesPlantBlock(BlockBehaviour.Properties p_154975_) {
+	      super(p_154975_, Direction.DOWN, SHAPE, false);
+	   }
 
-    @Override
-    protected AbstractPlantStemBlock getStem() {
-        return (AbstractPlantStemBlock)LirothBlocks.DAMNATION_VINES;
-    }
-}
-
+	   protected GrowingPlantHeadBlock getHeadBlock() {
+	      return (GrowingPlantHeadBlock)LirothBlocks.DAMNATION_VINES;
+	   }
+	}

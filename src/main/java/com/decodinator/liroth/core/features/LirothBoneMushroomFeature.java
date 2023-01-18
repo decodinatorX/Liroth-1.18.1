@@ -1,26 +1,28 @@
 package com.decodinator.liroth.core.features;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public class LirothBoneMushroomFeature
 extends LirothSkeletonFeature {
-    public LirothBoneMushroomFeature(Codec<DefaultFeatureConfig> codec) {
+    public LirothBoneMushroomFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
 
     @Override
-    protected boolean generateCoral(WorldAccess world, Random random, BlockPos pos, BlockState state) {
+    protected boolean generateCoral(LevelAccessor world, RandomSource random, BlockPos pos, BlockState state) {
         int i = random.nextInt(3) + 3;
         int j = random.nextInt(3) + 3;
         int k = random.nextInt(3) + 3;
         int l = random.nextInt(3) + 1;
-        BlockPos.Mutable mutable = pos.mutableCopy();
+        MutableBlockPos mutable = pos.mutable();
         for (int m = 0; m <= j; ++m) {
             for (int n = 0; n <= i; ++n) {
                 for (int o = 0; o <= k; ++o) {

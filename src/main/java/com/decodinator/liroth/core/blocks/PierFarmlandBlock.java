@@ -1,21 +1,20 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.util.math.random.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FarmlandBlock;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-
-public class PierFarmlandBlock extends FarmlandBlock {
+public class PierFarmlandBlock extends FarmBlock {
 	
-    public PierFarmlandBlock(Settings properties) {
+    public PierFarmlandBlock(Properties properties) {
         super(properties);
     }
 
     @Override
-    public void randomTick(BlockState blockState, ServerWorld serverLevel, BlockPos blockPos, Random random) {
-            serverLevel.setBlockState(blockPos, blockState.with(MOISTURE, 7), 2);
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
+            serverLevel.setBlock(blockPos, blockState.setValue(MOISTURE, 7), 2);
     }
 
 }

@@ -1,31 +1,32 @@
 package com.decodinator.liroth.core.helpers;
 
 import com.decodinator.liroth.LirothClient;
+import com.mojang.authlib.minecraft.client.MinecraftClient;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public class PotestiumHelmetRenderer implements ArmorRenderer {
-    private static final Identifier TEXTURE = new Identifier("liroth", "textures/models/armor/potestium_armor_helm.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("liroth", "textures/models/armor/potestium_armor_helm.png");
     private static PotestiumHelmetModel potestiumHelmetModel;
     public PotestiumHelmetRenderer() {
 
     }
     @Override
-    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
+    public void render(PoseStack matrices, MultiBufferSource vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, HumanoidModel<LivingEntity> contextModel) {
         if (potestiumHelmetModel == null) {
-        	potestiumHelmetModel = new PotestiumHelmetModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(LirothClient.MODEL_POTESTIUM_HELMET_LAYER));;
+        	potestiumHelmetModel = new PotestiumHelmetModel(Minecraft.getInstance().getEntityModels().bakeLayer(LirothClient.MODEL_POTESTIUM_HELMET_LAYER));;
         }
 
-        contextModel.copyBipedStateTo(potestiumHelmetModel);
-        potestiumHelmetModel.setVisible(false);
+        contextModel.copyPropertiesTo(potestiumHelmetModel);
+        potestiumHelmetModel.setAllVisible(false);
         potestiumHelmetModel.head.visible = slot == EquipmentSlot.HEAD;
             ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, potestiumHelmetModel, TEXTURE);
     }
