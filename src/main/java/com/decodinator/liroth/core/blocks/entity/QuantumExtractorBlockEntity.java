@@ -381,8 +381,7 @@ public class QuantumExtractorBlockEntity extends BlockEntity implements MenuProv
 		} else if (fuel.isOf(LirothBlocks.REDSTONE_BROKEN_STAGE_3.asItem())) {
 			return 16000;*/
 		} else {
-	         fuel.getItem();
-	         return getFabricFuel(fuel);
+	         return 0;
 		}
 	}
 	

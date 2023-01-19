@@ -19,15 +19,13 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.common.Constants;
 import mezz.jei.library.plugins.vanilla.cooking.FurnaceVariantCategory;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public abstract class AbstractQuantumCategory<T extends AbstractQuantumRecipe> extends FurnaceVariantCategory<T> {
     public static final RecipeType TYPE = RecipeType.create(
@@ -101,6 +99,7 @@ public abstract class AbstractQuantumCategory<T extends AbstractQuantumRecipe> e
 	public void setRecipe(IRecipeLayoutBuilder builder, AbstractQuantumRecipe recipe, IFocusGroup focuses) {
 
 		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(recipe.at(0));
+		builder.addSlot(RecipeIngredientRole.INPUT, 1, 37).addItemStack(Blocks.REDSTONE_BLOCK.asItem().getDefaultInstance());
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 58, 5).addItemStack(recipe.getResultItem());
 		if (!recipe.bonus.bonus.isEmpty() && recipe.bonus.percent > 0) {
 			builder.addSlot(RecipeIngredientRole.OUTPUT, 58, 33).addItemStack(recipe.bonus.bonus);
