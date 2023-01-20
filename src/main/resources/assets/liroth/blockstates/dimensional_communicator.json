@@ -1,33 +1,61 @@
 {
   "variants": {
-    "eye=false,facing=east": {
-      "model": "liroth:block/dimensional_communicator",
+    "shape=ascending_east": {
+      "model": "liroth:block/dimensional_communicator_raised_ne",
+      "y": 90
+    },
+    "shape=ascending_north": {
+      "model": "liroth:block/dimensional_communicator_raised_ne"
+    },
+    "shape=ascending_south": {
+      "model": "liroth:block/dimensional_communicator_raised_sw"
+    },
+    "shape=ascending_west": {
+      "model": "liroth:block/dimensional_communicator_raised_sw",
+      "y": 90
+    },
+    "shape=east_west,powered=false": {
+      "model": "liroth:block/dimensional_communicator_unpowered",
+      "y": 90
+    },
+    "shape=north_east,powered=false": {
+      "model": "liroth:block/dimensional_communicator_corner_unpowered",
       "y": 270
     },
-    "eye=false,facing=north": {
-      "model": "liroth:block/dimensional_communicator",
+    "shape=north_south,powered=false": {
+      "model": "liroth:block/dimensional_communicator_unpowered"
+    },
+    "shape=north_west,powered=false": {
+      "model": "liroth:block/dimensional_communicator_corner_unpowered",
       "y": 180
     },
-    "eye=false,facing=south": {
-      "model": "liroth:block/dimensional_communicator"
+    "shape=south_east,powered=false": {
+      "model": "liroth:block/dimensional_communicator_corner_unpowered"
     },
-    "eye=false,facing=west": {
+    "shape=south_west,powered=false": {
+      "model": "liroth:block/dimensional_communicator_corner_unpowered",
+      "y": 90
+    },
+    "shape=east_west,powered=true": {
       "model": "liroth:block/dimensional_communicator",
       "y": 90
     },
-    "eye=true,facing=east": {
-      "model": "liroth:block/dimensional_communicator_filled",
+    "shape=north_east,powered=true": {
+      "model": "liroth:block/dimensional_communicator_corner",
       "y": 270
     },
-    "eye=true,facing=north": {
-      "model": "liroth:block/dimensional_communicator_filled",
+    "shape=north_south,powered=true": {
+      "model": "liroth:block/dimensional_communicator"
+    },
+    "shape=north_west,powered=true": {
+      "model": "liroth:block/dimensional_communicator_corner",
       "y": 180
     },
-    "eye=true,facing=south": {
-      "model": "liroth:block/dimensional_communicator_filled"
+    "shape=south_east,powered=true": {
+      "model": "liroth:block/dimensional_communicator_corner"
     },
-    "eye=true,facing=west": {
-      "model": "liroth:block/dimensional_communicator_filled",
+    "shape=south_west,powered=true": {
+      "model": "liroth:block/dimensional_communicator_corner",
       "y": 90
     }
   }

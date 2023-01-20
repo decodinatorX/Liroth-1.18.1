@@ -2,7 +2,7 @@
     "textures": {
         "particle": "liroth:blocks/dimensional_communicator_side",
         "bottom": "minecraft:block/obsidian",
-        "top": "liroth:blocks/dimensional_communicator_top_powered",
+        "top": "liroth:blocks/dimensional_communicator_top",
         "side": "liroth:blocks/dimensional_communicator_side"
     },
     "elements": [
