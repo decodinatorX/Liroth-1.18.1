@@ -101,9 +101,9 @@ public class WarpModel<T extends WarpEntity> extends EntityModel<T> {
     public void setupAnim(T livingEntity, float f, float g, float h, float i, float j) {
         boolean bl = ((LivingEntity)livingEntity).getFallFlyingTicks() > 4;
         boolean bl2 = ((LivingEntity)livingEntity).isVisuallySwimming();
-        this.head.xRot = i * ((float)Math.PI / 180);
-        this.head.yRot = bl ? -0.7853982f : (this.leaningPitch > 0.0f ? (bl2 ? this.lerpAngle(this.leaningPitch, this.head.yRot, -0.7853982f) : this.lerpAngle(this.leaningPitch, this.head.yRot, j * ((float)Math.PI / 180))) : j * ((float)Math.PI / 180));
-        this.body.xRot = 0.0f;
+        this.head.yRot = i * ((float)Math.PI / 180);
+        this.head.xRot = bl ? -0.7853982f : (this.leaningPitch > 0.0f ? (bl2 ? this.lerpAngle(this.leaningPitch, this.head.xRot, -0.7853982f) : this.lerpAngle(this.leaningPitch, this.head.xRot, j * ((float)Math.PI / 180))) : j * ((float)Math.PI / 180));
+        this.body.yRot = 0.0f;
         this.rightArm.z = 0.0f;
         this.leftArm.z = 0.0f;
         float k = 1.0f;
@@ -116,38 +116,38 @@ public class WarpModel<T extends WarpEntity> extends EntityModel<T> {
             k = 1.0f;
         }
         if (this.carryingBlock) {
-            this.rightArm.yRot = -0.5f;
-            this.leftArm.yRot = -0.5f;
+            this.rightArm.xRot = -0.5f;
+            this.leftArm.xRot = -0.5f;
             this.rightArm.zRot = 0.05f;
             this.leftArm.zRot = -0.05f;
         }
         if (this.angry) {
             this.head.y -= 5.0f;
         }
-        this.rightArm.yRot = Mth.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f / k;
-        this.leftArm.yRot = Mth.cos(f * 0.6662f) * 2.0f * g * 0.5f / k;
+        this.rightArm.xRot = Mth.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f / k;
+        this.leftArm.xRot = Mth.cos(f * 0.6662f) * 2.0f * g * 0.5f / k;
         this.rightArm.zRot = 0.0f;
         this.leftArm.zRot = 0.0f;
-        this.rightLeg.yRot = Mth.cos(f * 0.6662f) * 1.4f * g / k;
-        this.leftLeg.yRot = Mth.cos(f * 0.6662f + (float)Math.PI) * 1.4f * g / k;
-        this.rightLeg.xRot = 0.0f;
-        this.leftLeg.xRot = 0.0f;
+        this.rightLeg.xRot = Mth.cos(f * 0.6662f) * 1.4f * g / k;
+        this.leftLeg.xRot = Mth.cos(f * 0.6662f + (float)Math.PI) * 1.4f * g / k;
+        this.rightLeg.yRot = 0.0f;
+        this.leftLeg.yRot = 0.0f;
         this.rightLeg.zRot = 0.0f;
         this.leftLeg.zRot = 0.0f;
         if (this.riding) {
-            this.rightArm.yRot += -0.62831855f;
-            this.leftArm.yRot += -0.62831855f;
-            this.rightLeg.yRot = -1.4137167f;
-            this.rightLeg.xRot = 0.31415927f;
+            this.rightArm.xRot += -0.62831855f;
+            this.leftArm.xRot += -0.62831855f;
+            this.rightLeg.xRot = -1.4137167f;
+            this.rightLeg.yRot = 0.31415927f;
             this.rightLeg.zRot = 0.07853982f;
-            this.leftLeg.yRot = -1.4137167f;
-            this.leftLeg.xRot = -0.31415927f;
+            this.leftLeg.xRot = -1.4137167f;
+            this.leftLeg.yRot = -0.31415927f;
             this.leftLeg.zRot = -0.07853982f;
         }
-        this.rightArm.xRot = 0.0f;
-        this.leftArm.xRot = 0.0f;
-            this.leftLeg.yRot = Mth.lerp(this.leaningPitch, this.leftLeg.yRot, 0.3f * Mth.cos(f * 0.33333334f + (float)Math.PI));
-            this.rightLeg.yRot = Mth.lerp(this.leaningPitch, this.rightLeg.yRot, 0.3f * Mth.cos(f * 0.33333334f));
+        this.rightArm.yRot = 0.0f;
+        this.leftArm.yRot = 0.0f;
+            this.leftLeg.xRot = Mth.lerp(this.leaningPitch, this.leftLeg.xRot, 0.3f * Mth.cos(f * 0.33333334f + (float)Math.PI));
+            this.rightLeg.xRot = Mth.lerp(this.leaningPitch, this.rightLeg.xRot, 0.3f * Mth.cos(f * 0.33333334f));
             
     }
 

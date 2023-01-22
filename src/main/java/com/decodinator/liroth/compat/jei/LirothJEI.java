@@ -3,9 +3,13 @@ package com.decodinator.liroth.compat.jei;
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothBlocks;
 import com.decodinator.liroth.core.LirothRecipeTypes;
+import com.decodinator.liroth.core.blocks.entity.LirothSplitterScreen;
+import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreen;
+
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -64,4 +68,14 @@ public class LirothJEI implements IModPlugin {
 	public ResourceLocation getPluginUid() {
 		return PLUGIN_ID;
 	}
+	
+	  @Override
+	  public void registerGuiHandlers(IGuiHandlerRegistration registry) {
+	    registry.addRecipeClickArea(LirothSplitterScreen.class,
+	        73, 30,
+	        30, 24, SplitterCategory.TYPE);
+	    registry.addRecipeClickArea(QuantumExtractorScreen.class,
+	        75, 22,
+	        32, 21, QuantumCategory.TYPE);
+	  }
 }
