@@ -9,18 +9,12 @@
     "access.CropBlockMixin",
     "access.DirtPathBlockAccess",
     "access.DoorBlockAccess",
-    "access.FireBlockAccess",
     "access.HoeItemAccess",
-    "access.IronBarsBlockAccess",
     "access.ItemBlockRenderTypeAccess",
-    "access.MixinFarmBlock",
-    "access.PickaxeItemAccess",
     "access.PressurePlateBlockAccess",
-    "access.SaplingBlockAccess",
     "access.ShovelItemAccess",
     "access.StairBlockAccess",
-    "access.TrapDoorBlockAccess",
-    "access.WoodButtonBlockAccess"
+    "access.TrapDoorBlockAccess"
   ],
   "client": [
     

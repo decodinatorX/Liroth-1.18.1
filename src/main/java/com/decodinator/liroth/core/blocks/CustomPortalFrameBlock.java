@@ -1,14 +1,10 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.block.EndPortalFrameBlock;
-import net.minecraft.block.FurnaceBlock;
-import net.minecraft.block.JukeboxBlock;
-import net.minecraft.block.PaneBlock;
-import net.minecraft.block.RailBlock;
+import net.minecraft.world.level.block.EndPortalFrameBlock;
 
 public class CustomPortalFrameBlock extends EndPortalFrameBlock {
 
-	public CustomPortalFrameBlock(Settings settings) {
+	public CustomPortalFrameBlock(Properties settings) {
 		super(settings);
 	}
 

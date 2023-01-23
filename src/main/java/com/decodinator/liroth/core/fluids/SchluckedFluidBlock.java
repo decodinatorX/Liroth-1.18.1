@@ -1,19 +1,30 @@
 package com.decodinator.liroth.core.fluids;
 
-import com.decodinator.liroth.Liroth;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FluidBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+public class SchluckedFluidBlock extends LiquidBlock {
 
-public class SchluckedFluidBlock extends FluidBlock {
-
-	protected SchluckedFluidBlock(FlowableFluid fluid, Settings settings) {
+	protected SchluckedFluidBlock(FlowingFluid fluid, Properties settings) {
 		super(fluid, settings);
 	}
+	
+    @Override
+    public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
+        LivingEntity livingEntity;
+        if (level.isClientSide || level.getDifficulty() == Difficulty.PEACEFUL) {
+            return;
+        }
+        if (entity instanceof LivingEntity && !(livingEntity = (LivingEntity)entity).isPassenger()) {
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 40));
+        }
+    }
 }

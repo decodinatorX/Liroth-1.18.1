@@ -2,11 +2,11 @@ package com.decodinator.liroth.core.helpers;
 
 import com.decodinator.liroth.core.LirothItems;
 
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class LirothianCobaltArmorMaterial implements ArmorMaterial {
 	private static final int[] BASE_DURABILITY = new int[] {13, 15, 16, 11};
@@ -14,28 +14,28 @@ public class LirothianCobaltArmorMaterial implements ArmorMaterial {
 	// In which A is helmet, B chestplate, C leggings and D boots. 
 	// For reference, Leather uses {1, 2, 3, 1}, and Diamond/Netherite {3, 6, 8, 3}
 	@Override
-	public int getDurability(EquipmentSlot var1) {
-		return BASE_DURABILITY[var1.getEntitySlotId()] * 15;
+	public int getDurabilityForSlot(EquipmentSlot var1) {
+		return BASE_DURABILITY[var1.getIndex()] * 15;
 	}
 
 	@Override
-	public int getProtectionAmount(EquipmentSlot var1) {
-		return PROTECTION_VALUES[var1.getEntitySlotId()];
+	public int getDefenseForSlot(EquipmentSlot var1) {
+		return PROTECTION_VALUES[var1.getIndex()];
 	}
 
 	@Override
-	public int getEnchantability() {
+	public int getEnchantmentValue() {
 		return 9;
 	}
 
 	@Override
 	public SoundEvent getEquipSound() {
-		return SoundEvents.ITEM_ARMOR_EQUIP_IRON;
+		return SoundEvents.ARMOR_EQUIP_IRON;
 	}
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(LirothItems.LIROTHIAN_COBALT_INGOT);
+		return Ingredient.of(LirothItems.LIROTHIAN_COBALT_INGOT);
 
 	}
 

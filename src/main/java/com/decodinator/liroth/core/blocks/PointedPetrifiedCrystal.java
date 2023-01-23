@@ -1,522 +1,567 @@
 package com.decodinator.liroth.core.blocks;
 
-import com.decodinator.liroth.core.LirothBlocks;
-import com.google.common.annotations.VisibleForTesting;
 import java.util.Optional;
-import net.minecraft.util.math.random.Random;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractCauldronBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LandingBlock;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.block.enums.Thickness;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.FallingBlockEntity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.TridentEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldEvents;
-import net.minecraft.world.WorldView;
+
 import org.jetbrains.annotations.Nullable;
 
-public class PointedPetrifiedCrystal
-extends Block
-implements LandingBlock,
-Waterloggable {
-    public static final DirectionProperty VERTICAL_DIRECTION = Properties.VERTICAL_DIRECTION;
-    public static final EnumProperty<Thickness> THICKNESS = Properties.THICKNESS;
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    private static final int field_31205 = 11;
-    private static final int field_31206 = Integer.MAX_VALUE;
-    private static final int field_31207 = 2;
-    private static final float field_31208 = 0.02f;
-    private static final float field_31209 = 0.12f;
-    private static final int field_31210 = 11;
-    private static final float field_31211 = 0.17578125f;
-    private static final float field_31212 = 0.05859375f;
-    private static final double field_31213 = 0.6;
-    private static final float field_31214 = 1.0f;
-    private static final int field_31215 = 40;
-    private static final int field_31200 = 6;
-    private static final float field_31201 = 2.0f;
-    private static final int field_31202 = 2;
-    private static final float field_33566 = 5.0f;
-    private static final float field_33567 = 0.011377778f;
-    private static final int MAX_STALACTITE_GROWTH = 7;
-    private static final int STALACTITE_FLOOR_SEARCH_RANGE = 10;
-    private static final float field_31203 = 0.6875f;
-    private static final VoxelShape TIP_MERGE_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 16.0, 11.0);
-    private static final VoxelShape UP_TIP_SHAPE = Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 11.0, 11.0);
-    private static final VoxelShape DOWN_TIP_SHAPE = Block.createCuboidShape(5.0, 5.0, 5.0, 11.0, 16.0, 11.0);
-    private static final VoxelShape BASE_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 16.0, 12.0);
-    private static final VoxelShape FRUSTUM_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 16.0, 13.0);
-    private static final VoxelShape MIDDLE_SHAPE = Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
-    private static final float field_31204 = 0.125f;
+import com.decodinator.liroth.core.LirothBlocks;
+import com.google.common.annotations.VisibleForTesting;
 
-    public PointedPetrifiedCrystal(AbstractBlock.Settings settings) {
-        super(settings);
-        this.setDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(VERTICAL_DIRECTION, Direction.UP)).with(THICKNESS, Thickness.TIP)).with(WATERLOGGED, false));
-    }
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Fallable;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(VERTICAL_DIRECTION, THICKNESS, WATERLOGGED);
-    }
+public class PointedPetrifiedCrystal  extends Block implements Fallable, SimpleWaterloggedBlock {
+	   public static final DirectionProperty TIP_DIRECTION = BlockStateProperties.VERTICAL_DIRECTION;
+	   public static final EnumProperty<DripstoneThickness> THICKNESS = BlockStateProperties.DRIPSTONE_THICKNESS;
+	   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	   private static final VoxelShape TIP_MERGE_SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
+	   private static final VoxelShape TIP_SHAPE_UP = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 11.0D, 11.0D);
+	   private static final VoxelShape TIP_SHAPE_DOWN = Block.box(5.0D, 5.0D, 5.0D, 11.0D, 16.0D, 11.0D);
+	   private static final VoxelShape FRUSTUM_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+	   private static final VoxelShape MIDDLE_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+	   private static final VoxelShape BASE_SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+	   private static final VoxelShape REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 
-    @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return PointedPetrifiedCrystal.canPlaceAtWithDirection(world, pos, state.get(VERTICAL_DIRECTION));
-    }
+	   public PointedPetrifiedCrystal(BlockBehaviour.Properties p_154025_) {
+	      super(p_154025_);
+	      this.registerDefaultState(this.stateDefinition.any().setValue(TIP_DIRECTION, Direction.UP).setValue(THICKNESS, DripstoneThickness.TIP).setValue(WATERLOGGED, Boolean.valueOf(false)));
+	   }
 
-    @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (state.get(WATERLOGGED).booleanValue()) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-        }
-        if (direction != Direction.UP && direction != Direction.DOWN) {
-            return state;
-        }
-        Direction direction2 = state.get(VERTICAL_DIRECTION);
-        if (direction2 == Direction.DOWN && world.getBlockTickScheduler().isQueued(pos, this)) {
-            return state;
-        }
-        if (direction == direction2.getOpposite() && !this.canPlaceAt(state, world, pos)) {
-            if (direction2 == Direction.DOWN) {
-                this.scheduleFall(state, world, pos);
-            } else {
-                world.createAndScheduleBlockTick(pos, this, 1);
-            }
-            return state;
-        }
-        boolean bl = state.get(THICKNESS) == Thickness.TIP_MERGE;
-        Thickness thickness = PointedPetrifiedCrystal.getThickness(world, pos, direction2, bl);
-        return (BlockState)state.with(THICKNESS, thickness);
-    }
+	   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_154157_) {
+	      p_154157_.add(TIP_DIRECTION, THICKNESS, WATERLOGGED);
+	   }
 
-    @Override
-    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        BlockPos blockPos = hit.getBlockPos();
-        if (!world.isClient && projectile.canModifyAt(world, blockPos) && projectile instanceof TridentEntity && projectile.getVelocity().length() > 0.6) {
-            world.breakBlock(blockPos, true);
-        }
-    }
+	   public boolean canSurvive(BlockState p_154137_, LevelReader p_154138_, BlockPos p_154139_) {
+	      return isValidPointedDripstonePlacement(p_154138_, p_154139_, p_154137_.getValue(TIP_DIRECTION));
+	   }
 
-    @Override
-    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        if (state.get(VERTICAL_DIRECTION) == Direction.UP && state.get(THICKNESS) == Thickness.TIP) {
-            entity.handleFallDamage(fallDistance + 2.0f, 2.0f, DamageSource.STALAGMITE);
-        } else {
-            super.onLandedUpon(world, state, pos, entity, fallDistance);
-        }
-    }
+	   public BlockState updateShape(BlockState p_154147_, Direction p_154148_, BlockState p_154149_, LevelAccessor p_154150_, BlockPos p_154151_, BlockPos p_154152_) {
+	      if (p_154147_.getValue(WATERLOGGED)) {
+	         p_154150_.scheduleTick(p_154151_, Fluids.WATER, Fluids.WATER.getTickDelay(p_154150_));
+	      }
 
-    @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (!PointedPetrifiedCrystal.canDrip(state)) {
-            return;
-        }
-        float f = random.nextFloat();
-        if (f > 0.12f) {
-            return;
-        }
-        PointedPetrifiedCrystal.getFluid(world, pos, state).filter(fluid -> f < 0.02f || PointedPetrifiedCrystal.isFluidLiquid(fluid)).ifPresent(fluid -> PointedPetrifiedCrystal.createParticle(world, pos, state, fluid));
-    }
+	      if (p_154148_ != Direction.UP && p_154148_ != Direction.DOWN) {
+	         return p_154147_;
+	      } else {
+	         Direction direction = p_154147_.getValue(TIP_DIRECTION);
+	         if (direction == Direction.DOWN && p_154150_.getBlockTicks().hasScheduledTick(p_154151_, this)) {
+	            return p_154147_;
+	         } else if (p_154148_ == direction.getOpposite() && !this.canSurvive(p_154147_, p_154150_, p_154151_)) {
+	            if (direction == Direction.DOWN) {
+	               p_154150_.scheduleTick(p_154151_, this, 2);
+	            } else {
+	               p_154150_.scheduleTick(p_154151_, this, 1);
+	            }
 
-    @Override
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (PointedPetrifiedCrystal.isPointingUp(state) && !this.canPlaceAt(state, world, pos)) {
-            world.breakBlock(pos, true);
-        } else {
-            PointedPetrifiedCrystal.spawnFallingBlock(state, world, pos);
-        }
-    }
+	            return p_154147_;
+	         } else {
+	            boolean flag = p_154147_.getValue(THICKNESS) == DripstoneThickness.TIP_MERGE;
+	            DripstoneThickness dripstonethickness = calculateDripstoneThickness(p_154150_, p_154151_, direction, flag);
+	            return p_154147_.setValue(THICKNESS, dripstonethickness);
+	         }
+	      }
+	   }
 
-    @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (random.nextFloat() < 0.011377778f && PointedPetrifiedCrystal.isHeldByPointedDripstone(state, world, pos)) {
-            PointedPetrifiedCrystal.tryGrow(state, world, pos, random);
-        }
-    }
+	   public void onProjectileHit(Level p_154042_, BlockState p_154043_, BlockHitResult p_154044_, Projectile p_154045_) {
+	      BlockPos blockpos = p_154044_.getBlockPos();
+	      if (!p_154042_.isClientSide && p_154045_.mayInteract(p_154042_, blockpos) && p_154045_ instanceof ThrownTrident && p_154045_.getDeltaMovement().length() > 0.6D) {
+	         p_154042_.destroyBlock(blockpos, true);
+	      }
 
-    @Override
-    public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.DESTROY;
-    }
+	   }
 
-    @Override
-    @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        Direction direction;
-        BlockPos blockPos;
-        World worldAccess = ctx.getWorld();
-        Direction direction2 = PointedPetrifiedCrystal.getDirectionToPlaceAt(worldAccess, blockPos = ctx.getBlockPos(), direction = ctx.getVerticalPlayerLookDirection().getOpposite());
-        if (direction2 == null) {
-            return null;
-        }
-        boolean bl = !ctx.shouldCancelInteraction();
-        Thickness thickness = PointedPetrifiedCrystal.getThickness(worldAccess, blockPos, direction2, bl);
-        if (thickness == null) {
-            return null;
-        }
-        return (BlockState)((BlockState)((BlockState)this.getDefaultState().with(VERTICAL_DIRECTION, direction2)).with(THICKNESS, thickness)).with(WATERLOGGED, worldAccess.getFluidState(blockPos).getFluid() == Fluids.WATER);
-    }
+	   public void fallOn(Level p_154047_, BlockState p_154048_, BlockPos p_154049_, Entity p_154050_, float p_154051_) {
+	      if (p_154048_.getValue(TIP_DIRECTION) == Direction.UP && p_154048_.getValue(THICKNESS) == DripstoneThickness.TIP) {
+	         p_154050_.causeFallDamage(p_154051_ + 2.0F, 2.0F, DamageSource.STALAGMITE);
+	      } else {
+	         super.fallOn(p_154047_, p_154048_, p_154049_, p_154050_, p_154051_);
+	      }
 
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        if (state.get(WATERLOGGED).booleanValue()) {
-            return Fluids.WATER.getStill(false);
-        }
-        return super.getFluidState(state);
-    }
+	   }
 
-    @Override
-    public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
-        return VoxelShapes.empty();
-    }
+	   public void animateTick(BlockState p_221870_, Level p_221871_, BlockPos p_221872_, RandomSource p_221873_) {
+	      if (canDrip(p_221870_)) {
+	         float f = p_221873_.nextFloat();
+	         if (!(f > 0.12F)) {
+	            getFluidAboveStalactite(p_221871_, p_221872_, p_221870_).filter((p_221848_) -> {
+	               return f < 0.02F || canFillCauldron(p_221848_.fluid);
+	            }).ifPresent((p_221881_) -> {
+	               spawnDripParticle(p_221871_, p_221872_, p_221870_, p_221881_.fluid);
+	            });
+	         }
+	      }
+	   }
 
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        Thickness thickness = state.get(THICKNESS);
-        VoxelShape voxelShape = thickness == Thickness.TIP_MERGE ? TIP_MERGE_SHAPE : (thickness == Thickness.TIP ? (state.get(VERTICAL_DIRECTION) == Direction.DOWN ? DOWN_TIP_SHAPE : UP_TIP_SHAPE) : (thickness == Thickness.FRUSTUM ? BASE_SHAPE : (thickness == Thickness.MIDDLE ? FRUSTUM_SHAPE : MIDDLE_SHAPE)));
-        Vec3d vec3d = state.getModelOffset(world, pos);
-        return voxelShape.offset(vec3d.x, 0.0, vec3d.z);
-    }
+	   public void tick(BlockState p_221865_, ServerLevel p_221866_, BlockPos p_221867_, RandomSource p_221868_) {
+	      if (isStalagmite(p_221865_) && !this.canSurvive(p_221865_, p_221866_, p_221867_)) {
+	         p_221866_.destroyBlock(p_221867_, true);
+	      } else {
+	         spawnFallingStalactite(p_221865_, p_221866_, p_221867_);
+	      }
 
-    @Override
-    public boolean isShapeFullCube(BlockState state, BlockView world, BlockPos pos) {
-        return false;
-    }
+	   }
 
-    @Override
-    public float getMaxHorizontalModelOffset() {
-        return 0.125f;
-    }
+	   public void randomTick(BlockState p_221883_, ServerLevel p_221884_, BlockPos p_221885_, RandomSource p_221886_) {
+	      maybeTransferFluid(p_221883_, p_221884_, p_221885_, p_221886_.nextFloat());
+	      if (p_221886_.nextFloat() < 0.011377778F && isStalactiteStartPos(p_221883_, p_221884_, p_221885_)) {
+	         growStalactiteOrStalagmiteIfPossible(p_221883_, p_221884_, p_221885_, p_221886_);
+	      }
 
-    @Override
-    public void onDestroyedOnLanding(World world, BlockPos pos, FallingBlockEntity fallingBlockEntity) {
-        if (!fallingBlockEntity.isSilent()) {
-            world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_LANDS, pos, 0);
-        }
-    }
+	   }
 
-    @Override
-    public DamageSource getDamageSource() {
-        return DamageSource.FALLING_STALACTITE;
-    }
+	   @VisibleForTesting
+	   public static void maybeTransferFluid(BlockState p_221860_, ServerLevel p_221861_, BlockPos p_221862_, float p_221863_) {
+	      if (!(p_221863_ > 0.17578125F) || !(p_221863_ > 0.05859375F)) {
+	         if (isStalactiteStartPos(p_221860_, p_221861_, p_221862_)) {
+	            Optional<PointedPetrifiedCrystal.FluidInfo> optional = getFluidAboveStalactite(p_221861_, p_221862_, p_221860_);
+	            if (!optional.isEmpty()) {
+	               Fluid fluid = (optional.get()).fluid;
+	               float f;
+	               if (fluid == Fluids.WATER) {
+	                  f = 0.17578125F;
+	               } else {
+	                  if (fluid != Fluids.LAVA) {
+	                     return;
+	                  }
 
-    @Override
-    public Predicate<Entity> getEntityPredicate() {
-        return EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.and(EntityPredicates.VALID_LIVING_ENTITY);
-    }
+	                  f = 0.05859375F;
+	               }
 
-    private void scheduleFall(BlockState state, WorldAccess world, BlockPos pos) {
-        BlockPos blockPos = PointedPetrifiedCrystal.getTipPos(state, world, pos, Integer.MAX_VALUE, true);
-        if (blockPos == null) {
-            return;
-        }
-        BlockPos.Mutable mutable = blockPos.mutableCopy();
-        mutable.move(Direction.DOWN);
-        BlockState blockState = world.getBlockState(mutable);
-        if (blockState.getCollisionShape(world, mutable, ShapeContext.absent()).getMax(Direction.Axis.Y) >= 1.0 || blockState.isOf(Blocks.POWDER_SNOW)) {
-            world.breakBlock(blockPos, true);
-            mutable.move(Direction.UP);
-        }
-        mutable.move(Direction.UP);
-        while (PointedPetrifiedCrystal.isPointingDown(world.getBlockState(mutable))) {
-            world.createAndScheduleBlockTick(mutable, this, 2);
-            mutable.move(Direction.UP);
-        }
-    }
+	               if (!(p_221863_ >= f)) {
+	                  BlockPos blockpos = findTip(p_221860_, p_221861_, p_221862_, 11, false);
+	                  if (blockpos != null) {
+	                     if ((optional.get()).sourceState.is(Blocks.MUD) && fluid == Fluids.WATER) {
+	                        BlockState blockstate1 = Blocks.CLAY.defaultBlockState();
+	                        p_221861_.setBlockAndUpdate((optional.get()).pos, blockstate1);
+	                        Block.pushEntitiesUp((optional.get()).sourceState, blockstate1, p_221861_, (optional.get()).pos);
+	                        p_221861_.gameEvent(GameEvent.BLOCK_CHANGE, (optional.get()).pos, GameEvent.Context.of(blockstate1));
+	                        p_221861_.levelEvent(1504, blockpos, 0);
+	                     }
+	                  }
+	               }
+	            }
+	         }
+	      }
+	   }
 
-    private static int getStalactiteSize(ServerWorld world, BlockPos pos, int range) {
-        int i;
-        BlockPos.Mutable mutable = pos.mutableCopy().move(Direction.UP);
-        for (i = 1; i < range && PointedPetrifiedCrystal.isPointingDown(world.getBlockState(mutable)); ++i) {
-            mutable.move(Direction.UP);
-        }
-        return i;
-    }
+	   public PushReaction getPistonPushReaction(BlockState p_154237_) {
+	      return PushReaction.DESTROY;
+	   }
 
-    private static void spawnFallingBlock(BlockState state, ServerWorld world, BlockPos pos) {
-        Vec3d vec3d = Vec3d.ofBottomCenter(pos);
-        BlockPos.Mutable mutable = pos.mutableCopy();
-        BlockState blockState = state;
-        FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, mutable, blockState);
-        if (PointedPetrifiedCrystal.isTip(state, true)) {
-            int i = PointedPetrifiedCrystal.getStalactiteSize(world, pos, 6);
-            float f = 1.0f * (float)i;
-            fallingBlockEntity.setHurtEntities(f, 40);
-        }
-        world.spawnEntity(fallingBlockEntity);
-    }
+	   @Nullable
+	   public BlockState getStateForPlacement(BlockPlaceContext p_154040_) {
+	      LevelAccessor levelaccessor = p_154040_.getLevel();
+	      BlockPos blockpos = p_154040_.getClickedPos();
+	      Direction direction = p_154040_.getNearestLookingVerticalDirection().getOpposite();
+	      Direction direction1 = calculateTipDirection(levelaccessor, blockpos, direction);
+	      if (direction1 == null) {
+	         return null;
+	      } else {
+	         boolean flag = !p_154040_.isSecondaryUseActive();
+	         DripstoneThickness dripstonethickness = calculateDripstoneThickness(levelaccessor, blockpos, direction1, flag);
+	         return dripstonethickness == null ? null : this.defaultBlockState().setValue(TIP_DIRECTION, direction1).setValue(THICKNESS, dripstonethickness).setValue(WATERLOGGED, Boolean.valueOf(levelaccessor.getFluidState(blockpos).getType() == Fluids.WATER));
+	      }
+	   }
 
-    @VisibleForTesting
-    public static void tryGrow(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        BlockState blockState2;
-        BlockState blockState = world.getBlockState(pos.up(1));
-        if (!PointedPetrifiedCrystal.canGrow(blockState, blockState2 = world.getBlockState(pos.up(2)))) {
-            return;
-        }
-        BlockPos blockPos = PointedPetrifiedCrystal.getTipPos(state, world, pos, 7, false);
-        if (blockPos == null) {
-            return;
-        }
-        BlockState blockState3 = world.getBlockState(blockPos);
-        if (!PointedPetrifiedCrystal.canDrip(blockState3) || !PointedPetrifiedCrystal.canGrow(blockState3, world, blockPos)) {
-            return;
-        }
-        if (random.nextBoolean()) {
-            PointedPetrifiedCrystal.tryGrow(world, blockPos, Direction.DOWN);
-        } else {
-            PointedPetrifiedCrystal.tryGrowStalagmite(world, blockPos);
-        }
-    }
+	   @SuppressWarnings("deprecation")
+	public FluidState getFluidState(BlockState p_154235_) {
+	      return p_154235_.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_154235_);
+	   }
 
-    private static void tryGrowStalagmite(ServerWorld world, BlockPos pos) {
-        BlockPos.Mutable mutable = pos.mutableCopy();
-        for (int i = 0; i < 10; ++i) {
-            mutable.move(Direction.DOWN);
-            BlockState blockState = world.getBlockState(mutable);
-            if (!blockState.getFluidState().isEmpty()) {
-                return;
-            }
-            if (PointedPetrifiedCrystal.isTip(blockState, Direction.UP) && PointedPetrifiedCrystal.canGrow(blockState, world, mutable)) {
-                PointedPetrifiedCrystal.tryGrow(world, mutable, Direction.UP);
-                return;
-            }
-            if (!PointedPetrifiedCrystal.canPlaceAtWithDirection(world, mutable, Direction.UP) || world.isWater((BlockPos)mutable.down())) continue;
-            PointedPetrifiedCrystal.tryGrow(world, (BlockPos)mutable.down(), Direction.UP);
-            return;
-        }
-    }
+	   public VoxelShape getOcclusionShape(BlockState p_154170_, BlockGetter p_154171_, BlockPos p_154172_) {
+	      return Shapes.empty();
+	   }
 
-    private static void tryGrow(ServerWorld world, BlockPos pos, Direction direction) {
-        BlockPos blockPos = pos.offset(direction);
-        BlockState blockState = world.getBlockState(blockPos);
-        if (PointedPetrifiedCrystal.isTip(blockState, direction.getOpposite())) {
-            PointedPetrifiedCrystal.growMerged(blockState, world, blockPos);
-        } else if (blockState.isAir() || blockState.isOf(Blocks.WATER)) {
-            PointedPetrifiedCrystal.place(world, blockPos, direction, Thickness.TIP);
-        }
-    }
+	   public VoxelShape getShape(BlockState p_154117_, BlockGetter p_154118_, BlockPos p_154119_, CollisionContext p_154120_) {
+	      DripstoneThickness dripstonethickness = p_154117_.getValue(THICKNESS);
+	      VoxelShape voxelshape;
+	      if (dripstonethickness == DripstoneThickness.TIP_MERGE) {
+	         voxelshape = TIP_MERGE_SHAPE;
+	      } else if (dripstonethickness == DripstoneThickness.TIP) {
+	         if (p_154117_.getValue(TIP_DIRECTION) == Direction.DOWN) {
+	            voxelshape = TIP_SHAPE_DOWN;
+	         } else {
+	            voxelshape = TIP_SHAPE_UP;
+	         }
+	      } else if (dripstonethickness == DripstoneThickness.FRUSTUM) {
+	         voxelshape = FRUSTUM_SHAPE;
+	      } else if (dripstonethickness == DripstoneThickness.MIDDLE) {
+	         voxelshape = MIDDLE_SHAPE;
+	      } else {
+	         voxelshape = BASE_SHAPE;
+	      }
 
-    private static void place(WorldAccess world, BlockPos pos, Direction direction, Thickness thickness) {
-        BlockState blockState = (BlockState)((BlockState)((BlockState)LirothBlocks.POINTED_PETRIFIED_CRYSTAL.getDefaultState().with(VERTICAL_DIRECTION, direction)).with(THICKNESS, thickness)).with(WATERLOGGED, world.getFluidState(pos).getFluid() == Fluids.WATER);
-        world.setBlockState(pos, blockState, Block.NOTIFY_ALL);
-    }
+	      Vec3 vec3 = p_154117_.getOffset(p_154118_, p_154119_);
+	      return voxelshape.move(vec3.x, 0.0D, vec3.z);
+	   }
 
-    private static void growMerged(BlockState state, WorldAccess world, BlockPos pos) {
-        BlockPos blockPos2;
-        BlockPos blockPos;
-        if (state.get(VERTICAL_DIRECTION) == Direction.UP) {
-            blockPos = pos;
-            blockPos2 = pos.up();
-        } else {
-            blockPos2 = pos;
-            blockPos = pos.down();
-        }
-        PointedPetrifiedCrystal.place(world, blockPos2, Direction.DOWN, Thickness.TIP_MERGE);
-        PointedPetrifiedCrystal.place(world, blockPos, Direction.UP, Thickness.TIP_MERGE);
-    }
+	   public boolean isCollisionShapeFullBlock(BlockState p_181235_, BlockGetter p_181236_, BlockPos p_181237_) {
+	      return false;
+	   }
 
-    public static void createParticle(World world, BlockPos pos, BlockState state) {
-        PointedPetrifiedCrystal.getFluid(world, pos, state).ifPresent(fluid -> PointedPetrifiedCrystal.createParticle(world, pos, state, fluid));
-    }
+	   public float getMaxHorizontalOffset() {
+	      return 0.125F;
+	   }
 
-    private static void createParticle(World world, BlockPos pos, BlockState state, Fluid fluid) {
-        Vec3d vec3d = state.getModelOffset(world, pos);
-        double d = 0.0625;
-        double e = (double)pos.getX() + 0.5 + vec3d.x;
-        double f = (double)((float)(pos.getY() + 1) - 0.6875f) - 0.0625;
-        double g = (double)pos.getZ() + 0.5 + vec3d.z;
-        Fluid fluid2 = PointedPetrifiedCrystal.getDripFluid(world, fluid);
-        DefaultParticleType particleEffect = fluid2.isIn(FluidTags.LAVA) ? ParticleTypes.DRIPPING_DRIPSTONE_LAVA : ParticleTypes.DRIPPING_DRIPSTONE_WATER;
-        world.addParticle(particleEffect, e, f, g, 0.0, 0.0, 0.0);
-    }
+	   public void onBrokenAfterFall(Level p_154059_, BlockPos p_154060_, FallingBlockEntity p_154061_) {
+	      if (!p_154061_.isSilent()) {
+	         p_154059_.levelEvent(1045, p_154060_, 0);
+	      }
 
-    @Nullable
-    private static BlockPos getTipPos(BlockState state2, WorldAccess world, BlockPos pos, int range, boolean allowMerged) {
-        if (PointedPetrifiedCrystal.isTip(state2, allowMerged)) {
-            return pos;
-        }
-        Direction direction = state2.get(VERTICAL_DIRECTION);
-        Predicate<BlockState> predicate = state -> state.isOf(LirothBlocks.POINTED_PETRIFIED_CRYSTAL) && state.get(VERTICAL_DIRECTION) == direction;
-        return PointedPetrifiedCrystal.searchInDirection(world, pos, direction.getDirection(), predicate, state -> PointedPetrifiedCrystal.isTip(state, allowMerged), range).orElse(null);
-    }
+	   }
 
-    @Nullable
-    private static Direction getDirectionToPlaceAt(WorldView world, BlockPos pos, Direction direction) {
-        Direction direction2;
-        if (PointedPetrifiedCrystal.canPlaceAtWithDirection(world, pos, direction)) {
-            direction2 = direction;
-        } else if (PointedPetrifiedCrystal.canPlaceAtWithDirection(world, pos, direction.getOpposite())) {
-            direction2 = direction.getOpposite();
-        } else {
-            return null;
-        }
-        return direction2;
-    }
+	   public DamageSource getFallDamageSource() {
+		      return DamageSource.FALLING_STALACTITE;
+		   }
 
-    private static Thickness getThickness(WorldView world, BlockPos pos, Direction direction, boolean tryMerge) {
-        Direction direction2 = direction.getOpposite();
-        BlockState blockState = world.getBlockState(pos.offset(direction));
-        if (PointedPetrifiedCrystal.isPointedDripstoneFacingDirection(blockState, direction2)) {
-            if (tryMerge || blockState.get(THICKNESS) == Thickness.TIP_MERGE) {
-                return Thickness.TIP_MERGE;
-            }
-            return Thickness.TIP;
-        }
-        if (!PointedPetrifiedCrystal.isPointedDripstoneFacingDirection(blockState, direction)) {
-            return Thickness.TIP;
-        }
-        Thickness thickness = blockState.get(THICKNESS);
-        if (thickness == Thickness.TIP || thickness == Thickness.TIP_MERGE) {
-            return Thickness.FRUSTUM;
-        }
-        BlockState blockState2 = world.getBlockState(pos.offset(direction2));
-        if (!PointedPetrifiedCrystal.isPointedDripstoneFacingDirection(blockState2, direction)) {
-            return Thickness.BASE;
-        }
-        return Thickness.MIDDLE;
-    }
+	   public Predicate<Entity> getHurtsEntitySelector() {
+	      return EntitySelector.NO_CREATIVE_OR_SPECTATOR.and(EntitySelector.LIVING_ENTITY_STILL_ALIVE);
+	   }
 
-    public static boolean canDrip(BlockState state) {
-        return PointedPetrifiedCrystal.isPointingDown(state) && state.get(THICKNESS) == Thickness.TIP && state.get(WATERLOGGED) == false;
-    }
+	   private static void spawnFallingStalactite(BlockState p_154098_, ServerLevel p_154099_, BlockPos p_154100_) {
+	      BlockPos.MutableBlockPos blockpos$mutableblockpos = p_154100_.mutable();
 
-    private static boolean canGrow(BlockState state, ServerWorld world, BlockPos pos) {
-        Direction direction = state.get(VERTICAL_DIRECTION);
-        BlockPos blockPos = pos.offset(direction);
-        BlockState blockState = world.getBlockState(blockPos);
-        if (!blockState.getFluidState().isEmpty()) {
-            return false;
-        }
-        if (blockState.isAir()) {
-            return true;
-        }
-        return PointedPetrifiedCrystal.isTip(blockState, direction.getOpposite());
-    }
+	      for(BlockState blockstate = p_154098_; isStalactite(blockstate); blockstate = p_154099_.getBlockState(blockpos$mutableblockpos)) {
+	         FallingBlockEntity fallingblockentity = FallingBlockEntity.fall(p_154099_, blockpos$mutableblockpos, blockstate);
+	         if (isTip(blockstate, true)) {
+	            int i = Math.max(1 + p_154100_.getY() - blockpos$mutableblockpos.getY(), 6);
+	            float f = 1.0F * (float)i;
+	            fallingblockentity.setHurtsEntities(f, 40);
+	            break;
+	         }
 
-    private static Optional<BlockPos> getSupportingPos(World world, BlockPos pos, BlockState state2, int range) {
-        Direction direction = state2.get(VERTICAL_DIRECTION);
-        Predicate<BlockState> predicate = state -> state.isOf(LirothBlocks.POINTED_PETRIFIED_CRYSTAL) && state.get(VERTICAL_DIRECTION) == direction;
-        return PointedPetrifiedCrystal.searchInDirection(world, pos, direction.getOpposite().getDirection(), predicate, state -> !state.isOf(LirothBlocks.POINTED_PETRIFIED_CRYSTAL), range);
-    }
+	         blockpos$mutableblockpos.move(Direction.DOWN);
+	      }
 
-    private static boolean canPlaceAtWithDirection(WorldView world, BlockPos pos, Direction direction) {
-        BlockPos blockPos = pos.offset(direction.getOpposite());
-        BlockState blockState = world.getBlockState(blockPos);
-        return blockState.isSideSolidFullSquare(world, blockPos, direction) || PointedPetrifiedCrystal.isPointedDripstoneFacingDirection(blockState, direction);
-    }
+	   }
 
-    private static boolean isTip(BlockState state, boolean allowMerged) {
-        if (!state.isOf(LirothBlocks.POINTED_PETRIFIED_CRYSTAL)) {
-            return false;
-        }
-        Thickness thickness = state.get(THICKNESS);
-        return thickness == Thickness.TIP || allowMerged && thickness == Thickness.TIP_MERGE;
-    }
+	   @VisibleForTesting
+	   public static void growStalactiteOrStalagmiteIfPossible(BlockState p_221888_, ServerLevel p_221889_, BlockPos p_221890_, RandomSource p_221891_) {
+	      BlockState blockstate = p_221889_.getBlockState(p_221890_.above(1));
+	      BlockState blockstate1 = p_221889_.getBlockState(p_221890_.above(2));
+	      if (canGrow(blockstate, blockstate1)) {
+	         BlockPos blockpos = findTip(p_221888_, p_221889_, p_221890_, 7, false);
+	         if (blockpos != null) {
+	            BlockState blockstate2 = p_221889_.getBlockState(blockpos);
+	            if (canDrip(blockstate2) && canTipGrow(blockstate2, p_221889_, blockpos)) {
+	               if (p_221891_.nextBoolean()) {
+	                  grow(p_221889_, blockpos, Direction.DOWN);
+	               } else {
+	                  growStalagmiteBelow(p_221889_, blockpos);
+	               }
 
-    private static boolean isTip(BlockState state, Direction direction) {
-        return PointedPetrifiedCrystal.isTip(state, false) && state.get(VERTICAL_DIRECTION) == direction;
-    }
+	            }
+	         }
+	      }
+	   }
 
-    private static boolean isPointingDown(BlockState state) {
-        return PointedPetrifiedCrystal.isPointedDripstoneFacingDirection(state, Direction.DOWN);
-    }
+	   private static void growStalagmiteBelow(ServerLevel p_154033_, BlockPos p_154034_) {
+	      BlockPos.MutableBlockPos blockpos$mutableblockpos = p_154034_.mutable();
 
-    private static boolean isPointingUp(BlockState state) {
-        return PointedPetrifiedCrystal.isPointedDripstoneFacingDirection(state, Direction.UP);
-    }
+	      for(int i = 0; i < 10; ++i) {
+	         blockpos$mutableblockpos.move(Direction.DOWN);
+	         BlockState blockstate = p_154033_.getBlockState(blockpos$mutableblockpos);
+	         if (!blockstate.getFluidState().isEmpty()) {
+	            return;
+	         }
 
-    private static boolean isHeldByPointedDripstone(BlockState state, WorldView world, BlockPos pos) {
-        return PointedPetrifiedCrystal.isPointingDown(state) && !world.getBlockState(pos.up()).isOf(LirothBlocks.POINTED_PETRIFIED_CRYSTAL);
-    }
+	         if (isUnmergedTipWithDirection(blockstate, Direction.UP) && canTipGrow(blockstate, p_154033_, blockpos$mutableblockpos)) {
+	            grow(p_154033_, blockpos$mutableblockpos, Direction.UP);
+	            return;
+	         }
 
-    @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return false;
-    }
+	         if (isValidPointedDripstonePlacement(p_154033_, blockpos$mutableblockpos, Direction.UP) && !p_154033_.isWaterAt(blockpos$mutableblockpos.below())) {
+	            grow(p_154033_, blockpos$mutableblockpos.below(), Direction.UP);
+	            return;
+	         }
 
-    private static boolean isPointedDripstoneFacingDirection(BlockState state, Direction direction) {
-        return state.isOf(LirothBlocks.POINTED_PETRIFIED_CRYSTAL) && state.get(VERTICAL_DIRECTION) == direction;
-    }
+	         if (!canDripThrough(p_154033_, blockpos$mutableblockpos, blockstate)) {
+	            return;
+	         }
+	      }
 
-    @Nullable
-    public static BlockPos getDripPos(World world, BlockPos pos) {
-        return PointedPetrifiedCrystal.searchInDirection(world, pos, Direction.UP.getDirection(), AbstractBlock.AbstractBlockState::isAir, PointedPetrifiedCrystal::canDrip, 11).orElse(null);
-    }
+	   }
 
-    public static Fluid getDripFluid(World world, BlockPos pos) {
-        return PointedPetrifiedCrystal.getFluid(world, pos, world.getBlockState(pos)).filter(PointedPetrifiedCrystal::isFluidLiquid).orElse(Fluids.EMPTY);
-    }
+	   private static void grow(ServerLevel p_154036_, BlockPos p_154037_, Direction p_154038_) {
+	      BlockPos blockpos = p_154037_.relative(p_154038_);
+	      BlockState blockstate = p_154036_.getBlockState(blockpos);
+	      if (isUnmergedTipWithDirection(blockstate, p_154038_.getOpposite())) {
+	         createMergedTips(blockstate, p_154036_, blockpos);
+	      } else if (blockstate.isAir() || blockstate.is(Blocks.WATER)) {
+	         createDripstone(p_154036_, blockpos, p_154038_, DripstoneThickness.TIP);
+	      }
 
-    private static Optional<Fluid> getFluid(World world, BlockPos pos2, BlockState state) {
-        if (!PointedPetrifiedCrystal.isPointingDown(state)) {
-            return Optional.empty();
-        }
-        return PointedPetrifiedCrystal.getSupportingPos(world, pos2, state, 11).map(pos -> world.getFluidState(pos.up()).getFluid());
-    }
+	   }
 
-    /**
-     * {@return whether the provided {@code fluid} is liquid, namely lava or water}
-     */
-    private static boolean isFluidLiquid(Fluid fluid) {
-        return fluid == Fluids.LAVA || fluid == Fluids.WATER;
-    }
+	   private static void createDripstone(LevelAccessor p_154088_, BlockPos p_154089_, Direction p_154090_, DripstoneThickness p_154091_) {
+	      BlockState blockstate = LirothBlocks.POINTED_PETRIFIED_CRYSTAL.defaultBlockState().setValue(TIP_DIRECTION, p_154090_).setValue(THICKNESS, p_154091_).setValue(WATERLOGGED, Boolean.valueOf(p_154088_.getFluidState(p_154089_).getType() == Fluids.WATER));
+	      p_154088_.setBlock(p_154089_, blockstate, 3);
+	   }
 
-    private static boolean canGrow(BlockState dripstoneBlockState, BlockState waterState) {
-        return dripstoneBlockState.isOf(LirothBlocks.PETRIFIED_CRYSTAL_BLOCK) && waterState.isOf(Blocks.WATER) && waterState.getFluidState().isStill();
-    }
+	   private static void createMergedTips(BlockState p_154231_, LevelAccessor p_154232_, BlockPos p_154233_) {
+	      BlockPos blockpos;
+	      BlockPos blockpos1;
+	      if (p_154231_.getValue(TIP_DIRECTION) == Direction.UP) {
+	         blockpos1 = p_154233_;
+	         blockpos = p_154233_.above();
+	      } else {
+	         blockpos = p_154233_;
+	         blockpos1 = p_154233_.below();
+	      }
 
-    private static Fluid getDripFluid(World world, Fluid fluid) {
-        if (fluid.matchesType(Fluids.EMPTY)) {
-            return world.getDimension().ultrawarm() ? Fluids.LAVA : Fluids.WATER;
-        }
-        return fluid;
-    }
+	      createDripstone(p_154232_, blockpos, Direction.DOWN, DripstoneThickness.TIP_MERGE);
+	      createDripstone(p_154232_, blockpos1, Direction.UP, DripstoneThickness.TIP_MERGE);
+	   }
 
-    private static Optional<BlockPos> searchInDirection(WorldAccess world, BlockPos pos, Direction.AxisDirection direction, Predicate<BlockState> continuePredicate, Predicate<BlockState> stopPredicate, int range) {
-        Direction direction2 = Direction.get(direction, Direction.Axis.Y);
-        BlockPos.Mutable mutable = pos.mutableCopy();
-        for (int i = 1; i < range; ++i) {
-            mutable.move(direction2);
-            BlockState blockState = world.getBlockState(mutable);
-            if (stopPredicate.test(blockState)) {
-                return Optional.of(mutable.toImmutable());
-            }
-            if (!world.isOutOfHeightLimit(mutable.getY()) && continuePredicate.test(blockState)) continue;
-            return Optional.empty();
-        }
-        return Optional.empty();
-    }
-}
+	   public static void spawnDripParticle(Level p_154063_, BlockPos p_154064_, BlockState p_154065_) {
+	      getFluidAboveStalactite(p_154063_, p_154064_, p_154065_).ifPresent((p_221856_) -> {
+	         spawnDripParticle(p_154063_, p_154064_, p_154065_, p_221856_.fluid);
+	      });
+	   }
+
+	   private static void spawnDripParticle(Level p_154072_, BlockPos p_154073_, BlockState p_154074_, Fluid p_154075_) {
+	      Vec3 vec3 = p_154074_.getOffset(p_154072_, p_154073_);
+	      double d1 = (double)p_154073_.getX() + 0.5D + vec3.x;
+	      double d2 = (double)((float)(p_154073_.getY() + 1) - 0.6875F) - 0.0625D;
+	      double d3 = (double)p_154073_.getZ() + 0.5D + vec3.z;
+	      Fluid fluid = getDripFluid(p_154072_, p_154075_);
+	      @SuppressWarnings("deprecation")
+		ParticleOptions particleoptions = fluid.is(FluidTags.LAVA) ? ParticleTypes.DRIPPING_DRIPSTONE_LAVA : ParticleTypes.DRIPPING_DRIPSTONE_WATER;
+	      p_154072_.addParticle(particleoptions, d1, d2, d3, 0.0D, 0.0D, 0.0D);
+	   }
+
+	   @Nullable
+	   private static BlockPos findTip(BlockState p_154131_, LevelAccessor p_154132_, BlockPos p_154133_, int p_154134_, boolean p_154135_) {
+	      if (isTip(p_154131_, p_154135_)) {
+	         return p_154133_;
+	      } else {
+	         Direction direction = p_154131_.getValue(TIP_DIRECTION);
+	         BiPredicate<BlockPos, BlockState> bipredicate = (p_202023_, p_202024_) -> {
+	            return p_202024_.is(LirothBlocks.POINTED_PETRIFIED_CRYSTAL) && p_202024_.getValue(TIP_DIRECTION) == direction;
+	         };
+	         return findBlockVertical(p_154132_, p_154133_, direction.getAxisDirection(), bipredicate, (p_154168_) -> {
+	            return isTip(p_154168_, p_154135_);
+	         }, p_154134_).orElse((BlockPos)null);
+	      }
+	   }
+
+	   @Nullable
+	   private static Direction calculateTipDirection(LevelReader p_154191_, BlockPos p_154192_, Direction p_154193_) {
+	      Direction direction;
+	      if (isValidPointedDripstonePlacement(p_154191_, p_154192_, p_154193_)) {
+	         direction = p_154193_;
+	      } else {
+	         if (!isValidPointedDripstonePlacement(p_154191_, p_154192_, p_154193_.getOpposite())) {
+	            return null;
+	         }
+
+	         direction = p_154193_.getOpposite();
+	      }
+
+	      return direction;
+	   }
+
+	   private static DripstoneThickness calculateDripstoneThickness(LevelReader p_154093_, BlockPos p_154094_, Direction p_154095_, boolean p_154096_) {
+	      Direction direction = p_154095_.getOpposite();
+	      BlockState blockstate = p_154093_.getBlockState(p_154094_.relative(p_154095_));
+	      if (isPointedDripstoneWithDirection(blockstate, direction)) {
+	         return !p_154096_ && blockstate.getValue(THICKNESS) != DripstoneThickness.TIP_MERGE ? DripstoneThickness.TIP : DripstoneThickness.TIP_MERGE;
+	      } else if (!isPointedDripstoneWithDirection(blockstate, p_154095_)) {
+	         return DripstoneThickness.TIP;
+	      } else {
+	         DripstoneThickness dripstonethickness = blockstate.getValue(THICKNESS);
+	         if (dripstonethickness != DripstoneThickness.TIP && dripstonethickness != DripstoneThickness.TIP_MERGE) {
+	            BlockState blockstate1 = p_154093_.getBlockState(p_154094_.relative(direction));
+	            return !isPointedDripstoneWithDirection(blockstate1, p_154095_) ? DripstoneThickness.BASE : DripstoneThickness.MIDDLE;
+	         } else {
+	            return DripstoneThickness.FRUSTUM;
+	         }
+	      }
+	   }
+
+	   public static boolean canDrip(BlockState p_154239_) {
+	      return isStalactite(p_154239_) && p_154239_.getValue(THICKNESS) == DripstoneThickness.TIP && !p_154239_.getValue(WATERLOGGED);
+	   }
+
+	   private static boolean canTipGrow(BlockState p_154195_, ServerLevel p_154196_, BlockPos p_154197_) {
+	      Direction direction = p_154195_.getValue(TIP_DIRECTION);
+	      BlockPos blockpos = p_154197_.relative(direction);
+	      BlockState blockstate = p_154196_.getBlockState(blockpos);
+	      if (!blockstate.getFluidState().isEmpty()) {
+	         return false;
+	      } else {
+	         return blockstate.isAir() ? true : isUnmergedTipWithDirection(blockstate, direction.getOpposite());
+	      }
+	   }
+
+	   private static Optional<BlockPos> findRootBlock(Level p_154067_, BlockPos p_154068_, BlockState p_154069_, int p_154070_) {
+	      Direction direction = p_154069_.getValue(TIP_DIRECTION);
+	      BiPredicate<BlockPos, BlockState> bipredicate = (p_202015_, p_202016_) -> {
+	         return p_202016_.is(LirothBlocks.POINTED_PETRIFIED_CRYSTAL) && p_202016_.getValue(TIP_DIRECTION) == direction;
+	      };
+	      return findBlockVertical(p_154067_, p_154068_, direction.getOpposite().getAxisDirection(), bipredicate, (p_154245_) -> {
+	         return !p_154245_.is(LirothBlocks.POINTED_PETRIFIED_CRYSTAL);
+	      }, p_154070_);
+	   }
+
+	   private static boolean isValidPointedDripstonePlacement(LevelReader p_154222_, BlockPos p_154223_, Direction p_154224_) {
+	      BlockPos blockpos = p_154223_.relative(p_154224_.getOpposite());
+	      BlockState blockstate = p_154222_.getBlockState(blockpos);
+	      return blockstate.isFaceSturdy(p_154222_, blockpos, p_154224_) || isPointedDripstoneWithDirection(blockstate, p_154224_);
+	   }
+
+	   private static boolean isTip(BlockState p_154154_, boolean p_154155_) {
+	      if (!p_154154_.is(LirothBlocks.POINTED_PETRIFIED_CRYSTAL)) {
+	         return false;
+	      } else {
+	         DripstoneThickness dripstonethickness = p_154154_.getValue(THICKNESS);
+	         return dripstonethickness == DripstoneThickness.TIP || p_154155_ && dripstonethickness == DripstoneThickness.TIP_MERGE;
+	      }
+	   }
+
+	   private static boolean isUnmergedTipWithDirection(BlockState p_154144_, Direction p_154145_) {
+	      return isTip(p_154144_, false) && p_154144_.getValue(TIP_DIRECTION) == p_154145_;
+	   }
+
+	   private static boolean isStalactite(BlockState p_154241_) {
+	      return isPointedDripstoneWithDirection(p_154241_, Direction.DOWN);
+	   }
+
+	   private static boolean isStalagmite(BlockState p_154243_) {
+	      return isPointedDripstoneWithDirection(p_154243_, Direction.UP);
+	   }
+
+	   private static boolean isStalactiteStartPos(BlockState p_154204_, LevelReader p_154205_, BlockPos p_154206_) {
+	      return isStalactite(p_154204_) && !p_154205_.getBlockState(p_154206_.above()).is(LirothBlocks.POINTED_PETRIFIED_CRYSTAL);
+	   }
+
+	   public boolean isPathfindable(BlockState p_154112_, BlockGetter p_154113_, BlockPos p_154114_, PathComputationType p_154115_) {
+	      return false;
+	   }
+
+	   private static boolean isPointedDripstoneWithDirection(BlockState p_154208_, Direction p_154209_) {
+	      return p_154208_.is(LirothBlocks.POINTED_PETRIFIED_CRYSTAL) && p_154208_.getValue(TIP_DIRECTION) == p_154209_;
+	   }
+
+	   @Nullable
+	   public static BlockPos findStalactiteTipAboveCauldron(Level p_154056_, BlockPos p_154057_) {
+	      BiPredicate<BlockPos, BlockState> bipredicate = (p_202030_, p_202031_) -> {
+	         return canDripThrough(p_154056_, p_202030_, p_202031_);
+	      };
+	      return findBlockVertical(p_154056_, p_154057_, Direction.UP.getAxisDirection(), bipredicate, PointedPetrifiedCrystal::canDrip, 11).orElse((BlockPos)null);
+	   }
+
+	   public static Fluid getCauldronFillFluidType(ServerLevel p_221850_, BlockPos p_221851_) {
+	      return getFluidAboveStalactite(p_221850_, p_221851_, p_221850_.getBlockState(p_221851_)).map((p_221858_) -> {
+	         return p_221858_.fluid;
+	      }).filter(PointedPetrifiedCrystal::canFillCauldron).orElse(Fluids.EMPTY);
+	   }
+
+	   private static Optional<PointedPetrifiedCrystal.FluidInfo> getFluidAboveStalactite(Level p_154182_, BlockPos p_154183_, BlockState p_154184_) {
+	      return !isStalactite(p_154184_) ? Optional.empty() : findRootBlock(p_154182_, p_154183_, p_154184_, 11).map((p_221876_) -> {
+	         BlockPos blockpos = p_221876_.above();
+	         BlockState blockstate = p_154182_.getBlockState(blockpos);
+	         Fluid fluid;
+	         if (blockstate.is(Blocks.MUD) && !p_154182_.dimensionType().ultraWarm()) {
+	            fluid = Fluids.WATER;
+	         } else {
+	            fluid = p_154182_.getFluidState(blockpos).getType();
+	         }
+
+	         return new PointedPetrifiedCrystal.FluidInfo(blockpos, fluid, blockstate);
+	      });
+	   }
+
+	   private static boolean canFillCauldron(Fluid p_154159_) {
+	      return p_154159_ == Fluids.LAVA || p_154159_ == Fluids.WATER;
+	   }
+
+	   private static boolean canGrow(BlockState p_154141_, BlockState p_154142_) {
+	      return p_154141_.is(LirothBlocks.JALSPHIRE_CRYSTAL_BLOCK) && p_154142_.is(Blocks.WATER) && p_154142_.getFluidState().isSource();
+	   }
+
+	   private static Fluid getDripFluid(Level p_154053_, Fluid p_154054_) {
+	      if (p_154054_.isSame(Fluids.EMPTY)) {
+	         return p_154053_.dimensionType().ultraWarm() ? Fluids.LAVA : Fluids.WATER;
+	      } else {
+	         return p_154054_;
+	      }
+	   }
+
+	   private static Optional<BlockPos> findBlockVertical(LevelAccessor p_202007_, BlockPos p_202008_, Direction.AxisDirection p_202009_, BiPredicate<BlockPos, BlockState> p_202010_, Predicate<BlockState> p_202011_, int p_202012_) {
+	      Direction direction = Direction.get(p_202009_, Direction.Axis.Y);
+	      BlockPos.MutableBlockPos blockpos$mutableblockpos = p_202008_.mutable();
+
+	      for(int i = 1; i < p_202012_; ++i) {
+	         blockpos$mutableblockpos.move(direction);
+	         BlockState blockstate = p_202007_.getBlockState(blockpos$mutableblockpos);
+	         if (p_202011_.test(blockstate)) {
+	            return Optional.of(blockpos$mutableblockpos.immutable());
+	         }
+
+	         if (p_202007_.isOutsideBuildHeight(blockpos$mutableblockpos.getY()) || !p_202010_.test(blockpos$mutableblockpos, blockstate)) {
+	            return Optional.empty();
+	         }
+	      }
+
+	      return Optional.empty();
+	   }
+
+	   private static boolean canDripThrough(BlockGetter p_202018_, BlockPos p_202019_, BlockState p_202020_) {
+	      if (p_202020_.isAir()) {
+	         return true;
+	      } else if (p_202020_.isSolidRender(p_202018_, p_202019_)) {
+	         return false;
+	      } else if (!p_202020_.getFluidState().isEmpty()) {
+	         return false;
+	      } else {
+	         VoxelShape voxelshape = p_202020_.getCollisionShape(p_202018_, p_202019_);
+	         return !Shapes.joinIsNotEmpty(REQUIRED_SPACE_TO_DRIP_THROUGH_NON_SOLID_BLOCK, voxelshape, BooleanOp.AND);
+	      }
+	   }
+
+	   static record FluidInfo(BlockPos pos, Fluid fluid, BlockState sourceState) {
+	   }
+	}

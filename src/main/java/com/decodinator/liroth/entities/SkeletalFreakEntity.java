@@ -1,65 +1,66 @@
 package com.decodinator.liroth.entities;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothEntities;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 
-public class SkeletalFreakEntity extends SkeletonEntity {
+public class SkeletalFreakEntity extends Skeleton {
 
-	public SkeletalFreakEntity(EntityType<? extends SkeletonEntity> entityType, World world) {
+	public SkeletalFreakEntity(EntityType<? extends Skeleton> entityType, Level world) {
 		super(entityType, world);
 	}
 
-    public static DefaultAttributeContainer.Builder createSkeletalFreakAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
+    public static AttributeSupplier.Builder createSkeletalFreakAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.25);
     }
 	
     @Override
-    public void attack(LivingEntity target, float pullProgress) {
-        ItemStack itemStack = this.getArrowType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
-        PersistentProjectileEntity persistentProjectileEntity = this.createBeamProjectile(itemStack, pullProgress);
+    public void performRangedAttack(LivingEntity target, float pullProgress) {
+        ItemStack itemStack = this.getProjectile(this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, Items.BOW)));
+        AbstractArrow persistentProjectileEntity = this.createBeamProjectile(itemStack, pullProgress);
         double d = target.getX() - this.getX();
-        double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
+        double e = target.getY(0.3333333333333333) - persistentProjectileEntity.getY();
         double f = target.getZ() - this.getZ();
         double g = Math.sqrt(d * d + f * f);
-        persistentProjectileEntity.setVelocity(d, e + g * (double)0.2f, f, 1.6f, 14 - this.world.getDifficulty().getId() * 4);
-        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0f, 1.0f / (this.getRandom().nextFloat() * 0.4f + 0.8f));
-        this.world.spawnEntity(persistentProjectileEntity);
+        persistentProjectileEntity.shoot(d, e + g * (double)0.2f, f, 1.6f, 14 - this.level.getDifficulty().getId() * 4);
+        this.playSound(SoundEvents.SKELETON_SHOOT, 1.0f, 1.0f / (this.getRandom().nextFloat() * 0.4f + 0.8f));
+        this.level.addFreshEntity(persistentProjectileEntity);
     }
 
-    protected PersistentProjectileEntity createBeamProjectile(ItemStack arrow, float damageModifier) {
-        return Liroth.createBeamProjectile(this, arrow, damageModifier);
+    protected AbstractArrow createBeamProjectile(ItemStack arrow, float damageModifier) {
+        return LirothEntities.createBeamProjectile(this, arrow, damageModifier);
     }
     
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_STRAY_AMBIENT;
+        return SoundEvents.STRAY_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_STRAY_HURT;
+        return SoundEvents.STRAY_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_STRAY_DEATH;
+        return SoundEvents.STRAY_DEATH;
     }
 
     protected SoundEvent getStepSound() {
-        return SoundEvents.ENTITY_WITHER_SKELETON_STEP;
+        return SoundEvents.WITHER_SKELETON_STEP;
     }
 }

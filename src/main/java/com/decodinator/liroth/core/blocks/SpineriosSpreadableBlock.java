@@ -1,58 +1,56 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.util.math.random.Random;
-
 import com.decodinator.liroth.core.LirothBlocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SnowBlock;
-import net.minecraft.block.SnowyBlock;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.chunk.light.ChunkLightProvider;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.SnowyDirtBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.lighting.LayerLightEngine;
 
 public abstract class SpineriosSpreadableBlock
-extends SnowyBlock {
-    protected SpineriosSpreadableBlock(AbstractBlock.Settings settings) {
-        super(settings);
-    }
+extends SnowyDirtBlock {
+	   protected SpineriosSpreadableBlock(BlockBehaviour.Properties p_56817_) {
+	      super(p_56817_);
+	   }
 
-    private static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        BlockState blockState = world.getBlockState(blockPos);
-        if (blockState.isOf(Blocks.SNOW) && blockState.get(SnowBlock.LAYERS) == 1) {
-            return true;
-        }
-        if (blockState.getFluidState().getLevel() == 8) {
-            return false;
-        }
-        int i = ChunkLightProvider.getRealisticOpacity(world, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
-        return i < world.getMaxLightLevel();
-    }
+	   private static boolean canBeGrass(BlockState p_56824_, LevelReader p_56825_, BlockPos p_56826_) {
+	      BlockPos blockpos = p_56826_.above();
+	      BlockState blockstate = p_56825_.getBlockState(blockpos);
+	      if (blockstate.is(Blocks.SNOW) && blockstate.getValue(SnowLayerBlock.LAYERS) == 1) {
+	         return true;
+	      } else if (blockstate.getFluidState().getAmount() == 8) {
+	         return false;
+	      } else {
+	         int i = LayerLightEngine.getLightBlockInto(p_56825_, p_56824_, p_56826_, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(p_56825_, blockpos));
+	         return i < p_56825_.getMaxLightLevel();
+	      }
+	   }
 
-    private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        return SpineriosSpreadableBlock.canSurvive(state, world, pos) && !world.getFluidState(blockPos).isIn(FluidTags.WATER);
-    }
+	   private static boolean canPropagate(BlockState p_56828_, LevelReader p_56829_, BlockPos p_56830_) {
+	      BlockPos blockpos = p_56830_.above();
+	      return canBeGrass(p_56828_, p_56829_, p_56830_) && !p_56829_.getFluidState(blockpos).is(FluidTags.WATER);
+	   }
 
-    @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!SpineriosSpreadableBlock.canSurvive(state, world, pos)) {
-            world.setBlockState(pos, LirothBlocks.SPINERIOS_DIRT.getDefaultState());
-            return;
-        }
-        if (world.getLightLevel(pos.up()) >= 9) {
-            BlockState blockState = this.getDefaultState();
-            for (int i = 0; i < 4; ++i) {
-                BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                if (!world.getBlockState(blockPos).isOf(LirothBlocks.SPINERIOS_DIRT) || !SpineriosSpreadableBlock.canSpread(blockState, world, blockPos)) continue;
-                world.setBlockState(blockPos, (BlockState)blockState.with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
-            }
-        }
-    }
-}
+	   public void randomTick(BlockState p_222508_, ServerLevel p_222509_, BlockPos p_222510_, RandomSource p_222511_) {
+	        if (!canBeGrass(p_222508_, p_222509_, p_222510_)) {
+	        	p_222509_.setBlockAndUpdate(p_222510_, LirothBlocks.SPINERIOS_DIRT.defaultBlockState());
+	            return;
+	        }
+	        if (p_222509_.getMaxLocalRawBrightness(p_222510_.above()) >= 9) {
+	            BlockState blockState2 = this.defaultBlockState();
+	            for (int i = 0; i < 4; ++i) {
+	                BlockPos blockPos2 = p_222510_.offset(p_222511_.nextInt(3) - 1, p_222511_.nextInt(5) - 3, p_222511_.nextInt(3) - 1);
+	                if (!p_222509_.getBlockState(blockPos2).is(Blocks.DIRT) || canPropagate(blockState2, p_222509_, blockPos2)) continue;
+	                p_222509_.setBlockAndUpdate(blockPos2, (BlockState)blockState2.setValue(SNOWY, p_222509_.getBlockState(blockPos2.above()).is(Blocks.SNOW)));
+	            }
+	        }
+	    }
+	}

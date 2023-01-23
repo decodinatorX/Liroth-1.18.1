@@ -1,77 +1,63 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.util.math.random.Random;
-
 import com.decodinator.liroth.core.LirothBlocks;
-import com.decodinator.liroth.core.LirothItems;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractPlantBlock;
-import net.minecraft.block.AbstractPlantStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CaveVines;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.CaveVines;
+import net.minecraft.world.level.block.GrowingPlantBodyBlock;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.BlockHitResult;
 
-public class PetrifiedCaveVinesBodyBlock
-extends AbstractPlantBlock
-implements Fertilizable,
-CaveVines {
-    public PetrifiedCaveVinesBodyBlock(AbstractBlock.Settings settings) {
-        super(settings, Direction.DOWN, SHAPE, false);
-        this.setDefaultState((BlockState)((BlockState)this.stateManager.getDefaultState()).with(BERRIES, false));
-    }
+public class PetrifiedCaveVinesBodyBlock  extends GrowingPlantBodyBlock implements BonemealableBlock, CaveVines {
+	   public PetrifiedCaveVinesBodyBlock(BlockBehaviour.Properties p_153000_) {
+		      super(p_153000_, Direction.DOWN, SHAPE, false);
+		      this.registerDefaultState(this.stateDefinition.any().setValue(BERRIES, Boolean.valueOf(false)));
+		   }
 
-    @Override
-    protected AbstractPlantStemBlock getStem() {
-        return (AbstractPlantStemBlock)LirothBlocks.PETRIFIED_VINES;
-    }
+		   protected GrowingPlantHeadBlock getHeadBlock() {
+		      return (GrowingPlantHeadBlock)LirothBlocks.PETRIFIED_VINES;
+		   }
 
-    @Override
-    protected BlockState copyState(BlockState from, BlockState to) {
-        return (BlockState)to.with(BERRIES, from.get(BERRIES));
-    }
+		   protected BlockState updateHeadAfterConvertedFromBody(BlockState p_153028_, BlockState p_153029_) {
+		      return p_153029_.setValue(BERRIES, p_153028_.getValue(BERRIES));
+		   }
 
-    @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(LirothItems.LIROTH_BERRY);
-    }
+		   public ItemStack getCloneItemStack(BlockGetter p_153007_, BlockPos p_153008_, BlockState p_153009_) {
+		      return new ItemStack(Items.GLOW_BERRIES);
+		   }
 
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        return CaveVines.pickBerries(state, world, pos);
-    }
+		   public InteractionResult use(BlockState p_153021_, Level p_153022_, BlockPos p_153023_, Player p_153024_, InteractionHand p_153025_, BlockHitResult p_153026_) {
+		      return CaveVines.use(p_153021_, p_153022_, p_153023_);
+		   }
 
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(BERRIES);
-    }
+		   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_153031_) {
+		      p_153031_.add(BERRIES);
+		   }
 
-    @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return state.get(BERRIES) == false;
-    }
+		   public boolean isValidBonemealTarget(BlockGetter p_153011_, BlockPos p_153012_, BlockState p_153013_, boolean p_153014_) {
+		      return !p_153013_.getValue(BERRIES);
+		   }
 
-    @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-        return true;
-    }
+		   public boolean isBonemealSuccess(Level p_220943_, RandomSource p_220944_, BlockPos p_220945_, BlockState p_220946_) {
+		      return true;
+		   }
 
-    @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        world.setBlockState(pos, (BlockState)state.with(BERRIES, true), Block.NOTIFY_LISTENERS);
-    }
-}
+		   public void performBonemeal(ServerLevel p_220938_, RandomSource p_220939_, BlockPos p_220940_, BlockState p_220941_) {
+		      p_220938_.setBlock(p_220940_, p_220941_.setValue(BERRIES, Boolean.valueOf(true)), 2);
+		   }
+		}

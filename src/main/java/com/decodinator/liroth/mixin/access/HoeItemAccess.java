@@ -7,12 +7,12 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import com.mojang.datafixers.util.Pair;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -22,18 +22,18 @@ import java.util.function.Predicate;
 public interface HoeItemAccess {
 
     @Invoker("<init>")
-    static HoeItem create(ToolMaterial tier, int i, float f, Item.Settings properties) {
+    static HoeItem create(Tier tier, int i, float f, Properties properties) {
         throw new Error("Mixin did not apply");
     }
 
-    @Accessor("TILLING_ACTIONS")
-    static Map<Block, Pair<Predicate<ItemUsageContext>, Consumer<ItemUsageContext>>> getTillables() {
+    @Accessor("TILLABLES")
+    static Map<Block, Pair<Predicate<UseOnContext>, Consumer<UseOnContext>>> getTillables() {
         throw new Error("Mixin did not apply");
     }
 
-    @Accessor("TILLING_ACTIONS")
+    @Accessor("TILLABLES")
     @Mutable
-    static void setTillables(Map<Block, Pair<Predicate<ItemUsageContext>, Consumer<ItemUsageContext>>> tillables) {
+    static void setTillables(Map<Block, Pair<Predicate<UseOnContext>, Consumer<UseOnContext>>> tillables) {
         throw new Error("Mixin did not apply");
     }
 }

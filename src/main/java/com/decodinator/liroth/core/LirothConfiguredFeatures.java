@@ -1,65 +1,52 @@
 package com.decodinator.liroth.core;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.OptionalInt;
 
 import com.google.common.collect.ImmutableList;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PropaguleBlock;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryEntryList;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.feature.size.ThreeLayersFeatureSize;
-import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
-import net.minecraft.world.gen.foliage.AcaciaFoliagePlacer;
-import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
-import net.minecraft.world.gen.foliage.DarkOakFoliagePlacer;
-import net.minecraft.world.gen.foliage.JungleFoliagePlacer;
-import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
-import net.minecraft.world.gen.foliage.RandomSpreadFoliagePlacer;
-import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
-import net.minecraft.world.gen.root.AboveRootPlacement;
-import net.minecraft.world.gen.root.MangroveRootPlacement;
-import net.minecraft.world.gen.root.MangroveRootPlacer;
-import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import net.minecraft.world.gen.stateprovider.RandomizedIntBlockStateProvider;
-import net.minecraft.world.gen.treedecorator.AttachedToLeavesTreeDecorator;
-import net.minecraft.world.gen.treedecorator.LeavesVineTreeDecorator;
-import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator;
-import net.minecraft.world.gen.trunk.DarkOakTrunkPlacer;
-import net.minecraft.world.gen.trunk.ForkingTrunkPlacer;
-import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
-import net.minecraft.world.gen.trunk.MegaJungleTrunkPlacer;
-import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
-import net.minecraft.world.gen.trunk.UpwardsBranchingTrunkPlacer;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.MegaJungleTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
-public class LirothConfiguredFeatures extends PlacedFeatures {
+public class LirothConfiguredFeatures {  
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> LIROTH = FeatureUtils.register("liroth", Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.LIROTH_LOG), new FancyTrunkPlacer(3, 11, 0), BlockStateProvider.simple(LirothBlocks.LIROTH_LEAVES), new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().build());
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> SPICED = FeatureUtils.register("spiced",Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.SPICED_LOG), new ForkingTrunkPlacer(5, 2, 2), BlockStateProvider.simple(LirothBlocks.SPICED_LEAVES), new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2))).ignoreVines().build());
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> TALLPIER = FeatureUtils.register("tallpier", Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.TALLPIER_LOG), new MegaJungleTrunkPlacer(10, 2, 19), BlockStateProvider.simple(LirothBlocks.TALLPIER_LEAVES), new MegaJungleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2), new TwoLayersFeatureSize(1, 1, 2))).decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25F))).build());
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> DAMNATION = FeatureUtils.register("damnation", Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.DAMNATION_LOG), new DarkOakTrunkPlacer(6, 2, 1), BlockStateProvider.simple(LirothBlocks.DAMNATION_LEAVES), new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)), new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))).ignoreVines().build());
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> JAPZ = FeatureUtils.register("japz", Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.JAPZ_LOG), new StraightTrunkPlacer(5, 2, 1), BlockStateProvider.simple(LirothBlocks.JAPZ_LEAVES), new SpruceFoliagePlacer(UniformInt.of(2, 3), UniformInt.of(0, 2), UniformInt.of(1, 2)), new TwoLayersFeatureSize(2, 0, 2))).ignoreVines().build());
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> KOOLAW = FeatureUtils.register("koolaw", Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.KOOLAW_LOG), new StraightTrunkPlacer(4, 2, 0), BlockStateProvider.simple(LirothBlocks.KOOLAW_LEAVES), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1)).build()));
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> PETRIFIED = FeatureUtils.register("petrified", Feature.TREE, (new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(LirothBlocks.PETRIFIED_DAMNATION_LOG), new ForkingTrunkPlacer(5, 2, 2), BlockStateProvider.simple(LirothBlocks.DAMNATION_LEAVES), new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 2))).ignoreVines().build());
 	
-	   	public static final RegistryEntry<? extends ConfiguredFeature<?, ?>> LIROTH = ConfiguredFeatures.register("liroth", Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(LirothBlocks.LIROTH_LOG), new LargeOakTrunkPlacer(3, 11, 0), BlockStateProvider.of(LirothBlocks.LIROTH_LEAVES), new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4))).ignoreVines().build());
-	    
-	    public static final RegistryEntry<? extends ConfiguredFeature<?, ?>> SPICED = ConfiguredFeatures.register("spiced", Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(LirothBlocks.SPICED_LOG), new ForkingTrunkPlacer(5, 2, 2), BlockStateProvider.of(LirothBlocks.SPICED_LEAVES), new AcaciaFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0)), new TwoLayersFeatureSize(1, 0, 2)).ignoreVines().build());
-	    public static final RegistryEntry<? extends ConfiguredFeature<?, ?>> TALLPIER = ConfiguredFeatures.register("tallpier", Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(LirothBlocks.TALLPIER_LOG), new MegaJungleTrunkPlacer(10, 2, 19), BlockStateProvider.of(LirothBlocks.TALLPIER_LEAVES), new JungleFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 2), new TwoLayersFeatureSize(1, 1, 2)).decorators(ImmutableList.of(TrunkVineTreeDecorator.INSTANCE, new LeavesVineTreeDecorator(0.25f))).build());
+    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> OVERWORLD_LIROTH_ORE = FeatureUtils.register("liroth_ore", Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), LirothBlocks.LIROTH_ORE.defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), LirothBlocks.DEEPSLATE_LIROTH_ORE.defaultBlockState())), 4, 0.5F));
+    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> NETHER_LIROTH_ORE = FeatureUtils.register("nether_liroth_ore", Feature.ORE, new OreConfiguration(new BlockMatchTest(Blocks.NETHERRACK), LirothBlocks.NETHER_LIROTH_GEM_ORE.defaultBlockState(), 4));
+    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> END_LIROTH_ORE = FeatureUtils.register("end_liroth_ore", Feature.ORE, new OreConfiguration(new BlockMatchTest(Blocks.END_STONE), LirothBlocks.END_LIROTH_GEM_ORE.defaultBlockState(), 6));
+    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> TOURMALINE_ORE = FeatureUtils.register("tourmaline_ore", Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), LirothBlocks.TOURMALINE_ORE.defaultBlockState()), OreConfiguration.target(new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), LirothBlocks.DEEPSLATE_TOURMALINE_ORE.defaultBlockState())), 4, 0.5F));
 
-	    public static final RegistryEntry<? extends ConfiguredFeature<?, ?>> DAMNATION = ConfiguredFeatures.register("damnation", Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(LirothBlocks.DAMNATION_LOG), new DarkOakTrunkPlacer(6, 2, 1), BlockStateProvider.of(LirothBlocks.DAMNATION_LEAVES), new DarkOakFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0)), new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty())).ignoreVines().build());
-
-	    public static final RegistryEntry<? extends ConfiguredFeature<?, ?>> JAPZ = ConfiguredFeatures.register("japz", Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(LirothBlocks.JAPZ_LOG), new StraightTrunkPlacer(5, 2, 1), BlockStateProvider.of(LirothBlocks.JAPZ_LEAVES), new SpruceFoliagePlacer(UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 2), UniformIntProvider.create(1, 2)), new TwoLayersFeatureSize(2, 0, 2)).ignoreVines().build());
-
-	    public static final RegistryEntry<? extends ConfiguredFeature<?, ?>> KOOLAW = ConfiguredFeatures.register("koolaw", Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(LirothBlocks.KOOLAW_LOG), new StraightTrunkPlacer(5, 2, 0), BlockStateProvider.of(LirothBlocks.KOOLAW_LEAVES), new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1)).build());
-
-	    public static final RegistryEntry<? extends ConfiguredFeature<?, ?>> PETRIFIED = ConfiguredFeatures.register("petrified", Feature.TREE, new TreeFeatureConfig.Builder(BlockStateProvider.of(LirothBlocks.PETRIFIED_DAMNATION_LOG), new UpwardsBranchingTrunkPlacer(2, 1, 4, UniformIntProvider.create(1, 4), 0.5f, UniformIntProvider.create(0, 1), Registry.BLOCK.getOrCreateEntryList(BlockTags.MANGROVE_LOGS_CAN_GROW_THROUGH)), BlockStateProvider.of(LirothBlocks.DAMNATION_LEAVES), new RandomSpreadFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), ConstantIntProvider.create(2), 70), Optional.of(new MangroveRootPlacer(UniformIntProvider.create(1, 3), BlockStateProvider.of(LirothBlocks.PETRIFIED_DAMNATION_LOG), Optional.of(new AboveRootPlacement(BlockStateProvider.of(LirothBlocks.PETRIFIED_MOSS_CARPET), 0.5f)), new MangroveRootPlacement(Registry.BLOCK.getOrCreateEntryList(BlockTags.MANGROVE_ROOTS_CAN_GROW_THROUGH), RegistryEntryList.of(Block::getRegistryEntry, Blocks.MUD, Blocks.MUDDY_MANGROVE_ROOTS), BlockStateProvider.of(Blocks.MUDDY_MANGROVE_ROOTS), 8, 15, 0.2f))), new TwoLayersFeatureSize(2, 0, 2)).decorators(List.of(new LeavesVineTreeDecorator(0.125f), new AttachedToLeavesTreeDecorator(0.14f, 1, 0, new RandomizedIntBlockStateProvider((BlockStateProvider)BlockStateProvider.of((BlockState)Blocks.MANGROVE_PROPAGULE.getDefaultState().with(PropaguleBlock.HANGING, true)), PropaguleBlock.AGE, (IntProvider)UniformIntProvider.create(0, 4)), 2, List.of(Direction.DOWN)))).ignoreVines().build());   
+    public static void init() {}
 }

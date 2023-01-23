@@ -1,31 +1,25 @@
 package com.decodinator.liroth.entities.renderers;
 
-import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.LirothClient;
+import com.decodinator.liroth.core.LirothModelLayers;
 import com.decodinator.liroth.entities.ForsakenCorpseEntity;
-import com.decodinator.liroth.entities.FungalFiendEntity;
-import com.decodinator.liroth.entities.renderers.FungalFiendModel;
 
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.feature.DrownedOverlayFeatureRenderer;
-import net.minecraft.client.render.entity.feature.EndermanEyesFeatureRenderer;
-import net.minecraft.client.render.entity.model.CreeperEntityModel;
-import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.mob.DrownedEntity;
-import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.util.Identifier;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-public class ForsakenCorpseEntityRenderer extends MobEntityRenderer<ForsakenCorpseEntity, ForsakenCorpseModel<ForsakenCorpseEntity>> {
+@Environment(value=EnvType.CLIENT)
+public class ForsakenCorpseEntityRenderer extends HumanoidMobRenderer<ForsakenCorpseEntity, ForsakenCorpseModel<ForsakenCorpseEntity>> {
 
-    public ForsakenCorpseEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new ForsakenCorpseModel(context.getPart(LirothClient.MODEL_FORSAKEN_CORPSE_LAYER)), 0.5f);
-        this.addFeature(new ForsakenCorpseFaceFeatureRenderer<ForsakenCorpseEntity>(this));
+    public ForsakenCorpseEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new ForsakenCorpseModel<ForsakenCorpseEntity>(context.bakeLayer(LirothModelLayers.FORSAKEN_CORPSE)), 0.5f);
+        this.addLayer(new ForsakenCorpseFaceFeatureRenderer<ForsakenCorpseEntity>(this));
     }
  
     @Override
-    public Identifier getTexture(ForsakenCorpseEntity entity) {
-        return new Identifier("liroth", "textures/entity/forsaken_corpse/forsaken_corpse.png");
+    public ResourceLocation getTextureLocation(ForsakenCorpseEntity entity) {
+        return new ResourceLocation("liroth", "textures/entity/forsaken_corpse/forsaken_corpse.png");
         
     }
 }

@@ -2,20 +2,19 @@ package com.decodinator.liroth.core.items;
 
 import com.decodinator.liroth.entities.projectiles.BeamLaserProjectileEntity;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class BeamItem extends Item {
 
-	public BeamItem(Settings settings) {
+	public BeamItem(Properties settings) {
 		super(settings);
 	}
 	
-    public PersistentProjectileEntity createBeam(World world, ItemStack stack, LivingEntity shooter) {
+    public AbstractArrow createBeam(Level world, ItemStack stack, LivingEntity shooter) {
         BeamLaserProjectileEntity beamEntity = new BeamLaserProjectileEntity(world, shooter);
         beamEntity.initFromStack(stack);
         return beamEntity;

@@ -1,16 +1,16 @@
 package com.decodinator.liroth.core.world.trees;
 
-import net.minecraft.util.math.random.Random;
 import com.decodinator.liroth.core.LirothConfiguredFeatures;
 
-import net.minecraft.block.sapling.SaplingGenerator;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
-public class TallpierTree 
-extends SaplingGenerator {
-    @Override
-    protected RegistryEntry<? extends ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bees) {
-        return LirothConfiguredFeatures.TALLPIER;
-    }
+public class TallpierTree extends AbstractTreeGrower {
+	protected Holder<ConfiguredFeature<TreeConfiguration, ?>> getConfiguredFeature(RandomSource p_222938_, boolean p_222939_) {
+		   return LirothConfiguredFeatures.TALLPIER;	   
+	   }
 }

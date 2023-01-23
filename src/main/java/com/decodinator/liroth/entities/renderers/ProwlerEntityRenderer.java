@@ -1,32 +1,26 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.LirothClient;
-import com.decodinator.liroth.entities.FungalFiendEntity;
+import com.decodinator.liroth.core.LirothModelLayers;
 import com.decodinator.liroth.entities.ProwlerEntity;
-import com.decodinator.liroth.entities.WarpEntity;
-import com.decodinator.liroth.entities.renderers.FungalFiendModel;
 
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.feature.DrownedOverlayFeatureRenderer;
-import net.minecraft.client.render.entity.feature.EndermanEyesFeatureRenderer;
-import net.minecraft.client.render.entity.model.CreeperEntityModel;
-import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.mob.DrownedEntity;
-import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.util.Identifier;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-public class ProwlerEntityRenderer extends MobEntityRenderer<ProwlerEntity, ProwlerModel<ProwlerEntity>> {
+@Environment(value=EnvType.CLIENT)
+public class ProwlerEntityRenderer extends MobRenderer<ProwlerEntity, ProwlerModel<ProwlerEntity>> {
 
-    public ProwlerEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new ProwlerModel(context.getPart(LirothClient.MODEL_PROWLER_LAYER)), 0.5f);
-        this.addFeature(new ProwlerGlowFeatureRenderer<ProwlerEntity>(this));
+    public ProwlerEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new ProwlerModel(context.bakeLayer(LirothModelLayers.PROWLER)), 0.5f);
+        this.addLayer(new ProwlerGlowFeatureRenderer<ProwlerEntity>(this));
     }
  
     @Override
-    public Identifier getTexture(ProwlerEntity entity) {
-        return new Identifier("liroth", "textures/entity/prowler/prowler.png");
+    public ResourceLocation getTextureLocation(ProwlerEntity entity) {
+        return new ResourceLocation("liroth", "textures/entity/prowler/prowler.png");
         
     }
 }

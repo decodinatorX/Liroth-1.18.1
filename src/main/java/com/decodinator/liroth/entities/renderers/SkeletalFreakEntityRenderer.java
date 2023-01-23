@@ -1,32 +1,26 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.LirothClient;
-import com.decodinator.liroth.entities.ForsakenCorpseEntity;
-import com.decodinator.liroth.entities.FungalFiendEntity;
+import com.decodinator.liroth.core.LirothModelLayers;
 import com.decodinator.liroth.entities.SkeletalFreakEntity;
-import com.decodinator.liroth.entities.renderers.FungalFiendModel;
 
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.feature.DrownedOverlayFeatureRenderer;
-import net.minecraft.client.render.entity.feature.EndermanEyesFeatureRenderer;
-import net.minecraft.client.render.entity.model.CreeperEntityModel;
-import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.mob.DrownedEntity;
-import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.util.Identifier;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-public class SkeletalFreakEntityRenderer extends MobEntityRenderer<SkeletalFreakEntity, SkeletalFreakModel<SkeletalFreakEntity>> {
+@Environment(value=EnvType.CLIENT)
+public class SkeletalFreakEntityRenderer extends MobRenderer<SkeletalFreakEntity, SkeletalFreakModel<SkeletalFreakEntity>> {
 
-    public SkeletalFreakEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new SkeletalFreakModel(context.getPart(LirothClient.MODEL_SKELETAL_FREAK_LAYER)), 0.5f);
-        this.addFeature(new SkeletalFreakFaceFeatureRenderer<SkeletalFreakEntity>(this));
+    public SkeletalFreakEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new SkeletalFreakModel(context.bakeLayer(LirothModelLayers.SKELETAL_FREAK)), 0.5f);
+        this.addLayer(new SkeletalFreakFaceFeatureRenderer<SkeletalFreakEntity>(this));
     }
  
     @Override
-    public Identifier getTexture(SkeletalFreakEntity entity) {
-        return new Identifier("liroth", "textures/entity/skeletal_freak/skeletal_freak.png");
+    public ResourceLocation getTextureLocation(SkeletalFreakEntity entity) {
+        return new ResourceLocation("liroth", "textures/entity/skeletal_freak/skeletal_freak.png");
         
     }
 }

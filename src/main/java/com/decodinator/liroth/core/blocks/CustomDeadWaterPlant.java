@@ -1,25 +1,22 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CustomDeadWaterPlant extends CustomWaterPlantParentBlock {
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    private static final VoxelShape SHAPE = Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 4.0, 14.0);
+	   protected static final float AABB_OFFSET = 6.0F;
+	   protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 15.0D, 14.0D);
 
-    public CustomDeadWaterPlant(AbstractBlock.Settings settings) {
-        super(settings);
-    }
+	   public CustomDeadWaterPlant(BlockBehaviour.Properties p_49151_) {
+	      super(p_49151_);
+	   }
 
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
-    }
-}
+	   public VoxelShape getShape(BlockState p_49153_, BlockGetter p_49154_, BlockPos p_49155_, CollisionContext p_49156_) {
+	      return SHAPE;
+	   }
+	}

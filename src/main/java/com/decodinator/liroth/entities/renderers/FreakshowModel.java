@@ -1,19 +1,19 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.entities.FreakshowEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 
 public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {	
     public boolean carryingBlock;
@@ -36,74 +36,74 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
 		this.body = root.getChild("body");
 	}
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData meshdefinition = new ModelData();
-		ModelPartData partdefinition = meshdefinition.getRoot();
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		ModelPartData leftLeg = partdefinition.addChild("leftLeg", ModelPartBuilder.create().uv(0, 57).cuboid(-1.0F, 25.0F, -1.0F, 2.0F, 5.0F, 2.0F)
-		.uv(0, 34).cuboid(-1.0F, 5.0F, 0.0F, 2.0F, 20.0F, 2.0F)
-		.uv(0, 34).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F), ModelTransform.pivot(-3.0F, -6.0F, 0.0F));
+		partdefinition.addOrReplaceChild("leftLeg", CubeListBuilder.create().texOffs(0, 57).addBox(-1.0F, 25.0F, -1.0F, 2.0F, 5.0F, 2.0F)
+		.texOffs(0, 34).addBox(-1.0F, 5.0F, 0.0F, 2.0F, 20.0F, 2.0F)
+		.texOffs(0, 34).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F), PartPose.offset(-3.0F, -6.0F, 0.0F));
 
-		ModelPartData rightLeg = partdefinition.addChild("rightLeg", ModelPartBuilder.create().uv(0, 57).cuboid(-1.0F, 25.0F, -1.0F, 2.0F, 5.0F, 2.0F)
-		.uv(0, 34).cuboid(-1.0F, 5.0F, 0.0F, 2.0F, 20.0F, 2.0F)
-		.uv(0, 34).cuboid(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F), ModelTransform.pivot(3.0F, -6.0F, 0.0F));
+		partdefinition.addOrReplaceChild("rightLeg", CubeListBuilder.create().texOffs(0, 57).addBox(-1.0F, 25.0F, -1.0F, 2.0F, 5.0F, 2.0F)
+		.texOffs(0, 34).addBox(-1.0F, 5.0F, 0.0F, 2.0F, 20.0F, 2.0F)
+		.texOffs(0, 34).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F), PartPose.offset(3.0F, -6.0F, 0.0F));
 
-		ModelPartData head = partdefinition.addChild("head", ModelPartBuilder.create().uv(128, 147).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F)
-		.uv(32, 12).cuboid(4.0F, -3.0F, 0.0F, 4.0F, 1.0F, 1.0F)
-		.uv(32, 12).cuboid(4.0F, -5.0F, 0.0F, 4.0F, 1.0F, 1.0F)
-		.uv(40, 0).cuboid(4.0F, -4.0F, 0.0F, 5.0F, 1.0F, 1.0F)
-		.uv(0, 0).cuboid(3.0F, -16.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 4).cuboid(5.0F, -16.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 18).cuboid(5.0F, -10.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 22).cuboid(6.0F, -14.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(32, 8).cuboid(5.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(52, 28).cuboid(2.0F, -10.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(24, 34).cuboid(3.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(114, 27).cuboid(-4.0F, -6.0F, 1.0F, -5.0F, 5.0F, 0.0F), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
+		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(128, 147).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F)
+		.texOffs(32, 12).addBox(4.0F, -3.0F, 0.0F, 4.0F, 1.0F, 1.0F)
+		.texOffs(32, 12).addBox(4.0F, -5.0F, 0.0F, 4.0F, 1.0F, 1.0F)
+		.texOffs(40, 0).addBox(4.0F, -4.0F, 0.0F, 5.0F, 1.0F, 1.0F)
+		.texOffs(0, 0).addBox(3.0F, -16.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 4).addBox(5.0F, -16.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 18).addBox(5.0F, -10.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 22).addBox(6.0F, -14.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(32, 8).addBox(5.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(52, 28).addBox(2.0F, -10.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(24, 34).addBox(3.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(114, 27).addBox(-4.0F, -6.0F, 1.0F, -5.0F, 5.0F, 0.0F), PartPose.offset(0.0F, -18.0F, 0.0F));
 
-		ModelPartData cube_r1 = head.addChild("cube_r1", ModelPartBuilder.create().uv(0, 4).cuboid(5.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 18).cuboid(5.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 22).cuboid(6.0F, -16.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(32, 8).cuboid(5.0F, -14.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(24, 34).cuboid(3.0F, -14.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(52, 28).cuboid(2.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 0).cuboid(3.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F), ModelTransform.of(0.0F, 2.0F, 0.0F, -3.1416F, 0.0F, 3.1416F));
+		head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 4).addBox(5.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 18).addBox(5.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 22).addBox(6.0F, -16.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(32, 8).addBox(5.0F, -14.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(24, 34).addBox(3.0F, -14.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(52, 28).addBox(2.0F, -12.0F, -1.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 0).addBox(3.0F, -18.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(0.0F, 2.0F, 0.0F, -3.1416F, 0.0F, 3.1416F));
 
-		ModelPartData leftArm = partdefinition.addChild("leftArm", ModelPartBuilder.create().uv(20, 42).cuboid(-2.0F, -0.5F, -1.0F, 2.0F, 17.0F, 2.0F)
-		.uv(10, 43).mirrored().cuboid(-2.0F, 16.5F, -0.5F, 2.0F, 13.0F, 2.0F).mirrored(false), ModelTransform.pivot(-5.0F, -17.5F, 0.0F));
+		partdefinition.addOrReplaceChild("leftArm", CubeListBuilder.create().texOffs(20, 42).addBox(-2.0F, -0.5F, -1.0F, 2.0F, 17.0F, 2.0F)
+		.texOffs(10, 43).mirror().addBox(-2.0F, 16.5F, -0.5F, 2.0F, 13.0F, 2.0F).mirror(false), PartPose.offset(-5.0F, -17.5F, 0.0F));
 
-		ModelPartData rightArm = partdefinition.addChild("rightArm", ModelPartBuilder.create().uv(20, 42).cuboid(0.0F, -0.5F, -1.0F, 2.0F, 17.0F, 2.0F)
-		.uv(10, 43).cuboid(0.0F, 16.5F, -0.5F, 2.0F, 13.0F, 2.0F), ModelTransform.pivot(5.0F, -17.5F, 0.0F));
+		partdefinition.addOrReplaceChild("rightArm", CubeListBuilder.create().texOffs(20, 42).addBox(0.0F, -0.5F, -1.0F, 2.0F, 17.0F, 2.0F)
+		.texOffs(10, 43).addBox(0.0F, 16.5F, -0.5F, 2.0F, 13.0F, 2.0F), PartPose.offset(5.0F, -17.5F, 0.0F));
 
-		ModelPartData body = partdefinition.addChild("body", ModelPartBuilder.create().uv(21, 74).cuboid(-3.0F, 6.0F, -2.0F, 6.0F, 1.0F, 1.0F)
-		.uv(14, 76).cuboid(-4.0F, 2.0F, -2.0F, 8.0F, 3.0F, 1.0F)
-		.uv(17, 78).cuboid(-4.0F, 10.0F, -2.0F, 8.0F, 2.0F, 1.0F)
-		.uv(21, 76).cuboid(1.0F, 1.0F, -2.0F, 3.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(1.0F, 0.0F, 2.0F, 3.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(1.0F, 2.0F, 2.0F, 3.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(1.0F, 4.0F, 2.0F, 3.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(-4.0F, 4.0F, 2.0F, 3.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(-4.0F, 2.0F, 2.0F, 3.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(-4.0F, 0.0F, 2.0F, 3.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(-4.0F, 1.0F, -2.0F, 3.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(-4.0F, 0.0F, -2.0F, 2.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(-1.0F, 9.0F, 1.0F, 2.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(2.0F, 0.0F, -2.0F, 2.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(-1.0F, 5.0F, -2.0F, 2.0F, 1.0F, 1.0F)
-		.uv(21, 76).cuboid(-1.0F, 7.0F, -2.0F, 2.0F, 3.0F, 1.0F)
-		.uv(27, 72).cuboid(-1.0F, 0.0F, 2.0F, 2.0F, 10.0F, 1.0F)
-		.uv(15, 79).cuboid(-4.0F, 10.0F, 1.0F, 8.0F, 2.0F, 1.0F)
-		.uv(10, 66).cuboid(4.0F, 10.0F, -1.0F, 1.0F, 2.0F, 2.0F)
-		.uv(10, 66).cuboid(-5.0F, 10.0F, -1.0F, 1.0F, 2.0F, 2.0F)
-		.uv(1, 69).cuboid(-5.0F, 4.0F, -1.0F, 1.0F, 1.0F, 3.0F)
-		.uv(46, 74).cuboid(-5.0F, 2.0F, -1.0F, 1.0F, 1.0F, 3.0F)
-		.uv(18, 86).cuboid(-5.0F, 0.0F, -1.0F, 1.0F, 1.0F, 3.0F)
-		.uv(8, 83).cuboid(4.0F, 0.0F, -1.0F, 1.0F, 1.0F, 3.0F)
-		.uv(21, 73).cuboid(4.0F, 4.0F, -1.0F, 1.0F, 1.0F, 3.0F)
-		.uv(41, 84).cuboid(4.0F, 2.0F, -1.0F, 1.0F, 1.0F, 3.0F)
-		.uv(58, 83).cuboid(0.0F, 0.0F, 3.0F, 0.0F, 10.0F, 3.0F), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
+		partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(21, 74).addBox(-3.0F, 6.0F, -2.0F, 6.0F, 1.0F, 1.0F)
+		.texOffs(14, 76).addBox(-4.0F, 2.0F, -2.0F, 8.0F, 3.0F, 1.0F)
+		.texOffs(17, 78).addBox(-4.0F, 10.0F, -2.0F, 8.0F, 2.0F, 1.0F)
+		.texOffs(21, 76).addBox(1.0F, 1.0F, -2.0F, 3.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(1.0F, 0.0F, 2.0F, 3.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(1.0F, 2.0F, 2.0F, 3.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(1.0F, 4.0F, 2.0F, 3.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(-4.0F, 4.0F, 2.0F, 3.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(-4.0F, 2.0F, 2.0F, 3.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(-4.0F, 0.0F, 2.0F, 3.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(-4.0F, 1.0F, -2.0F, 3.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(-4.0F, 0.0F, -2.0F, 2.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(-1.0F, 9.0F, 1.0F, 2.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(2.0F, 0.0F, -2.0F, 2.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(-1.0F, 5.0F, -2.0F, 2.0F, 1.0F, 1.0F)
+		.texOffs(21, 76).addBox(-1.0F, 7.0F, -2.0F, 2.0F, 3.0F, 1.0F)
+		.texOffs(27, 72).addBox(-1.0F, 0.0F, 2.0F, 2.0F, 10.0F, 1.0F)
+		.texOffs(15, 79).addBox(-4.0F, 10.0F, 1.0F, 8.0F, 2.0F, 1.0F)
+		.texOffs(10, 66).addBox(4.0F, 10.0F, -1.0F, 1.0F, 2.0F, 2.0F)
+		.texOffs(10, 66).addBox(-5.0F, 10.0F, -1.0F, 1.0F, 2.0F, 2.0F)
+		.texOffs(1, 69).addBox(-5.0F, 4.0F, -1.0F, 1.0F, 1.0F, 3.0F)
+		.texOffs(46, 74).addBox(-5.0F, 2.0F, -1.0F, 1.0F, 1.0F, 3.0F)
+		.texOffs(18, 86).addBox(-5.0F, 0.0F, -1.0F, 1.0F, 1.0F, 3.0F)
+		.texOffs(8, 83).addBox(4.0F, 0.0F, -1.0F, 1.0F, 1.0F, 3.0F)
+		.texOffs(21, 73).addBox(4.0F, 4.0F, -1.0F, 1.0F, 1.0F, 3.0F)
+		.texOffs(41, 84).addBox(4.0F, 2.0F, -1.0F, 1.0F, 1.0F, 3.0F)
+		.texOffs(58, 83).addBox(0.0F, 0.0F, 3.0F, 0.0F, 10.0F, 3.0F), PartPose.offset(0.0F, -18.0F, 0.0F));
 
-		return TexturedModelData.of(meshdefinition, 256, 256);
+		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
     protected float lerpAngle(float angleOne, float angleTwo, float magnitude) {
@@ -117,23 +117,18 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
         return angleTwo + angleOne * f;
     }
 
-    private float method_2807(float f) {
-        return -65.0f * f + f * f;
-    }
-
     @Override
-    public void setAngles(T livingEntity, float f, float g, float h, float i, float j) {
-        boolean bl3;
-        boolean bl = ((LivingEntity)livingEntity).getRoll() > 4;
-        boolean bl2 = ((LivingEntity)livingEntity).isInSwimmingPose();
-        this.head.yaw = i * ((float)Math.PI / 180);
-        this.head.pitch = bl ? -0.7853982f : (this.leaningPitch > 0.0f ? (bl2 ? this.lerpAngle(this.leaningPitch, this.head.pitch, -0.7853982f) : this.lerpAngle(this.leaningPitch, this.head.pitch, j * ((float)Math.PI / 180))) : j * ((float)Math.PI / 180));
-        this.body.yaw = 0.0f;
-        this.rightArm.pivotZ = 0.0f;
-        this.leftArm.pivotZ = 0.0f;
+    public void setupAnim(T livingEntity, float f, float g, float h, float i, float j) {
+        boolean bl = ((LivingEntity)livingEntity).getFallFlyingTicks() > 4;
+        boolean bl2 = ((LivingEntity)livingEntity).isVisuallySwimming();
+        this.head.yRot = i * ((float)Math.PI / 180);
+        this.head.xRot = bl ? -0.7853982f : (this.leaningPitch > 0.0f ? (bl2 ? this.lerpAngle(this.leaningPitch, this.head.xRot, -0.7853982f) : this.lerpAngle(this.leaningPitch, this.head.xRot, j * ((float)Math.PI / 180))) : j * ((float)Math.PI / 180));
+        this.body.yRot = 0.0f;
+        this.rightArm.z = 0.0f;
+        this.leftArm.z = 0.0f;
         float k = 1.0f;
         if (bl) {
-            k = (float)((Entity)livingEntity).getVelocity().lengthSquared();
+            k = (float)((Entity)livingEntity).getDeltaMovement().lengthSqr();
             k /= 0.2f;
             k *= k * k;
         }
@@ -141,45 +136,43 @@ public class FreakshowModel<T extends FreakshowEntity> extends EntityModel<T> {
             k = 1.0f;
         }
         if (this.carryingBlock) {
-            this.rightArm.pitch = -0.5f;
-            this.leftArm.pitch = -0.5f;
-            this.rightArm.roll = 0.05f;
-            this.leftArm.roll = -0.05f;
+            this.rightArm.xRot = -0.5f;
+            this.leftArm.xRot = -0.5f;
+            this.rightArm.zRot = 0.05f;
+            this.leftArm.zRot = -0.05f;
         }
         if (this.angry) {
-            float m = 1.0f;
-            this.head.pivotY -= 5.0f;
+            this.head.y -= 5.0f;
         }
-        this.rightArm.pitch = MathHelper.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f / k;
-        this.leftArm.pitch = MathHelper.cos(f * 0.6662f) * 2.0f * g * 0.5f / k;
-        this.rightArm.roll = 0.0f;
-        this.leftArm.roll = 0.0f;
-        this.rightLeg.pitch = MathHelper.cos(f * 0.6662f) * 1.4f * g / k;
-        this.leftLeg.pitch = MathHelper.cos(f * 0.6662f + (float)Math.PI) * 1.4f * g / k;
-        this.rightLeg.yaw = 0.0f;
-        this.leftLeg.yaw = 0.0f;
-        this.rightLeg.roll = 0.0f;
-        this.leftLeg.roll = 0.0f;
+        this.rightArm.xRot = Mth.cos(f * 0.6662f + (float)Math.PI) * 2.0f * g * 0.5f / k;
+        this.leftArm.xRot = Mth.cos(f * 0.6662f) * 2.0f * g * 0.5f / k;
+        this.rightArm.zRot = 0.0f;
+        this.leftArm.zRot = 0.0f;
+        this.rightLeg.xRot = Mth.cos(f * 0.6662f) * 1.4f * g / k;
+        this.leftLeg.xRot = Mth.cos(f * 0.6662f + (float)Math.PI) * 1.4f * g / k;
+        this.rightLeg.yRot = 0.0f;
+        this.leftLeg.yRot = 0.0f;
+        this.rightLeg.zRot = 0.0f;
+        this.leftLeg.zRot = 0.0f;
         if (this.riding) {
-            this.rightArm.pitch += -0.62831855f;
-            this.leftArm.pitch += -0.62831855f;
-            this.rightLeg.pitch = -1.4137167f;
-            this.rightLeg.yaw = 0.31415927f;
-            this.rightLeg.roll = 0.07853982f;
-            this.leftLeg.pitch = -1.4137167f;
-            this.leftLeg.yaw = -0.31415927f;
-            this.leftLeg.roll = -0.07853982f;
+            this.rightArm.xRot += -0.62831855f;
+            this.leftArm.xRot += -0.62831855f;
+            this.rightLeg.xRot = -1.4137167f;
+            this.rightLeg.yRot = 0.31415927f;
+            this.rightLeg.zRot = 0.07853982f;
+            this.leftLeg.xRot = -1.4137167f;
+            this.leftLeg.yRot = -0.31415927f;
+            this.leftLeg.zRot = -0.07853982f;
         }
-        this.rightArm.yaw = 0.0f;
-        this.leftArm.yaw = 0.0f;
-            float p = 0.33333334f;
-            this.leftLeg.pitch = MathHelper.lerp(this.leaningPitch, this.leftLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f + (float)Math.PI));
-            this.rightLeg.pitch = MathHelper.lerp(this.leaningPitch, this.rightLeg.pitch, 0.3f * MathHelper.cos(f * 0.33333334f));
+        this.rightArm.yRot = 0.0f;
+        this.leftArm.yRot = 0.0f;
+            this.leftLeg.xRot = Mth.lerp(this.leaningPitch, this.leftLeg.xRot, 0.3f * Mth.cos(f * 0.33333334f + (float)Math.PI));
+            this.rightLeg.xRot = Mth.lerp(this.leaningPitch, this.rightLeg.xRot, 0.3f * Mth.cos(f * 0.33333334f));
             
     }
 
 	@Override
-	public void render(MatrixStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		leftLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		rightLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		head.render(poseStack, buffer, packedLight, packedOverlay);

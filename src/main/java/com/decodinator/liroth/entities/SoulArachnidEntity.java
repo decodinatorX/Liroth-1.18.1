@@ -1,19 +1,19 @@
 package com.decodinator.liroth.entities;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.SpiderEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.world.level.Level;
 
-public class SoulArachnidEntity extends SpiderEntity {
+public class SoulArachnidEntity extends Spider {
 
-	public SoulArachnidEntity(EntityType<? extends SpiderEntity> entityType, World world) {
+	public SoulArachnidEntity(EntityType<? extends Spider> entityType, Level world) {
 		super(entityType, world);
 	}
 	
-    public static DefaultAttributeContainer.Builder createSoulArachnidAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f);
+    public static AttributeSupplier.Builder createSoulArachnidAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 16.0).add(Attributes.MOVEMENT_SPEED, 0.3f);
     }
 }

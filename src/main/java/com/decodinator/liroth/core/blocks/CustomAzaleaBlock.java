@@ -1,55 +1,39 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.util.math.random.Random;
-
 import com.decodinator.liroth.core.LirothBlocks;
-import com.decodinator.liroth.core.world.trees.JapzTree;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.PlantBlock;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CustomAzaleaBlock
-extends PlantBlock
-implements Fertilizable {
-    private static final JapzTree GENERATOR = new JapzTree();
-    private static final VoxelShape SHAPE = VoxelShapes.union(Block.createCuboidShape(0.0, 8.0, 0.0, 16.0, 16.0, 16.0), Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 8.0, 10.0));
+public class CustomAzaleaBlock  extends BushBlock {
+	   private static final VoxelShape SHAPE = Shapes.or(Block.box(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D), Block.box(6.0D, 0.0D, 6.0D, 10.0D, 8.0D, 10.0D));
 
-    public CustomAzaleaBlock(AbstractBlock.Settings settings) {
-        super(settings);
-    }
+	   public CustomAzaleaBlock(BlockBehaviour.Properties p_152067_) {
+	      super(p_152067_);
+	   }
 
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
-    }
+	   public VoxelShape getShape(BlockState p_152084_, BlockGetter p_152085_, BlockPos p_152086_, CollisionContext p_152087_) {
+	      return SHAPE;
+	   }
 
-    @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isOf(LirothBlocks.SPINERIOS_DIRT) || super.canPlantOnTop(floor, world, pos);
-    }
+	   protected boolean mayPlaceOn(BlockState p_152089_, BlockGetter p_152090_, BlockPos p_152091_) {
+	      return p_152089_.is(LirothBlocks.SPINERIOS_DIRT) || super.mayPlaceOn(p_152089_, p_152090_, p_152091_);
+	   }
 
-    @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return world.getFluidState(pos.up()).isEmpty();
-    }
+	   public boolean isValidBonemealTarget(BlockGetter p_152074_, BlockPos p_152075_, BlockState p_152076_, boolean p_152077_) {
+	      return p_152074_.getFluidState(p_152075_.above()).isEmpty();
+	   }
 
-	@Override
-	public boolean canGrow(World var1, Random var2, BlockPos var3, BlockState var4) {
-		return (double)var1.random.nextFloat() < 0.45;
+	   public boolean isBonemealSuccess(Level p_220712_, RandomSource p_220713_, BlockPos p_220714_, BlockState p_220715_) {
+	      return (double)p_220712_.random.nextFloat() < 0.45D;
+	   }
 	}
-
-	@Override
-	public void grow(ServerWorld var1, Random var2, BlockPos var3, BlockState var4) {
-        GENERATOR.generate(var1, var1.getChunkManager().getChunkGenerator(), var3, var4, var2);
-	}
-}

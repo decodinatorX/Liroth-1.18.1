@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "liroth:blocks/sea_eye",
 	"textures": {
 		"0": "liroth:blocks/eye_side",
 		"1": "liroth:blocks/eye_top",
 		"2": "liroth:blocks/vile_tentacle",
-		"particle": "liroth:blocks/eye_side"
+		"particle": "liroth:blocks/eye_side",
+		"missing": "liroth:blocks/eye_top"
 	},
 	"elements": [
 		{

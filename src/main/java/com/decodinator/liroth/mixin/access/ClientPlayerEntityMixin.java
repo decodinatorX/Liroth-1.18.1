@@ -1,71 +1,41 @@
 package com.decodinator.liroth.mixin.access;
 
-import com.decodinator.liroth.entities.boats.DamnationBoatEntity;
-import com.decodinator.liroth.entities.boats.JapzBoatEntity;
-import com.decodinator.liroth.entities.boats.KoolawBoatEntity;
-import com.decodinator.liroth.entities.boats.LirothBoatEntity;
-import com.decodinator.liroth.entities.boats.PetrifiedBoatEntity;
-import com.decodinator.liroth.entities.boats.PierBoatEntity;
-import com.decodinator.liroth.entities.boats.SpicedBoatEntity;
+import com.decodinator.liroth.core.LirothBoat;
 import com.mojang.authlib.GameProfile;
 
-import net.minecraft.client.input.Input;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.encryption.PlayerPublicKey;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.Input;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.player.ProfilePublicKey;
 
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
-	
-    @Shadow
-    private boolean riding;
+@Mixin(LocalPlayer.class)
+public abstract class ClientPlayerEntityMixin extends AbstractClientPlayer {
+
+	@Shadow
+    private boolean handsBusy;
 
     @Shadow
     public Input input;
 
-    public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile, PlayerPublicKey publicKey) {
-        super(world, profile, publicKey);
-    }
+    public ClientPlayerEntityMixin(ClientLevel clientLevel, GameProfile gameProfile, @Nullable ProfilePublicKey profilePublicKey) {
+		super(clientLevel, gameProfile, profilePublicKey);
+	}
 
-
-    @Inject(at = @At("HEAD"), method = "tickRiding")
-    public void tickRiding(CallbackInfo ci) {
-        this.riding = false;
-        if (this.getVehicle() instanceof LirothBoatEntity) {
-        	LirothBoatEntity boatEntity = (LirothBoatEntity)this.getVehicle();
-            boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
-            this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
-        } else if (this.getVehicle() instanceof DamnationBoatEntity) {
-        	DamnationBoatEntity boatEntity = (DamnationBoatEntity)this.getVehicle();
-            boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
-            this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
-        } else if (this.getVehicle() instanceof JapzBoatEntity) {
-        	JapzBoatEntity boatEntity = (JapzBoatEntity)this.getVehicle();
-            boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
-            this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
-        } else if (this.getVehicle() instanceof KoolawBoatEntity) {
-        	KoolawBoatEntity boatEntity = (KoolawBoatEntity)this.getVehicle();
-            boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
-            this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
-        } else if (this.getVehicle() instanceof PetrifiedBoatEntity) {
-        	PetrifiedBoatEntity boatEntity = (PetrifiedBoatEntity)this.getVehicle();
-            boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
-            this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
-        } else if (this.getVehicle() instanceof SpicedBoatEntity) {
-        	SpicedBoatEntity boatEntity = (SpicedBoatEntity)this.getVehicle();
-            boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
-            this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
-        } else if (this.getVehicle() instanceof PierBoatEntity) {
-        	PierBoatEntity boatEntity = (PierBoatEntity)this.getVehicle();
-            boatEntity.setInputs(this.input.pressingLeft, this.input.pressingRight, this.input.pressingForward, this.input.pressingBack);
-            this.riding |= this.input.pressingLeft || this.input.pressingRight || this.input.pressingForward || this.input.pressingBack;
+    @Inject(at = @At("HEAD"), method = "rideTick")
+    public void rideTick(CallbackInfo ci) {
+        this.handsBusy = false;
+        if (this.getVehicle() instanceof LirothBoat) {
+        	LirothBoat boatEntity = (LirothBoat)this.getVehicle();
+            boatEntity.setInput(this.input.left, this.input.right, this.input.up, this.input.down);
+            this.handsBusy |= this.input.left || this.input.right || this.input.up || this.input.down;
         }
     }
 }

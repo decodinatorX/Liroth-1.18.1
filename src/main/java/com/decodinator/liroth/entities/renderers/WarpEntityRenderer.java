@@ -1,31 +1,26 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.LirothClient;
-import com.decodinator.liroth.entities.FungalFiendEntity;
+import com.decodinator.liroth.core.LirothModelLayers;
 import com.decodinator.liroth.entities.WarpEntity;
-import com.decodinator.liroth.entities.renderers.FungalFiendModel;
 
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.feature.DrownedOverlayFeatureRenderer;
-import net.minecraft.client.render.entity.feature.EndermanEyesFeatureRenderer;
-import net.minecraft.client.render.entity.model.CreeperEntityModel;
-import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.mob.DrownedEntity;
-import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.util.Identifier;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-public class WarpEntityRenderer extends MobEntityRenderer<WarpEntity, WarpModel<WarpEntity>> {
+@Environment(value=EnvType.CLIENT)
+public class WarpEntityRenderer extends MobRenderer<WarpEntity, WarpModel<WarpEntity>> {
 
-    public WarpEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new WarpModel(context.getPart(LirothClient.MODEL_WARP_LAYER)), 0.5f);
-        this.addFeature(new WarpGlowFeatureRenderer<WarpEntity>(this));
+    public WarpEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new WarpModel(context.bakeLayer(LirothModelLayers.WARP)), 0.5f);
+        this.addLayer(new WarpGlowFeatureRenderer<WarpEntity>(this));
     }
  
     @Override
-    public Identifier getTexture(WarpEntity entity) {
-        return new Identifier("liroth", "textures/entity/warp/warp.png");
+    public ResourceLocation getTextureLocation(WarpEntity entity) {
+        return new ResourceLocation("liroth", "textures/entity/warp/warp.png");
         
     }
 }

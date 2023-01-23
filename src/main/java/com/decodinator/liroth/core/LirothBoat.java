@@ -1,0 +1,223 @@
+package com.decodinator.liroth.core;
+
+import org.jetbrains.annotations.NotNull;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
+
+public class LirothBoat extends Boat {
+    private static final EntityDataAccessor<Integer> LIROTH_BOAT_TYPE = SynchedEntityData.defineId(LirothBoat.class, EntityDataSerializers.INT);
+    private static final LootContextParamSet LOOT_CONTEXT_PARAM_SETS = LootContextParamSet.builder()
+            .required(LootContextParams.THIS_ENTITY)
+            .required(LootContextParams.THIS_ENTITY)
+            .required(LootContextParams.ORIGIN)
+            .required(LootContextParams.DAMAGE_SOURCE)
+            .build();
+    private double lastYd;
+    private LirothBoat.Status status;
+
+
+    public LirothBoat(Level worldIn, double x, double y, double z) {
+        this(LirothEntities.LIROTH_BOAT, worldIn);
+        this.setPos(x, y, z);
+        this.setDeltaMovement(Vec3.ZERO);
+        this.xo = x;
+        this.yo = y;
+        this.zo = z;
+    }
+
+    public LirothBoat(EntityType<? extends Boat> boatEntityType, Level worldType) {
+        super(boatEntityType, worldType);
+    }
+
+    @Override
+    public Item getDropItem() {
+        switch (this.getLirothBoatType()) {
+           case LIROTH:
+           default:
+              return LirothItems.LIROTH_BOAT;
+           case DAMNATION:
+              return LirothItems.DAMNATION_BOAT;
+           case SPICED:
+              return LirothItems.SPICED_BOAT;
+           case PIER:
+              return LirothItems.PIER_BOAT;
+           case JAPZ:
+              return LirothItems.JAPZ_BOAT;
+           case KOOLAW:
+              return LirothItems.KOOLAW_BOAT;
+           case PETRIFIED:
+              return LirothItems.PETRIFIED_BOAT;
+        }
+     }
+
+    public LirothType getLirothBoatType() {
+        return LirothType.byId(this.entityData.get(LIROTH_BOAT_TYPE));
+    }
+
+    public void setLirothBoatType(LirothType boatLirothType) {
+        this.entityData.set(LIROTH_BOAT_TYPE, boatLirothType.ordinal());
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(LIROTH_BOAT_TYPE, LirothType.LIROTH.ordinal());
+    }
+
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag compound) {
+        compound.putString("LirothType", this.getLirothBoatType().getName());
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag compound) {
+        if (compound.contains("LirothType", 8)) {
+            this.setLirothBoatType(LirothType.byName(compound.getString("LirothType")));
+        }
+    }
+
+    @Override
+    public void animateHurt() {
+        this.setHurtDir(-this.getHurtDir());
+        this.setHurtTime(10);
+        this.setDamage(this.getDamage() * 11.0F);
+    }
+
+    @Override
+    protected void checkFallDamage(double p_38307_, boolean p_38308_, BlockState p_38309_, BlockPos p_38310_) {
+        this.lastYd = this.getDeltaMovement().y;
+        if (!this.isPassenger()) {
+           if (p_38308_) {
+              if (this.fallDistance > 3.0F) {
+                 if (this.status != LirothBoat.Status.ON_LAND) {
+                    this.resetFallDistance();
+                    return;
+                 }
+
+                 this.causeFallDamage(this.fallDistance, 1.0F, DamageSource.FALL);
+                 if (!this.level.isClientSide && !this.isRemoved()) {
+                    this.kill();
+                    if (this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                       for(int i = 0; i < 3; ++i) {
+                          this.spawnAtLocation(this.getLirothBoatType().getPlanks());
+                       }
+
+                       for(int j = 0; j < 2; ++j) {
+                          this.spawnAtLocation(Items.STICK);
+                       }
+                    }
+                 }
+              }
+
+              this.resetFallDistance();
+           } else if (!(this.level.getFluidState(this.blockPosition().below()).is(FluidTags.WATER)) && p_38307_ < 0.0D) {
+              this.fallDistance -= (float)p_38307_;
+           }
+
+        }
+     }
+    @Override
+    public boolean hurt(DamageSource p_38319_, float p_38320_) {
+        if (this.isInvulnerableTo(p_38319_)) {
+           return false;
+        } else if (!this.level.isClientSide && !this.isRemoved()) {
+           this.setHurtDir(-this.getHurtDir());
+           this.setHurtTime(10);
+           this.setDamage(this.getDamage() + p_38320_ * 10.0F);
+           this.markHurt();
+           this.gameEvent(GameEvent.ENTITY_DAMAGE, p_38319_.getEntity());
+           boolean flag = p_38319_.getEntity() instanceof Player && ((Player)p_38319_.getEntity()).getAbilities().instabuild;
+           if (flag || this.getDamage() > 40.0F) {
+              if (!flag && this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                 this.destroy(p_38319_);
+              }
+
+              this.discard();
+           }
+
+           return true;
+        } else {
+           return true;
+        }
+     }
+
+    @Override
+    public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
+        //TODO: Is this right?
+        return new ClientboundAddEntityPacket(this);
+    }
+
+    public static enum LirothType {
+        LIROTH(LirothBlocks.LIROTH_PLANKS, "liroth"),
+        DAMNATION(LirothBlocks.DAMNATION_PLANKS, "damnation"),
+        SPICED(LirothBlocks.SPICED_PLANKS, "spiced"),
+        PIER(LirothBlocks.TALLPIER_PLANKS, "tallpier"),
+        JAPZ(LirothBlocks.JAPZ_PLANKS, "japz"),
+        KOOLAW(LirothBlocks.KOOLAW_PLANKS, "koolaw"),
+        PETRIFIED(LirothBlocks.PETRIFIED_DAMNATION_PLANKS, "petrified_damnation");
+
+        private final String name;
+        private final Block planks;
+
+        private LirothType(Block lirothPlanks, String p_38428_) {
+           this.name = p_38428_;
+           this.planks = lirothPlanks;
+        }
+
+        public String getName() {
+           return this.name;
+        }
+
+        public @NotNull Block getPlanks() {
+           return this.planks;
+        }
+
+        public String toString() {
+           return this.name;
+        }
+
+        public static LirothBoat.LirothType byId(int p_38431_) {
+           LirothBoat.LirothType[] aboat$type = values();
+           if (p_38431_ < 0 || p_38431_ >= aboat$type.length) {
+              p_38431_ = 0;
+           }
+
+           return aboat$type[p_38431_];
+        }
+
+        public static LirothBoat.LirothType byName(String p_38433_) {
+           LirothBoat.LirothType[] aboat$type = values();
+
+           for(int i = 0; i < aboat$type.length; ++i) {
+              if (aboat$type[i].getName().equals(p_38433_)) {
+                 return aboat$type[i];
+              }
+           }
+
+           return aboat$type[0];
+        }
+     }
+}

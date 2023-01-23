@@ -1,47 +1,43 @@
 package com.decodinator.liroth.entities;
 
 import com.decodinator.liroth.Liroth;
+import com.decodinator.liroth.core.LirothSounds;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.EndermanEntity;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
-public class ProwlerEntity extends EndermanEntity {
+public class ProwlerEntity extends EnderMan {
 
-	public ProwlerEntity(EntityType<? extends EndermanEntity> entityType, World world) {
+	public ProwlerEntity(EntityType<? extends EnderMan> entityType, Level world) {
 		super(entityType, world);
-        this.stepHeight = 1.0f;
-        this.setPathfindingPenalty(PathNodeType.WATER, -1.0f);
+        this.maxUpStep = 1.0f;
+        this.setPathfindingMalus(BlockPathTypes.WATER, -1.0f);
 	}
 
-    public static DefaultAttributeContainer.Builder createProwlerAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 12.0).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0);
+    public static AttributeSupplier.Builder createProwlerAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 40.0).add(Attributes.MOVEMENT_SPEED, 0.4f).add(Attributes.ATTACK_DAMAGE, 12.0).add(Attributes.FOLLOW_RANGE, 48.0);
     }
     
     @Override
     protected SoundEvent getAmbientSound() {
-        return this.isAngry() ? SoundEvents.ENTITY_ENDERMAN_SCREAM : Liroth.WARP_IDLE_SOUND_EVENT;
+        return this.isAngry() ? SoundEvents.ENDERMAN_SCREAM : LirothSounds.WARP_IDLE_SOUND_EVENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return Liroth.WARP_HURT_SOUND_EVENT;
+        return LirothSounds.WARP_HURT_SOUND_EVENT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return Liroth.WARP_DEATH_SOUND_EVENT;
+        return LirothSounds.WARP_DEATH_SOUND_EVENT;
     }
 }

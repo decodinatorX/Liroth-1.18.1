@@ -3,18 +3,18 @@ package com.decodinator.liroth.mixin.access;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Map;
 
-@Mixin(RenderLayers.class)
+@Mixin(ItemBlockRenderTypes.class)
 public interface ItemBlockRenderTypeAccess {
 
 
-    @Accessor("BLOCKS")
-    static Map<Block, RenderLayer> getTypeByBlock() {
+    @Accessor("TYPE_BY_BLOCK")
+    static Map<Block, RenderType> getTypeByBlock() {
         throw new Error("Mixin did not apply");
     }
 }

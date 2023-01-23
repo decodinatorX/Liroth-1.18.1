@@ -2,106 +2,104 @@ package com.decodinator.liroth.core.items;
 
 import java.util.function.Predicate;
 
-import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.core.LirothItems;
+import com.decodinator.liroth.core.LirothSounds;
 
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.BowItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 
 public class LirothBlaster extends BowItem {
 
-	public LirothBlaster(Settings settings) {
+	public LirothBlaster(Properties settings) {
 		super(settings);
 	}
 	
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
         boolean bl;
-        ItemStack itemStack = user.getStackInHand(hand);
-        boolean bl2 = bl = !user.getArrowType(itemStack).isEmpty();
-        if (user.getAbilities().creativeMode || bl) {
-            user.setCurrentHand(hand);
-            return TypedActionResult.consume(itemStack);
+        ItemStack itemStack = user.getItemInHand(hand);
+        bl = !user.getProjectile(itemStack).isEmpty();
+        if (user.getAbilities().instabuild || bl) {
+            user.startUsingItem(hand);
+            return InteractionResultHolder.consume(itemStack);
         }
-        return TypedActionResult.consume(itemStack);
+        return InteractionResultHolder.consume(itemStack);
     }
 
     @Override
-    public Predicate<ItemStack> getProjectiles() {
-        return BOW_PROJECTILES;
-    }
+    public Predicate<ItemStack> getAllSupportedProjectiles() {
+        return ARROW_ONLY;
+     }
     
     @Override
-    public int getRange() {
+    public int getDefaultProjectileRange() {
         return 50;
     }
     
-    @Override
-    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+    @SuppressWarnings("deprecation")
+	@Override
+    public void releaseUsing(ItemStack stack, Level world, LivingEntity user, int remainingUseTicks) {
         boolean bl2;
-        int i;
         float f;
-        if (!(user instanceof PlayerEntity)) {
+        if (!(user instanceof Player)) {
             return;
         }
-        PlayerEntity playerEntity = (PlayerEntity)user;
-        boolean bl = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
-        ItemStack itemStack = playerEntity.getArrowType(stack);
+        Player playerEntity = (Player)user;
+        boolean bl = playerEntity.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
+        ItemStack itemStack = playerEntity.getProjectile(stack);
         if (itemStack.isEmpty() && !bl) {
             return;
         }
         if (itemStack.isEmpty()) {
             itemStack = new ItemStack(Items.ARROW);
         }
-        if ((double)(f = LirothBlaster.getPullProgress(i = this.getMaxUseTime(stack) - remainingUseTicks)) < 0.1) {
+        if ((double)(f = LirothBlaster.getPowerForTime(this.getUseDuration(stack) - remainingUseTicks)) < 0.1) {
             return;
         }
-        boolean bl3 = bl2 = bl && itemStack.isOf(Items.ARROW);
-        if (!world.isClient) {
+        bl2 = bl && itemStack.is(Items.ARROW);
+        if (!world.isClientSide) {
             int k;
             int j;
             ArrowItem arrowItem = (ArrowItem)(itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
-            PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, itemStack, playerEntity);
-            persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, f * 7.0f, 1.0f);
+            AbstractArrow persistentProjectileEntity = arrowItem.createArrow(world, itemStack, playerEntity);
+            persistentProjectileEntity.shootFromRotation(playerEntity, playerEntity.getXRot(), playerEntity.getYRot(), 0.0f, f * 7.0f, 1.0f);
             if (f == 5.0f) {
-                persistentProjectileEntity.setCritical(true);
+                persistentProjectileEntity.setCritArrow(true);
             }
-            if ((j = EnchantmentHelper.getLevel(Enchantments.POWER, stack)) > 0) {
-                persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double)j * 0.5 + 0.5);
+            if ((j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack)) > 0) {
+                persistentProjectileEntity.setBaseDamage(persistentProjectileEntity.getBaseDamage() + (double)j * 0.5 + 0.5);
             }
-            if ((k = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack)) > 0) {
-                persistentProjectileEntity.setPunch(k);
+            if ((k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack)) > 0) {
+                persistentProjectileEntity.setKnockback(k);
             }
-            if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
-                persistentProjectileEntity.setOnFireFor(100);
+            if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0) {
+                persistentProjectileEntity.setSecondsOnFire(100);
             }
-            stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
-            if (bl2 || playerEntity.getAbilities().creativeMode && (itemStack.isOf(Items.SPECTRAL_ARROW) || itemStack.isOf(Items.TIPPED_ARROW))) {
-                persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+            stack.hurtAndBreak(1, playerEntity, p -> p.broadcastBreakEvent(playerEntity.getUsedItemHand()));
+            if (bl2 || playerEntity.getAbilities().instabuild && (itemStack.is(Items.SPECTRAL_ARROW) || itemStack.is(Items.TIPPED_ARROW))) {
+                persistentProjectileEntity.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
             }
-            world.spawnEntity(persistentProjectileEntity);
+            world.addFreshEntity(persistentProjectileEntity);
         }
-        world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), Liroth.LIROTH_BLASTER_FIRING_SOUND_EVENT, SoundCategory.PLAYERS, 1.0f, 1.0f / (world.getRandom().nextFloat() * 0.4f + 1.2f) + f * 0.5f);
-        if (!bl2 && !playerEntity.getAbilities().creativeMode) {
-            itemStack.decrement(1);
+        world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), LirothSounds.LIROTH_BLASTER_FIRING_SOUND_EVENT, SoundSource.PLAYERS, 1.0f, 1.0f / (world.getRandom().nextFloat() * 0.4f + 1.2f) + f * 0.5f);
+        if (!bl2 && !playerEntity.getAbilities().instabuild) {
+            itemStack.shrink(1);
             if (itemStack.isEmpty()) {
-                playerEntity.getInventory().removeOne(itemStack);
+                playerEntity.getInventory().removeItem(itemStack);
             }
         }
-        playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+        playerEntity.awardStat(Stats.ITEM_USED.get(this));
     }
 
 }

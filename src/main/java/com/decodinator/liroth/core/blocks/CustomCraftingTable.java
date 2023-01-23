@@ -1,10 +1,10 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.block.CraftingTableBlock;
+import net.minecraft.world.level.block.CraftingTableBlock;
 
 public class CustomCraftingTable extends CraftingTableBlock {
 
-	public CustomCraftingTable(Settings settings) {
+	public CustomCraftingTable(Properties settings) {
 		super(settings);
 	}
 

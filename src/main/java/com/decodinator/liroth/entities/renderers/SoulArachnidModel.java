@@ -1,19 +1,19 @@
 package com.decodinator.liroth.entities.renderers;
 
 import com.decodinator.liroth.entities.SoulArachnidEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
-public class SoulArachnidModel<T extends SoulArachnidEntity> extends SinglePartEntityModel<T> {
+public class SoulArachnidModel<T extends SoulArachnidEntity> extends HierarchicalModel<T> {
     private final ModelPart root;
 	private final ModelPart head;
 	private final ModelPart body0;
@@ -42,94 +42,94 @@ public class SoulArachnidModel<T extends SoulArachnidEntity> extends SinglePartE
 		this.leg7 = root.getChild("leg7");
 	}
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData meshdefinition = new ModelData();
-		ModelPartData ModelData = meshdefinition.getRoot();
+	public static LayerDefinition getTexturedModelData() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition MeshDefinition = meshdefinition.getRoot();
 
-		ModelPartData head = ModelData.addChild("head", ModelPartBuilder.create().uv(0, 20).cuboid(-4.0F, -4.0F, -8.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, 15.0F, -3.0F));
+		PartDefinition head = MeshDefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 20).addBox(-4.0F, -4.0F, -8.0F, 8.0F, 8.0F, 8.0F), PartPose.offset(0.0F, 15.0F, -3.0F));
 
-		ModelPartData body0 = ModelData.addChild("body0", ModelPartBuilder.create().uv(30, 36).cuboid(-3.0F, -3.0F, -3.5F, 6.0F, 6.0F, 6.0F), ModelTransform.pivot(0.0F, 15.0F, 1.0F));
+		PartDefinition body0 = MeshDefinition.addOrReplaceChild("body0", CubeListBuilder.create().texOffs(30, 36).addBox(-3.0F, -3.0F, -3.5F, 6.0F, 6.0F, 6.0F), PartPose.offset(0.0F, 15.0F, 1.0F));
 
-		ModelPartData body1 = ModelData.addChild("body1", ModelPartBuilder.create().uv(0, 0).cuboid(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 12.0F)
-		.uv(0, 24).cuboid(-1.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 8).cuboid(1.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 4).cuboid(-3.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
-		.uv(0, 40).cuboid(-2.5F, -8.0F, 12.0F, 5.0F, 2.0F, 2.0F)
-		.uv(0, 0).cuboid(-1.5F, -10.0F, 13.0F, 3.0F, 2.0F, 2.0F)
-		.uv(0, 20).cuboid(-1.0F, -12.0F, 12.0F, 2.0F, 2.0F, 2.0F)
-		.uv(6, 6).cuboid(-0.5F, -13.0F, 10.0F, 1.0F, 2.0F, 2.0F)
-		.uv(6, 2).cuboid(0.0F, -12.0F, 8.0F, 0.0F, 2.0F, 2.0F), ModelTransform.pivot(0.0F, 15.0F, -3.0F));
+		PartDefinition body1 = MeshDefinition.addOrReplaceChild("body1", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 12.0F)
+		.texOffs(0, 24).addBox(-1.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 8).addBox(1.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 4).addBox(-3.0F, -6.0F, 11.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(0, 40).addBox(-2.5F, -8.0F, 12.0F, 5.0F, 2.0F, 2.0F)
+		.texOffs(0, 0).addBox(-1.5F, -10.0F, 13.0F, 3.0F, 2.0F, 2.0F)
+		.texOffs(0, 20).addBox(-1.0F, -12.0F, 12.0F, 2.0F, 2.0F, 2.0F)
+		.texOffs(6, 6).addBox(-0.5F, -13.0F, 10.0F, 1.0F, 2.0F, 2.0F)
+		.texOffs(6, 2).addBox(0.0F, -12.0F, 8.0F, 0.0F, 2.0F, 2.0F), PartPose.offset(0.0F, 15.0F, -3.0F));
 
-		ModelPartData leg0 = ModelData.addChild("leg0", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 2.0F));
+		PartDefinition leg0 = MeshDefinition.addOrReplaceChild("leg0", CubeListBuilder.create().texOffs(0, 36).addBox(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offset(4.0F, 15.0F, 2.0F));
 
-		ModelPartData leg1 = ModelData.addChild("leg1", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 2.0F));
+		PartDefinition leg1 = MeshDefinition.addOrReplaceChild("leg1", CubeListBuilder.create().texOffs(0, 36).mirror().addBox(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirror(false), PartPose.offset(-4.0F, 15.0F, 2.0F));
 
-		ModelPartData leg2 = ModelData.addChild("leg2", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 1.0F));
+		PartDefinition leg2 = MeshDefinition.addOrReplaceChild("leg2", CubeListBuilder.create().texOffs(0, 36).addBox(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offset(4.0F, 15.0F, 1.0F));
 
-		ModelPartData leg3 = ModelData.addChild("leg3", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 1.0F));
+		PartDefinition leg3 = MeshDefinition.addOrReplaceChild("leg3", CubeListBuilder.create().texOffs(0, 36).mirror().addBox(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirror(false), PartPose.offset(-4.0F, 15.0F, 1.0F));
 
-		ModelPartData leg4 = ModelData.addChild("leg4", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, 0.0F));
+		PartDefinition leg4 = MeshDefinition.addOrReplaceChild("leg4", CubeListBuilder.create().texOffs(0, 36).addBox(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offset(4.0F, 15.0F, 0.0F));
 
-		ModelPartData leg5 = ModelData.addChild("leg5", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, 0.0F));
+		PartDefinition leg5 = MeshDefinition.addOrReplaceChild("leg5", CubeListBuilder.create().texOffs(0, 36).mirror().addBox(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirror(false), PartPose.offset(-4.0F, 15.0F, 0.0F));
 
-		ModelPartData leg6 = ModelData.addChild("leg6", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), ModelTransform.pivot(4.0F, 15.0F, -1.0F));
+		PartDefinition leg6 = MeshDefinition.addOrReplaceChild("leg6", CubeListBuilder.create().texOffs(0, 36).addBox(-1.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F), PartPose.offset(4.0F, 15.0F, -1.0F));
 
-		ModelPartData leg7 = ModelData.addChild("leg7", ModelPartBuilder.create().uv(0, 36).mirrored().cuboid(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirrored(false), ModelTransform.pivot(-4.0F, 15.0F, -1.0F));
+		PartDefinition leg7 = MeshDefinition.addOrReplaceChild("leg7", CubeListBuilder.create().texOffs(0, 36).mirror().addBox(-15.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F).mirror(false), PartPose.offset(-4.0F, 15.0F, -1.0F));
 
-		return TexturedModelData.of(meshdefinition, 128, 128);
+		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
 
     @Override
-    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        this.head.yaw = headYaw * ((float)Math.PI / 180);
-        this.head.pitch = headPitch * ((float)Math.PI / 180);
+    public void setupAnim(T entity, float limbAngle, float limbDistance, float animationProgress, float headyRot, float headPitch) {
+        this.head.yRot = headyRot * ((float)Math.PI / 180);
+        this.head.xRot = headPitch * ((float)Math.PI / 180);
         float f = 0.7853982f;
-        this.leg1.roll = -0.7853982f;
-        this.leg0.roll = 0.7853982f;
-        this.leg3.roll = -0.58119464f;
-        this.leg2.roll = 0.58119464f;
-        this.leg5.roll = -0.58119464f;
-        this.leg4.roll = 0.58119464f;
-        this.leg7.roll = -0.7853982f;
-        this.leg6.roll = 0.7853982f;
+        this.leg1.zRot = -0.7853982f;
+        this.leg0.zRot = 0.7853982f;
+        this.leg3.zRot = -0.58119464f;
+        this.leg2.zRot = 0.58119464f;
+        this.leg5.zRot = -0.58119464f;
+        this.leg4.zRot = 0.58119464f;
+        this.leg7.zRot = -0.7853982f;
+        this.leg6.zRot = 0.7853982f;
         float g = -0.0f;
         float h = 0.3926991f;
-        this.leg1.yaw = 0.7853982f;
-        this.leg0.yaw = -0.7853982f;
-        this.leg3.yaw = 0.3926991f;
-        this.leg2.yaw = -0.3926991f;
-        this.leg5.yaw = -0.3926991f;
-        this.leg4.yaw = 0.3926991f;
-        this.leg7.yaw = -0.7853982f;
-        this.leg6.yaw = 0.7853982f;
-        float i = -(MathHelper.cos(limbAngle * 0.6662f * 2.0f + 0.0f) * 0.4f) * limbDistance;
-        float j = -(MathHelper.cos(limbAngle * 0.6662f * 2.0f + (float)Math.PI) * 0.4f) * limbDistance;
-        float k = -(MathHelper.cos(limbAngle * 0.6662f * 2.0f + 1.5707964f) * 0.4f) * limbDistance;
-        float l = -(MathHelper.cos(limbAngle * 0.6662f * 2.0f + 4.712389f) * 0.4f) * limbDistance;
-        float m = Math.abs(MathHelper.sin(limbAngle * 0.6662f + 0.0f) * 0.4f) * limbDistance;
-        float n = Math.abs(MathHelper.sin(limbAngle * 0.6662f + (float)Math.PI) * 0.4f) * limbDistance;
-        float o = Math.abs(MathHelper.sin(limbAngle * 0.6662f + 1.5707964f) * 0.4f) * limbDistance;
-        float p = Math.abs(MathHelper.sin(limbAngle * 0.6662f + 4.712389f) * 0.4f) * limbDistance;
-        this.leg1.yaw += i;
-        this.leg0.yaw += -i;
-        this.leg3.yaw += j;
-        this.leg2.yaw += -j;
-        this.leg5.yaw += k;
-        this.leg4.yaw += -k;
-        this.leg7.yaw += l;
-        this.leg6.yaw += -l;
-        this.leg1.roll += m;
-        this.leg0.roll += -m;
-        this.leg3.roll += n;
-        this.leg2.roll += -n;
-        this.leg5.roll += o;
-        this.leg4.roll += -o;
-        this.leg7.roll += p;
-        this.leg6.roll += -p;
+        this.leg1.yRot = 0.7853982f;
+        this.leg0.yRot = -0.7853982f;
+        this.leg3.yRot = 0.3926991f;
+        this.leg2.yRot = -0.3926991f;
+        this.leg5.yRot = -0.3926991f;
+        this.leg4.yRot = 0.3926991f;
+        this.leg7.yRot = -0.7853982f;
+        this.leg6.yRot = 0.7853982f;
+        float i = -(Mth.cos(limbAngle * 0.6662f * 2.0f + 0.0f) * 0.4f) * limbDistance;
+        float j = -(Mth.cos(limbAngle * 0.6662f * 2.0f + (float)Math.PI) * 0.4f) * limbDistance;
+        float k = -(Mth.cos(limbAngle * 0.6662f * 2.0f + 1.5707964f) * 0.4f) * limbDistance;
+        float l = -(Mth.cos(limbAngle * 0.6662f * 2.0f + 4.712389f) * 0.4f) * limbDistance;
+        float m = Math.abs(Mth.sin(limbAngle * 0.6662f + 0.0f) * 0.4f) * limbDistance;
+        float n = Math.abs(Mth.sin(limbAngle * 0.6662f + (float)Math.PI) * 0.4f) * limbDistance;
+        float o = Math.abs(Mth.sin(limbAngle * 0.6662f + 1.5707964f) * 0.4f) * limbDistance;
+        float p = Math.abs(Mth.sin(limbAngle * 0.6662f + 4.712389f) * 0.4f) * limbDistance;
+        this.leg1.yRot += i;
+        this.leg0.yRot += -i;
+        this.leg3.yRot += j;
+        this.leg2.yRot += -j;
+        this.leg5.yRot += k;
+        this.leg4.yRot += -k;
+        this.leg7.yRot += l;
+        this.leg6.yRot += -l;
+        this.leg1.zRot += m;
+        this.leg0.zRot += -m;
+        this.leg3.zRot += n;
+        this.leg2.zRot += -n;
+        this.leg5.zRot += o;
+        this.leg4.zRot += -o;
+        this.leg7.zRot += p;
+        this.leg6.zRot += -p;
     }
 
 	@Override
-	public void render(MatrixStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		head.render(poseStack, buffer, packedLight, packedOverlay);
 		body0.render(poseStack, buffer, packedLight, packedOverlay);
 		body1.render(poseStack, buffer, packedLight, packedOverlay);
@@ -144,7 +144,7 @@ public class SoulArachnidModel<T extends SoulArachnidEntity> extends SinglePartE
 	}
 
     @Override
-    public ModelPart getPart() {
+    public ModelPart root() {
         return this.root;
     }
 }

@@ -1,38 +1,34 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.util.math.random.Random;
-
 import com.decodinator.liroth.core.LirothBlocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractPlantStemBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.VineLogic;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.NetherVines;
+import net.minecraft.world.level.block.WeepingVinesBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CustomWeepingVinesBlock
-extends AbstractPlantStemBlock {
-    protected static final VoxelShape SHAPE = Block.createCuboidShape(4.0, 9.0, 4.0, 12.0, 16.0, 12.0);
+public class CustomWeepingVinesBlock extends GrowingPlantHeadBlock {
+	   protected static final VoxelShape SHAPE = Block.box(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
-    public CustomWeepingVinesBlock(AbstractBlock.Settings settings) {
-        super(settings, Direction.DOWN, SHAPE, false, 0.1);
-    }
+	   public CustomWeepingVinesBlock(BlockBehaviour.Properties p_154966_) {
+	      super(p_154966_, Direction.DOWN, SHAPE, false, 0.1D);
+	   }
 
-    @Override
-    protected int getGrowthLength(Random random) {
-        return VineLogic.getGrowthLength(random);
-    }
+	   protected int getBlocksToGrowWhenBonemealed(RandomSource p_222680_) {
+	      return NetherVines.getBlocksToGrowWhenBonemealed(p_222680_);
+	   }
 
-    @Override
-    protected Block getPlant() {
-        return LirothBlocks.DAMNATION_VINES_PLANT;
-    }
+	   protected Block getBodyBlock() {
+	      return LirothBlocks.DAMNATION_VINES_PLANT;
+	   }
 
-    @Override
-    protected boolean chooseStemState(BlockState state) {
-        return VineLogic.isValidForWeepingStem(state);
-    }
-}
+	   protected boolean canGrowInto(BlockState p_154971_) {
+	      return NetherVines.isValidGrowthState(p_154971_);
+	   }
+	}

@@ -1,71 +1,100 @@
 package com.decodinator.liroth.entities.boats;
 
+import com.decodinator.liroth.core.LirothBoat;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.BoatEntityModel;
-import net.minecraft.client.render.entity.model.CompositeEntityModel;
-import net.minecraft.entity.vehicle.BoatEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.ListModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
-@Environment(EnvType.CLIENT)
-public class LirothBoatEntityModel extends CompositeEntityModel<LirothBoatEntity> {
-    private static final String LEFT_PADDLE = "left_paddle";
-    private static final String RIGHT_PADDLE = "right_paddle";
-    private static final String WATER_PATCH = "water_patch";
-    private static final String BOTTOM = "bottom";
-    private static final String BACK = "back";
-    private static final String FRONT = "front";
-    private static final String RIGHT = "right";
-    private static final String LEFT = "left";
-    private final ModelPart leftPaddle;
-    private final ModelPart rightPaddle;
-    private final ModelPart waterPatch;
-    private final ImmutableList<ModelPart> parts;
+@Environment(value=EnvType.CLIENT)
+public class LirothBoatEntityModel extends ListModel<LirothBoat> {
+	   private static final String LEFT_PADDLE = "left_paddle";
+	   private static final String RIGHT_PADDLE = "right_paddle";
+	   private static final String WATER_PATCH = "water_patch";
+	   private static final String BOTTOM = "bottom";
+	   private static final String BACK = "back";
+	   private static final String FRONT = "front";
+	   private static final String RIGHT = "right";
+	   private static final String LEFT = "left";
+	   private static final String CHEST_BOTTOM = "chest_bottom";
+	   private static final String CHEST_LID = "chest_lid";
+	   private static final String CHEST_LOCK = "chest_lock";
+	   private final ModelPart leftPaddle;
+	   private final ModelPart rightPaddle;
+	   private final ModelPart waterPatch;
+	   private final ImmutableList<ModelPart> parts;
 
-    public LirothBoatEntityModel(ModelPart root) {
-        this.leftPaddle = root.getChild("left_paddle");
-        this.rightPaddle = root.getChild("right_paddle");
-        this.waterPatch = root.getChild("water_patch");
-        this.parts = ImmutableList.of(root.getChild("bottom"), root.getChild("back"), root.getChild("front"), root.getChild("right"), root.getChild("left"), this.leftPaddle, this.rightPaddle);
-    }
+	   public LirothBoatEntityModel(ModelPart p_233345_, boolean p_233346_) {
+	      this.leftPaddle = p_233345_.getChild("left_paddle");
+	      this.rightPaddle = p_233345_.getChild("right_paddle");
+	      this.waterPatch = p_233345_.getChild("water_patch");
+	      ImmutableList.Builder<ModelPart> builder = new ImmutableList.Builder<>();
+	      builder.add(p_233345_.getChild("bottom"), p_233345_.getChild("back"), p_233345_.getChild("front"), p_233345_.getChild("right"), p_233345_.getChild("left"), this.leftPaddle, this.rightPaddle);
+	      if (p_233346_) {
+	         builder.add(p_233345_.getChild("chest_bottom"));
+	         builder.add(p_233345_.getChild("chest_lid"));
+	         builder.add(p_233345_.getChild("chest_lock"));
+	      }
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild("bottom", ModelPartBuilder.create().uv(0, 0).cuboid(-14.0F, -9.0F, -3.0F, 28.0F, 16.0F, 3.0F), ModelTransform.of(0.0F, 3.0F, 1.0F, 1.5707964F, 0.0F, 0.0F));
-        modelPartData.addChild("back", ModelPartBuilder.create().uv(0, 19).cuboid(-13.0F, -7.0F, -1.0F, 18.0F, 6.0F, 2.0F), ModelTransform.of(-15.0F, 4.0F, 4.0F, 0.0F, 4.712389F, 0.0F));
-        modelPartData.addChild("front", ModelPartBuilder.create().uv(0, 27).cuboid(-8.0F, -7.0F, -1.0F, 16.0F, 6.0F, 2.0F), ModelTransform.of(15.0F, 4.0F, 0.0F, 0.0F, 1.5707964F, 0.0F));
-        modelPartData.addChild("right", ModelPartBuilder.create().uv(0, 35).cuboid(-14.0F, -7.0F, -1.0F, 28.0F, 6.0F, 2.0F), ModelTransform.of(0.0F, 4.0F, -9.0F, 0.0F, 3.1415927F, 0.0F));
-        modelPartData.addChild("left", ModelPartBuilder.create().uv(0, 43).cuboid(-14.0F, -7.0F, -1.0F, 28.0F, 6.0F, 2.0F), ModelTransform.pivot(0.0F, 4.0F, 9.0F));
-        float f = -5.0F;
-        modelPartData.addChild("left_paddle", ModelPartBuilder.create().uv(62, 0).cuboid(-1.0F, 0.0F, -5.0F, 2.0F, 2.0F, 18.0F).cuboid(-1.001F, -3.0F, 8.0F, 1.0F, 6.0F, 7.0F), ModelTransform.of(3.0F, -5.0F, 9.0F, 0.0F, 0.0F, 0.19634955F));
-        modelPartData.addChild("right_paddle", ModelPartBuilder.create().uv(62, 20).cuboid(-1.0F, 0.0F, -5.0F, 2.0F, 2.0F, 18.0F).cuboid(0.001F, -3.0F, 8.0F, 1.0F, 6.0F, 7.0F), ModelTransform.of(3.0F, -5.0F, -9.0F, 0.0F, 3.1415927F, 0.19634955F));
-        modelPartData.addChild("water_patch", ModelPartBuilder.create().uv(0, 0).cuboid(-14.0F, -9.0F, -3.0F, 28.0F, 16.0F, 3.0F), ModelTransform.of(0.0F, -3.0F, 1.0F, 1.5707964F, 0.0F, 0.0F));
-        return TexturedModelData.of(modelData, 128, 64);
-    }
+	      this.parts = builder.build();
+	   }
 
-    public void setAngles(LirothBoatEntity boatEntity, float f, float g, float h, float i, float j) {
-        setPaddleAngle(boatEntity, 0, this.leftPaddle, f);
-        setPaddleAngle(boatEntity, 1, this.rightPaddle, f);
-    }
+	   public static LayerDefinition createBodyModel(boolean p_233348_) {
+	      MeshDefinition meshdefinition = new MeshDefinition();
+	      PartDefinition partdefinition = meshdefinition.getRoot();
+	      int i = 32;
+	      int j = 6;
+	      int k = 20;
+	      int l = 4;
+	      int i1 = 28;
+	      partdefinition.addOrReplaceChild("bottom", CubeListBuilder.create().texOffs(0, 0).addBox(-14.0F, -9.0F, -3.0F, 28.0F, 16.0F, 3.0F), PartPose.offsetAndRotation(0.0F, 3.0F, 1.0F, ((float)Math.PI / 2F), 0.0F, 0.0F));
+	      partdefinition.addOrReplaceChild("back", CubeListBuilder.create().texOffs(0, 19).addBox(-13.0F, -7.0F, -1.0F, 18.0F, 6.0F, 2.0F), PartPose.offsetAndRotation(-15.0F, 4.0F, 4.0F, 0.0F, ((float)Math.PI * 1.5F), 0.0F));
+	      partdefinition.addOrReplaceChild("front", CubeListBuilder.create().texOffs(0, 27).addBox(-8.0F, -7.0F, -1.0F, 16.0F, 6.0F, 2.0F), PartPose.offsetAndRotation(15.0F, 4.0F, 0.0F, 0.0F, ((float)Math.PI / 2F), 0.0F));
+	      partdefinition.addOrReplaceChild("right", CubeListBuilder.create().texOffs(0, 35).addBox(-14.0F, -7.0F, -1.0F, 28.0F, 6.0F, 2.0F), PartPose.offsetAndRotation(0.0F, 4.0F, -9.0F, 0.0F, (float)Math.PI, 0.0F));
+	      partdefinition.addOrReplaceChild("left", CubeListBuilder.create().texOffs(0, 43).addBox(-14.0F, -7.0F, -1.0F, 28.0F, 6.0F, 2.0F), PartPose.offset(0.0F, 4.0F, 9.0F));
+	      if (p_233348_) {
+	         partdefinition.addOrReplaceChild("chest_bottom", CubeListBuilder.create().texOffs(0, 76).addBox(0.0F, 0.0F, 0.0F, 12.0F, 8.0F, 12.0F), PartPose.offsetAndRotation(-2.0F, -5.0F, -6.0F, 0.0F, (-(float)Math.PI / 2F), 0.0F));
+	         partdefinition.addOrReplaceChild("chest_lid", CubeListBuilder.create().texOffs(0, 59).addBox(0.0F, 0.0F, 0.0F, 12.0F, 4.0F, 12.0F), PartPose.offsetAndRotation(-2.0F, -9.0F, -6.0F, 0.0F, (-(float)Math.PI / 2F), 0.0F));
+	         partdefinition.addOrReplaceChild("chest_lock", CubeListBuilder.create().texOffs(0, 59).addBox(0.0F, 0.0F, 0.0F, 2.0F, 4.0F, 1.0F), PartPose.offsetAndRotation(-1.0F, -6.0F, -1.0F, 0.0F, (-(float)Math.PI / 2F), 0.0F));
+	      }
 
-    public ImmutableList<ModelPart> getParts() {
-        return this.parts;
-    }
+	      int j1 = 20;
+	      int k1 = 7;
+	      int l1 = 6;
+	      float f = -5.0F;
+	      partdefinition.addOrReplaceChild("left_paddle", CubeListBuilder.create().texOffs(62, 0).addBox(-1.0F, 0.0F, -5.0F, 2.0F, 2.0F, 18.0F).addBox(-1.001F, -3.0F, 8.0F, 1.0F, 6.0F, 7.0F), PartPose.offsetAndRotation(3.0F, -5.0F, 9.0F, 0.0F, 0.0F, 0.19634955F));
+	      partdefinition.addOrReplaceChild("right_paddle", CubeListBuilder.create().texOffs(62, 20).addBox(-1.0F, 0.0F, -5.0F, 2.0F, 2.0F, 18.0F).addBox(0.001F, -3.0F, 8.0F, 1.0F, 6.0F, 7.0F), PartPose.offsetAndRotation(3.0F, -5.0F, -9.0F, 0.0F, (float)Math.PI, 0.19634955F));
+	      partdefinition.addOrReplaceChild("water_patch", CubeListBuilder.create().texOffs(0, 0).addBox(-14.0F, -9.0F, -3.0F, 28.0F, 16.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -3.0F, 1.0F, ((float)Math.PI / 2F), 0.0F, 0.0F));
+	      return LayerDefinition.create(meshdefinition, 128, p_233348_ ? 128 : 64);
+	   }
 
-    public ModelPart getWaterPatch() {
-        return this.waterPatch;
-    }
+	   public void setupAnim(LirothBoat p_102269_, float p_102270_, float p_102271_, float p_102272_, float p_102273_, float p_102274_) {
+	      animatePaddle(p_102269_, 0, this.leftPaddle, p_102270_);
+	      animatePaddle(p_102269_, 1, this.rightPaddle, p_102270_);
+	   }
 
-    private static void setPaddleAngle(LirothBoatEntity entity, int sigma, ModelPart part, float angle) {
-        float f = entity.interpolatePaddlePhase(sigma, angle);
-        part.pitch = MathHelper.clampedLerp(-1.0471976F, -0.2617994F, (MathHelper.sin(-f) + 1.0F) / 2.0F);
-        part.yaw = MathHelper.clampedLerp(-0.7853982F, 0.7853982F, (MathHelper.sin(-f + 1.0F) + 1.0F) / 2.0F);
-        if (sigma == 1) {
-            part.yaw = 3.1415927F - part.yaw;
-        }
+	   public ImmutableList<ModelPart> parts() {
+	      return this.parts;
+	   }
 
-    }
-}
+	   public ModelPart waterPatch() {
+	      return this.waterPatch;
+	   }
+
+	   private static void animatePaddle(LirothBoat p_170465_, int p_170466_, ModelPart p_170467_, float p_170468_) {
+	      float f = p_170465_.getRowingTime(p_170466_, p_170468_);
+	      p_170467_.xRot = Mth.clampedLerp((-(float)Math.PI / 3F), -0.2617994F, (Mth.sin(-f) + 1.0F) / 2.0F);
+	      p_170467_.yRot = Mth.clampedLerp((-(float)Math.PI / 4F), ((float)Math.PI / 4F), (Mth.sin(-f + 1.0F) + 1.0F) / 2.0F);
+	      if (p_170466_ == 1) {
+	         p_170467_.yRot = (float)Math.PI - p_170467_.yRot;
+	      }
+
+	   }
+	}

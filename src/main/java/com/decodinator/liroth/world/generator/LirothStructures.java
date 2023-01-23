@@ -1,11 +1,11 @@
 package com.decodinator.liroth.world.generator;
 
+
 import com.decodinator.liroth.Liroth;
 
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.structure.StructureType;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.structure.StructureType;
 
 public class LirothStructures {
 
@@ -22,9 +22,9 @@ public class LirothStructures {
     public static StructureType<NovaTowerStructure> NOVA_TOWER;
     public static StructureType<OldenLirothPortalStructure> OLDEN_LIROTH_PORTAL;
     
-    public static void registerStructureFeatures() {
-    	LIROTH_FORTRESS = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(Liroth.MOD_ID, "liroth_fortress"), () -> LirothFortressStructure.CODEC);
-    	NOVA_TOWER = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(Liroth.MOD_ID, "nova_tower"), () -> NovaTowerStructure.CODEC);
-    	OLDEN_LIROTH_PORTAL = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(Liroth.MOD_ID, "olden_liroth_portal"), () -> OldenLirothPortalStructure.CODEC);
+    public static void init() {
+    	LIROTH_FORTRESS = Registry.register(Registry.STRUCTURE_TYPES, new ResourceLocation(Liroth.MOD_ID, "liroth_fortress"), () -> LirothFortressStructure.CODEC);
+    	NOVA_TOWER = Registry.register(Registry.STRUCTURE_TYPES, new ResourceLocation(Liroth.MOD_ID, "nova_tower"), () -> NovaTowerStructure.CODEC);
+    	OLDEN_LIROTH_PORTAL = Registry.register(Registry.STRUCTURE_TYPES, new ResourceLocation(Liroth.MOD_ID, "olden_liroth_portal"), () -> OldenLirothPortalStructure.CODEC);
     }
 }

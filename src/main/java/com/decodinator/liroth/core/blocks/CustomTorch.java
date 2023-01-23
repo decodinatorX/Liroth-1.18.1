@@ -1,11 +1,12 @@
 package com.decodinator.liroth.core.blocks;
 
-import net.minecraft.block.TorchBlock;
-import net.minecraft.particle.ParticleEffect;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.TorchBlock;
 
 public class CustomTorch extends TorchBlock {
 
-	public CustomTorch(Settings settings, ParticleEffect particle) {
+	public CustomTorch(Block.Properties settings, ParticleOptions particle) {
 		super(settings, particle);
 	}
 }

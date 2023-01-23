@@ -1,43 +1,43 @@
 package com.decodinator.liroth.core.blocks;
 
-import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothBlocks;
+import com.decodinator.liroth.core.LirothFluids;
 
-import net.minecraft.block.AbstractPlantStemBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.KelpPlantBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.GrowingPlantBodyBlock;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.LiquidBlockContainer;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.shapes.Shapes;
 
-public class CustomKelpPlantBlock extends KelpPlantBlock {
+public class CustomKelpPlantBlock extends GrowingPlantBodyBlock implements LiquidBlockContainer {
+	   public CustomKelpPlantBlock(BlockBehaviour.Properties p_54323_) {
+		      super(p_54323_, Direction.UP, Shapes.block(), true);
+		   }
 
-	public CustomKelpPlantBlock(Settings settings) {
-		super(settings);
-	}
+		   protected GrowingPlantHeadBlock getHeadBlock() {
+		      return (GrowingPlantHeadBlock)LirothBlocks.VILE_TENTACLE_TIP;
+		   }
 
-    @Override
-    protected AbstractPlantStemBlock getStem() {
-        return (AbstractPlantStemBlock)LirothBlocks.VILE_TENTACLE_TIP;
-    }
-    
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return Liroth.LIROTH_FLUID_STILL.getStill(false);
-    }
-    
-    @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        entity.slowMovement(state, new Vec3d(0.8f, 0.75, 0.8f));
-        if (!(world.isClient || entity.lastRenderX == entity.getX() && entity.lastRenderZ == entity.getZ())) {
-            double d = Math.abs(entity.getX() - entity.lastRenderX);
-            double e = Math.abs(entity.getZ() - entity.lastRenderZ);
-            if (d >= (double)0.003f || e >= (double)0.003f) {
-                entity.damage(DamageSource.SWEET_BERRY_BUSH, 1.0f);
-            }
-        }
-    }
-}
+		   public FluidState getFluidState(BlockState p_54336_) {
+		      return LirothFluids.LIROTH_FLUID_STILL.getSource(false);
+		   }
+
+		   protected boolean canAttachTo(BlockState p_153457_) {
+			   return true;
+		   }
+
+		   public boolean canPlaceLiquid(BlockGetter p_54325_, BlockPos p_54326_, BlockState p_54327_, Fluid p_54328_) {
+		      return false;
+		   }
+
+		   public boolean placeLiquid(LevelAccessor p_54330_, BlockPos p_54331_, BlockState p_54332_, FluidState p_54333_) {
+		      return false;
+		   }
+		}
