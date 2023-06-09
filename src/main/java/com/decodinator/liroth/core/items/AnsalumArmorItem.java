@@ -21,8 +21,8 @@ public class AnsalumArmorItem extends ArmorItem {
                     .put(LirothArmorMaterials.ANSALUM_LIROTH_ARMOR_MATERIAL,
                             new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 1, true, false, false)).build();
 
-    public AnsalumArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-        super(material, slot, settings);
+    public AnsalumArmorItem(ArmorMaterial material, Type type, Properties settings) {
+        super(material, type, settings);
     }
 
     @Override

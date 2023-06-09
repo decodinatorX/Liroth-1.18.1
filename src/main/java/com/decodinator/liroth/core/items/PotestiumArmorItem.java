@@ -24,8 +24,8 @@ public class PotestiumArmorItem extends ArmorItem {
                     .put(LirothArmorMaterials.POTESTIUM_LIROTH_ARMOR_MATERIAL,
                             new MobEffectInstance(MobEffects.SATURATION, 200, 1, true, false, false)).build();
 
-    public PotestiumArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-        super(material, slot, settings);
+    public PotestiumArmorItem(ArmorMaterial material, Type type, Properties settings) {
+        super(material, type, settings);
     }
 
     @Override

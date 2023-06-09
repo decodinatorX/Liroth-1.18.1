@@ -24,8 +24,8 @@ public class QuantumArmorItem extends ArmorItem {
                     .put(LirothArmorMaterials.QUANTUM_LIROTH_ARMOR_MATERIAL,
                             new MobEffectInstance(MobEffects.REGENERATION, 200, 1, true, false, false)).build();
 
-    public QuantumArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-        super(material, slot, settings);
+    public QuantumArmorItem(ArmorMaterial material, Type type, Properties settings) {
+        super(material, type, settings);
     }
 
     @Override

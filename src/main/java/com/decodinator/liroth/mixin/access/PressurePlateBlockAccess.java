@@ -1,5 +1,6 @@
 package com.decodinator.liroth.mixin.access;
 
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
@@ -11,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 public interface PressurePlateBlockAccess {
 
     @Invoker("<init>")
-    static PressurePlateBlock create(PressurePlateBlock.Sensitivity type, BlockBehaviour.Properties settings, SoundEvent depressSound, SoundEvent pressSound) {
+    static PressurePlateBlock create(PressurePlateBlock.Sensitivity sensitivity, BlockBehaviour.Properties properties, BlockSetType blockSetType) {
         throw new Error("Mixin did not apply!");
     }
 }

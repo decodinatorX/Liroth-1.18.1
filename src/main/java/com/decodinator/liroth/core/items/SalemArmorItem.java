@@ -21,8 +21,8 @@ public class SalemArmorItem extends ArmorItem {
                     .put(LirothArmorMaterials.SALEM_LIROTH_ARMOR_MATERIAL,
                             new MobEffectInstance(MobEffects.CONDUIT_POWER, 400, 1)).build();
 
-    public SalemArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-        super(material, slot, settings);
+    public SalemArmorItem(ArmorMaterial material, Type type, Properties settings) {
+        super(material, type, settings);
     }
 
     @Override

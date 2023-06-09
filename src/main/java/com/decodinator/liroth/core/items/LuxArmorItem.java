@@ -8,7 +8,6 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -21,8 +20,8 @@ public class LuxArmorItem extends ArmorItem {
                     .put(LirothArmorMaterials.LUX_LIROTH_ARMOR_MATERIAL,
                             new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, true, false, false)).build();
 
-    public LuxArmorItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-        super(material, slot, settings);
+    public LuxArmorItem(ArmorMaterial material, Type type, Properties settings) {
+        super(material, type, settings);
     }
 
     @Override

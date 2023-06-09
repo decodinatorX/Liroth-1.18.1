@@ -6,8 +6,8 @@ import net.minecraft.world.item.ArmorMaterial;
 
 public class PotestiumHelmItem extends ArmorItem {
 
-	public PotestiumHelmItem(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-		super(material, slot, settings);
+	public PotestiumHelmItem(ArmorMaterial material, Type type, Properties settings) {
+		super(material, type, settings);
 	}
 	
 }

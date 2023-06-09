@@ -1,6 +1,5 @@
 package com.decodinator.liroth.core.blocks;
 
-import javax.annotation.Nullable;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.LirothParticles;
@@ -32,6 +31,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 public class LirothSplitterBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;

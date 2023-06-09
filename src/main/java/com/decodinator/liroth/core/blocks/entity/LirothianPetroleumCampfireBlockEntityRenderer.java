@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 @Environment(value=EnvType.CLIENT)
@@ -41,7 +42,7 @@ implements BlockEntityRenderer<LirothianPetroleumCampfireBlockEntity> {
 	            p_112346_.mulPose(Axis.XP.rotationDegrees(90.0F));
 	            p_112346_.translate(-0.3125D, -0.3125D, 0.0D);
 	            p_112346_.scale(0.375F, 0.375F, 0.375F);
-	            this.itemRenderer.renderStatic(itemstack, ItemTransforms.TransformType.FIXED, p_112348_, p_112349_, p_112346_, p_112347_, i + j);
+				this.itemRenderer.renderStatic(itemstack, ItemDisplayContext.FIXED, i, j, p_112346_, p_112347_, p_112344_.getLevel(), p_112348_ + p_112349_);
 	            p_112346_.popPose();
 	         }
 	      }

@@ -3,7 +3,6 @@ package com.decodinator.liroth.core;
 import com.decodinator.liroth.Liroth;
 import com.google.common.collect.Lists;
 import java.util.List;
-import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +28,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntitySelector;
@@ -136,13 +134,6 @@ public class LirothBoat extends Boat {
     }
 
     @Override
-    public void animateHurt() {
-        this.setHurtDir(-this.getHurtDir());
-        this.setHurtTime(10);
-        this.setDamage(this.getDamage() * 11.0F);
-    }
-
-    @Override
     protected void checkFallDamage(double p_38307_, boolean p_38308_, BlockState p_38309_, BlockPos p_38310_) {
         this.lastYd = this.getDeltaMovement().y;
         if (!this.isPassenger()) {
@@ -153,10 +144,10 @@ public class LirothBoat extends Boat {
                     return;
                  }
 
-                 this.causeFallDamage(this.fallDistance, 1.0F, DamageSource.FALL);
-                 if (!this.level.isClientSide && !this.isRemoved()) {
+                 this.causeFallDamage(this.fallDistance, 1.0F, this.damageSources().fall());
+                 if (!this.level().isClientSide && !this.isRemoved()) {
                     this.kill();
-                    if (this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                    if (this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                        for(int i = 0; i < 3; ++i) {
                           this.spawnAtLocation(this.getLirothBoatType().getPlanks());
                        }
@@ -169,7 +160,7 @@ public class LirothBoat extends Boat {
               }
 
               this.resetFallDistance();
-           } else if (!(this.level.getFluidState(this.blockPosition().below()).is(FluidTags.WATER)) && p_38307_ < 0.0D) {
+           } else if (!(this.level().getFluidState(this.blockPosition().below()).is(FluidTags.WATER)) && p_38307_ < 0.0D) {
               this.fallDistance -= (float)p_38307_;
            }
 
@@ -179,7 +170,7 @@ public class LirothBoat extends Boat {
     public boolean hurt(DamageSource p_38319_, float p_38320_) {
         if (this.isInvulnerableTo(p_38319_)) {
            return false;
-        } else if (!this.level.isClientSide && !this.isRemoved()) {
+        } else if (!this.level().isClientSide && !this.isRemoved()) {
            this.setHurtDir(-this.getHurtDir());
            this.setHurtTime(10);
            this.setDamage(this.getDamage() + p_38320_ * 10.0F);
@@ -187,7 +178,7 @@ public class LirothBoat extends Boat {
            this.gameEvent(GameEvent.ENTITY_DAMAGE, p_38319_.getEntity());
            boolean flag = p_38319_.getEntity() instanceof Player && ((Player)p_38319_.getEntity()).getAbilities().instabuild;
            if (flag || this.getDamage() > 40.0F) {
-              if (!flag && this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+              if (!flag && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                  this.destroy(p_38319_);
               }
 

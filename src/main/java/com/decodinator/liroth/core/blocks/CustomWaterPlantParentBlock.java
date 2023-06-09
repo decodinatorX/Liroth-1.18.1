@@ -1,6 +1,5 @@
 package com.decodinator.liroth.core.blocks;
 
-import javax.annotation.Nullable;
 
 import com.decodinator.liroth.core.LirothFluids;
 
@@ -22,6 +21,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class CustomWaterPlantParentBlock extends Block implements SimpleWaterloggedBlock {
 	   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;

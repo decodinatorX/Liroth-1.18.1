@@ -2,7 +2,6 @@ package com.decodinator.liroth.core.blocks;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
 
 import com.decodinator.liroth.core.LirothFluids;
 

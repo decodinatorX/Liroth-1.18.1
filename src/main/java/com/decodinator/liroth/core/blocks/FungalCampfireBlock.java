@@ -2,7 +2,6 @@ package com.decodinator.liroth.core.blocks;
 
 import java.util.Optional;
 
-import javax.annotation.Nullable;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntity;
@@ -20,6 +19,8 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -56,6 +57,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class FungalCampfireBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
 	   protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
@@ -95,7 +97,7 @@ public class FungalCampfireBlock extends BaseEntityBlock implements SimpleWaterl
 
 	   public void entityInside(BlockState p_51269_, Level p_51270_, BlockPos p_51271_, Entity p_51272_) {
 	      if (p_51269_.getValue(LIT) && p_51272_ instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)p_51272_)) {
-	         p_51272_.hurt(DamageSource.IN_FIRE, (float)this.fireDamage);
+	         p_51272_.hurt(p_51272_.damageSources().inFire(), (float)this.fireDamage);
 	      }
 
 	      super.entityInside(p_51269_, p_51270_, p_51271_, p_51272_);

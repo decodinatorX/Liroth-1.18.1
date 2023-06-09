@@ -1,6 +1,5 @@
 package com.decodinator.liroth.core;
 
-import javax.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +29,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 public class LirothChestBoat extends LirothBoat implements HasCustomInventoryScreen, ContainerEntity {
    private static final int CONTAINER_SIZE = 27;
@@ -70,24 +70,24 @@ public class LirothChestBoat extends LirothBoat implements HasCustomInventoryScr
 
    public void destroy(DamageSource p_219892_) {
       super.destroy(p_219892_);
-      this.chestVehicleDestroyed(p_219892_, this.level, this);
+      this.chestVehicleDestroyed(p_219892_, this.level(), this);
    }
 
    public void remove(Entity.RemovalReason p_219894_) {
-      if (!this.level.isClientSide && p_219894_.shouldDestroy()) {
-         Containers.dropContents(this.level, this, this);
+      if (!this.level().isClientSide && p_219894_.shouldDestroy()) {
+         Containers.dropContents(this.level(), this, this);
       }
 
       super.remove(p_219894_);
    }
 
    public InteractionResult interact(Player p_219898_, InteractionHand p_219899_) {
-      return this.canAddPassenger(p_219898_) && !p_219898_.isSecondaryUseActive() ? super.interact(p_219898_, p_219899_) : this.interactWithChestVehicle(this::gameEvent, p_219898_);
+      return this.canAddPassenger(p_219898_) && !p_219898_.isSecondaryUseActive() ? super.interact(p_219898_, p_219899_) : this.interactWithContainerVehicle(p_219898_);
    }
 
    public void openCustomInventoryScreen(Player p_219906_) {
       p_219906_.openMenu(this);
-      if (!p_219906_.level.isClientSide) {
+      if (!p_219906_.level().isClientSide) {
          this.gameEvent(GameEvent.CONTAINER_OPEN, p_219906_);
          PiglinAi.angerNearbyPiglins(p_219906_, true);
       }

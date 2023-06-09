@@ -108,7 +108,7 @@ public class LirothEntities {
 	
     public static AbstractArrow createBeamProjectile(LivingEntity entity, ItemStack stack, float damageModifier) {
     	BeamItem beamItem = (BeamItem)(stack.getItem() instanceof BeamItem ? stack.getItem() : LirothItems.COOL_BEAM);
-    	AbstractArrow persistentProjectileEntity = beamItem.createBeam(entity.level, stack, entity);
+    	AbstractArrow persistentProjectileEntity = beamItem.createBeam(entity.level(), stack, entity);
         persistentProjectileEntity.setEnchantmentEffectsFromEntity(entity, damageModifier);
         return persistentProjectileEntity;
     }

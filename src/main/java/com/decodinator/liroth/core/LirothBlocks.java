@@ -35,9 +35,9 @@ import net.minecraft.world.level.block.SporeBlossomBlock;
 import net.minecraft.world.level.block.TallFlowerBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.block.state.properties.WoodType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +138,6 @@ public class LirothBlocks {
 //    public static final Block CORRUPTED_LIROTH_GEM_BLOCK = createPillarMetalBlock("corrupted_liroth_gem_block");
 //    public static final Block CORRUPTED_LIROTH_GEM_ORE = createOre("corrupted_liroth_gem_ore");
     public static final Block DAMNATION_CRAFTING_TABLE = createCraftingTable("damnation_crafting_table");
-    public static final Block DAMNATION_CHEST = createChest("damnation_chest");
     public static final Block DAMNATION_FENCE = createFence("damnation_fence");
     public static final Block DAMNATION_FUNGAL_CLUSTER = createFungusClusterPlant("damnation_fungal_cluster");
     public static final Block DAMNATION_FUNGUS = createFungusPlant("damnation_fungus");
@@ -149,6 +148,7 @@ public class LirothBlocks {
     public static final Block DAMNATION_LEAVES = createLeaves("damnation_leaves");
     public static final Block DAMNATION_LOG = createDamnationLog("damnation_log");
     public static final Block DAMNATION_PLANKS = createPlanks("damnation_planks");
+    public static final Block DAMNATION_CHEST = createChest("damnation_chest", DAMNATION_PLANKS);
     public static final LirothPortalBlock DAMNATION_DIMENSION_PORTAL = createLirothPortal("damnation_portal");
     public static final Block DAMNATION_SOIL = createDamnationSoil("damnation_soil");
     public static final Block DAMNATION_DOOR = createDoor("damnation_door");
@@ -190,7 +190,6 @@ public class LirothBlocks {
     public static final Block JALSPHIRE_TRACKWAY = createStone("jalsphire_trackway");
     public static final LirothPortalBlock JANTIRO_DIMENSION_PORTAL = createLirothPortal("jantiro_escape_dimension_portal");
     public static final Block JAPZ_BLOSSOM = createSporeBlossom("japz_blossom");
-    public static final Block JAPZ_CHEST = createChest("japz_chest");
     public static final Block JAPZ_CRAFTING_TABLE = createCraftingTable("japz_crafting_table");
     public static final Block JAPZ_FENCE = createFence("japz_fence");
     public static final Block JAPZ_LEAVES = createLeaves("japz_leaves");
@@ -199,6 +198,7 @@ public class LirothBlocks {
     public static final Block JAPZ_MOSS = createMoss("japz_moss_block");
     public static final Block JAPZ_MOSS_CARPET = createMossCarpet("japz_moss_carpet");
     public static final Block JAPZ_PLANKS = createPlanks("japz_planks");
+    public static final Block JAPZ_CHEST = createChest("japz_chest", JAPZ_PLANKS);
     public static final Block JAPZ_STAIRS = createWoodStairs("japz_stairs");
     public static final Block JAPZ_DOOR = createDoor("japz_door");
     public static final Block JAPZ_SLAB = createWoodSlab("japz_slab");
@@ -206,12 +206,12 @@ public class LirothBlocks {
     public static final Block JAPZ_VINES = createCaveVinesHead("japz_vines");
     public static final Block JAPZ_VINES_PLANT = createCaveVinesBody("japz_vines_plant");
     public static final Block JAPZ_WOOD = createWood("japz_wood");
-    public static final Block KOOLAW_CHEST = createChest("koolaw_chest");
     public static final Block KOOLAW_CRAFTING_TABLE = createCraftingTable("koolaw_crafting_table");
     public static final Block KOOLAW_FENCE = createFence("koolaw_fence");
     public static final Block KOOLAW_LEAVES = createLeaves("koolaw_leaves");
     public static final Block KOOLAW_LOG = createLog("koolaw_log");
     public static final Block KOOLAW_PLANKS = createPlanks("koolaw_planks");
+    public static final Block KOOLAW_CHEST = createChest("koolaw_chest", KOOLAW_PLANKS);
     public static final Block KOOLAW_STAIRS = createWoodStairs("koolaw_stairs");
     public static final Block KOOLAW_DOOR = createDoor("koolaw_door");
     public static final Block KOOLAW_SLAB = createWoodSlab("koolaw_slab");
@@ -219,7 +219,6 @@ public class LirothBlocks {
     public static final Block KOOLAW_WOOD = createWood("koolaw_wood");
     public static final Block NETHER_LIROTH_GEM_ORE = createOre("nether_liroth_gem_ore");
     public static final Block LIROTH_BONE_BLOCK = createBoneBlock("liroth_bone_block");
-    public static final Block LIROTH_CHEST = createChest("liroth_chest");
     public static final Block LIROTH_COBBLESTONE = createStone("liroth_cobblestone");
     public static final Block LIROTH_COBBLESTONE_WALL = createStoneWall("liroth_cobblestone_wall");
     public static final Block LIROTH_COBBLESTONE_STAIRS = createStoneStairs("liroth_cobblestone_stairs");
@@ -239,6 +238,7 @@ public class LirothBlocks {
     public static final Block LIROTHIAN_LIROTH_ORE = createOre("lirothian_liroth_ore");
     public static final Block LIROTH_ORE = createOre("liroth_gem_ore");
     public static final Block LIROTH_PLANKS = createPlanks("liroth_planks");
+    public static final Block LIROTH_CHEST = createChest("liroth_chest", LIROTH_PLANKS);
     public static final LirothPortalBlock LIROTH_DIMENSION_PORTAL = createLirothPortal("liroth_dimension_portal");
     public static final Block LIROTH_ROSE = createFlower("liroth_rose");
     public static final Block LIROTH_SOUL_SAND = createLirothSoulSand("liroth_soul_sand");
@@ -267,7 +267,6 @@ public class LirothBlocks {
     public static final Block LIROTHIAN_PETROLEUM_CAMPFIRE = createLirothianPetroleumCampfire("lirothian_petroleum_campfire");
     public static final Block OLDEN_LIROTH_GEM_BLOCK = createPillarMetalBlock("olden_liroth_gem_block");
     public static final Block PETRIFIED_DAMNATION_CRAFTING_TABLE = createCraftingTable("petrified_damnation_crafting_table");
-    public static final Block PETRIFIED_DAMNATION_CHEST = createChest("petrified_damnation_chest");
     public static final Block PETRIFIED_DAMNATION_LOG = createLog("petrified_damnation_log");
     public static final Block PETRIFIED_DAMNATION_BRICKS = createStone("petrified_damnation_bricks");
     public static final Block PETRIFIED_DAMNATION_BRICK_STAIRS = createStoneStairs("petrified_damnation_brick_stairs");
@@ -275,6 +274,7 @@ public class LirothBlocks {
     public static final Block PETRIFIED_DAMNATION_BRICK_WALL = createStoneWall("petrified_damnation_brick_wall");
     public static final Block PETRIFIED_DAMNATION_DOOR = createDoor("petrified_damnation_door");
     public static final Block PETRIFIED_DAMNATION_PLANKS = createPlanks("petrified_damnation_planks");
+    public static final Block PETRIFIED_DAMNATION_CHEST = createChest("petrified_damnation_chest", PETRIFIED_DAMNATION_PLANKS);
     public static final Block PETRIFIED_DAMNATION_STAIRS = createWoodStairs("petrified_damnation_stairs");
     public static final Block PETRIFIED_DAMNATION_SLAB = createWoodSlab("petrified_damnation_slab");
     public static final Block PETRIFIED_DAMNATION_TRAPDOOR = createTrapDoor("petrified_damnation_trapdoor");
@@ -313,10 +313,10 @@ public class LirothBlocks {
     public static final Block SOULLESS_SOIL = createSoullessSoil("soulless_soil");
     public static final Block SOUL_ROD = createRod("soul_rod");
     public static final Block SPICED_CRAFTING_TABLE = createCraftingTable("spiced_crafting_table");
-    public static final Block SPICED_CHEST = createChest("spiced_chest");
     public static final Block SPICED_LEAVES = createLeaves("spiced_leaves");
     public static final Block SPICED_LOG = createLog("spiced_log");
     public static final Block SPICED_PLANKS = createPlanks("spiced_planks");
+    public static final Block SPICED_CHEST = createChest("spiced_chest", SPICED_PLANKS);
     public static final Block SPICED_DOOR = createDoor("spiced_door");
     public static final Block SPICED_FENCE = createFence("spiced_fence");
     public static final Block SPICED_SLAB = createWoodSlab("spiced_slab");
@@ -369,10 +369,11 @@ public class LirothBlocks {
     public static final Block STRIPPED_KOOLAW_WOOD = createWood("stripped_koolaw_wood");
     public static final Block STRIPPED_PETRIFIED_DAMNATION_WOOD = createWood("stripped_petrified_damnation_wood");
     public static final Block TALLPIER_CRAFTING_TABLE = createCraftingTable("tallpier_crafting_table");
-    public static final Block TALLPIER_CHEST = createChest("tallpier_chest");
     public static final Block TALLPIER_LEAVES = createLeaves("tallpier_leaves");
     public static final Block TALLPIER_LOG = createLog("tallpier_log");
     public static final Block TALLPIER_PLANKS = createPlanks("tallpier_planks");
+
+    public static final Block TALLPIER_CHEST = createChest("tallpier_chest", TALLPIER_PLANKS);
     public static final Block TALLPIER_DOOR = createDoor("tallpier_door");
     public static final Block TALLPIER_FENCE = createFence("tallpier_fence");
     public static final Block TALLPIER_SLAB = createWoodSlab("tallpier_slab");
@@ -583,14 +584,14 @@ public class LirothBlocks {
     }
     
     private static Block createLirothSplitter(String id) {
-        Block createBlock = new LirothSplitterBlock(Block.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(3.5f).lightLevel(LirothBlocks.createLightLevelFromLitBlockState(13)));
+        Block createBlock = new LirothSplitterBlock(Block.Properties.of().requiresCorrectToolForDrops().strength(3.5f).lightLevel(LirothBlocks.createLightLevelFromLitBlockState(13)));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
 	}
 
     private static Block createQuantumExtractor(String id) {
-        Block createBlock = new QuantumExtractorBlock(Block.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(3.5f).noOcclusion().lightLevel(LirothBlocks.createLightLevelFromLitBlockState(13)));
+        Block createBlock = new QuantumExtractorBlock(Block.Properties.of().requiresCorrectToolForDrops().strength(3.5f).noOcclusion().lightLevel(LirothBlocks.createLightLevelFromLitBlockState(13)));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
@@ -726,8 +727,8 @@ public class LirothBlocks {
         return createBlock;
     }
 
-    static Block createChest(String id) {
-        Block createBlock = new BaseChestBlock(Blocks.CHEST);
+    static Block createChest(String id, Block wood_type) {
+        Block createBlock = new BaseChestBlock.Wood(wood_type);
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
@@ -804,7 +805,7 @@ public class LirothBlocks {
     }
     
     static Block createFence(String id) {
-        Block createBlock = new FenceBlock(FabricBlockSettings.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f));
+        Block createBlock = new FenceBlock(FabricBlockSettings.of().sound(SoundType.WOOD).strength(2.0f, 3.0f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -812,7 +813,7 @@ public class LirothBlocks {
     }
 
     static Block createFenceGate(String id) {
-        Block createBlock = new FenceGateBlock(FabricBlockSettings.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f), SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN);
+        Block createBlock = new FenceGateBlock(FabricBlockSettings.of().sound(SoundType.WOOD).strength(2.0f, 3.0f), WoodType.OAK);
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -820,7 +821,7 @@ public class LirothBlocks {
     }
 
     static Block createSand(int dustColor, String id) {
-        Block createBlock = new SandBlock(dustColor, FabricBlockSettings.of(Material.SAND).sound(SoundType.SAND).strength(0.2f));
+        Block createBlock = new SandBlock(dustColor, FabricBlockSettings.of().sound(SoundType.SAND).strength(0.2f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -860,7 +861,7 @@ public class LirothBlocks {
     }
     
     static Block createWoodSlab(String id) {
-        Block createBlock = new SlabBlock(FabricBlockSettings.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f));
+        Block createBlock = new SlabBlock(FabricBlockSettings.of().sound(SoundType.WOOD).strength(2.0f, 3.0f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -868,7 +869,7 @@ public class LirothBlocks {
     }
 
     static Block createStoneSlab(String id) {
-        Block createBlock = new SlabBlock(FabricBlockSettings.of(Material.STONE).sound(SoundType.STONE).strength(2.0f, 6.0f));
+        Block createBlock = new SlabBlock(FabricBlockSettings.of().sound(SoundType.STONE).strength(2.0f, 6.0f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -876,7 +877,7 @@ public class LirothBlocks {
     }
 
     static Block createStoneWall(String id) {
-        Block createBlock = new WallBlock(FabricBlockSettings.of(Material.STONE).sound(SoundType.STONE).strength(2.0f, 6.0f));
+        Block createBlock = new WallBlock(FabricBlockSettings.of().sound(SoundType.STONE).strength(2.0f, 6.0f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -884,7 +885,7 @@ public class LirothBlocks {
     }
 
     static Block createWoodPressurePlate(String id) {
-        Block createBlock = PressurePlateBlockAccess.create(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.of(Material.WOOD).sound(SoundType.WOOD).noCollission().strength(0.5F), SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON);
+        Block createBlock = PressurePlateBlockAccess.create(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.of().sound(SoundType.WOOD).noCollission().strength(0.5F), BlockSetType.OAK);
         createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
@@ -902,37 +903,37 @@ public class LirothBlocks {
     }
 
     static Block createTrapDoor(String id) {
-        Block createBlock = TrapDoorBlockAccess.create(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion(), SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN);
+        Block createBlock = TrapDoorBlockAccess.create(Block.Properties.of().sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion(), BlockSetType.OAK);
         createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createMetalTrapDoor(String id) {
-        Block createBlock = TrapDoorBlockAccess.create(Block.Properties.of(Material.METAL, MaterialColor.COLOR_BLUE).sound(SoundType.METAL).strength(3.0f, 4.0f).noOcclusion(), SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN);
+        Block createBlock = TrapDoorBlockAccess.create(Block.Properties.of().sound(SoundType.METAL).strength(3.0f, 4.0f).noOcclusion(), BlockSetType.IRON);
         createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
     static Block createWoodButton(String id) {
-        Block createBlock = WoodButtonBlockAccess.create(Block.Properties.of(Material.DECORATION).sound(SoundType.WOOD).noCollission().strength(0.5F), 0, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
+        Block createBlock = WoodButtonBlockAccess.create(Block.Properties.of().sound(SoundType.WOOD).noCollission().strength(0.5F), BlockSetType.OAK, 0, true);
         createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
     static Block createDoor(String id) {
-        Block createBlock = DoorBlockAccess.create(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion(), SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN);
+        Block createBlock = DoorBlockAccess.create(Block.Properties.of().sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion(),  BlockSetType.OAK);
         createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
     
     static Block createMetalDoor(String id) {
-        Block createBlock = DoorBlockAccess.create(Block.Properties.of(Material.METAL, MaterialColor.COLOR_BLUE).sound(SoundType.METAL).strength(3.0f, 4.0f).noOcclusion(), SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN);
+        Block createBlock = DoorBlockAccess.create(Block.Properties.of().sound(SoundType.METAL).strength(3.0f, 4.0f).noOcclusion(),  BlockSetType.IRON);
         createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
 
     static Block createPlanks(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.WOOD, MaterialColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f));
+        Block createBlock = new Block(FabricBlockSettings.of().sound(SoundType.WOOD).strength(2.0f, 3.0f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -940,7 +941,7 @@ public class LirothBlocks {
     }
 
     static Block createWood(String id) {
-        Block createBlock = new RotatedPillarBlock(FabricBlockSettings.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0f));
+        Block createBlock = new RotatedPillarBlock(FabricBlockSettings.of().sound(SoundType.WOOD).strength(2.0f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -948,7 +949,7 @@ public class LirothBlocks {
     }
 
     static Block createStrippedLog(String id) {
-        Block createBlock = new RotatedPillarBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.COLOR_BLACK).sound(SoundType.WOOD).strength(2.0f));
+        Block createBlock = new RotatedPillarBlock(FabricBlockSettings.of().sound(SoundType.WOOD).strength(2.0f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -956,7 +957,7 @@ public class LirothBlocks {
     }
 
     static Block createLog(String id) {
-        Block createBlock = new RotatedPillarBlock(FabricBlockSettings.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0f));
+        Block createBlock = new RotatedPillarBlock(FabricBlockSettings.of().sound(SoundType.WOOD).strength(2.0f));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -964,7 +965,7 @@ public class LirothBlocks {
     }
     
     static Block createDamnationLog(String id) {
-        Block createBlock = new RotatedPillarBlock(FabricBlockSettings.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0f).emissiveRendering((state, world, pos) -> true));
+        Block createBlock = new RotatedPillarBlock(FabricBlockSettings.of().sound(SoundType.WOOD).strength(2.0f).emissiveRendering((state, world, pos) -> true));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -972,7 +973,7 @@ public class LirothBlocks {
     }
 
     static Block createFlower(String id) {
-        Block createBlock = new FlowerBlock(MobEffects.SATURATION, 7, FabricBlockSettings.of(Material.PLANT).sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion());
+        Block createBlock = new FlowerBlock(MobEffects.SATURATION, 7, FabricBlockSettings.of().sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion());
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
 
         createPottedBlock(createBlock, id);
@@ -982,7 +983,7 @@ public class LirothBlocks {
     }
 
     static Block createTallFlower(String id) {
-        Block createBlock = new TallFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion());
+        Block createBlock = new TallFlowerBlock(FabricBlockSettings.of().sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion());
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createPlantBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -991,7 +992,7 @@ public class LirothBlocks {
     }
 
     static Block createPottedBlock(Block blockForPot, String id) {
-        Block createBlock = new FlowerPotBlock(blockForPot, FabricBlockSettings.of(Material.WOOD).instabreak().noOcclusion());
+        Block createBlock = new FlowerPotBlock(blockForPot, FabricBlockSettings.of().instabreak().noOcclusion());
 //        Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, "potted_" + id), createBlock);
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, "potted_" + id), createBlock); //Forge
         flowerPotBlocks.add(createBlock);
@@ -1000,7 +1001,7 @@ public class LirothBlocks {
     }
 
     static Block createShroomlight(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.FROGLIGHT, MaterialColor.COLOR_PURPLE).strength(1.0F).sound(SoundType.SHROOMLIGHT).lightLevel((state) -> 14));
+        Block createBlock = new Block(FabricBlockSettings.of().strength(1.0F).sound(SoundType.SHROOMLIGHT).lightLevel((state) -> 14));
         //Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
@@ -1008,7 +1009,7 @@ public class LirothBlocks {
     }
 
     static Block createLeaves(String id) {
-        Block createBlock = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false));
+        Block createBlock = new LeavesBlock(FabricBlockSettings.of().strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -1020,7 +1021,7 @@ public class LirothBlocks {
     }
 
     static Block createGlowingLeaves(int lightLevel, String id) {
-        Block createBlock = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false).lightLevel((state) -> lightLevel));
+        Block createBlock = new LeavesBlock(FabricBlockSettings.of().strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false).lightLevel((state) -> lightLevel));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -1028,7 +1029,7 @@ public class LirothBlocks {
     }
 
     static Block createPetal(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.LEAVES).sound(SoundType.GRASS).strength(0.2f).noOcclusion());
+        Block createBlock = new Block(FabricBlockSettings.of().sound(SoundType.GRASS).strength(0.2f).noOcclusion());
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -1036,7 +1037,7 @@ public class LirothBlocks {
     }
 
     static Block createDirt(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.DIRT).sound(SoundType.GRAVEL).strength(0.2f).randomTicks());
+        Block createBlock = new Block(FabricBlockSettings.of().sound(SoundType.GRAVEL).strength(0.2f).randomTicks());
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
 
         BLOCKS.add(createBlock);
@@ -1093,7 +1094,7 @@ public class LirothBlocks {
     }
     
     public static Block createGrassBlock(String id) {
-        Block createBlock = new Block(FabricBlockSettings.of(Material.MOSS).sound(SoundType.GRASS).strength(0.2f).randomTicks());
+        Block createBlock = new Block(FabricBlockSettings.of().sound(SoundType.GRASS).strength(0.2f).randomTicks());
         createBlock(createBlock, id);createBlockItem(createBlock, id);
         return createBlock;
     }
@@ -1159,43 +1160,43 @@ public class LirothBlocks {
     }
     
     public static Block createLirothSapling(String id) {
-        Block createBlock = new CustomSapling(new LirothTree(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
+        Block createBlock = new CustomSapling(new LirothTree(), Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
         createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createSpicedSapling(String id) {
-        Block createBlock = new CustomSapling(new SpicedTree(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
+        Block createBlock = new CustomSapling(new SpicedTree(), Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
         createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createTallpierSapling(String id) {
-        Block createBlock = new CustomSapling(new TallpierTree(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
+        Block createBlock = new CustomSapling(new TallpierTree(), Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
         createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createJapzSapling(String id) {
-        Block createBlock = new CustomSapling(new JapzTree(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
+        Block createBlock = new CustomSapling(new JapzTree(), Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
         createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createKoolawSapling(String id) {
-        Block createBlock = new CustomSapling(new KoolawTree(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
+        Block createBlock = new CustomSapling(new KoolawTree(), Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
         createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createDamnationSapling(String id) {
-        Block createBlock = new CustomSapling(new DamnationTree(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
+        Block createBlock = new CustomSapling(new DamnationTree(), Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
         createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }
     
     public static Block createPetrifiedSapling(String id) {
-        Block createBlock = new CustomSapling(new PetrifiedDamnationTree(), Block.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
+        Block createBlock = new CustomSapling(new PetrifiedDamnationTree(), Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
         createBlock(createBlock, id);createPlantBlockItem(createBlock, id);
         return createBlock;
     }

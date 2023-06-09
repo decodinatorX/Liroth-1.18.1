@@ -2,7 +2,6 @@ package com.decodinator.liroth.core.blocks.entity;
 
 import java.util.Optional;
 
-import javax.annotation.Nullable;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.blocks.FungalCampfireBlock;
@@ -29,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 public class FungalCampfireBlockEntity  extends BlockEntity implements Clearable {
 	   private static final int BURN_COOL_SPEED = 2;
@@ -53,7 +53,7 @@ public class FungalCampfireBlockEntity  extends BlockEntity implements Clearable
 	            if (p_155310_.cookingProgress[i] >= p_155310_.cookingTime[i]) {
 	               Container container = new SimpleContainer(itemstack);
 	               ItemStack itemstack1 = p_155310_.quickCheck.getRecipeFor(container, p_155307_).map((p_155305_) -> {
-	                  return p_155305_.assemble(container);
+	                  return p_155305_.assemble(container, p_155307_.registryAccess());
 	               }).orElse(itemstack);
 	               Containers.dropItemStack(p_155307_, (double)p_155308_.getX(), (double)p_155308_.getY(), (double)p_155308_.getZ(), itemstack1);
 	               p_155310_.items.set(i, ItemStack.EMPTY);

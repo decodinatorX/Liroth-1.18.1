@@ -1,5 +1,9 @@
 package com.decodinator.liroth;
 
+import net.fabricmc.fabric.impl.biome.modification.BuiltInRegistryKeys;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,53 +63,13 @@ public class Liroth implements ModInitializer {
     public static final ResourceKey<ConfiguredFeature<?, ?>> DAMNATION = FeatureUtils.createKey("damnation");
     public static final ResourceKey<ConfiguredFeature<?, ?>> JAPZ = FeatureUtils.createKey("japz");
     public static final ResourceKey<ConfiguredFeature<?, ?>> KOOLAW = FeatureUtils.createKey("koolaw");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED = FeatureUtils.createKey("pretrified"); 
-    
-    public static final CreativeModeTab creativeItemsTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_items")).icon(() -> new ItemStack(LirothItems.LIROTH_GEM))
-        	.displayItems((enableFeatures, entries, operatorEnabled) -> {
-                for (var supplier : LirothItems.getItems()) {
-                	entries.accept(supplier);
-                }
-        	}
-        ).build();
-        public static final CreativeModeTab creativeBlocksTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_blocks")).icon(() -> new ItemStack(LirothBlocks.LIROTH_GEM_BLOCK.asItem()))
-            .displayItems((enableFeatures, entries, operatorEnabled) -> {
-                for (var supplier : LirothBlocks.getBlocks()) {
-                    entries.accept(supplier);
-                }
-            }
-        ).build();
-        public static final CreativeModeTab creativeCombatTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_combat")).icon(() -> new ItemStack(LirothItems.LIROTH_SWORD))
-            .displayItems((enableFeatures, entries, operatorEnabled) -> {
-                for (var supplier : LirothItems.getCombatItems()) {
-                    entries.accept(supplier);
-                }
-            }
-        ).build();
-        public static final CreativeModeTab creativePlantsTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_plants")).icon(() -> new ItemStack(LirothBlocks.LIROTH_ROSE.asItem()))
-            .displayItems((enableFeatures, entries, operatorEnabled) -> {
-                for (var supplier : LirothBlocks.getPlantBlocks()) {
-                    entries.accept(supplier);
-                }
-            }
-        ).build();
-        public static final CreativeModeTab creativeEntitiesTab = FabricItemGroup.builder(new ResourceLocation(Liroth.MOD_ID, "liroth_entities")).icon(() -> new ItemStack(LirothItems.UNOBTAINABLE_FORSAKEN_CORPSE_SPAWN_EGG))
-            .displayItems((enableFeatures, entries, operatorEnabled) -> {
-            	if (!FabricLoader.getInstance().isModLoaded("liroth_addendum")) {
-            		entries.accept(LirothSpawnEggs.FORSAKEN_CORPSE_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.FREAKSHOW_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.FUNGAL_FIEND_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.LIROTHIAN_MIMIC_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.PIER_PEEP_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.PROWLER_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.SHADE_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.SKELETAL_FREAK_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.SOUL_ARACHNID_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.VILE_SHARK_SPAWN_EGG);
-            		entries.accept(LirothSpawnEggs.WARP_SPAWN_EGG);
-            	}
-            }
-        ).build();  
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PETRIFIED = FeatureUtils.createKey("pretrified");
+
+	public static final ResourceKey<CreativeModeTab> creativeItemsTab = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), new ResourceLocation(MOD_ID, "liroth_items"));
+	public static final ResourceKey<CreativeModeTab> creativeBlocksTab = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), new ResourceLocation(MOD_ID, "liroth_blocks"));
+	public static final ResourceKey<CreativeModeTab> creativeCombatTab = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), new ResourceLocation(MOD_ID, "liroth_combat"));
+	public static final ResourceKey<CreativeModeTab> creativePlantsTab = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), new ResourceLocation(MOD_ID, "liroth_plants"));
+	public static final ResourceKey<CreativeModeTab> creativeEntitiesTab = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), new ResourceLocation(MOD_ID, "liroth_entities"));
     
 		@Override
 		public void onInitialize() {
@@ -127,6 +91,51 @@ public class Liroth implements ModInitializer {
 		      if(!FabricLoader.getInstance().isModLoaded("liroth_addendum")) {
 		    	  LirothRegistries.registerSpawnEggItems();
 		      }
+
+			Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, creativeItemsTab, FabricItemGroup.builder().icon(() -> new ItemStack(LirothItems.LIROTH_GEM))
+					.displayItems((itemDisplayParameters, output) -> {
+								for (var supplier : LirothItems.getItems()) {
+									output.accept(supplier);
+								}
+							}
+					).title(Component.translatable("itemGroup.liroth.liroth_items")
+					).build());
+
+			Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, creativeBlocksTab, FabricItemGroup.builder().icon(() -> new ItemStack(LirothBlocks.LIROTH_GEM_BLOCK.asItem()))
+					.displayItems((itemDisplayParameters, output) -> {
+								for (var supplier : LirothBlocks.getBlocks()) {
+									output.accept(supplier);
+								}
+							}
+					).title(Component.translatable("itemGroup.liroth.liroth_blocks")
+					).build());
+
+			Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, creativeCombatTab, FabricItemGroup.builder().icon(() -> new ItemStack(LirothItems.LIROTH_SWORD))
+					.displayItems((itemDisplayParameters, output) -> {
+								for (var supplier : LirothBlocks.getBlocks()) {
+									output.accept(supplier);
+								}
+							}
+					).title(Component.translatable("itemGroup.liroth.liroth_combat")
+					).build());
+
+			Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, creativePlantsTab, FabricItemGroup.builder().icon(() -> new ItemStack(LirothBlocks.LIROTH_ROSE.asItem()))
+					.displayItems((itemDisplayParameters, output) -> {
+								for (var supplier : LirothBlocks.getBlocks()) {
+									output.accept(supplier);
+								}
+							}
+					).title(Component.translatable("itemGroup.liroth.liroth_plants")
+					).build());
+
+			Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, creativeEntitiesTab, FabricItemGroup.builder().icon(() -> new ItemStack(LirothItems.UNOBTAINABLE_FORSAKEN_CORPSE_SPAWN_EGG))
+					.displayItems((itemDisplayParameters, output) -> {
+								for (var supplier : LirothBlocks.getBlocks()) {
+									output.accept(supplier);
+								}
+							}
+					).title(Component.translatable("itemGroup.liroth.liroth_entities")
+					).build());
 		
 		}
 		
