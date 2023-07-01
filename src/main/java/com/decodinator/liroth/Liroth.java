@@ -3,7 +3,12 @@ package com.decodinator.liroth;
 import net.fabricmc.fabric.impl.biome.modification.BuiltInRegistryKeys;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Item;
+
+import java.util.Map;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,13 +38,19 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.Util;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
@@ -112,7 +123,7 @@ public class Liroth implements ModInitializer {
 
 			Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, creativeCombatTab, FabricItemGroup.builder().icon(() -> new ItemStack(LirothItems.LIROTH_SWORD))
 					.displayItems((itemDisplayParameters, output) -> {
-								for (var supplier : LirothBlocks.getBlocks()) {
+								for (var supplier : LirothItems.getCombatItems()) {
 									output.accept(supplier);
 								}
 							}
@@ -121,7 +132,7 @@ public class Liroth implements ModInitializer {
 
 			Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, creativePlantsTab, FabricItemGroup.builder().icon(() -> new ItemStack(LirothBlocks.LIROTH_ROSE.asItem()))
 					.displayItems((itemDisplayParameters, output) -> {
-								for (var supplier : LirothBlocks.getBlocks()) {
+								for (var supplier : LirothBlocks.getPlantBlocks()) {
 									output.accept(supplier);
 								}
 							}
@@ -130,13 +141,12 @@ public class Liroth implements ModInitializer {
 
 			Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, creativeEntitiesTab, FabricItemGroup.builder().icon(() -> new ItemStack(LirothItems.UNOBTAINABLE_FORSAKEN_CORPSE_SPAWN_EGG))
 					.displayItems((itemDisplayParameters, output) -> {
-								for (var supplier : LirothBlocks.getBlocks()) {
+								for (var supplier : LirothSpawnEggs.getSpawnEggs()) {
 									output.accept(supplier);
 								}
 							}
 					).title(Component.translatable("itemGroup.liroth.liroth_entities")
 					).build());
-		
 		}
 		
 	    public static class LirothRegistries {

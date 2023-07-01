@@ -1,5 +1,8 @@
 {
-  "type": "minecraft:smithing",
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "liroth:swap_upgrade_smithing_template"
+  },
   "base": {
     "item": "liroth:lirothian_cobalt_horse_armor"
   },

@@ -103,7 +103,7 @@ public class LirothEntities {
 			FabricEntityTypeBuilder.<BeamLaserProjectileEntity>create(MobCategory.MISC, BeamLaserProjectileEntity::new)
 					.dimensions(EntityDimensions.fixed(0.25F, 0.25F)) // dimensions in Minecraft units of the projectile
 					.trackRangeBlocks(10) // necessary for all thrown projectiles (as it prevents it from breaking, lol)
-					.build() // VERY IMPORTANT DONT DELETE FOR THE LOVE OF GOD PSLSSSSSS
+					.build() // VERY IMPORTANT DON'T DELETE FOR THE LOVE OF GOD PSLSSSSSS
 	);
 	
     public static AbstractArrow createBeamProjectile(LivingEntity entity, ItemStack stack, float damageModifier) {

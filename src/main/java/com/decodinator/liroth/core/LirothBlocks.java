@@ -721,7 +721,7 @@ public class LirothBlocks {
     }
     
     static Block createFurnace(String id) {
-        Block createBlock = new BaseFurnaceBlock(FabricBlockSettings.copy(Blocks.STONE).lightLevel(LirothBlocks.createLightLevelFromLitBlockState(13)));
+        Block createBlock = new BaseFurnaceBlock.Stone(FabricBlockSettings.copy(Blocks.STONE).lightLevel(LirothBlocks.createLightLevelFromLitBlockState(13)));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;

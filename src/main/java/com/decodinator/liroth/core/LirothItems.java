@@ -1,23 +1,20 @@
 package com.decodinator.liroth.core;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.food.FoodConstants;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.item.SwordItem;
@@ -64,7 +61,7 @@ public class LirothItems {
     public static final Item BLOODY_ENTRAILS = createItem(new Item(new Item.Properties().food(Foods.ROTTEN_FLESH)), "bloody_entrails");
     
     public static final Item COOL_BEAM = createItem(new BeamItem(new Item.Properties()), "cool_beam");
-    
+        
 //    public static final Item CORRUPTED_JALSPHIRE_GEM = createItem(new Item(new Item.Properties()), "corrupted_jalsphire_gem");
     
 //    public static final Item CORRUPTED_LIROTH_GEM = createItem(new Item(new Item.Properties()), "corrupted_liroth_gem");
@@ -142,6 +139,8 @@ public class LirothItems {
     public static final Item SALEM_LIROTH_SHIELD = createSalemShieldItem(new SalemLirothShield(new Item.Properties().stacksTo(1)), "salem_liroth_shield");
     public static final Item QUANTUM_LIROTH_SHIELD = createQuantumShieldItem(new QuantumLirothShield(new Item.Properties().stacksTo(1)), "quantum_liroth_shield");
     
+    public static final Item LIROTH_SMITHING_UPGRADE_TEMPLATE = createItem(new Item(new Item.Properties()), "liroth_upgrade_smithing_template");
+    
     public static final Item LIROTH_SOUL_DUST = createItem(new Item(new Item.Properties()), "liroth_soul_dust");
     
 //    public static final Item LIROTH_STAR = createItem(new Item(new Item.Properties()), "liroth_star");
@@ -164,9 +163,13 @@ public class LirothItems {
 //    public static final Item SOUL_GLASS_BOTTLE = createItem(new Item(new Item.Properties()), "soul_glass_bottle");
     public static final Item SPINERIOS_STONE_PEBBLE = createItem(new Item(new Item.Properties()), "spinerios_stone_pebble");
     
+    public static final Item SWAP_SMITHING_UPGRADE_TEMPLATE = createItem(new Item(new Item.Properties()), "swap_upgrade_smithing_template");
+    
     public static final Item TOURMALINE = createItem(new Item(new Item.Properties()), "tourmaline");
     public static final Item TOURMALINE_HORSE_ARMOR = createItem(new HorseArmorItem(8, "tourmaline", new Item.Properties()), "tourmaline_horse_armor");
 
+    public static final Item QUANTUM_SMITHING_UPGRADE_TEMPLATE = createItem(new Item(new Item.Properties()), "quantum_upgrade_smithing_template");
+    
     public static final Item LIROTH_HELMET = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()), "liroth_helmet");
     public static final Item LIROTH_CHESTPLATE = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()), "liroth_chestplate");
     public static final Item LIROTH_LEGGINGS = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()), "liroth_leggings");
