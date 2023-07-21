@@ -171,77 +171,77 @@ public class LirothItems {
     public static final Item LIROTH_CHESTPLATE = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "liroth_chestplate");
     public static final Item LIROTH_LEGGINGS = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "liroth_leggings");
     public static final Item LIROTH_BOOTS = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "liroth_boots");
-    
+
     public static final Item LIROTHIAN_COBALT_HELMET = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTHIAN_COBALT_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()), "lirothian_cobalt_helmet");
     public static final Item LIROTHIAN_COBALT_CHESTPLATE = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTHIAN_COBALT_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "lirothian_cobalt_chestplate");
     public static final Item LIROTHIAN_COBALT_LEGGINGS = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTHIAN_COBALT_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "lirothian_cobalt_leggings");
     public static final Item LIROTHIAN_COBALT_BOOTS = createArmorItem(new ArmorItem(LirothArmorMaterials.LIROTHIAN_COBALT_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "lirothian_cobalt_boots");
-    
+
     public static final Item ANSALUM_LIROTH_HELMET = createArmorItem(new AnsalumArmorItem(LirothArmorMaterials.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()), "ansalum_liroth_helmet");
     public static final Item ANSALUM_LIROTH_CHESTPLATE = createArmorItem(new AnsalumArmorItem(LirothArmorMaterials.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "ansalum_liroth_chestplate");
     public static final Item ANSALUM_LIROTH_LEGGINGS = createArmorItem(new AnsalumArmorItem(LirothArmorMaterials.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "ansalum_liroth_leggings");
     public static final Item ANSALUM_LIROTH_BOOTS = createArmorItem(new AnsalumArmorItem(LirothArmorMaterials.ANSALUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "ansalum_liroth_boots");
-    
+
     public static final Item ANSALUM_LIROTH_AXE = createToolItem(new AxeItem(LirothToolMaterials.ANSALUM_LIROTH_TOOL_MATERIAL, 7.0f, -3.0f, new Item.Properties().fireResistant()), "ansalum_liroth_axe");
     public static final Item LUX_LIROTH_KATANA = createToolItem(new SwordItem(LirothToolMaterials.LUX_LIROTH_TOOL_MATERIAL, 2, -1.4f, new Item.Properties().fireResistant()), "lux_liroth_katana");
     public static final Item SALEM_LIROTH_FALCHION = createToolItem(new SwordItem(LirothToolMaterials.SALEM_LIROTH_TOOL_MATERIAL, 4, -2.4f, new Item.Properties().fireResistant()), "salem_liroth_falchion");
-    
+
     public static final Item QUANTUM_LIROTH_SWORD = createToolItem(new SwordItem(LirothToolMaterials.QUANTUM_LIROTH_TOOL_MATERIAL, 4, -2.4f, new Item.Properties().fireResistant()), "quantum_liroth_sword");
     public static final Item QUANTUM_LIROTH_SHOVEL = createToolItem(new ShovelItem(LirothToolMaterials.QUANTUM_LIROTH_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Properties().fireResistant()), "quantum_liroth_shovel");
     public static final Item QUANTUM_LIROTH_PICKAXE = createToolItem(new PickaxeItem(LirothToolMaterials.QUANTUM_LIROTH_TOOL_MATERIAL, 1, -2.8f, new Item.Properties().fireResistant()), "quantum_liroth_pickaxe");
     public static final Item QUANTUM_LIROTH_AXE = createToolItem(new AxeItem(LirothToolMaterials.QUANTUM_LIROTH_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Properties().fireResistant()), "quantum_liroth_axe");
     public static final Item QUANTUM_LIROTH_HOE = createToolItem(new CustomHoeItem(LirothToolMaterials.QUANTUM_LIROTH_TOOL_MATERIAL, -4, 0.0f, new Item.Properties().fireResistant()), "quantum_liroth_hoe");
-    
+
     public static final Item LUX_LIROTH_HELMET = createArmorItem(new LuxArmorItem(LirothArmorMaterials.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()), "lux_liroth_helmet");
     public static final Item LUX_LIROTH_CHESTPLATE = createArmorItem(new LuxArmorItem(LirothArmorMaterials.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "lux_liroth_chestplate");
     public static final Item LUX_LIROTH_LEGGINGS = createArmorItem(new LuxArmorItem(LirothArmorMaterials.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "lux_liroth_leggings");
     public static final Item LUX_LIROTH_BOOTS = createArmorItem(new LuxArmorItem(LirothArmorMaterials.LUX_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "lux_liroth_boots");
-    
+
     public static final Item SALEM_LIROTH_HELMET = createArmorItem(new SalemArmorItem(LirothArmorMaterials.SALEM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()), "salem_liroth_helmet");
     public static final Item SALEM_LIROTH_CHESTPLATE = createArmorItem(new SalemArmorItem(LirothArmorMaterials.SALEM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "salem_liroth_chestplate");
     public static final Item SALEM_LIROTH_LEGGINGS = createArmorItem(new SalemArmorItem(LirothArmorMaterials.SALEM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "salem_liroth_leggings");
     public static final Item SALEM_LIROTH_BOOTS = createArmorItem(new SalemArmorItem(LirothArmorMaterials.SALEM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "salem_liroth_boots");
-    
+
     public static final Item QUANTUM_LIROTH_HELMET = createArmorItem(new QuantumArmorItem(LirothArmorMaterials.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()), "quantum_liroth_helmet");
     public static final Item QUANTUM_LIROTH_CHESTPLATE = createArmorItem(new QuantumArmorItem(LirothArmorMaterials.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "quantum_liroth_chestplate");
     public static final Item QUANTUM_LIROTH_LEGGINGS = createArmorItem(new QuantumArmorItem(LirothArmorMaterials.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "quantum_liroth_leggings");
     public static final Item QUANTUM_LIROTH_BOOTS = createArmorItem(new QuantumArmorItem(LirothArmorMaterials.QUANTUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "quantum_liroth_boots");
-    
+
     public static final Item POTESTIUM_LIROTH_HELMET = createArmorItem(new PotestiumHelmItem(LirothArmorMaterials.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()), "potestium_liroth_helmet");
     public static final Item POTESTIUM_LIROTH_CHESTPLATE = createArmorItem(new PotestiumArmorItem(LirothArmorMaterials.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "potestium_liroth_chestplate");
     public static final Item POTESTIUM_LIROTH_LEGGINGS = createArmorItem(new PotestiumArmorItem(LirothArmorMaterials.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "potestium_liroth_leggings");
     public static final Item POTESTIUM_LIROTH_BOOTS = createArmorItem(new PotestiumArmorItem(LirothArmorMaterials.POTESTIUM_LIROTH_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "potestium_liroth_boots");
-    
+
     public static final Item POTESTIUM_SCYTHE = createToolItem(new CustomScytheItem(LirothToolMaterials.POTESTIUM_LIROTH_TOOL_MATERIAL, LirothItems.scytheDamage, 0.0f, new Item.Properties().fireResistant()), "potestium_scythe");
-    
+
     public static final Item LIROTH_SWORD = createToolItem(new SwordItem(LirothToolMaterials.LIROTH_TOOL_MATERIAL, 3, -2.4f, new Item.Properties().fireResistant()), "liroth_sword");
     public static final Item LIROTH_SHOVEL = createToolItem(new ShovelItem(LirothToolMaterials.LIROTH_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Properties().fireResistant()), "liroth_shovel");
     public static final Item LIROTH_PICKAXE = createToolItem(new PickaxeItem(LirothToolMaterials.LIROTH_TOOL_MATERIAL, 1, -2.8f, new Item.Properties().fireResistant()), "liroth_pickaxe");
     public static final Item LIROTH_AXE = createToolItem(new AxeItem(LirothToolMaterials.LIROTH_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Properties().fireResistant()), "liroth_axe");
     public static final Item LIROTH_HOE = createToolItem(new CustomHoeItem(LirothToolMaterials.LIROTH_TOOL_MATERIAL, -4, 0.0f, new Item.Properties().fireResistant()), "liroth_hoe");
-    
+
     public static final Item LIROTHIAN_COBALT_SWORD = createToolItem(new SwordItem(LirothToolMaterials.LIROTHIAN_COBALT_TOOL_MATERIAL, 3, -2.4f, new Item.Properties()), "lirothian_cobalt_sword");
     public static final Item LIROTHIAN_COBALT_SHOVEL = createToolItem(new ShovelItem(LirothToolMaterials.LIROTHIAN_COBALT_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Properties()), "lirothian_cobalt_shovel");
     public static final Item LIROTHIAN_COBALT_PICKAXE = createToolItem(new PickaxeItem(LirothToolMaterials.LIROTHIAN_COBALT_TOOL_MATERIAL, 1, -2.8f, new Item.Properties()), "lirothian_cobalt_pickaxe");
     public static final Item LIROTHIAN_COBALT_AXE = createToolItem(new AxeItem(LirothToolMaterials.LIROTHIAN_COBALT_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Properties()), "lirothian_cobalt_axe");
     public static final Item LIROTHIAN_COBALT_HOE = createToolItem(new CustomHoeItem(LirothToolMaterials.LIROTHIAN_COBALT_TOOL_MATERIAL, -4, 0.0f, new Item.Properties()), "lirothian_cobalt_hoe");
-    
+
     public static final Item TOURMALINE_HELMET = createArmorItem(new ArmorItem(LirothArmorMaterials.TOURMALINE_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()), "tourmaline_helmet");
     public static final Item TOURMALINE_CHESTPLATE = createArmorItem(new ArmorItem(LirothArmorMaterials.TOURMALINE_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "tourmaline_chestplate");
     public static final Item TOURMALINE_LEGGINGS = createArmorItem(new ArmorItem(LirothArmorMaterials.TOURMALINE_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "tourmaline_leggings");
     public static final Item TOURMALINE_BOOTS = createArmorItem(new ArmorItem(LirothArmorMaterials.TOURMALINE_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "tourmaline_boots");
-    
+
     public static final Item TOURMALINE_SWORD = createToolItem(new SwordItem(LirothToolMaterials.TOURMALINE_TOOL_MATERIAL, 3, -2.4f, new Item.Properties().fireResistant()), "tourmaline_sword");
     public static final Item TOURMALINE_SHOVEL = createToolItem(new ShovelItem(LirothToolMaterials.TOURMALINE_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Properties().fireResistant()), "tourmaline_shovel");
     public static final Item TOURMALINE_PICKAXE = createToolItem(new PickaxeItem(LirothToolMaterials.TOURMALINE_TOOL_MATERIAL, 1, -2.8f, new Item.Properties().fireResistant()), "tourmaline_pickaxe");
     public static final Item TOURMALINE_AXE = createToolItem(new AxeItem(LirothToolMaterials.TOURMALINE_TOOL_MATERIAL, 5.0f, -3.0f, new Item.Properties().fireResistant()), "tourmaline_axe");
     public static final Item TOURMALINE_HOE = createToolItem(new CustomHoeItem(LirothToolMaterials.TOURMALINE_TOOL_MATERIAL, -4, 0.0f, new Item.Properties().fireResistant()), "tourmaline_hoe");
-    
+
     public static final Item RUBY_HELMET = createArmorItem(new ArmorItem(LirothArmorMaterials.RUBY_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()), "ruby_helmet");
     public static final Item RUBY_CHESTPLATE = createArmorItem(new ArmorItem(LirothArmorMaterials.RUBY_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()), "ruby_chestplate");
     public static final Item RUBY_LEGGINGS = createArmorItem(new ArmorItem(LirothArmorMaterials.RUBY_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()), "ruby_leggings");
     public static final Item RUBY_BOOTS = createArmorItem(new ArmorItem(LirothArmorMaterials.RUBY_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()), "ruby_boots");
-    
+
     public static final Item RUBY_SWORD = createToolItem(new SwordItem(LirothToolMaterials.RUBY_TOOL_MATERIAL, 3, -2.4f, new Item.Properties()), "ruby_sword");
     public static final Item RUBY_SHOVEL = createToolItem(new ShovelItem(LirothToolMaterials.RUBY_TOOL_MATERIAL, 1.5f, -3.0f, new Item.Properties()), "ruby_shovel");
     public static final Item RUBY_PICKAXE = createToolItem(new PickaxeItem(LirothToolMaterials.RUBY_TOOL_MATERIAL, 1, -2.8f, new Item.Properties()), "ruby_pickaxe");
