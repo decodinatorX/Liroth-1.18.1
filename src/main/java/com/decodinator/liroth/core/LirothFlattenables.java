@@ -4,7 +4,7 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.mixin.access.ShovelItemAccess;
+import com.decodinator.liroth.mixin.ShovelItemAccess;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;

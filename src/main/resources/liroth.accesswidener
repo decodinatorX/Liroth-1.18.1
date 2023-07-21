@@ -1,0 +1,7 @@
+accessWidener v1 named
+
+#Fields
+accessible field net/minecraft/client/gui/components/LogoRenderer showEasterEgg Z
+accessible field net/minecraft/client/gui/components/LogoRenderer keepLogoThroughFade Z
+
+#Methods

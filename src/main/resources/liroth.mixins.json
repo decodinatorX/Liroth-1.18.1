@@ -4,21 +4,21 @@
   "package": "com.decodinator.liroth.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "access.AxeItemAccess",
-    "access.ClientPlayerEntityMixin",
-    "access.CropBlockMixin",
-    "access.DirtPathBlockAccess",
-    "access.DoorBlockAccess",
-    "access.HoeItemAccess",
-    "access.ItemBlockRenderTypeAccess",
-    "access.PressurePlateBlockAccess",
-    "access.ShovelItemAccess",
-    "access.StairBlockAccess",
-    "access.TrapDoorBlockAccess",
-    "access.WoodButtonBlockAccess"
+    "AxeItemAccess",
+    "ClientPlayerEntityMixin",
+    "CropBlockMixin",
+    "DirtPathBlockAccess",
+    "DoorBlockAccess",
+    "HoeItemAccess",
+    "ItemBlockRenderTypeAccess",
+    "PressurePlateBlockAccess",
+    "ShovelItemAccess",
+    "StairBlockAccess",
+    "TrapDoorBlockAccess",
+    "WoodButtonBlockAccess"
   ],
   "client": [
-    
+    "RedirectTitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

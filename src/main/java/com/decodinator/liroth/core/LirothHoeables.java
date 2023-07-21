@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.mixin.access.HoeItemAccess;
+import com.decodinator.liroth.mixin.HoeItemAccess;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.world.item.HoeItem;

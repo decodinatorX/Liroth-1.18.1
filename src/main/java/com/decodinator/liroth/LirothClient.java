@@ -49,9 +49,13 @@ import com.decodinator.liroth.entities.renderers.VileSharkEntityRenderer;
 import com.decodinator.liroth.entities.renderers.VileSharkModel;
 import com.decodinator.liroth.entities.renderers.WarpEntityRenderer;
 import com.decodinator.liroth.entities.renderers.WarpModel;
-import com.decodinator.liroth.mixin.access.ItemBlockRenderTypeAccess;
+import com.decodinator.liroth.mixin.ItemBlockRenderTypeAccess;
 import com.google.common.collect.Maps;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
+import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -64,6 +68,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 public class LirothClient implements ClientModInitializer {
 	public static final ResourceLocation PacketID = new ResourceLocation(Liroth.MOD_ID, "spawn_packet");
     private static final Map<EntityType<?>, EntityRendererProvider<?>> PROVIDERS = Maps.newHashMap();
+	public static LirothConfig config;
 
     public static final ModelLayerLocation MODEL_LIROTH_BOAT_LAYER = new ModelLayerLocation(new ResourceLocation(Liroth.MOD_ID, "liroth_boat"), "main");
     public static final ModelLayerLocation MODEL_CHEST_LIROTH_BOAT_LAYER = new ModelLayerLocation(new ResourceLocation(Liroth.MOD_ID, "chest_liroth_boat"), "main");
@@ -84,6 +89,9 @@ public class LirothClient implements ClientModInitializer {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void onInitializeClient() {
+		
+		AutoConfig.register(LirothConfigWrapper.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
+		config = AutoConfig.getConfigHolder(LirothConfigWrapper.class).getConfig().client;
 
 		FluidRenderHandlerRegistry.INSTANCE.register(LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_FLOWING, new SimpleFluidRenderHandler(
 				new ResourceLocation("liroth:blocks/liroth_fluid_still"),

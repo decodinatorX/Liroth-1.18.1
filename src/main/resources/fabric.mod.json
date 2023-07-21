@@ -26,8 +26,12 @@
     ],
   	"jei_mod_plugin": [
     	"com.decodinator.liroth.compat.jei.LirothJEI"
-  	]
+  	],
+    "modmenu": [
+      	"com.decodinator.liroth.LirothModMenuIntegration"
+    ]
   },
+  "accessWidener" : "liroth.accesswidener",
   "mixins": [
     "liroth.mixins.json"
   ],

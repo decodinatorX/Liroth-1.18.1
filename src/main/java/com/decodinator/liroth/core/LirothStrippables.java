@@ -4,7 +4,7 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 
 import com.decodinator.liroth.Liroth;
-import com.decodinator.liroth.mixin.access.AxeItemAccess;
+import com.decodinator.liroth.mixin.AxeItemAccess;
 
 import net.minecraft.world.level.block.Block;
 

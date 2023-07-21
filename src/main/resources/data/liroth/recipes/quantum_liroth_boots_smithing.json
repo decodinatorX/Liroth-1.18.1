@@ -7,9 +7,9 @@
     "item": "liroth:liroth_boots"
   },
   "addition": {
-    "item": "liroth:potestium_shard"
+    "item": "liroth:quantum_plate"
   },
   "result": {
-    "item": "liroth:potestium_liroth_boots"
+    "item": "liroth:quantum_liroth_boots"
   }
 }
