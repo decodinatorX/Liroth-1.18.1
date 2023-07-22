@@ -2,7 +2,7 @@
   "parent": "liroth:enter_liroth",
   "display": {
     "icon": {
-      "item": "liroth:vile_tentacle"
+      "item": "liroth:vile_tentacle_tip"
     },
     "title": {
       "translate": "liroth:advancements.story.vile_shark.title"

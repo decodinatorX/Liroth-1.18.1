@@ -1,5 +1,8 @@
 package com.decodinator.liroth;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
+import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.particle.EndRodParticle;
@@ -69,6 +72,7 @@ public class LirothClient implements ClientModInitializer {
     private static final Map<EntityType<?>, EntityRendererProvider<?>> PROVIDERS = Maps.newHashMap();
     private static final Map<BlockEntityType<?>, BlockEntityRendererProvider<?>> PROVIDERS2 = Maps.newHashMap();
 
+    public static LirothConfig config;
     public static final ModelLayerLocation MODEL_LIROTH_BOAT_LAYER = new ModelLayerLocation(new ResourceLocation(Liroth.MOD_ID, "liroth_boat"), "main");
     public static final ModelLayerLocation MODEL_CHEST_LIROTH_BOAT_LAYER = new ModelLayerLocation(new ResourceLocation(Liroth.MOD_ID, "chest_liroth_boat"), "main");
     public static final ModelLayerLocation MODEL_FUNGAL_FIEND_LAYER = new ModelLayerLocation(new ResourceLocation(Liroth.MOD_ID, "fungal_fiend"), "main");
@@ -88,6 +92,9 @@ public class LirothClient implements ClientModInitializer {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void onInitializeClient() {
+
+        AutoConfig.register(LirothConfigWrapper.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
+        config = AutoConfig.getConfigHolder(LirothConfigWrapper.class).getConfig().client;
 
 		FluidRenderHandlerRegistry.INSTANCE.register(LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_FLOWING, new SimpleFluidRenderHandler(
 				new ResourceLocation("liroth:blocks/liroth_fluid_still"),

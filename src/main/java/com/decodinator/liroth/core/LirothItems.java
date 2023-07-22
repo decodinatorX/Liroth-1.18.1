@@ -379,7 +379,8 @@ public class LirothItems {
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_crafting_table"), new BlockItem(LirothBlocks.DAMNATION_CRAFTING_TABLE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_chest"), new BlockItem(LirothBlocks.DAMNATION_CHEST, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_door"), new BlockItem(LirothBlocks.DAMNATION_DOOR, new Item.Properties().tab(Liroth.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_fence"), new BlockItem(LirothBlocks.DAMNATION_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_fence"), new BlockItem(LirothBlocks.DAMNATION_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_fence_gate"), new BlockItem(LirothBlocks.DAMNATION_FENCE_GATE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_fungal_cluster"), new BlockItem(LirothBlocks.DAMNATION_FUNGAL_CLUSTER, new Item.Properties().tab(Liroth.creativePlantsTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_fungus"), new BlockItem(LirothBlocks.DAMNATION_FUNGUS, new Item.Properties().tab(Liroth.creativePlantsTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "damnation_fungal_carpet"), new BlockItem(LirothBlocks.DAMNATION_FUNGAL_CARPET, new Item.Properties().tab(Liroth.creativePlantsTab)));
@@ -424,7 +425,8 @@ public class LirothItems {
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_chest"), new BlockItem(LirothBlocks.JAPZ_CHEST, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_crafting_table"), new BlockItem(LirothBlocks.JAPZ_CRAFTING_TABLE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_door"), new BlockItem(LirothBlocks.JAPZ_DOOR, new Item.Properties().tab(Liroth.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_fence"), new BlockItem(LirothBlocks.JAPZ_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_fence"), new BlockItem(LirothBlocks.JAPZ_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_fence_gate"), new BlockItem(LirothBlocks.JAPZ_FENCE_GATE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_leaves"), new BlockItem(LirothBlocks.JAPZ_LEAVES, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_log"), new BlockItem(LirothBlocks.JAPZ_LOG, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "japz_mini_tree"), new BlockItem(LirothBlocks.JAPZ_MINI_TREE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
@@ -440,7 +442,8 @@ public class LirothItems {
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_chest"), new BlockItem(LirothBlocks.KOOLAW_CHEST, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_crafting_table"), new BlockItem(LirothBlocks.KOOLAW_CRAFTING_TABLE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_door"), new BlockItem(LirothBlocks.KOOLAW_DOOR, new Item.Properties().tab(Liroth.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_fence"), new BlockItem(LirothBlocks.KOOLAW_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_fence"), new BlockItem(LirothBlocks.KOOLAW_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_fence_gate"), new BlockItem(LirothBlocks.KOOLAW_FENCE_GATE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_leaves"), new BlockItem(LirothBlocks.KOOLAW_LEAVES, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_log"), new BlockItem(LirothBlocks.KOOLAW_LOG, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "koolaw_wood"), new BlockItem(LirothBlocks.KOOLAW_WOOD, new Item.Properties().tab(Liroth.creativeBlocksTab)));
@@ -459,7 +462,8 @@ public class LirothItems {
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_dirt"), new BlockItem(LirothBlocks.LIROTH_DIRT, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_door"), new BlockItem(LirothBlocks.LIROTH_DOOR, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 //	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_end_stone"), new BlockItem(LirothBlocks.LIROTH_END_STONE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_fence"), new BlockItem(LirothBlocks.LIROTH_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_fence"), new BlockItem(LirothBlocks.LIROTH_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_fence_gate"), new BlockItem(LirothBlocks.LIROTH_FENCE_GATE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_furnace"), new BlockItem(LirothBlocks.LIROTH_FURNACE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_gem_block"), new BlockItem(LirothBlocks.LIROTH_GEM_BLOCK, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "liroth_gem_ore"), new BlockItem(LirothBlocks.LIROTH_ORE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
@@ -511,7 +515,8 @@ public class LirothItems {
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_damnation_slab"), new BlockItem(LirothBlocks.PETRIFIED_DAMNATION_SLAB, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_damnation_stairs"), new BlockItem(LirothBlocks.PETRIFIED_DAMNATION_STAIRS, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_damnation_trapdoor"), new BlockItem(LirothBlocks.PETRIFIED_DAMNATION_TRAPDOOR, new Item.Properties().tab(Liroth.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_damnation_fence"), new BlockItem(LirothBlocks.PETRIFIED_DAMNATION_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_damnation_fence"), new BlockItem(LirothBlocks.PETRIFIED_DAMNATION_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_damnation_fence_gate"), new BlockItem(LirothBlocks.PETRIFIED_DAMNATION_FENCE_GATE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_crystal_block"), new BlockItem(LirothBlocks.PETRIFIED_CRYSTAL_BLOCK, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_moss_block"), new BlockItem(LirothBlocks.PETRIFIED_MOSS_BLOCK, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "petrified_moss_carpet"), new BlockItem(LirothBlocks.PETRIFIED_MOSS_CARPET, new Item.Properties().tab(Liroth.creativeBlocksTab)));
@@ -543,7 +548,8 @@ public class LirothItems {
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_crafting_table"), new BlockItem(LirothBlocks.SPICED_CRAFTING_TABLE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_chest"), new BlockItem(LirothBlocks.SPICED_CHEST, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_door"), new BlockItem(LirothBlocks.SPICED_DOOR, new Item.Properties().tab(Liroth.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_fence"), new BlockItem(LirothBlocks.SPICED_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_fence"), new BlockItem(LirothBlocks.SPICED_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_fence_gate"), new BlockItem(LirothBlocks.SPICED_FENCE_GATE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_leaves"), new BlockItem(LirothBlocks.SPICED_LEAVES, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_log"), new BlockItem(LirothBlocks.SPICED_LOG, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "spiced_wood"), new BlockItem(LirothBlocks.SPICED_WOOD, new Item.Properties().tab(Liroth.creativeBlocksTab)));
@@ -598,7 +604,8 @@ public class LirothItems {
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_crafting_table"), new BlockItem(LirothBlocks.TALLPIER_CRAFTING_TABLE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_chest"), new BlockItem(LirothBlocks.TALLPIER_CHEST, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_door"), new BlockItem(LirothBlocks.TALLPIER_DOOR, new Item.Properties().tab(Liroth.creativeBlocksTab)));
-	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_fence"), new BlockItem(LirothBlocks.TALLPIER_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_fence"), new BlockItem(LirothBlocks.TALLPIER_FENCE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
+		Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_fence_gate"), new BlockItem(LirothBlocks.TALLPIER_FENCE_GATE, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_leaves"), new BlockItem(LirothBlocks.TALLPIER_LEAVES, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_log"), new BlockItem(LirothBlocks.TALLPIER_LOG, new Item.Properties().tab(Liroth.creativeBlocksTab)));
 	    Registry.register(Registry.ITEM, new ResourceLocation("liroth", "tallpier_wood"), new BlockItem(LirothBlocks.TALLPIER_WOOD, new Item.Properties().tab(Liroth.creativeBlocksTab)));

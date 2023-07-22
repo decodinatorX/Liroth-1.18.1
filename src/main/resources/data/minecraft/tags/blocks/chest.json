@@ -1,13 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:chest",
-    "liroth:liroth_chest",
-    "liroth:damnation_chest",
-    "liroth:japz_chest",
-    "liroth:koolaw_chest",
-    "liroth:petrified_chest",
-    "liroth:spiced_chest",
-    "liroth:pier_chest"
+    "#liroth:chest"
   ]
 }
