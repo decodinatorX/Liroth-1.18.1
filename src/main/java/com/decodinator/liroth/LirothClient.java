@@ -85,11 +85,14 @@ public class LirothClient implements ClientModInitializer {
     public static final ModelLayerLocation MODEL_LIROTHIAN_MIMIC_LAYER = new ModelLayerLocation(new ResourceLocation(Liroth.MOD_ID, "lirothian_mimic"), "main");
     public static final ModelLayerLocation MODEL_BUTTERFLY_LAYER = new ModelLayerLocation(new ResourceLocation(Liroth.MOD_ID, "butterfly"), "main");
     public static final ModelLayerLocation MODEL_POTESTIUM_HELMET_LAYER = new ModelLayerLocation(new ResourceLocation(Liroth.MOD_ID, "potestium_helmet"), "main");
-    
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void onInitializeClient() {
-		
+
+        MenuScreens.register(LirothScreenHandlers.LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
+        MenuScreens.register(LirothScreenHandlers.QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
+
 		AutoConfig.register(LirothConfigWrapper.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
 		config = AutoConfig.getConfigHolder(LirothConfigWrapper.class).getConfig().client;
 
@@ -99,7 +102,6 @@ public class LirothClient implements ClientModInitializer {
 		));
 		
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderType.translucent(), LirothFluids.LIROTH_FLUID_STILL, LirothFluids.LIROTH_FLUID_FLOWING);
-
 		
 		FluidRenderHandlerRegistry.INSTANCE.register(LirothFluids.MOLTEN_SPINERIOS_STILL, LirothFluids.MOLTEN_SPINERIOS_FLOWING, new SimpleFluidRenderHandler(
 				new ResourceLocation("liroth:blocks/molten_spinerios_still"),
@@ -107,9 +109,6 @@ public class LirothClient implements ClientModInitializer {
 		));
         
         LirothRenders.renderCutOuts(blockRenderTypeMap -> ItemBlockRenderTypeAccess.getTypeByBlock().putAll(blockRenderTypeMap));
-		
-        MenuScreens.register(LirothScreenHandlers.LIROTH_SPLITTER_SCREEN_HANDLER, LirothSplitterScreen::new);
-        MenuScreens.register(LirothScreenHandlers.QUANTUM_EXTRACTOR_SCREEN_HANDLER, QuantumExtractorScreen::new);
         
 		EntityRendererRegistry.register(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, context -> new BeamLaserProjectileEntityRenderer(context));
         

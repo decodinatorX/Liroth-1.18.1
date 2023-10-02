@@ -200,15 +200,6 @@ public class LirothTitleScreen extends Screen {
 			Object var2x = this.minecraft.options.skipMultiplayerWarning ? new JoinMultiplayerScreen(this) : new SafetyScreen(this);
 			this.minecraft.setScreen((Screen)var2x);
 		}).bounds(this.width / 2 - 100, var1 + var2 * 1, 200, 20).tooltip(var5).build()).active = var4;
-		if(FabricLoader.getInstance().isModLoaded("modmenu")) {
-			this.addRenderableWidget(
-					Button.builder(Component.translatable("menu.online"), var1x -> this.realmsButtonClicked())
-						.bounds(this.width / 2 + 2, var1 + var2 * 2, 98, 20)
-						.tooltip(var5)
-						.build()
-				)
-				.active = var4;
-		}else if (!FabricLoader.getInstance().isModLoaded("modmenu")) {
 			this.addRenderableWidget(
 					Button.builder(Component.translatable("menu.online"), var1x -> this.realmsButtonClicked())
 						.bounds(this.width / 2 - 100, var1 + var2 * 2, 200, 20)
@@ -216,16 +207,6 @@ public class LirothTitleScreen extends Screen {
 						.build()
 				)
 				.active = var4;
-		}
-		if(FabricLoader.getInstance().isModLoaded("modmenu")) {
-			this.addRenderableWidget(
-					Button.builder(Component.translatable("modmenu.nameTranslation.modmenu"), var1x -> this.minecraft.setScreen(new ModsScreen(this)))
-						.bounds(this.width / 2 - 100, var1 + var2 * 2, 98, 20)
-						.tooltip(var5)
-						.build()
-				)
-			.active = var4;
-		}
 	}
 	@Nullable
 	private Component getMultiplayerDisabledReason() {

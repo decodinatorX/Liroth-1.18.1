@@ -4,6 +4,8 @@ import com.decodinator.liroth.Liroth;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -11,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+@Environment(value= EnvType.CLIENT)
 public class QuantumExtractorScreen extends AbstractContainerScreen<QuantumExtractorScreenHandler> {
 	private static final ResourceLocation TEXTURE =
             new ResourceLocation(Liroth.MOD_ID, "textures/gui/quantum_extractor_gui.png");

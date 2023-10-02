@@ -2,6 +2,8 @@ package com.decodinator.liroth.core.blocks.entity;
 
 import com.decodinator.liroth.core.LirothScreenHandlers;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -79,13 +81,15 @@ public class LirothSplitterScreenHandler extends AbstractContainerMenu {
 
         return newStack;
     }
-    
-	public int getCookProgress(int pixels) {
+
+    @Environment(value= EnvType.CLIENT)
+    public int getCookProgress(int pixels) {
 		int time = propertyDelegate.get(2);
 		int timeTotal = propertyDelegate.get(3);
 		return timeTotal != 0 && time != 0 ? time * pixels / timeTotal : 0;
 	}
-	
+
+    @Environment(value= EnvType.CLIENT)
     public int getFuelProgress() {
         int i = this.propertyDelegate.get(1);
         if (i == 0) {
@@ -93,7 +97,8 @@ public class LirothSplitterScreenHandler extends AbstractContainerMenu {
         }
         return this.propertyDelegate.get(0) * 13 / i;
     }
-	
+
+    @Environment(value= EnvType.CLIENT)
     public boolean isBurning() {
         return this.propertyDelegate.get(0) > 0;
     }

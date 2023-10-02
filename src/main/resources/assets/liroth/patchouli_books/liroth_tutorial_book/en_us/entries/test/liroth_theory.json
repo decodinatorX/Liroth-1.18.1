@@ -36,6 +36,10 @@
 				"F": "minecraft:lapis_block"
 			}
 		}
-	}
+	},
+		{
+			"type": "text",
+			"text": " Once the structure is built, I just need to light with a flint and steel, likely being the case for all future constructs similar to this one."
+		}
     ]
 }

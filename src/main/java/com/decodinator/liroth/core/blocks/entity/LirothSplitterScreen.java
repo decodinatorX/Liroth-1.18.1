@@ -4,6 +4,8 @@ import com.decodinator.liroth.Liroth;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -12,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 
+@Environment(value= EnvType.CLIENT)
 public class LirothSplitterScreen extends AbstractContainerScreen<LirothSplitterScreenHandler> {
 	private Player entity;
     private static final ResourceLocation TEXTURE =

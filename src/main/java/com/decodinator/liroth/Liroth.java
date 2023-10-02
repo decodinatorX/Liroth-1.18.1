@@ -1,26 +1,12 @@
 package com.decodinator.liroth;
 
+import com.decodinator.liroth.core.*;
+import com.decodinator.liroth.core.blocks.entity.*;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.network.chat.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.decodinator.liroth.core.LirothBlocks;
-import com.decodinator.liroth.core.LirothEntities;
-import com.decodinator.liroth.core.LirothFeatures;
-import com.decodinator.liroth.core.LirothFlattenables;
-import com.decodinator.liroth.core.LirothFluids;
-import com.decodinator.liroth.core.LirothHoeables;
-import com.decodinator.liroth.core.LirothItems;
-import com.decodinator.liroth.core.LirothParticles;
-import com.decodinator.liroth.core.LirothPortalBuilders;
-import com.decodinator.liroth.core.LirothRecipeTypes;
-import com.decodinator.liroth.core.LirothSounds;
-import com.decodinator.liroth.core.LirothSpawnEggs;
-import com.decodinator.liroth.core.LirothStrippables;
-import com.decodinator.liroth.core.blocks.entity.FungalCampfireBlockEntity;
-import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlockEntity;
-import com.decodinator.liroth.core.blocks.entity.QuantumBlockEntity;
-import com.decodinator.liroth.core.blocks.entity.SplitterBlockEntity;
 import com.decodinator.liroth.world.generator.LirothStructures;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -50,10 +36,6 @@ public class Liroth implements ModInitializer {
     public static BlockEntityType<QuantumBlockEntity> QUANTUM_EXTRACTOR_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Liroth.MOD_ID, "quantum_extractor"), FabricBlockEntityTypeBuilder.create(QuantumBlockEntity::new, LirothBlocks.QUANTUM_EXTRACTOR).build(null));
     public static BlockEntityType<SplitterBlockEntity> LIROTH_SPLITTER_BLOCK_ENTITY = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, new ResourceLocation(Liroth.MOD_ID, "liroth_splitter"), FabricBlockEntityTypeBuilder.create(SplitterBlockEntity::new, LirothBlocks.LIROTH_SPLITTER).build(null));
 
-    
-//    public static ScreenHandlerType<LirothSplitterScreenHandler> LIROTH_SPLITTER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new ResourceLocation(Liroth.MOD_ID, "liroth_splitter"), LirothSplitterScreenHandler::new);
-//    public static ScreenHandlerType<QuantumExtractorScreenHandler> QUANTUM_EXTRACTOR_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new ResourceLocation(Liroth.MOD_ID, "quantum_extractor"), QuantumExtractorScreenHandler::new);
-    
    	public static final ResourceKey<ConfiguredFeature<?, ?>> LIROTH = FeatureUtils.createKey("liroth");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SPICED = FeatureUtils.createKey("spiced");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TALLPIER = FeatureUtils.createKey("tallpier");
@@ -82,6 +64,7 @@ public class Liroth implements ModInitializer {
 		    LirothRegistries.registerFeatures();
 		    LirothRegistries.registerStructures();
 		    LirothRegistries.registerRecipeTypes();
+			LirothRegistries.registerMenuTypes();
 		    LirothRegistries.registerFuels();
 	        Liroth.threadSafeLoadFinish();
 			addClassicPack();
@@ -199,6 +182,12 @@ public class Liroth implements ModInitializer {
 	        	LirothRecipeTypes.init();
 	        	Liroth.LOGGER.info("Liroth: Recipe Types registered!");
 	        }
+
+			public static void registerMenuTypes() {
+				Liroth.LOGGER.debug("Liroth: Registering Menu Types...");
+				LirothScreenHandlers.init();
+				Liroth.LOGGER.info("Liroth: Menu Types registered!");
+			}
 	        
 	        public static void registerFuels() {
 	        	Liroth.LOGGER.debug("Liroth: Registering fuels...");
