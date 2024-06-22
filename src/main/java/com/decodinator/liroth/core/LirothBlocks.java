@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
 import java.util.ArrayList;
@@ -577,14 +578,14 @@ public class LirothBlocks {
     }
     
     static Block createCrystalBlock(String id) {
-        Block createBlock = new Block(FabricBlockSettings.copy(Blocks.GLASS).lightLevel(state -> 8));
+        Block createBlock = new Block(FabricBlockSettings.of().instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).lightLevel(state -> 8));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;
     }
     
     static Block createPointedCrystal(String id) {
-        Block createBlock = new PointedJalsphireCrystal(FabricBlockSettings.copy(Blocks.GLASS).dynamicShape().lightLevel(state -> 8));
+        Block createBlock = new PointedJalsphireCrystal(FabricBlockSettings.of().instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).dynamicShape().lightLevel(state -> 8));
         Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Liroth.MOD_ID, id), createBlock);createBlockItem(createBlock, id);
         BLOCKS.add(createBlock);
         return createBlock;

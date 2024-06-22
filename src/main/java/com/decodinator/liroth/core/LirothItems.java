@@ -1,5 +1,6 @@
 package com.decodinator.liroth.core;
 
+import com.decodinator.liroth.core.items.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -25,23 +26,6 @@ import java.util.List;
 
 import com.decodinator.liroth.Liroth;
 import com.decodinator.liroth.core.helpers.PotestiumHelmItem;
-import com.decodinator.liroth.core.items.AnsalumArmorItem;
-import com.decodinator.liroth.core.items.AnsalumLirothShield;
-import com.decodinator.liroth.core.items.BeamItem;
-import com.decodinator.liroth.core.items.CustomHoeItem;
-import com.decodinator.liroth.core.items.CustomScytheItem;
-import com.decodinator.liroth.core.items.KeyItem;
-import com.decodinator.liroth.core.items.LirothBlaster;
-import com.decodinator.liroth.core.items.LirothBoatItem;
-import com.decodinator.liroth.core.items.LirothShield;
-import com.decodinator.liroth.core.items.LuxArmorItem;
-import com.decodinator.liroth.core.items.LuxLirothShield;
-import com.decodinator.liroth.core.items.PotestiumArmorItem;
-import com.decodinator.liroth.core.items.QuantumArmorItem;
-import com.decodinator.liroth.core.items.QuantumLirothShield;
-import com.decodinator.liroth.core.items.SalemArmorItem;
-import com.decodinator.liroth.core.items.SalemLirothShield;
-import com.decodinator.liroth.core.items.UnusedItem;
 
 public class LirothItems {
 
@@ -146,7 +130,9 @@ public class LirothItems {
 //    public static final Item LIROTH_STAR = createItem(new Item(new Item.Properties()), "liroth_star");
 
     public static final Item LIROTH_TEAR = createItem(new Item(new Item.Properties()), "liroth_tear");
-        
+
+    public static final Item LIROTH_TUTORIAL_BOOK = createItem(new LirothTutorialBookItem(new Item.Properties().stacksTo(1)), "liroth_tutorial_book");
+
     public static final Item NETHERITE_HORSE_ARMOR = createItem(new HorseArmorItem(8, "netherite", new Item.Properties()), "netherite_horse_armor");
     
     public static final Item PURPETUATED_AMETHYST_SHARD = createItem(new Item(new Item.Properties()), "purpetuated_amethyst_shard");

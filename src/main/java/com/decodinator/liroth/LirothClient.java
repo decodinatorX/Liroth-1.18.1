@@ -1,5 +1,6 @@
 package com.decodinator.liroth;
 
+import com.decodinator.liroth.entities.renderers.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.particle.EndRodParticle;
@@ -26,29 +27,6 @@ import com.decodinator.liroth.core.blocks.entity.LirothianPetroleumCampfireBlock
 import com.decodinator.liroth.core.blocks.entity.QuantumExtractorScreen;
 import com.decodinator.liroth.entities.boats.LirothBoatEntityModel;
 import com.decodinator.liroth.entities.boats.LirothBoatEntityRenderer;
-import com.decodinator.liroth.entities.renderers.BeamLaserProjectileEntityRenderer;
-import com.decodinator.liroth.entities.renderers.ForsakenCorpseEntityRenderer;
-import com.decodinator.liroth.entities.renderers.ForsakenCorpseModel;
-import com.decodinator.liroth.entities.renderers.FreakshowEntityRenderer;
-import com.decodinator.liroth.entities.renderers.FreakshowModel;
-import com.decodinator.liroth.entities.renderers.FungalFiendEntityRenderer;
-import com.decodinator.liroth.entities.renderers.FungalFiendModel;
-import com.decodinator.liroth.entities.renderers.LirothianMimicEntityRenderer;
-import com.decodinator.liroth.entities.renderers.LirothianMimicModel;
-import com.decodinator.liroth.entities.renderers.PierPeepEntityRenderer;
-import com.decodinator.liroth.entities.renderers.PierPeepModel;
-import com.decodinator.liroth.entities.renderers.ProwlerEntityRenderer;
-import com.decodinator.liroth.entities.renderers.ProwlerModel;
-import com.decodinator.liroth.entities.renderers.ShadeEntityRenderer;
-import com.decodinator.liroth.entities.renderers.ShadeModel;
-import com.decodinator.liroth.entities.renderers.SkeletalFreakEntityRenderer;
-import com.decodinator.liroth.entities.renderers.SkeletalFreakModel;
-import com.decodinator.liroth.entities.renderers.SoulArachnidEntityRenderer;
-import com.decodinator.liroth.entities.renderers.SoulArachnidModel;
-import com.decodinator.liroth.entities.renderers.VileSharkEntityRenderer;
-import com.decodinator.liroth.entities.renderers.VileSharkModel;
-import com.decodinator.liroth.entities.renderers.WarpEntityRenderer;
-import com.decodinator.liroth.entities.renderers.WarpModel;
 import com.decodinator.liroth.mixin.ItemBlockRenderTypeAccess;
 import com.google.common.collect.Maps;
 
@@ -114,39 +92,29 @@ public class LirothClient implements ClientModInitializer {
         
         // In 1.17, use EntityRendererRegistry.register (seen below) instead of EntityRendererRegistry.INSTANCE.register (seen above)
         EntityRendererRegistry.register(LirothEntities.FUNGAL_FIEND, (context) -> {
-            return new FungalFiendEntityRenderer(context);
+            return new FungalFiendRenderer(context);
         });
- 
-        EntityModelLayerRegistry.registerModelLayer(MODEL_FUNGAL_FIEND_LAYER, FungalFiendModel::getTexturedModelData);
-        
+
         EntityRendererRegistry.register(LirothEntities.FORSAKEN_CORPSE, (context) -> {
-            return new ForsakenCorpseEntityRenderer(context);
+            return new ForsakenCorpseRenderer(context);
         });
- 
-        EntityModelLayerRegistry.registerModelLayer(MODEL_FORSAKEN_CORPSE_LAYER, ForsakenCorpseModel::getTexturedModelData);
-        
+
         EntityRendererRegistry.register(LirothEntities.SKELETAL_FREAK, (context) -> {
-            return new SkeletalFreakEntityRenderer(context);
+            return new SkeletalFreakRenderer(context);
         });
- 
-        EntityModelLayerRegistry.registerModelLayer(MODEL_SKELETAL_FREAK_LAYER, SkeletalFreakModel::getTexturedModelData);
-        
+
         EntityRendererRegistry.register(LirothEntities.BEAM_LASER_PROJECTILE_ENTITY, (context) -> {
             return new BeamLaserProjectileEntityRenderer(context);
         });
         
         EntityRendererRegistry.register(LirothEntities.WARP, (context) -> {
-            return new WarpEntityRenderer(context);
+            return new WarpRenderer(context);
         });
- 
-        EntityModelLayerRegistry.registerModelLayer(MODEL_WARP_LAYER, WarpModel::getTexturedModelData);
-        
+
         EntityRendererRegistry.register(LirothEntities.SOUL_ARACHNID, (context) -> {
             return new SoulArachnidEntityRenderer(context);
         });
- 
-        EntityModelLayerRegistry.registerModelLayer(MODEL_SOUL_ARACHNID_LAYER, SoulArachnidModel::getTexturedModelData);
-        
+
         EntityRendererRegistry.register(LirothEntities.PIER_PEEP, (context) -> {
             return new PierPeepEntityRenderer(context);
         });
@@ -160,11 +128,9 @@ public class LirothClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(MODEL_SHADE_LAYER, ShadeModel::getTexturedModelData);
         
         EntityRendererRegistry.register(LirothEntities.PROWLER, (context) -> {
-            return new ProwlerEntityRenderer(context);
+            return new ProwlerRenderer(context);
         });
- 
-        EntityModelLayerRegistry.registerModelLayer(MODEL_PROWLER_LAYER, ProwlerModel::getTexturedModelData);
-        
+
         EntityRendererRegistry.register(LirothEntities.FREAKSHOW, (context) -> {
             return new FreakshowEntityRenderer(context);
         });

@@ -8,5 +8,5 @@ import me.shedaniel.autoconfig.annotation.Config;
 @Config.Gui.Background("liroth:textures/blocks/liroth_dirt.png")
 public class LirothConfig implements ConfigData {
     @ConfigEntry.Gui.RequiresRestart
-	public boolean titlescreen = true;
+	public boolean titlescreen = false;
 }
